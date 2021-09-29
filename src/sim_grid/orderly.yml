@@ -1,0 +1,37 @@
+script: script.R
+
+resources:
+  - icar.stan
+
+sources:
+  - functions.R
+
+artefacts:
+  - data:
+      description: Plot of the geometry
+        - geometry.pdf
+  - data:
+      description: Simulated data
+      filenames:
+        - data_iid.rds
+        - data_icar.rds
+        - data_ik.rds
+
+parameters:
+  nsim:
+    default: 200
+
+packages:
+  - sf
+  - bsae
+  - ggplot2
+  - dplyr
+  - reshape2
+  - viridis
+  - tikzDevice
+  - cubature
+  - magrittr
+  - gt
+  - tidyr
+  - sn
+  - purrr
