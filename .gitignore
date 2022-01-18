@@ -2,3 +2,17 @@
 .Rhistory
 .RData
 .Ruserdata
+*.pdf
+
+# Orderly will store data in a sqlite database, by default orderly.sqlite
+*.sqlite
+
+draft
+data
+archive
+global
+depends/
+.orderly/
+backup/
+metadata/
+README.html
