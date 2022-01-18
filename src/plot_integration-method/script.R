@@ -13,7 +13,7 @@ random <- sf::st_sample(mw, size = rep(L, n))
 hexagonal <- sf::st_sample(mw, size = rep(L, n), type = "hexagonal", exact = TRUE)
 regular <- sf::st_sample(mw, size = rep(L, n), type = "regular", exact = TRUE)
 
-pdf("integration-method.pdf", h = 4, w = 6.25)
+pdf("integration-method.pdf", h = 2.5, w = 6.25)
 
 cowplot::plot_grid(
   plot_samples(random, title = "Random"),

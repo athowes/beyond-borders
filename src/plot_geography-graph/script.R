@@ -2,7 +2,7 @@
 # orderly::orderly_develop_start("plot_geography-graph")
 # setwd("src/plot_geography-graph")
 
-pdf("geography-graph.pdf", h = 4, w = 6.25)
+pdf("geography-graph.pdf", h = 2.5, w = 6.25)
 
 bsae::plot_graph(mw, add_geography = TRUE)
 

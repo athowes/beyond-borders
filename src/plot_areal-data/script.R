@@ -29,7 +29,7 @@ b <- ggplot(dat) +
   labs(x = "", y = "", title = "District: Lilongwe") +
   theme_void()
 
-pdf("areal-data.pdf", h = 4, w = 6.25)
+pdf("areal-data.pdf", h = 2.5, w = 6.25)
 
 cowplot::plot_grid(b, a, rel_widths = c(1.5, 1), align = "v", ncol = 2)
 
