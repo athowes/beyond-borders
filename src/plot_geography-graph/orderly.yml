@@ -1,0 +1,13 @@
+script: script.R
+
+artefacts:
+  - data:
+      description: Geography graph comparison plot
+      filenames:
+        - geography-graph.pdf
+
+packages:
+  - bsae
+  - sf
+  - ggplot2
+  - cowplot
