@@ -1,0 +1,32 @@
+script: script.R
+
+resources:
+  - icar.stan
+
+sources:
+  - functions.R
+
+artefacts:
+  - data:
+      description: Simulated data
+      filenames:
+        - simulated_data.rds
+
+parameters:
+  nsim:
+    default: 200
+
+packages:
+  - sf
+  - bsae
+  - ggplot2
+  - dplyr
+  - reshape2
+  - viridis
+  - tikzDevice
+  - cubature
+  - magrittr
+  - gt
+  - tidyr
+  - sn
+  - purrr
