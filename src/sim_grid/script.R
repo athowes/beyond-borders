@@ -11,6 +11,9 @@ pdf("geometry.pdf", h = 5, w = 6.25)
 plot(grid)
 dev.off()
 
+#' Save a copy of the geometry
+saveRDS(grid, "geometry.rds")
+
 #' Simulate and save IID data
 data_iid <- sim_iid(grid, nsim)
 saveRDS(data_iid, "data_iid.rds")
