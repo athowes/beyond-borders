@@ -2,20 +2,10 @@ script: script.R
 
 artefacts:
   - data:
-      description: Demonstration of areal kernels HTML report
+      description: Prior sensitivity analysis
       filenames:
-        - areal-kernels.html
-  - data:
-      description: Centroid and integrated kernel results
-        - centroid.rds
-        - integrated.rds
-
-resources:
-  - areal-kernels.Rmd
-  - centroid.R
-  - centroid.stan
-  - integrated.R
-  - integrated.stan
+        - prior-comparison.pdf
+        - posterior-comparison.pdf
 
 packages:
   - bsae
@@ -24,3 +14,9 @@ packages:
   - ggplot2
   - bayesplot
   - rmarkdown
+
+depends:
+  sim_grid:
+    id: latest
+    use:
+      depends/data_iid_grid.rds: data_iid.rds
