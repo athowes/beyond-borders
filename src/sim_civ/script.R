@@ -3,8 +3,7 @@
 # setwd("src/sim_civ")
 
 #' Create geometry
-civ <- sf::st_geometry(ci)
-civ <- sf::st_sf(civ)
+civ <- ci %>% select(geometry)
 sf::st_crs(civ) <- NA
 
 #' Check the geometry
