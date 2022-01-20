@@ -8,6 +8,11 @@ sources:
 
 artefacts:
   - data:
+      description: Plot and copy of the geometry
+      filenames:
+        - geometry.pdf
+        - geometry.rds
+  - data:
       description: Simulated data
       filenames:
         - data_iid.rds
