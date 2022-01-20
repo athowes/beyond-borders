@@ -2,9 +2,9 @@ script: script.R
 
 artefacts:
   - data:
-      description: Geography graph comparison plot
+      description: Geometry graph comparison plot
       filenames:
-        - geography-graph.pdf
+        - geometry-graph.pdf
 
 packages:
   - bsae
