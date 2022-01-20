@@ -1,6 +1,6 @@
 # areal-comparison
 
-Code for the manuscript Howes *et al.* "Small-area estimation with aggregated Gaussian processes" (in preparation).
+Code for the manuscript Howes *et al.* "Comparing models for spatial structure in small-area estimation" (in preparation).
 
 ## File structure
 
