@@ -10,7 +10,9 @@ artefacts:
   - data:
       description: Simulated data
       filenames:
-        - simulated_data.rds
+        - data_iid.rds
+        - data_icar.rds
+        - data_ik.rds
 
 parameters:
   nsim:
