@@ -1,0 +1,27 @@
+script: script.R
+
+artefacts:
+  - data:
+      description: The three simulation geometries we considered
+      filenames:
+        - simulation-geometries.pdf
+
+packages:
+  - bsae
+  - sf
+  - ggplot2
+  - cowplot
+
+depends:
+  sim_civ:
+    id: latest
+    use:
+      depends/geometry_civ.rds: geometry.rds
+  sim_grid:
+    id: latest
+    use:
+      depends/geometry_grid.rds: geometry.rds
+  sim_tex:
+    id: latest
+    use:
+      depends/geometry_tex.rds: geometry.rds
