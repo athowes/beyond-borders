@@ -2,6 +2,12 @@
 
 Code for the manuscript Howes *et al.* "Comparing models for spatial structure in small-area estimation" (in preparation).
 
+Small-area estimation models typically use the Besag model, a type of Gaussian Markov random field, to model spatial structure.
+However, for irregular geometries, the assumptions made by the Besag model do not seem plausible (in the image below, geometric irregularity is increasing from left to right).
+The goal of this work is to determine whether or not, in practice, this matters.
+
+![](simulation-geometries.png)
+
 ## File structure
 
 The directories of this repository are:
