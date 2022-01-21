@@ -2,17 +2,9 @@ script: script.R
 
 artefacts:
   - data:
-      description: Fitted models
+      description: Results of rho marginals assessment
       filenames:
-        - fits_iid_civ.rds
-        - fits_icar_civ.rds
-        - fits_ik_civ.rds
-        - fits_iid_grid.rds
-        - fits_icar_grid.rds
-        - fits_ik_grid.rds
-        - fits_iid_tex.rds
-        - fits_icar_tex.rds
-        - fits_ik_tex.rds
+        - df_rho.rds
 
 packages:
   - sf
