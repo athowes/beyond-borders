@@ -8,6 +8,16 @@ The goal of this work is to determine whether or not, in practice, this matters.
 
 ![](simulation-geometries.png)
 
+## R package dependencies
+
+This repository is supported by the [`bsae`](https://github.com/athowes/bsae) package, which can be installed from Github via:
+
+```r
+devtools::install_github("athowes/bsae")
+```
+
+Additionally, the `R-INLA` package is not currently available on CRAN, and instead may be installed by following [instructions](https://www.r-inla.org/download-install) from the project website.
+
 ## File structure
 
 The directories of this repository are:
