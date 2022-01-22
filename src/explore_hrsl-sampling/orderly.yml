@@ -1,0 +1,18 @@
+script: script.R
+
+artefacts:
+  - data:
+      description: Sampling proportional to population density using a high-resolution settlement layer
+      filenames:
+        - hrsl-sampling.pdf
+
+resources:
+  hrsl
+
+packages:
+  - bsae
+  - sf
+  - rstan
+  - ggplot2
+  - raster
+  - rgdal
