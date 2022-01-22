@@ -9,6 +9,9 @@ L <- 10
 n <- nrow(mw)
 
 #' The different integration strategies
+#' Note: sampling methods from package spatstat are interfaced!
+#' https://cran.r-project.org/web/packages/spatstat/spatstat.pdf
+
 random <- sf::st_sample(mw, size = rep(L, n))
 hexagonal <- sf::st_sample(mw, size = rep(L, n), type = "hexagonal", exact = TRUE)
 regular <- sf::st_sample(mw, size = rep(L, n), type = "regular", exact = TRUE)
