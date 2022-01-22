@@ -1,5 +1,8 @@
 script: script.R
 
+sources:
+  - functions.R
+
 artefacts:
   - data:
       description: Results of intercept marginal assessment
