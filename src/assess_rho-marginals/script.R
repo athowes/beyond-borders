@@ -17,6 +17,12 @@ pars <- expand.grid(
 
 #' Function to process fits
 process_fits <- function(geometry, sim_model, inf_model) {
+
+  message(
+    "Beginning assessment of rho posterior marginals of the ", inf_model,
+    " model fit to ", sim_model, " data on the ", geometry, " geometry."
+  )
+
   #' The underlying truth
   data_loc <- paste0("depends/data_", sim_model, "_", geometry, ".rds")
   data <- readRDS(data_loc)
@@ -36,11 +42,15 @@ process_fits <- function(geometry, sim_model, inf_model) {
       inf_model = inf_model,
       .before = replicate
     )
+
+  message("rho parameter assessment complete.")
 }
 
 #' Eventually this will be iterated over geometries, sim_models and inf_models
 df <- purrr::pmap_df(pars, process_fits) %>%
   bind_rows()
+
+saveRDS(df, "df.rds")
 
 #' Each instance takes around 5 minutes to run
 #' 5 * (3 * 3) = 45 minutes per model
