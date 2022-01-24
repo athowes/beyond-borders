@@ -1,3 +1,4 @@
-source("simulate-data.R")
-source("fit-models.R")
-source("assess-marginals.R")
+source("make/simulate-data.R")
+source("make/fit-models.R")
+source("make/assess-marginals.R")
+source("make/post-process.R")
