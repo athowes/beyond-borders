@@ -8,6 +8,7 @@ artefacts:
       description: Metric tables in LaTeX for the manuscript
       filenames:
         - crps-table-rho.txt
+        - time-table.txt
 
 packages:
   - sf
@@ -29,3 +30,7 @@ depends:
     id: latest
     use:
       depends/df_rho.rds: df.rds
+  assess_time-taken:
+    id: latest
+    use:
+      depends/df_time.rds: df.rds
