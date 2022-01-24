@@ -34,7 +34,7 @@ update_naming <- function(df) {
     df,
     geometry = recode_factor(geometry,
                              "grid" = "Grid",
-                             "ci" = "Cote d'Ivoire",
+                             "civ" = "Cote d'Ivoire",
                              "tex" = "Texas"),
     sim_model = recode_factor(sim_model,
                               "iid" = "IID",
