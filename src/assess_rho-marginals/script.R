@@ -53,8 +53,8 @@ df <- purrr::pmap_df(pars, process_fits)
 
 saveRDS(df, "df.rds")
 
-#' Each instance takes around 5 minutes to run
-#' 5 * (3 * 3) = 45 minutes per model
-#' 45 * 7 = 5 hours total for all models
-#' That's quite a long time: worth putting attention into the slow parts of this, and trying to speed them up.
+#' Ran report in 14.1772 mins
+#' 15 * 7 = 1.45 hours total for all models
+#' That's somewhat a long time:
+#' Perhaps worth putting attention into the slow parts of this, and trying to speed them up.
 #' I imagine the code is inefficient.
