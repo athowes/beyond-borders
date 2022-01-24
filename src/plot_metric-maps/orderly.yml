@@ -7,7 +7,7 @@ artefacts:
   - data:
       description: Metric boxplots
       filenames:
-        - crps_rho.pdf
+        - crps-map-rho.pdf
 
 packages:
   - sf

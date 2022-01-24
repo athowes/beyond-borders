@@ -5,7 +5,7 @@
 df_rho <- readRDS("depends/df_rho.rds")
 
 #' CRPS boxplot
-pdf("crps_rho.pdf", h = 4, w = 6.25)
+pdf("crps-boxplot-rho.pdf", h = 4, w = 6.25)
 
 df_rho %>%
   update_naming() %>%

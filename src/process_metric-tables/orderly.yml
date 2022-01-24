@@ -7,7 +7,7 @@ artefacts:
   - data:
       description: Metric tables in LaTeX for the manuscript
       filenames:
-        - crps_rho.txt
+        - crps-table-rho.txt
 
 packages:
   - sf
