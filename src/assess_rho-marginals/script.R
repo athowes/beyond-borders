@@ -44,11 +44,12 @@ process_fits <- function(geometry, sim_model, inf_model) {
     )
 
   message("rho parameter assessment complete.")
+
+  return(df)
 }
 
 #' Eventually this will be iterated over geometries, sim_models and inf_models
-df <- purrr::pmap_df(pars, process_fits) %>%
-  bind_rows()
+df <- purrr::pmap_df(pars, process_fits)
 
 saveRDS(df, "df.rds")
 
