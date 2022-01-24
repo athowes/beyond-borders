@@ -1,13 +1,3 @@
-#' Create height by width grid `sf` object
-#'
-#' @param height Number of grid cells height.
-#' @param width Number of grid cells width.
-create_sf_grid <- function(height, width){
-  sfc <- sf::st_sfc(sf::st_polygon(list(rbind(c(0, 0), c(width, 0), c(width, height), c(0, 0)))))
-  grid <- sf::st_make_grid(sfc, cellsize = 1, square = TRUE)
-  return(grid)
-}
-
 synthetic <- function(sf, phi_list) {
   sim_list <- lapply(phi_list, function(phi) {
     phi <- as.numeric(phi)
@@ -60,4 +50,3 @@ sim_ik <- function(sf, L, nsim, save = TRUE, ...) {
   phi_list <- rows_to_list(phi_df)
   synthetic(sf, phi_list)
 }
-
