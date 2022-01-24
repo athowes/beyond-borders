@@ -2,13 +2,6 @@
 #' The behaviour I'm aiming for is that lengthscale_df eventually just contains rows for the ones that do
 #' Perhaps returning NULL is a good way to do this, likely there are better solutions
 
-#' Bind the rows of a list together, adding an `id` column.
-#'
-#' @param list A list.
-list_to_df <- function(list){
-  data.frame(dplyr::bind_rows(list, .id = "replicate"))
-}
-
 marginal_lengthscale <- function(fit, ...) {
   UseMethod("marginal_lengthscale")
 }

@@ -1,10 +1,3 @@
-#' Bind the rows of a list together, adding an `id` column.
-#'
-#' @param list A list.
-list_to_df <- function(list){
-  data.frame(dplyr::bind_rows(list, .id = "replicate"))
-}
-
 marginal_intercept <- function(fit, ...) {
   UseMethod("marginal_intercept")
 }

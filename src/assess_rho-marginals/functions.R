@@ -6,13 +6,6 @@
 #' Kruger, Lerch, Thorarinsdottir, Gneiting https://arxiv.org/pdf/1608.06802v1.pdf
 #' Best probably to avoid (my take) and stick to CRPS
 
-#' Bind the rows of a list together, adding an `id` column.
-#'
-#' @param list A list.
-list_to_df <- function(list){
-  data.frame(dplyr::bind_rows(list, .id = "replicate"))
-}
-
 ith_marginal_rho <- function(fit, ...) {
   UseMethod("ith_marginal_rho")
 }

@@ -40,10 +40,3 @@ int_convergence_experiment <- function(L, n_sim = 100) {
   frobs <- sapply(covs, function(cov) frobenius(gt_cov, cov))
   return(frobs)
 }
-
-#' Bind the rows of a list together, adding an `id` column.
-#'
-#' @param list A list.
-list_to_df <- function(list){
-  data.frame(dplyr::bind_rows(list, .id = "replicate"))
-}

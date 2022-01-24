@@ -8,22 +8,6 @@ create_sf_grid <- function(height, width){
   return(grid)
 }
 
-#' Convert the rows of a dataframe to a list.
-#'
-#' @param df A dataframe.
-rows_to_list <- function(df) {
-  x <- as.list((data.frame(t(df))))
-  names(x) <- NULL
-  return(x)
-}
-
-#' Bind the rows of a list together, adding an `id` column.
-#'
-#' @param list A list.
-list_to_df <- function(list){
-  data.frame(dplyr::bind_rows(list, .id = "replicate"))
-}
-
 synthetic <- function(sf, phi_list) {
   sim_list <- lapply(phi_list, function(phi) {
     phi <- as.numeric(phi)
