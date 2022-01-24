@@ -30,6 +30,10 @@ depends:
     id: latest
     use:
       depends/df_rho.rds: df.rds
+  assess_intercept-marginal:
+    id: latest
+    use:
+      depends/df_intercept.rds: df.rds
   assess_time-taken:
     id: latest
     use:
