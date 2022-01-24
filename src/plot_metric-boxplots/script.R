@@ -1,0 +1,17 @@
+#' Uncomment and run the two line below to resume development of this script
+# orderly::orderly_develop_start("plot_metric-boxplots")
+# setwd("src/plot_metric-boxplots")
+
+df_rho <- readRDS("depends/df_rho.rds")
+
+#' CRPS boxplot
+pdf("crps_rho.pdf", h = 4, w = 6.25)
+
+df_rho %>%
+  update_naming() %>%
+  boxplot(
+    metric = "crps",
+    y_lab = "CRPS"
+  )
+
+dev.off()

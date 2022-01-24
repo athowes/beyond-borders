@@ -1,0 +1,31 @@
+script: script.R
+
+sources:
+  - functions.R
+
+artefacts:
+  - data:
+      description: Metric boxplots
+      filenames:
+        - crps_rho.pdf
+
+packages:
+  - sf
+  - bsae
+  - ggplot2
+  - dplyr
+  - reshape2
+  - viridis
+  - tikzDevice
+  - cubature
+  - magrittr
+  - gt
+  - tidyr
+  - sn
+  - purrr
+
+depends:
+  assess_rho-marginals:
+    id: latest
+    use:
+      depends/df_rho.rds: df.rds
