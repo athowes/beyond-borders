@@ -5,7 +5,6 @@
 
 type <- "random"
 L <- 200
-geometry <- create_sf_grid(height = 6, width = 6)
 grid <- readRDS("depends/geometry_grid.rds")
 n <- nrow(grid)
 samples <- sf::st_sample(grid, type = type, exact = TRUE, size = rep(L, n))
