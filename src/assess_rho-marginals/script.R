@@ -9,6 +9,12 @@ sim_models <- c("iid", "icar", "ik")
 inf_models <- c("constant_inla")
 # inf_models <- c("constant_inla", "besag_inla", "bym2_inla", "fck_inla", "fik_inla", "ck_stan", "ik_stan")
 
+pars <- expand.grid(
+  "geometry" = geometries,
+  "sim_model" = sim_models,
+  "inf_model" = inf_models
+)
+
 #' Function to process fits
 process_fits <- function(geometry, sim_model, inf_model) {
   #' The underlying truth
@@ -21,7 +27,7 @@ process_fits <- function(geometry, sim_model, inf_model) {
 
   #' Assess the rho marginals
   rhos <- lapply(data, "[[", "rho")
-  Map(assess_marginals_rho, rhos, fits) %>%
+  df <- Map(assess_marginals_rho, rhos, fits) %>%
     bsae::list_to_df() %>%
     #' Add columns for meta data
     mutate(
@@ -33,14 +39,11 @@ process_fits <- function(geometry, sim_model, inf_model) {
 }
 
 #' Eventually this will be iterated over geometries, sim_models and inf_models
-#' But keeping it simple now to keep things moving (learning my lessons!)
-df <- process_fits("grid", "iid", "constant_inla")
+df <- purrr::pmap_df(pars, process_fits) %>%
+  bind_rows()
 
-saveRDS(df, "df.rds")
-
-#' This report takes around 5 minutes to run.
-#' 5 * 9 = 45 minutes per model.
-#' 45 * 7 = 5 hours total for all models.
-#' That's quite a long time but not prohibitive.
-#' Perhaps still worth putting a little attention into the slow parts of this and trying to speed them up.
-#' I imagine it's likely that the code is very inefficient.
+#' Each instance takes around 5 minutes to run
+#' 5 * (3 * 3) = 45 minutes per model
+#' 45 * 7 = 5 hours total for all models
+#' That's quite a long time: worth putting attention into the slow parts of this, and trying to speed them up.
+#' I imagine the code is inefficient.

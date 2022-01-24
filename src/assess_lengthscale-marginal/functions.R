@@ -6,12 +6,12 @@ marginal_lengthscale <- function(fit, ...) {
   UseMethod("marginal_lengthscale")
 }
 
-marginal_lengthscale.inla <- function(fit, S = 4000) {
+marginal_lengthscale.inla <- function(fit, S = 1000) {
   warning("R-INLA models don't have a length-scale!")
   return(NULL)
 }
 
-marginal_lengthscale.stanfit <- function(fit, S = 4000) {
+marginal_lengthscale.stanfit <- function(fit, S = 1000) {
   if(!("l" %in% rownames(rstan::summary(fit)$summary))){
     # For other use-cases need more general approach to deal with e.g. rho[1]
     warning("This Stan model doesn't have a length-scale!")

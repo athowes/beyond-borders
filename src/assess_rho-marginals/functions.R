@@ -10,7 +10,7 @@ ith_marginal_rho <- function(fit, ...) {
   UseMethod("ith_marginal_rho")
 }
 
-ith_marginal_rho.inla <- function(fit, i, S = 4000) {
+ith_marginal_rho.inla <- function(fit, i, S = 1000) {
   df <- data.frame(fit$marginals.fitted.values[[i]])
   samples_list <- INLA::inla.posterior.sample(n = S, fit, selection = list(Predictor = i))
   eta_samples <- sapply(samples_list, function(x) x$latent)
@@ -22,7 +22,7 @@ ith_marginal_rho.inla <- function(fit, i, S = 4000) {
   return(list(df = df, samples = samples, mean = mean, mode = mode, lower = lower, upper = upper))
 }
 
-ith_marginal_rho.stanfit <- function(fit, i, S = 4000){
+ith_marginal_rho.stanfit <- function(fit, i, S = 1000){
   samples <- rstan::extract(fit, pars = "rho")$rho[, i]
   kde <- density(samples, bw = 0.1, n = 512, from = 0, to = 1)
   df <- data.frame(x = kde$x, y = kde$y)

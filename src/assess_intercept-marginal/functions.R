@@ -2,7 +2,7 @@ marginal_intercept <- function(fit, ...) {
   UseMethod("marginal_intercept")
 }
 
-marginal_intercept.inla <- function(fit, S = 4000) {
+marginal_intercept.inla <- function(fit, S = 1000) {
   df <- data.frame(fit$marginals.fixed$"(Intercept)")
   samples_list <- INLA::inla.posterior.sample(n = S, fit)
   samples <- sapply(samples_list, function(x) x$latent["(Intercept):1", ])
@@ -13,7 +13,7 @@ marginal_intercept.inla <- function(fit, S = 4000) {
   return(list(df = df, samples = samples, mean = mean, mode = mode, lower = lower, upper = upper))
 }
 
-marginal_intercept.stanfit <- function(fit, S = 4000) {
+marginal_intercept.stanfit <- function(fit, S = 1000) {
   samples <- rstan::extract(fit, pars = "beta_0")$beta_0
   kde <- density(samples)
   df <- data.frame(x = kde$x, y = kde$y)
