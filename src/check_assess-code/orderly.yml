@@ -7,7 +7,7 @@ artefacts:
   - data:
       description: To be determined
       filenames:
-        - to-be-determined.pdf
+        - inla-posterior.sample-vs-marginal.pdf
 
 packages:
   - sf
@@ -23,3 +23,9 @@ packages:
   - tidyr
   - sn
   - purrr
+
+depends:
+  sim_grid:
+    id: latest
+    use:
+      depends/data_iid_grid.rds: data_iid.rds
