@@ -36,4 +36,11 @@ process_fits <- function(geometry, sim_model, inf_model) {
 #' But keeping it simple now to keep things moving (learning my lessons!)
 df <- process_fits("grid", "iid", "constant_inla")
 
-saveRDS(df, "rho_df.rds")
+saveRDS(df, "df.rds")
+
+#' This report takes around 5 minutes to run.
+#' 5 * 9 = 45 minutes per model.
+#' 45 * 7 = 5 hours total for all models.
+#' That's quite a long time but not prohibitive.
+#' Perhaps still worth putting a little attention into the slow parts of this and trying to speed them up.
+#' I imagine it's likely that the code is very inefficient.

@@ -7,7 +7,7 @@ artefacts:
   - data:
       description: Results of rho marginals assessment
       filenames:
-        - df_rho.rds
+        - df.rds
 
 packages:
   - sf
