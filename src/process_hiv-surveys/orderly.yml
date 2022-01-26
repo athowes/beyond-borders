@@ -1,0 +1,35 @@
+script: script.R
+
+sources:
+  - functions.R
+
+artefacts:
+  - data:
+      description: Processed HIV surveys
+      filenames:
+        - civ2012dhs.csv
+        - mwi2015dhs.csv
+        - tza2012ais.csv
+        - zwe2015dhs.csv
+
+packages:
+  - sf
+  - bsae
+  - ggplot2
+  - dplyr
+  - reshape2
+  - viridis
+  - tikzDevice
+  - cubature
+  - magrittr
+  - gt
+  - tidyr
+  - sn
+  - purrr
+  - readr
+
+global_resources:
+  - civ_survey_hiv_indicators.csv
+  - mwi_survey_hiv_indicators.csv
+  - tza_survey_hiv_indicators.csv
+  - zwe_survey_hiv_indicators.csv
