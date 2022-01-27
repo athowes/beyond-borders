@@ -28,8 +28,20 @@ packages:
   - purrr
   - readr
 
-global_resources:
-  - civ_survey_hiv_indicators.csv
-  - mwi_survey_hiv_indicators.csv
-  - tza_survey_hiv_indicators.csv
-  - zwe_survey_hiv_indicators.csv
+depends:
+  mwi_data_survey-indicators:
+    id: latest
+    use:
+      depends/mwi_survey_hiv_indicators.csv: mwi_survey_hiv_indicators.csv
+  zwe_data_survey:
+    id: latest
+    use:
+      depends/zwe_survey_hiv_indicators.csv: zwe_survey_hiv_indicators.csv
+  tza_data_survey:
+    id: latest
+    use:
+      depends/tza_survey_hiv_indicators.csv: tza_survey_hiv_indicators.csv
+  civ_data_survey:
+    id: latest
+    use:
+      depends/civ_survey_hiv_indicators.csv: civ_survey_hiv_indicators.csv

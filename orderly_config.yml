@@ -35,6 +35,3 @@ fields:
     required: false
   author:
     required: false
-
-global_resources:
-  global
