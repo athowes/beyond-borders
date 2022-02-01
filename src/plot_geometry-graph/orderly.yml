@@ -4,7 +4,8 @@ artefacts:
   - data:
       description: Geometry graph comparison plot
       filenames:
-        - geometry-graph.pdf
+        - geometry-graph-mwi.pdf
+        - geommetry-graph-zwe.pdf
 
 packages:
   - bsae
