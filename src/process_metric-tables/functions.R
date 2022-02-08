@@ -26,8 +26,8 @@ update_naming <- function(df) {
       "besag_inla" = "Besag",
       "bym2_inla" = "BYM2",
       "fck_inla" = "FCK",
-      "ck_inla" = "CK",
-      "fik_stan" = "FIK",
+      "ck_stan" = "CK",
+      "fik_inla" = "FIK",
       "ik_stan" = "IK")
   )
 }

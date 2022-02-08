@@ -46,6 +46,7 @@ sink("time-table.txt")
 
 df_time %>%
   group_by(geometry, sim_model, inf_model) %>%
+  update_naming() %>%
   summarise(n = n(), across(t, list(mean = mean, se = ~ sd(.x) / sqrt(length(.x))))) %>%
   metric_table(
     metric = "t",
