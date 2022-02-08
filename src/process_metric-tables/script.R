@@ -13,7 +13,7 @@ sink("crps-table-rho.txt")
 
 df_rho %>%
   group_mean_and_se(group_variables = c("geometry", "sim_model", "inf_model")) %>%
-  update_naming() %>%
+  bsae::update_naming() %>%
   metric_table(
     metric = "crps",
     title = "Continuous Ranked Probability Score",
@@ -29,7 +29,7 @@ sink("crps-table-intercept.txt")
 
 df_intercept %>%
   group_mean_and_se(group_variables = c("geometry", "sim_model", "inf_model")) %>%
-  update_naming() %>%
+  bsae::update_naming() %>%
   metric_table(
     metric = "crps",
     title = "Continuous Ranked Probability Score",
@@ -40,13 +40,12 @@ df_intercept %>%
 
 sink()
 
-
 #' Time table
 sink("time-table.txt")
 
 df_time %>%
   group_by(geometry, sim_model, inf_model) %>%
-  update_naming() %>%
+  bsae::update_naming() %>%
   summarise(n = n(), across(t, list(mean = mean, se = ~ sd(.x) / sqrt(length(.x))))) %>%
   metric_table(
     metric = "t",

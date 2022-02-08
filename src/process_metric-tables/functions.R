@@ -5,33 +5,6 @@ group_mean_and_se <- function(df, group_variables) {
     summarise(n = n(), across(mse:lds, list(mean = mean, se = ~ sd(.x) / sqrt(length(.x)))))
 }
 
-#' A dictionary to convert from internal names to human readable names, used in the manuscript.
-#'
-#' @param df A dataframe with columns `geometry`, `sim_model` and `inf_model`.
-#' @return A dataframe where the entries in those columns have been renamed.
-update_naming <- function(df) {
-  mutate(
-    df,
-    geometry = recode_factor(geometry,
-      "grid" = "Grid",
-      "civ" = "Cote d'Ivoire",
-      "tex" = "Texas"),
-    sim_model = recode_factor(sim_model,
-      "iid" = "IID",
-      "icar" = "Besag",
-      "ik" = "IK"),
-    inf_model = recode_factor(inf_model,
-      "constant_inla" = "Constant",
-      "iid_inla" = "IID",
-      "besag_inla" = "Besag",
-      "bym2_inla" = "BYM2",
-      "fck_inla" = "FCK",
-      "ck_stan" = "CK",
-      "fik_inla" = "FIK",
-      "ik_stan" = "IK")
-  )
-}
-
 #' Create table for particular model assessment metric.
 #'
 #' @param df A dataframe of marginal assessments.

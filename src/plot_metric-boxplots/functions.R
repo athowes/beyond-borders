@@ -18,33 +18,6 @@ dark_palette <- c(darkblue, darkgreen, darkpink)
 
 cbpalette <- c("#56B4E9", "#009E73", "#E69F00", "#F0E442", "#0072B2", "#D55E00", "#CC79A7", "#999999")
 
-#' A dictionary to convert from internal names to human readable names, used in the manuscript.
-#'
-#' @param df A dataframe with columns `geometry`, `sim_model` and `inf_model`.
-#' @return A dataframe where the entries in those columns have been renamed.
-update_naming <- function(df) {
-  mutate(
-    df,
-    geometry = recode_factor(geometry,
-                             "grid" = "Grid",
-                             "civ" = "Cote d'Ivoire",
-                             "tex" = "Texas"),
-    sim_model = recode_factor(sim_model,
-                              "iid" = "IID",
-                              "icar" = "Besag",
-                              "ik" = "IK"),
-    inf_model = recode_factor(inf_model,
-                              "constant_inla" = "Constant",
-                              "iid_inla" = "IID",
-                              "besag_inla" = "Besag",
-                              "bym2_inla" = "BYM2",
-                              "fck_inla" = "FCK",
-                              "ck_inla" = "CK",
-                              "fik_stan" = "FIK",
-                              "ik_stan" = "IK")
-  )
-}
-
 boxplot <- function(df, metric, title = NULL, y_lab = NULL, labs = FALSE, remove_constant = FALSE) {
 
   .calc_boxplot_stat <- function(x) {
@@ -71,7 +44,7 @@ boxplot <- function(df, metric, title = NULL, y_lab = NULL, labs = FALSE, remove
   ggplot(df, aes(x = inf_model, y = .data[[metric]])) +
     stat_summary(fun.data = .calc_boxplot_stat, geom = "boxplot", width = 0.5, alpha = 0.9, show.legend = FALSE, fill = lightgrey) +
     stat_summary(fun = "mean", geom = "point", position = position_dodge(width = 0.5), alpha = 0.7, show.legend = FALSE) +
-    facet_grid(geometry ~ sim_model, scales = "free") +
+    facet_wrap(geometry ~ sim_model, scales = "free") +
     labs(x = "Inferential model", y = y_lab, title = title, fill = "Simulation model") +
     theme_minimal() +
     theme(

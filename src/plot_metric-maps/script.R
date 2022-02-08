@@ -13,7 +13,7 @@ df_rho <- readRDS("depends/df_rho.rds")
 pdf("crps-map-rho.pdf", h = 4, w = 6.25)
 
 df_rho %>%
-  update_naming() %>%
+  bsae::update_naming() %>%
   group_mean_and_se(c("geometry", "sim_model", "inf_model", "id")) %>%
   metric_map(
     metric = "crps",
