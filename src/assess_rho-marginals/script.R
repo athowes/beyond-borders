@@ -5,8 +5,8 @@
 geometries <- c("grid", "civ", "tex")
 sim_models <- c("iid", "icar", "ik")
 
-#' Currently we're testing with just the one constant model, but in future it will seven different models
-inf_models <- c("constant_inla")
+#' Currently we're testing with a subset, but in future it will seven different models
+inf_models <- c("constant_inla", "besag_inla", "bym2_inla", "fck_inla", "fik_inla")
 # inf_models <- c("constant_inla", "besag_inla", "bym2_inla", "fck_inla", "fik_inla", "ck_stan", "ik_stan")
 
 pars <- expand.grid(

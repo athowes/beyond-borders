@@ -4,4 +4,3 @@
 
 geometries <- c("grid", "civ", "tex")
 sim_models <- c("iid", "icar", "ik")
-inf_models <- c("constant_inla")
