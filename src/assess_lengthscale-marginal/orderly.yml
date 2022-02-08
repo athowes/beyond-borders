@@ -37,6 +37,67 @@ depends:
       depends/fits_iid_tex_constant_inla.rds: fits_iid_tex.rds
       depends/fits_icar_tex_constant_inla.rds: fits_icar_tex.rds
       depends/fits_ik_tex_constant_inla.rds: fits_ik_tex.rds
+  fit_iid-inla:
+    id: latest
+    use:
+      depends/fits_iid_civ_iid_inla.rds: fits_iid_civ.rds
+      depends/fits_icar_civ_iid_inla.rds: fits_icar_civ.rds
+      depends/fits_ik_civ_iid_inla.rds: fits_ik_civ.rds
+      depends/fits_iid_grid_iid_inla.rds: fits_iid_grid.rds
+      depends/fits_icar_grid_iid_inla.rds: fits_icar_grid.rds
+      depends/fits_ik_grid_iid_inla.rds: fits_ik_grid.rds
+      depends/fits_iid_tex_iid_inla.rds: fits_iid_tex.rds
+      depends/fits_icar_tex_iid_inla.rds: fits_icar_tex.rds
+      depends/fits_ik_tex_iid_inla.rds: fits_ik_tex.rds
+  fit_besag-inla:
+    id: latest
+    use:
+      depends/fits_iid_civ_besag_inla.rds: fits_iid_civ.rds
+      depends/fits_icar_civ_besag_inla.rds: fits_icar_civ.rds
+      depends/fits_ik_civ_besag_inla.rds: fits_ik_civ.rds
+      depends/fits_iid_grid_besag_inla.rds: fits_iid_grid.rds
+      depends/fits_icar_grid_besag_inla.rds: fits_icar_grid.rds
+      depends/fits_ik_grid_besag_inla.rds: fits_ik_grid.rds
+      depends/fits_iid_tex_besag_inla.rds: fits_iid_tex.rds
+      depends/fits_icar_tex_besag_inla.rds: fits_icar_tex.rds
+      depends/fits_ik_tex_besag_inla.rds: fits_ik_tex.rds
+  fit_bym2-inla:
+    id: latest
+    use:
+      depends/fits_iid_civ_bym2_inla.rds: fits_iid_civ.rds
+      depends/fits_icar_civ_bym2_inla.rds: fits_icar_civ.rds
+      depends/fits_ik_civ_bym2_inla.rds: fits_ik_civ.rds
+      depends/fits_iid_grid_bym2_inla.rds: fits_iid_grid.rds
+      depends/fits_icar_grid_bym2_inla.rds: fits_icar_grid.rds
+      depends/fits_ik_grid_bym2_inla.rds: fits_ik_grid.rds
+      depends/fits_iid_tex_bym2_inla.rds: fits_iid_tex.rds
+      depends/fits_icar_tex_bym2_inla.rds: fits_icar_tex.rds
+      depends/fits_ik_tex_bym2_inla.rds: fits_ik_tex.rds
+  fit_fck-inla:
+    id: latest
+    use:
+      depends/fits_iid_civ_fck_inla.rds: fits_iid_civ.rds
+      depends/fits_icar_civ_fck_inla.rds: fits_icar_civ.rds
+      depends/fits_ik_civ_fck_inla.rds: fits_ik_civ.rds
+      depends/fits_iid_grid_fck_inla.rds: fits_iid_grid.rds
+      depends/fits_icar_grid_fck_inla.rds: fits_icar_grid.rds
+      depends/fits_ik_grid_fck_inla.rds: fits_ik_grid.rds
+      depends/fits_iid_tex_fck_inla.rds: fits_iid_tex.rds
+      depends/fits_icar_tex_fck_inla.rds: fits_icar_tex.rds
+      depends/fits_ik_tex_fck_inla.rds: fits_ik_tex.rds
+  fit_fik-inla:
+    id: latest
+    use:
+      depends/fits_iid_civ_fik_inla.rds: fits_iid_civ.rds
+      depends/fits_icar_civ_fik_inla.rds: fits_icar_civ.rds
+      depends/fits_ik_civ_fik_inla.rds: fits_ik_civ.rds
+      depends/fits_iid_grid_fik_inla.rds: fits_iid_grid.rds
+      depends/fits_icar_grid_fik_inla.rds: fits_icar_grid.rds
+      depends/fits_ik_grid_fik_inla.rds: fits_ik_grid.rds
+      depends/fits_iid_tex_fik_inla.rds: fits_iid_tex.rds
+      depends/fits_icar_tex_fik_inla.rds: fits_icar_tex.rds
+      depends/fits_ik_tex_fik_inla.rds: fits_ik_tex.rds
+
   sim_civ:
     id: latest
     use:
