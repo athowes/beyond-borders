@@ -16,7 +16,7 @@ artefacts:
 
 packages:
   - sf
-  - stan
+  - rstan
   - bsae
   - ggplot2
   - dplyr
