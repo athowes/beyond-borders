@@ -15,7 +15,7 @@ pars <- expand.grid(
 run_models <- function(geometry, sim_model) {
   data <- readRDS(paste0("depends/data_", sim_model, "_", geometry, ".rds"))
   fits <- lapply(data, function(x) bsae::bym2_inla(x$sf))
-  saveRDS(paste0("fits_", sim_model, "_", geometry, ".rds"))
+  saveRDS(fits, file = paste0("fits_", sim_model, "_", geometry, ".rds"))
 }
 
 # Run models and save for each row of pars
