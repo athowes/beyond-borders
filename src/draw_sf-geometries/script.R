@@ -30,5 +30,19 @@ geometry_iii <- NULL
 saveRDS(geometry_iii, "geometry-iii.rds")
 
 #' Geometry (iv)
-geometry_iv <- NULL
-saveRDS(geometry_iv, "geometry-iv.rds")
+area1 <- matrix(c(0, 0, 0.5, 0, 0.5, 0.5, 0, 0.5, 0, 0), ncol = 2, byrow = TRUE)
+area2 <- area1
+area2[, 1] <- area2[, 1] + 0.5
+area2[1, ] <- area2[1, ] * 2
+area3 <- area1
+area3[, 1] <- area3[, 1] + 2
+geometry_iv <- st_polygon(list(area1, area2))
+
+pdf("geometry-iv.pdf", h = 4, w = 6.25)
+
+ggplot() +
+  geom_sf(data = geometry_iv) +
+  labs(title = "(iv)") +
+  theme_void()
+
+dev.off()
