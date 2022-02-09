@@ -1,0 +1,40 @@
+script: script.R
+
+sources:
+  - functions.R
+
+artefacts:
+  - data:
+      description: Simulated data
+      filenames:
+        - i_data_iid.rds
+        - i_data_icar.rds
+        - i_data_ik.rds
+        - ii_data_iid.rds
+        - ii_data_icar.rds
+        - ii_data_ik.rds
+        - iii_data_iid.rds
+        - iii_data_icar.rds
+        - iii_data_ik.rds
+        - iv_data_iid.rds
+        - iv_data_icar.rds
+        - iv_data_ik.rds
+
+parameters:
+  nsim:
+    default: 20
+
+packages:
+  - sf
+  - bsae
+  - ggplot2
+  - dplyr
+  - reshape2
+  - viridis
+  - tikzDevice
+  - cubature
+  - magrittr
+  - gt
+  - tidyr
+  - sn
+  - purrr
