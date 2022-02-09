@@ -8,7 +8,8 @@ area2 <- area1
 area2[, 1] <- area2[, 1] + 1
 area3 <- area1
 area3[, 1] <- area3[, 1] + 2
-geometry_1 <- st_polygon(list(area1, area2, area3))
+geometry_1 <- st_polygon(list(area1, area2, area3)) %>%
+  sf::st_sfc()
 
 saveRDS(geometry_1, "geometry-1.rds")
 
@@ -20,7 +21,8 @@ radius3 <- st_buffer(p, dist = 3)
 area1 <- radius1
 area2 <- st_difference(radius2, radius1)
 area3 <- st_difference(radius3, radius2)
-geometry_2 <- st_multipolygon(list(area1, area2, area3))
+geometry_2 <- st_multipolygon(list(area1, area2, area3)) %>%
+  sf::st_sfc()
 
 saveRDS(geometry_2, "geometry-2.rds")
 
@@ -28,7 +30,8 @@ saveRDS(geometry_2, "geometry-2.rds")
 area1 <- matrix(c(0, -0.5, 0, 0.5, 1, 1, 1, -1, 0, -0.5), ncol = 2, byrow = TRUE)
 area2 <- matrix(c(1, -1, 1, 1, 2, 1.5, 2, -1.5, 1, -1), ncol = 2, byrow = TRUE)
 area3 <- matrix(c(2, -1.5, 2, 1.5, 3, 2, 3, -2, 2, -1.5), ncol = 2, byrow = TRUE)
-geometry_3 <- st_polygon(list(area1, area2, area3))
+geometry_3 <- st_polygon(list(area1, area2, area3)) %>%
+  sf::st_sfc()
 
 saveRDS(geometry_3, "geometry-3.rds")
 
@@ -36,7 +39,8 @@ saveRDS(geometry_3, "geometry-3.rds")
 area1 <- matrix(c(0, 0, 0.5, 0, 0.5, 1, 0, 1, 0, 0), ncol = 2, byrow = TRUE)
 area2 <- matrix(c(0.5, 0, 1.5, 0, 1.5, 1, 0.5, 1, 0.5, 0), ncol = 2, byrow = TRUE)
 area3 <- matrix(c(1.5, 0, 3, 0, 3, 1, 1.5, 1, 1.5, 0), ncol = 2, byrow = TRUE)
-geometry_4 <- st_polygon(list(area1, area2, area3))
+geometry_4 <- st_polygon(list(area1, area2, area3)) %>%
+  sf::st_sfc()
 
 saveRDS(geometry_4, "geometry-4.rds")
 

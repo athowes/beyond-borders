@@ -1,5 +1,8 @@
 script: script.R
 
+resources:
+  - icar.stan
+
 sources:
   - functions.R
 
