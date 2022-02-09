@@ -8,13 +8,7 @@ artefacts:
         - geometry-ii.rds
         - geometry-iii.rds
         - geometry-iv.rds
-    - data:
-      description: Plots of the geometries
-      filenames:
-        - geometry-i.pdf
-        - geometry-ii.pdf
-        - geometry-iii.pdf
-        - geometry-iv.pdf
+        - geometries.pdf
 
 packages:
   - sf

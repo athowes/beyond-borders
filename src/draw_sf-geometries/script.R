@@ -10,39 +10,56 @@ area3 <- area1
 area3[, 1] <- area3[, 1] + 2
 geometry_i <- st_polygon(list(area1, area2, area3))
 
-pdf("geometry-i.pdf", h = 4, w = 6.25)
-
-ggplot() +
-  geom_sf(data = geometry_i) +
-  labs(title = "(i)") +
-  theme_void()
-
-dev.off()
-
 saveRDS(geometry_i, "geometry-i.rds")
 
 #' Geometry (ii)
-geometry_ii <- NULL
+p <- st_point(c(0, 0))
+radius1 <- st_buffer(p, dist = 1)
+radius2 <- st_buffer(p, dist = 2)
+radius3 <- st_buffer(p, dist = 3)
+area1 <- radius1
+area2 <- st_difference(radius2, radius1)
+area3 <- st_difference(radius3, radius2)
+geometry_ii <- st_multipolygon(list(area1, area2, area3))
+
 saveRDS(geometry_ii, "geometry-ii.rds")
 
 #' Geometry (iii)
-geometry_iii <- NULL
+area1 <- matrix(c(0, -0.5, 0, 0.5, 1, 1, 1, -1, 0, -0.5), ncol = 2, byrow = TRUE)
+area2 <- matrix(c(1, -1, 1, 1, 2, 1.5, 2, -1.5, 1, -1), ncol = 2, byrow = TRUE)
+area3 <- matrix(c(2, -1.5, 2, 1.5, 3, 2, 3, -2, 2, -1.5), ncol = 2, byrow = TRUE)
+geometry_iii <- st_polygon(list(area1, area2, area3))
+
 saveRDS(geometry_iii, "geometry-iii.rds")
 
 #' Geometry (iv)
-area1 <- matrix(c(0, 0, 0.5, 0, 0.5, 0.5, 0, 0.5, 0, 0), ncol = 2, byrow = TRUE)
-area2 <- area1
-area2[, 1] <- area2[, 1] + 0.5
-area2[1, ] <- area2[1, ] * 2
-area3 <- area1
-area3[, 1] <- area3[, 1] + 2
-geometry_iv <- st_polygon(list(area1, area2))
+area1 <- matrix(c(0, 0, 0.5, 0, 0.5, 1, 0, 1, 0, 0), ncol = 2, byrow = TRUE)
+area2 <- matrix(c(0.5, 0, 1.5, 0, 1.5, 1, 0.5, 1, 0.5, 0), ncol = 2, byrow = TRUE)
+area3 <- matrix(c(1.5, 0, 3, 0, 3, 1, 1.5, 1, 1.5, 0), ncol = 2, byrow = TRUE)
+geometry_iv <- st_polygon(list(area1, area2, area3))
 
-pdf("geometry-iv.pdf", h = 4, w = 6.25)
+saveRDS(geometry_iv, "geometry-iv.rds")
 
-ggplot() +
-  geom_sf(data = geometry_iv) +
-  labs(title = "(iv)") +
-  theme_void()
+pdf("geometries.pdf", h = 4, w = 6.25)
+
+cowplot::plot_grid(
+  ggplot() +
+    geom_sf(data = geometry_i) +
+    #labs(title = "(i)") +
+    theme_void(),
+  ggplot() +
+    geom_sf(data = geometry_ii) +
+    #labs(title = "(ii)") +
+    theme_void(),
+  ggplot() +
+    geom_sf(data = geometry_iii) +
+    #labs(title = "(iii)") +
+    theme_void(),
+  ggplot() +
+    geom_sf(data = geometry_iv) +
+    #labs(title = "(iv)") +
+    theme_void(),
+  ncol = 2
+)
 
 dev.off()
