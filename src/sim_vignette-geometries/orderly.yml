@@ -7,18 +7,18 @@ artefacts:
   - data:
       description: Simulated data
       filenames:
-        - i_data_iid.rds
-        - i_data_icar.rds
-        - i_data_ik.rds
-        - ii_data_iid.rds
-        - ii_data_icar.rds
-        - ii_data_ik.rds
-        - iii_data_iid.rds
-        - iii_data_icar.rds
-        - iii_data_ik.rds
-        - iv_data_iid.rds
-        - iv_data_icar.rds
-        - iv_data_ik.rds
+        - 1_data_iid.rds
+        - 1_data_icar.rds
+        - 1_data_ik.rds
+        - 2_data_iid.rds
+        - 2_data_icar.rds
+        - 2_data_ik.rds
+        - 3_data_iid.rds
+        - 3_data_icar.rds
+        - 3_data_ik.rds
+        - 4_data_iid.rds
+        - 4_data_icar.rds
+        - 4_data_ik.rds
 
 parameters:
   nsim:
@@ -38,3 +38,12 @@ packages:
   - tidyr
   - sn
   - purrr
+
+depends:
+  draw_sf-geometries:
+    id: latest
+    use:
+      depends/geometry-1.rds: geometry-1.rds
+      depends/geometry-2.rds: geometry-2.rds
+      depends/geometry-3.rds: geometry-3.rds
+      depends/geometry-4.rds: geometry-4.rds

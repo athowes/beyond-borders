@@ -4,10 +4,10 @@ artefacts:
   - data:
       description: Four geometries with the same adjacency graph
       filenames:
-        - geometry-i.rds
-        - geometry-ii.rds
-        - geometry-iii.rds
-        - geometry-iv.rds
+        - geometry-1.rds
+        - geometry-2.rds
+        - geometry-3.rds
+        - geometry-4.rds
         - geometries.pdf
 
 packages:
