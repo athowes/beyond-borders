@@ -22,3 +22,18 @@ df_rho %>%
   )
 
 dev.off()
+
+#' CRPS map
+pdf("crps-map-rho-no-constant.pdf", h = 4, w = 6.25)
+
+df_rho %>%
+  filter(inf_model != "constant_inla") %>%
+  bsae::update_naming() %>%
+  group_mean_and_se(c("geometry", "sim_model", "inf_model", "id")) %>%
+  metric_map(
+    metric = "crps",
+    g = "Grid",
+    sf = grid
+  )
+
+dev.off()

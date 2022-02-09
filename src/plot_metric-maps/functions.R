@@ -40,7 +40,7 @@ metric_map <- function(df_id, metric, g, sf, remove_constant = FALSE) {
     cbind(rep(sf$geometry, n_infsim)) %>%
     st_as_sf() %>%
     ggplot(aes(fill = .data[[metric_mean]])) +
-    facet_grid(inf_model ~ sim_model) +
+    facet_grid(sim_model ~ inf_model) +
     geom_sf() +
     scale_fill_viridis_c(option = "C") +
     labs(fill = toupper(metric)) +
@@ -54,6 +54,7 @@ metric_map <- function(df_id, metric, g, sf, remove_constant = FALSE) {
       axis.ticks.y = element_blank(),
       strip.text = element_text(face = "bold"),
       plot.title = element_text(face = "bold"),
-      legend.position = "bottom"
+      legend.position = "bottom",
+      legend.key.width = unit(4, "lines")
     )
 }

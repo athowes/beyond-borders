@@ -6,9 +6,21 @@ df_rho <- readRDS("depends/df_rho.rds")
 df_intercept <- readRDS("depends/df_intercept.rds")
 
 #' CRPS boxplot for rho
-pdf("crps-boxplot-rho.pdf", h = 4, w = 6.25)
+pdf("crps-boxplot-rho.pdf", h = 8, w = 6.25)
 
 df_rho %>%
+  bsae::update_naming() %>%
+  boxplot(
+    metric = "crps",
+    y_lab = "CRPS"
+  )
+
+dev.off()
+
+pdf("crps-boxplot-rho-no-constant.pdf", h = 8, w = 6.25)
+
+df_rho %>%
+  filter(inf_model != "constant_inla") %>%
   bsae::update_naming() %>%
   boxplot(
     metric = "crps",

@@ -8,6 +8,7 @@ artefacts:
       description: Metric boxplots
       filenames:
         - crps-boxplot-rho.pdf
+        - crps-boxplot-rho-no-constant.pdf
         - crps-boxplot-intercept.pdf
 
 packages:
