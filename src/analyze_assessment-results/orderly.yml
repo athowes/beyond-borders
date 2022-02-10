@@ -1,0 +1,34 @@
+script: script.R
+
+packages:
+  - sf
+  - bsae
+  - ggplot2
+  - dplyr
+  - reshape2
+  - viridis
+  - tikzDevice
+  - cubature
+  - magrittr
+  - gt
+  - tidyr
+  - sn
+  - purrr
+
+depends:
+  assess_intercept-marginal:
+    id: latest
+    use:
+      depends/df_intercept.rds: df.rds
+  assess_lengthscale-marginal:
+    id: latest
+    use:
+      depends/df_lengthscale.rds: df.rds
+  assess_rho-marginals:
+    id: latest
+    use:
+      depends/df_rho.rds: df.rds
+  assess_time-taken:
+    id: latest
+    use:
+      depends/df_time.rds: df.rds
