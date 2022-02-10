@@ -1,0 +1,31 @@
+script: script.R
+
+sources:
+  - functions.R
+
+artefacts:
+  - data:
+      description: Lengthscale recovery
+      filenames:
+        - lengthscale-recovery.pdf
+
+packages:
+  - sf
+  - bsae
+  - ggplot2
+  - dplyr
+  - reshape2
+  - viridis
+  - tikzDevice
+  - cubature
+  - magrittr
+  - gt
+  - tidyr
+  - sn
+  - purrr
+
+depends:
+  assess_lengthscale-marginal:
+    id: latest
+    use:
+      depends/df_lengthscale.rds: df.rds
