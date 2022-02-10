@@ -8,8 +8,6 @@ geometry_2 <- readRDS("depends/geometry-2.rds")
 geometry_3 <- readRDS("depends/geometry-3.rds")
 geometry_4 <- readRDS("depends/geometry-4.rds")
 
-plot(geometry_1)
-
 #' Geometry 1
 sim_iid(geometry_1, nsim) %>% saveRDS("data_iid_1.rds")
 sim_icar(geometry_1, nsim) %>% saveRDS("data_icar_1.rds")
