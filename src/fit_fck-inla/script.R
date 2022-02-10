@@ -12,6 +12,18 @@ if(length(geometries) == 0) stop("Either vignette or realistic must be TRUE")
 
 sim_models <- c("iid", "icar", "ik")
 
+#' Prevent orderly complaining if I don't produce all simulations all of the time
+lapply(
+  expand.grid(
+    "sim_model" = sim_models,
+    "geometry" = c(vignette_geometries, realistic_geometries)
+  ) %>%
+    as.data.frame() %>%
+    mutate(file = paste0("fits_", sim_model, "_", geometry, ".rds")) %>%
+    pull(file),
+  function(file) saveRDS(NULL, file)
+)
+
 #' Geometry and simulation model
 pars <- expand.grid(
   "geometry" = geometries,
