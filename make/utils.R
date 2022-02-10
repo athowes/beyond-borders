@@ -4,7 +4,7 @@
 #' @param `param` Paramters passed to all reports.
 #' @param `commit` Should the reports be commited? Defaults to `TRUE`.
 #' @param `push` Should the reports be pushed to remote? Defaults to `FALSE`.
-run_commit_push <- function(reports, param, commit = TRUE, push = FALSE) {
+run_commit_push <- function(reports, param = NULL, commit = TRUE, push = FALSE) {
   sapply(
     reports,
     function(report) {
