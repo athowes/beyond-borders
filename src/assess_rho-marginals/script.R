@@ -15,13 +15,12 @@ pars <- expand.grid(
   "inf_model" = inf_models
 )
 
+#' Initialise progress bar
+pb <- progress_estimated(nrow(pars))
+
 #' Function to process fits
 process_fits <- function(geometry, sim_model, inf_model) {
-
-  message(
-    "Beginning assessment of rho posterior marginals of the ", inf_model,
-    " model fit to ", sim_model, " data on the ", geometry, " geometry."
-  )
+  pb$tick()$print()
 
   #' The underlying truth
   data_loc <- paste0("depends/data_", sim_model, "_", geometry, ".rds")
@@ -43,8 +42,6 @@ process_fits <- function(geometry, sim_model, inf_model) {
       .before = replicate
     )
 
-  message("rho parameter assessment complete.")
-
   return(df)
 }
 
@@ -52,9 +49,3 @@ process_fits <- function(geometry, sim_model, inf_model) {
 df <- purrr::pmap_df(pars, process_fits)
 
 saveRDS(df, "df.rds")
-
-#' Ran report in 14.1772 mins
-#' 15 * 7 = 1.45 hours total for all models
-#' That's somewhat a long time:
-#' Perhaps worth putting attention into the slow parts of this, and trying to speed them up.
-#' I imagine the code is inefficient.
