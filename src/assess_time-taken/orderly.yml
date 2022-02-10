@@ -6,6 +6,12 @@ artefacts:
       filenames:
         - df.rds
 
+parameters:
+  vignette:
+    default: TRUE
+  realistic:
+    default: TRUE
+
 packages:
   - sf
   - bsae
@@ -34,6 +40,18 @@ depends:
       depends/fits_iid_tex_constant_inla.rds: fits_iid_tex.rds
       depends/fits_icar_tex_constant_inla.rds: fits_icar_tex.rds
       depends/fits_ik_tex_constant_inla.rds: fits_ik_tex.rds
+      depends/fits_iid_1_constant_inla.rds: fits_iid_1.rds
+      depends/fits_icar_1_constant_inla.rds: fits_icar_1.rds
+      depends/fits_ik_1_constant_inla.rds: fits_ik_1.rds
+      depends/fits_iid_2_constant_inla.rds: fits_iid_2.rds
+      depends/fits_icar_2_constant_inla.rds: fits_icar_2.rds
+      depends/fits_ik_2_constant_inla.rds: fits_ik_2.rds
+      depends/fits_iid_3_constant_inla.rds: fits_iid_3.rds
+      depends/fits_icar_3_constant_inla.rds: fits_icar_3.rds
+      depends/fits_ik_3_constant_inla.rds: fits_ik_3.rds
+      depends/fits_iid_4_constant_inla.rds: fits_iid_4.rds
+      depends/fits_icar_4_constant_inla.rds: fits_icar_4.rds
+      depends/fits_ik_4_constant_inla.rds: fits_ik_4.rds
   fit_iid-inla:
     id: latest
     use:
@@ -46,6 +64,18 @@ depends:
       depends/fits_iid_tex_iid_inla.rds: fits_iid_tex.rds
       depends/fits_icar_tex_iid_inla.rds: fits_icar_tex.rds
       depends/fits_ik_tex_iid_inla.rds: fits_ik_tex.rds
+      depends/fits_iid_1_constant_inla.rds: fits_iid_1.rds
+      depends/fits_icar_1_constant_inla.rds: fits_icar_1.rds
+      depends/fits_ik_1_constant_inla.rds: fits_ik_1.rds
+      depends/fits_iid_2_constant_inla.rds: fits_iid_2.rds
+      depends/fits_icar_2_constant_inla.rds: fits_icar_2.rds
+      depends/fits_ik_2_constant_inla.rds: fits_ik_2.rds
+      depends/fits_iid_3_constant_inla.rds: fits_iid_3.rds
+      depends/fits_icar_3_constant_inla.rds: fits_icar_3.rds
+      depends/fits_ik_3_constant_inla.rds: fits_ik_3.rds
+      depends/fits_iid_4_constant_inla.rds: fits_iid_4.rds
+      depends/fits_icar_4_constant_inla.rds: fits_icar_4.rds
+      depends/fits_ik_4_constant_inla.rds: fits_ik_4.rds
   fit_besag-inla:
     id: latest
     use:
@@ -58,6 +88,18 @@ depends:
       depends/fits_iid_tex_besag_inla.rds: fits_iid_tex.rds
       depends/fits_icar_tex_besag_inla.rds: fits_icar_tex.rds
       depends/fits_ik_tex_besag_inla.rds: fits_ik_tex.rds
+      depends/fits_iid_1_constant_inla.rds: fits_iid_1.rds
+      depends/fits_icar_1_constant_inla.rds: fits_icar_1.rds
+      depends/fits_ik_1_constant_inla.rds: fits_ik_1.rds
+      depends/fits_iid_2_constant_inla.rds: fits_iid_2.rds
+      depends/fits_icar_2_constant_inla.rds: fits_icar_2.rds
+      depends/fits_ik_2_constant_inla.rds: fits_ik_2.rds
+      depends/fits_iid_3_constant_inla.rds: fits_iid_3.rds
+      depends/fits_icar_3_constant_inla.rds: fits_icar_3.rds
+      depends/fits_ik_3_constant_inla.rds: fits_ik_3.rds
+      depends/fits_iid_4_constant_inla.rds: fits_iid_4.rds
+      depends/fits_icar_4_constant_inla.rds: fits_icar_4.rds
+      depends/fits_ik_4_constant_inla.rds: fits_ik_4.rds
   fit_bym2-inla:
     id: latest
     use:
@@ -70,6 +112,18 @@ depends:
       depends/fits_iid_tex_bym2_inla.rds: fits_iid_tex.rds
       depends/fits_icar_tex_bym2_inla.rds: fits_icar_tex.rds
       depends/fits_ik_tex_bym2_inla.rds: fits_ik_tex.rds
+      depends/fits_iid_1_constant_inla.rds: fits_iid_1.rds
+      depends/fits_icar_1_constant_inla.rds: fits_icar_1.rds
+      depends/fits_ik_1_constant_inla.rds: fits_ik_1.rds
+      depends/fits_iid_2_constant_inla.rds: fits_iid_2.rds
+      depends/fits_icar_2_constant_inla.rds: fits_icar_2.rds
+      depends/fits_ik_2_constant_inla.rds: fits_ik_2.rds
+      depends/fits_iid_3_constant_inla.rds: fits_iid_3.rds
+      depends/fits_icar_3_constant_inla.rds: fits_icar_3.rds
+      depends/fits_ik_3_constant_inla.rds: fits_ik_3.rds
+      depends/fits_iid_4_constant_inla.rds: fits_iid_4.rds
+      depends/fits_icar_4_constant_inla.rds: fits_icar_4.rds
+      depends/fits_ik_4_constant_inla.rds: fits_ik_4.rds
   fit_fck-inla:
     id: latest
     use:
@@ -82,6 +136,18 @@ depends:
       depends/fits_iid_tex_fck_inla.rds: fits_iid_tex.rds
       depends/fits_icar_tex_fck_inla.rds: fits_icar_tex.rds
       depends/fits_ik_tex_fck_inla.rds: fits_ik_tex.rds
+      depends/fits_iid_1_constant_inla.rds: fits_iid_1.rds
+      depends/fits_icar_1_constant_inla.rds: fits_icar_1.rds
+      depends/fits_ik_1_constant_inla.rds: fits_ik_1.rds
+      depends/fits_iid_2_constant_inla.rds: fits_iid_2.rds
+      depends/fits_icar_2_constant_inla.rds: fits_icar_2.rds
+      depends/fits_ik_2_constant_inla.rds: fits_ik_2.rds
+      depends/fits_iid_3_constant_inla.rds: fits_iid_3.rds
+      depends/fits_icar_3_constant_inla.rds: fits_icar_3.rds
+      depends/fits_ik_3_constant_inla.rds: fits_ik_3.rds
+      depends/fits_iid_4_constant_inla.rds: fits_iid_4.rds
+      depends/fits_icar_4_constant_inla.rds: fits_icar_4.rds
+      depends/fits_ik_4_constant_inla.rds: fits_ik_4.rds
   fit_fik-inla:
     id: latest
     use:
@@ -94,3 +160,15 @@ depends:
       depends/fits_iid_tex_fik_inla.rds: fits_iid_tex.rds
       depends/fits_icar_tex_fik_inla.rds: fits_icar_tex.rds
       depends/fits_ik_tex_fik_inla.rds: fits_ik_tex.rds
+      depends/fits_iid_1_constant_inla.rds: fits_iid_1.rds
+      depends/fits_icar_1_constant_inla.rds: fits_icar_1.rds
+      depends/fits_ik_1_constant_inla.rds: fits_ik_1.rds
+      depends/fits_iid_2_constant_inla.rds: fits_iid_2.rds
+      depends/fits_icar_2_constant_inla.rds: fits_icar_2.rds
+      depends/fits_ik_2_constant_inla.rds: fits_ik_2.rds
+      depends/fits_iid_3_constant_inla.rds: fits_iid_3.rds
+      depends/fits_icar_3_constant_inla.rds: fits_icar_3.rds
+      depends/fits_ik_3_constant_inla.rds: fits_ik_3.rds
+      depends/fits_iid_4_constant_inla.rds: fits_iid_4.rds
+      depends/fits_icar_4_constant_inla.rds: fits_icar_4.rds
+      depends/fits_ik_4_constant_inla.rds: fits_ik_4.rds
