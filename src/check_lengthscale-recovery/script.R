@@ -3,7 +3,7 @@
 
 #' Simulating data from l = 1 or 3 and seeing if it can be recovered
 
-grid <- readRDS("depends/geometry_grid.rds")
+grid <- readRDS("depends/grid.rds")
 
 #' l = 1
 ck_one <- sim_ck(grid, nsim = 10, l = 1, save = FALSE)

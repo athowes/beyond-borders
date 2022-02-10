@@ -3,9 +3,9 @@
 # setwd("src/plot_metric-maps")
 
 #' Get geometries for mapping
-civ <- readRDS("depends/geometry_civ.rds")
-grid <- readRDS("depends/geometry_grid.rds")
-tex <- readRDS("depends/geometry_tex.rds")
+civ <- readRDS("depends/civ.rds")
+grid <- readRDS("depends/grid.rds")
+tex <- readRDS("depends/tex.rds")
 
 df_rho <- readRDS("depends/df_rho.rds")
 

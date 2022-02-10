@@ -30,15 +30,9 @@ depends:
     id: latest
     use:
       depends/df_rho.rds: df.rds
-  sim_civ:
+  sim_realistic-geometries:
     id: latest
     use:
-      depends/geometry_civ.rds: geometry.rds
-  sim_grid:
-    id: latest
-    use:
-      depends/geometry_grid.rds: geometry.rds
-  sim_tex:
-    id: latest
-    use:
-      depends/geometry_tex.rds: geometry.rds
+      depends/grid.rds: grid.rds
+      depends/civ.rds: civ.rds
+      depends/tex.rds: tex.rds

@@ -2,9 +2,9 @@
 # orderly::orderly_develop_start("plot_simulation-geometries")
 # setwd("src/plot_simulation-geometries")
 
-grid <- readRDS("depends/geometry_grid.rds")
-civ <- readRDS("depends/geometry_civ.rds")
-tex <- readRDS("depends/geometry_tex.rds")
+grid <- readRDS("depends/grid.rds")
+civ <- readRDS("depends/civ.rds")
+tex <- readRDS("depends/tex.rds")
 
 area_plot <- function(geometry, title) {
   ggplot(geometry) +

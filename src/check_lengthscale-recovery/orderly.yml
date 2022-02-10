@@ -22,7 +22,7 @@ packages:
   - dplyr
 
 depends:
-  sim_grid:
+  sim_realistic-geometries:
     id: latest
     use:
-      depends/geometry_grid.rds: geometry.rds
+      depends/grid.rds: grid.rds

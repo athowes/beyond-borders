@@ -25,7 +25,7 @@ packages:
   - purrr
 
 depends:
-  sim_grid:
+  sim_realistic-geometries:
     id: latest
     use:
-      depends/data_iid_grid.rds: data_iid.rds
+      depends/data_iid_grid.rds: data_iid_grid.rds
