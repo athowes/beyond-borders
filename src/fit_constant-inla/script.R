@@ -30,8 +30,12 @@ pars <- expand.grid(
   "sim_model" = sim_models
 )
 
+#' Initialise progress bar
+pb <- progress_estimated(length(pars))
+
 #' Function to run bsae::constant_inla
 run_models <- function(geometry, sim_model) {
+  pb$tick()$print()
   data <- readRDS(paste0("depends/data_", sim_model, "_", geometry, ".rds"))
   fits <- lapply(data, function(x) bsae::constant_inla(x$sf))
   saveRDS(fits, file = paste0("fits_", sim_model, "_", geometry, ".rds"))
