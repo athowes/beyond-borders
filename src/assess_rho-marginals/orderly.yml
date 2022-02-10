@@ -97,21 +97,30 @@ depends:
       depends/fits_iid_tex_fik_inla.rds: fits_iid_tex.rds
       depends/fits_icar_tex_fik_inla.rds: fits_icar_tex.rds
       depends/fits_ik_tex_fik_inla.rds: fits_ik_tex.rds
-  sim_civ:
+  sim_realistic-geometries:
     id: latest
     use:
-      depends/data_iid_civ.rds: data_iid.rds
-      depends/data_icar_civ.rds: data_icar.rds
-      depends/data_ik_civ.rds: data_ik.rds
-  sim_grid:
+      depends/data_iid_grid.rds: data_iid_grid.rds
+      depends/data_icar_grid.rds: data_icar_grid.rds
+      depends/data_ik_grid.rds: data_ik_grid.rds
+      depends/data_iid_civ.rds: data_iid_civ.rds
+      depends/data_icar_civ.rds: data_icar_civ.rds
+      depends/data_ik_civ.rds: data_ik_civ.rds
+      depends/data_iid_tex.rds: data_iid_tex.rds
+      depends/data_icar_tex.rds: data_icar_tex.rds
+      depends/data_ik_tex.rds: data_ik_tex.rds
+  sim_vignette-geometries:
     id: latest
     use:
-      depends/data_iid_grid.rds: data_iid.rds
-      depends/data_icar_grid.rds: data_icar.rds
-      depends/data_ik_grid.rds: data_ik.rds
-  sim_tex:
-    id: latest
-    use:
-      depends/data_iid_tex.rds: data_iid.rds
-      depends/data_icar_tex.rds: data_icar.rds
-      depends/data_ik_tex.rds: data_ik.rds
+      depends/data_iid_1.rds: data_iid_1.rds
+      depends/data_icar_1.rds: data_icar_1.rds
+      depends/data_ik_1.rds: data_ik_1.rds
+      depends/data_iid_2.rds: data_iid_2.rds
+      depends/data_icar_2.rds: data_icar_2.rds
+      depends/data_ik_2.rds: data_ik_2.rds
+      depends/data_iid_3.rds: data_iid_3.rds
+      depends/data_icar_3.rds: data_icar_3.rds
+      depends/data_ik_3.rds: data_ik_3.rds
+      depends/data_iid_4.rds: data_iid_4.rds
+      depends/data_icar_4.rds: data_icar_4.rds
+      depends/data_ik_4.rds: data_ik_4.rds
