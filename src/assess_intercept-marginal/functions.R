@@ -13,6 +13,16 @@ marginal_intercept.inla <- function(fit, S = 1000) {
   return(list(df = df, samples = samples, mean = mean, mode = mode, lower = lower, upper = upper))
 }
 
+marginal_intercept.inlax <- function(fit, S = 1000) {
+  df <- data.frame(fit$marginals.fixed$"(Intercept)")
+  samples <- sapply(fit[["samples"]], function(x) x$latent["(Intercept):1", ])
+  mean <- fit$summary.fixed["(Intercept)", ]$mean
+  mode <- fit$summary.fixed["(Intercept)", ]$mode
+  lower <- fit$summary.fixed["(Intercept)", ]$"0.025quant"
+  upper <- fit$summary.fixed["(Intercept)", ]$"0.975quant"
+  return(list(df = df, samples = samples, mean = mean, mode = mode, lower = lower, upper = upper))
+}
+
 marginal_intercept.stanfit <- function(fit, S = 1000) {
   samples <- rstan::extract(fit, pars = "beta_0")$beta_0
   kde <- density(samples)
