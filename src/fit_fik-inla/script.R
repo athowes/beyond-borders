@@ -31,7 +31,7 @@ pars <- expand.grid(
 )
 
 #' Initialise progress bar
-pb <- progress_estimated(length(pars))
+pb <- progress_estimated(nrow(pars))
 
 #' Function to run bsae::fik_inla
 run_models <- function(geometry, sim_model) {
@@ -43,4 +43,3 @@ run_models <- function(geometry, sim_model) {
 
 # Run models and save for each row of pars
 purrr::pmap_df(pars, run_models)
-

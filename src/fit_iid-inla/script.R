@@ -31,7 +31,7 @@ pars <- expand.grid(
 )
 
 #' Initialise progress bar
-pb <- progress_estimated(length(pars))
+pb <- progress_estimated(nrow(pars))
 
 #' Function to run bsae::iid_inla
 run_models <- function(geometry, sim_model) {
