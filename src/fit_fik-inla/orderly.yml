@@ -14,6 +14,12 @@ artefacts:
         - fits_icar_tex.rds
         - fits_ik_tex.rds
 
+parameters:
+  vignette:
+    default: TRUE
+  realistic:
+    default: TRUE
+
 packages:
   - sf
   - rstan

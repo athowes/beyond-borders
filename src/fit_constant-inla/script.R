@@ -1,8 +1,15 @@
 #' Uncomment and run the two line below to resume development of this script
-# orderly::orderly_develop_start("fit_constant-inla")
+# orderly::orderly_develop_start("fit_constant-inla", parameters = list(realistic = FALSE))
 # setwd("src/fit_constant-inla")
 
-geometries <- c("grid", "civ", "tex")
+vignette_geometries <- as.character(1:4)
+realistic_geometries <- c("grid", "civ", "tex")
+
+geometries <- c()
+if(vignette) geometries <- c(geometries, vignette_geometries)
+if(realistic) geometries <- c(geometries, realistic_geometries)
+if(length(geometries) == 0) stop("Either vignette or realistic must be TRUE")
+
 sim_models <- c("iid", "icar", "ik")
 
 #' Geometry and simulation model

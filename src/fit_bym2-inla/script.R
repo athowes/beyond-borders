@@ -2,7 +2,14 @@
 # orderly::orderly_develop_start("fit_bym2-inla")
 # setwd("src/fit_bym2-inla")
 
-geometries <- c("grid", "civ", "tex")
+vignette_geometries <- as.character(1:4)
+realistic_geometries <- c("grid", "civ", "tex")
+
+geometries <- c()
+if(vignette) geometries <- c(geometries, vignette_geometries)
+if(realistic) geometries <- c(geometries, realistic_geometries)
+if(length(geometries) == 0) stop("Either vignette or realistic must be TRUE")
+
 sim_models <- c("iid", "icar", "ik")
 
 #' Geometry and simulation model
