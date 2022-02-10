@@ -30,21 +30,15 @@ packages:
   - purrr
 
 depends:
-  sim_civ:
+  sim_realistic-geometries:
     id: latest
     use:
-      depends/data_iid_civ.rds: data_iid.rds
-      depends/data_icar_civ.rds: data_icar.rds
-      depends/data_ik_civ.rds: data_ik.rds
-  sim_grid:
-    id: latest
-    use:
-      depends/data_iid_grid.rds: data_iid.rds
-      depends/data_icar_grid.rds: data_icar.rds
-      depends/data_ik_grid.rds: data_ik.rds
-  sim_tex:
-    id: latest
-    use:
-      depends/data_iid_tex.rds: data_iid.rds
-      depends/data_icar_tex.rds: data_icar.rds
-      depends/data_ik_tex.rds: data_ik.rds
+      depends/data_iid_grid.rds: data_iid_grid.rds
+      depends/data_icar_grid.rds: data_icar_grid.rds
+      depends/data_ik_grid.rds: data_ik_grid.rds
+      depends/data_iid_civ.rds: data_iid_civ.rds
+      depends/data_icar_civ.rds: data_icar_civ.rds
+      depends/data_ik_civ.rds: data_ik_civ.rds
+      depends/data_iid_tex.rds: data_iid_tex.rds
+      depends/data_icar_tex.rds: data_icar_tex.rds
+      depends/data_ik_tex.rds: data_ik_tex.rds
