@@ -37,7 +37,12 @@ pb <- progress_estimated(nrow(pars))
 run_models <- function(geometry, sim_model) {
   pb$tick()$print()
   data <- readRDS(paste0("depends/data_", sim_model, "_", geometry, ".rds"))
-  fits <- lapply(data, function(x) bsae::fik_inla(x$sf))
+  fits <- lapply(data, function(x) {
+    fit <- bsae::fik_inla(x$sf)
+    samples <- INLA::inla.posterior.sample(n = 1000, fit)
+    fit[[samples]] <- samples
+    class(fit) <- "inlax"
+  })
   saveRDS(fits, file = paste0("fits_", sim_model, "_", geometry, ".rds"))
 }
 
