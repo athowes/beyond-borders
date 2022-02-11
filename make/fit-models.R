@@ -7,6 +7,8 @@ run_commit_push("fit_besag-inla")
 run_commit_push("fit_bym2-inla")
 run_commit_push("fit_fck-inla")
 run_commit_push("fit_fik-inla")
+# run_commit_push("fit_ck-stan")
+# run_commit_push("fit_ik-stan")
 
 #' #' Vignette
 #' run_commit_push("fit_constant-inla", param = list(realistic = FALSE))
