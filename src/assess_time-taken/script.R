@@ -15,13 +15,12 @@ pars <- expand.grid(
   "inf_model" = inf_models
 )
 
+#' Initialise progress bar
+pb <- progress_estimated(nrow(pars))
+
 #' Function to process fits
 process_fits <- function(geometry, sim_model, inf_model) {
-
-  message(
-    "Beginning assessment of time taken to fit the ", inf_model,
-    " model to ", sim_model, " data on the ", geometry, " geometry."
-  )
+  pb$tick()$print()
 
   #' The fitted models
   fits_loc <- paste0("depends/fits_", sim_model, "_", geometry, "_", inf_model, ".rds")
@@ -37,8 +36,6 @@ process_fits <- function(geometry, sim_model, inf_model) {
       inf_model = inf_model,
       .before = replicate
     )
-
-  message("Time taken assessment complete.")
 
   return(df)
 }
