@@ -22,6 +22,9 @@ pb <- progress_estimated(nrow(pars))
 process_fits <- function(geometry, sim_model, inf_model) {
   pb$tick()$print()
 
+  #' CK models can't handle concentric circles
+  if(geometry == "2" & inf_model %in% c("fck_inla", "ck_stan")) return(NULL)
+
   #' The fitted models
   fits_loc <- paste0("depends/fits_", sim_model, "_", geometry, "_", inf_model, ".rds")
   fits <- readRDS(fits_loc)

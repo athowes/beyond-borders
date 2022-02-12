@@ -36,6 +36,10 @@ pb <- progress_estimated(nrow(pars))
 #' Function to run bsae::ck_stan
 run_models <- function(geometry, sim_model) {
   pb$tick()$print()
+
+  #' This model can't handle the concentric circles case!
+  if(geometry == "2") return(NULL)
+
   data <- readRDS(paste0("depends/data_", sim_model, "_", geometry, ".rds"))
   fits <- lapply(data, function(x) bsae::ck_stan(x$sf))
   saveRDS(fits, file = paste0("fits_", sim_model, "_", geometry, ".rds"))
