@@ -10,6 +10,7 @@ artefacts:
         - crps-boxplot-rho.pdf
         - crps-boxplot-rho-no-constant.pdf
         - crps-boxplot-intercept.pdf
+        - crps-boxplot-intercept-no-constant.pdf
 
 packages:
   - sf

@@ -40,3 +40,15 @@ df_intercept %>%
   )
 
 dev.off()
+
+pdf("crps-boxplot-intercept-no-constant.pdf", h = 8, w = 6.25)
+
+df_intercept %>%
+  filter(inf_model != "constant_inla") %>%
+  bsae::update_naming() %>%
+  boxplot(
+    metric = "crps",
+    y_lab = "CRPS"
+  )
+
+dev.off()
