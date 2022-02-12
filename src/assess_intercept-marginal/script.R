@@ -2,7 +2,7 @@
 # orderly::orderly_develop_start("assess_intercept-marginal")
 # setwd("src/assess_intercept-marginal")
 
-geometries <- c("grid", "civ", "tex")
+geometries <- c("grid", "civ", "tex", as.character(1:4))
 sim_models <- c("iid", "icar", "ik")
 
 #' Currently we're testing with a subset, but in future it will seven different models

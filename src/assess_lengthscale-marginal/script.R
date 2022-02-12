@@ -2,5 +2,5 @@
 # orderly::orderly_develop_start("assess_lengthscale-marginal")
 # setwd("src/assess_lengthscale-marginal")
 
-geometries <- c("grid", "civ", "tex")
+geometries <- c("grid", "civ", "tex", as.character(1:4))
 sim_models <- c("iid", "icar", "ik")
