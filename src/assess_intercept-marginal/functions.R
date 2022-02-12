@@ -6,33 +6,32 @@ marginal_intercept.inla <- function(fit, S = 1000) {
   df <- data.frame(fit$marginals.fixed$"(Intercept)")
   samples_list <- INLA::inla.posterior.sample(n = S, fit)
   samples <- sapply(samples_list, function(x) x$latent["(Intercept):1", ])
-  mean <- fit$summary.fixed["(Intercept)", ]$mean
-  mode <- fit$summary.fixed["(Intercept)", ]$mode
-  lower <- fit$summary.fixed["(Intercept)", ]$"0.025quant"
-  upper <- fit$summary.fixed["(Intercept)", ]$"0.975quant"
-  return(list(df = df, samples = samples, mean = mean, mode = mode, lower = lower, upper = upper))
+  summary <- fit$summary.fixed["(Intercept)", ]
+  return(list(
+    df = df, samples = samples, mean = summary$mean, mode = summary$mode,
+    lower = summary$"0.025quant", upper = summary$"0.975quant"
+  ))
 }
 
 marginal_intercept.inlax <- function(fit, S = 1000) {
   df <- data.frame(fit$marginals.fixed$"(Intercept)")
   samples <- sapply(fit[["samples"]], function(x) x$latent["(Intercept):1", ])
-  mean <- fit$summary.fixed["(Intercept)", ]$mean
-  mode <- fit$summary.fixed["(Intercept)", ]$mode
-  lower <- fit$summary.fixed["(Intercept)", ]$"0.025quant"
-  upper <- fit$summary.fixed["(Intercept)", ]$"0.975quant"
-  return(list(df = df, samples = samples, mean = mean, mode = mode, lower = lower, upper = upper))
+  summary <- fit$summary.fixed["(Intercept)", ]
+  return(list(
+    df = df, samples = samples, mean = summary$mean, mode = summary$mode,
+    lower = summary$"0.025quant", upper = summary$"0.975quant"
+  ))
 }
 
 marginal_intercept.stanfit <- function(fit, S = 1000) {
   samples <- rstan::extract(fit, pars = "beta_0")$beta_0
   kde <- density(samples)
   df <- data.frame(x = kde$x, y = kde$y)
-  summary <- rstan::summary(fit)$summary
-  mean <- summary["beta_0", "mean"]
-  mode <- summary["beta_0", "50%"]
-  lower <- summary["beta_0", "2.5%"]
-  upper <- summary["beta_0", "97.5%"]
-  return(list(df = df, samples = samples, mean = mean, mode = mode, lower = lower, upper = upper))
+  summary <- rstan::summary(fit)$summary["beta_0", ]
+  return(list(
+    df = df, samples = samples, mean = summary[, "mean"], mode = summary[, "50%"],
+    lower = summary[, "2.5%"], upper = summary[, "97.5%"]
+  ))
 }
 
 assess_marginal_intercept <- function(intercept = -2, fit) {
