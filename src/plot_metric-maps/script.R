@@ -6,34 +6,17 @@
 civ <- readRDS("depends/civ.rds")
 grid <- readRDS("depends/grid.rds")
 tex <- readRDS("depends/tex.rds")
+geometry_1 <- readRDS("depends/geometry-1.rds")
+geometry_2 <- readRDS("depends/geometry-2.rds")
+geometry_3 <- readRDS("depends/geometry-3.rds")
+geometry_4 <- readRDS("depends/geometry-4.rds")
 
 df_rho <- readRDS("depends/df_rho.rds")
 
-#' CRPS map
-pdf("crps-map-rho.pdf", h = 4, w = 6.25)
-
-df_rho %>%
-  bsae::update_naming() %>%
-  group_mean_and_se(c("geometry", "sim_model", "inf_model", "id")) %>%
-  metric_map(
-    metric = "crps",
-    g = "Grid",
-    sf = grid
-  )
-
-dev.off()
-
-#' CRPS map
-pdf("crps-map-rho-no-constant.pdf", h = 4, w = 6.25)
-
-df_rho %>%
-  filter(inf_model != "constant_inla") %>%
-  bsae::update_naming() %>%
-  group_mean_and_se(c("geometry", "sim_model", "inf_model", "id")) %>%
-  metric_map(
-    metric = "crps",
-    g = "Grid",
-    sf = grid
-  )
-
-dev.off()
+produce_crps_maps("civ", civ)
+produce_crps_maps("grid", grid)
+produce_crps_maps("tex", tex)
+produce_crps_maps("1", geometry_1)
+produce_crps_maps("2", geometry_2)
+produce_crps_maps("3", geometry_3)
+produce_crps_maps("4", geometry_4)

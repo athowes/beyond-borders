@@ -25,16 +25,14 @@ group_mean_and_se <- function(df, group_variables) {
     summarise(n = n(), across(mse:lds, list(mean = mean, se = ~ sd(.x) / sqrt(length(.x)))))
 }
 
-metric_map <- function(df_id, metric, g, sf, remove_constant = FALSE) {
+metric_map <- function(df, metric, sf, remove_constant = FALSE) {
   metric_mean <- paste0(metric, "_mean")
-
-  df <- df_id %>% filter(geometry == g)
 
   if(remove_constant){
     df <- df %>% filter(inf_model != "Constant")
   }
 
-  n_infsim <- nrow(unique(df[,c("inf_model", "sim_model")]))
+  n_infsim <- nrow(unique(df[, c("inf_model", "sim_model")]))
 
   df %>%
     cbind(rep(sf$geometry, n_infsim)) %>%
@@ -58,3 +56,22 @@ metric_map <- function(df_id, metric, g, sf, remove_constant = FALSE) {
       legend.key.width = unit(4, "lines")
     )
 }
+
+produce_crps_maps <- function(arg1, arg2) {
+  df_rho %>%
+    filter(geometry == arg1) %>%
+    bsae::update_naming() %>%
+    group_mean_and_se(c("geometry", "sim_model", "inf_model", "id")) %>%
+    metric_map(metric = "crps", sf = arg2) %>%
+    ggsave(filename = paste0("crps-map-rho-", tolower(arg1), ".pdf"), width = 6.25, height = 4)
+
+  df_rho %>%
+    filter(geometry == arg1) %>%
+    filter(inf_model != "constant_inla") %>%
+    bsae::update_naming() %>%
+    group_mean_and_se(c("geometry", "sim_model", "inf_model", "id")) %>%
+    metric_map(metric = "crps", sf = arg2) %>%
+    ggsave(filename = paste0("crps-map-rho-", tolower(arg1), "-no-constant.pdf"), width = 6.25, height = 4)
+}
+
+

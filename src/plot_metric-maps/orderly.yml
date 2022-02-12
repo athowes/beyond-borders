@@ -7,8 +7,20 @@ artefacts:
   - data:
       description: Metric boxplots
       filenames:
-        - crps-map-rho.pdf
-        - crps-map-rho-no-constant.pdf
+        - crps-map-rho-civ.pdf
+        - crps-map-rho-no-constant-civ.pdf
+        - crps-map-rho-grid.pdf
+        - crps-map-rho-no-constant-grid.pdf
+        - crps-map-rho-tex.pdf
+        - crps-map-rho-no-constant-tex.pdf
+        - crps-map-rho-1.pdf
+        - crps-map-rho-no-constant-1.pdf
+        - crps-map-rho-2.pdf
+        - crps-map-rho-no-constant-2.pdf
+        - crps-map-rho-3.pdf
+        - crps-map-rho-no-constant-3.pdf
+        - crps-map-rho-4.pdf
+        - crps-map-rho-no-constant-4.pdf
 
 packages:
   - sf
@@ -30,6 +42,13 @@ depends:
     id: latest
     use:
       depends/df_rho.rds: df.rds
+  draw_vignette-geometries:
+    id: latest
+    use:
+      depends/geometry-1.rds: geometry-1.rds
+      depends/geometry-2.rds: geometry-2.rds
+      depends/geometry-3.rds: geometry-3.rds
+      depends/geometry-4.rds: geometry-4.rds
   sim_realistic-geometries:
     id: latest
     use:
