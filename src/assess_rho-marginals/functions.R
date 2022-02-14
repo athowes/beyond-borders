@@ -1,8 +1,8 @@
 #' R-INLA $marginals don't cover enough of the space and vulnerable to -Inf?
-#' Use KDE on samples here? How does inla.posterior.sample work? Make $marginals higher resolution?
+#' Solution is to use KDE on samples here? How does inla.posterior.sample work? Make $marginals higher resolution?
 #' https://groups.google.com/g/r-inla-discussion-group/c/7uBoKYkHecg
 #' Instance of broader challenge with using log scores e.g.
-#' "While the log score requires fairly stringent conditions, the CRPS yields consistent approximations under minimal assumptions
+#' "While the log score requires fairly stringent conditions, the CRPS yields consistent approximations under minimal assumptions"
 #' Kruger, Lerch, Thorarinsdottir, Gneiting https://arxiv.org/pdf/1608.06802v1.pdf
 #' Best probably to avoid (my take) and stick to CRPS
 
@@ -48,8 +48,6 @@ assess_ith_marginal_rho <- function(rho, fit, i) {
   marginal <- ith_marginal_rho(fit, i)
   obs <- rho[[i]]
   error_samples <- (marginal$samples - obs)
-  mean <- marginal$mean
-  mode <- marginal$mode
 
   #' When there aren't enough entries to compute f, just return NAs
   if(is.null(marginal$df) | sum(complete.cases(marginal$df)) > 1) {
@@ -63,16 +61,12 @@ assess_ith_marginal_rho <- function(rho, fit, i) {
 
   return(list(
     obs = obs,
-    mean = mean,
-    mode = mode,
+    mean = marginal$mean,
+    mode = marginal$mode,
     lower = marginal$lower,
     upper = marginal$upper,
     mse = mean(error_samples^2),
     mae = mean(abs(error_samples)),
-    mse_mean = (obs - mean)^2, #' These could be calculated in post, vectorised
-    mae_mean = abs(obs - mean),
-    mse_mode = (obs - mode)^2,
-    mae_mode = abs(obs - mode),
     crps = bsae::crps(marginal$samples, obs),
     lds = lds,
     quantile = quantile
@@ -81,6 +75,6 @@ assess_ith_marginal_rho <- function(rho, fit, i) {
 
 assess_marginals_rho <- function(rho, fit) {
   res <- sapply(1:length(rho), function(i) assess_ith_marginal_rho(rho, fit, i))
-  df <- tidyr::unnest(data.frame(t(res)), cols = mse:quantile) #' Don't want vector of lists
+  df <- tidyr::unnest(data.frame(t(res)), cols = obs:quantile) #' Don't want vector of lists
   cbind(id = 1:nrow(df), df)
 }
