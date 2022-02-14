@@ -1,0 +1,20 @@
+script: script.R
+
+artefacts:
+  - data:
+      description: Learning about the INLA-SPDE method
+      filenames:
+        - inla-spde.pdf
+
+resources:
+  - inla-spde.Rmd
+  - citations.bib
+
+packages:
+  - bsae
+  - sf
+  - rstan
+  - ggplot2
+  - raster
+  - rgdal
+  - knitr

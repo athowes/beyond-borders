@@ -1,0 +1,386 @@
+---
+title: "SPDE approach notes"
+author: "Adam Howes"
+output: pdf_document
+bibliography: citations.bib
+---
+
+## List of possible sources
+
+* @miller2020understanding (recommended by Samir)
+* [Chapter 9](https://www.paulamoraga.com/book-geospatial/) of Geospatial Health Data: Modeling and Visualization with R-INLA and Shiny by Paula Moraga
+* [Most of](https://becarioprecario.bitbucket.io/spde-gitbook/index.html) Advanced Spatial Modeling with Stochastic Partial Differential Equations Using R and INLA by Elias T. Krainski and coauthors
+* [Comment](https://groups.google.com/g/r-inla-discussion-group/c/4tKXemUciGU) on Google group by Finn
+* [Markdown document](https://rstudio-pubs-static.s3.amazonaws.com/302639_3ccd091c277d4d6c9ad9c2cf524250b6.html) by Zhe Sha
+
+## Background
+
+The solution to certain stochastic partial differential equations (SPDEs) is a Gaussian field with Matérn covariance [@whittle1954stationary].
+@lindgren2010explicit propose to represent a Gaussian field with Matérn covariance as a GMRF by representing the solution of the SPDE using the finite element method.
+The Gaussian field $f(x)$ with the Matérn covariance function is a solution to the linear fractional (since $\alpha \neq 2$) SPDE
+$$
+(\kappa^2 - \Delta)^{\alpha/2} f(x) = \epsilon(x), \quad x \in \mathbb{R}^d, \quad \alpha = \nu + d/2, \quad \kappa > 0, \quad \nu > 0,
+$$
+where $(\kappa^2 - \Delta)^{\alpha/2}$ is a pseduo-differential operator, the innovation process $\epsilon$ is spatial Gaussian white noise with unit variance and $\Delta$ is the Laplacian
+$$
+\Delta = \sum_{i=1}^d \frac{\delta^2}{\delta x_i^2},
+$$
+and the marginal variance is
+$$
+\sigma^2 = \frac{\Gamma(\nu)}{\Gamma(\nu + d/2)(4\pi)^{d/2}\kappa^{2\nu}}
+$$
+
+## @miller2020understanding explanation
+
+SPDE equation:
+
+$$Df = \epsilon$$
+
+where $D$ is a differential operator, $f$ is a funciton and $\epsilon$ is a stochastic process (often white noise).
+This corresponds to the integral form:
+
+$$Df = \epsilon \iff \int Df(x) \phi(x) \text{d}x = \int \epsilon(x) \phi(x) \text{d}x \, \forall \phi$$
+
+where $\phi$ is known as a test function.
+Using the inner product notation $\langle f, g \rangle = \int f(x) g(x) \text{d}x$ this is equivalent to:
+
+$$\langle Df, \phi \rangle = \langle \epsilon, \phi \rangle$$
+
+Solve for points on a mesh $j = 1, \ldots, M$ and $f(x) = \sum_{j = 1}^M \beta_j \psi_j (x)$ then:
+
+$$
+\langle D \sum_{j = 1}^M \beta_j \psi_j, \phi \rangle 
+= \sum_{j = 1}^M \beta_j \langle D \psi_j, \phi \rangle 
+= \langle \epsilon, \phi \rangle
+$$
+
+Test only functions $\phi$ of the form $\sum_{j = 1}^M \beta_j \psi_j (x)$, equivalent to (showing it's equal for all of the basis shows it's equal for any linear combination of them) showing that:
+
+$$
+\sum_{j = 1}^M \beta_j \langle D \psi_j, \psi_i \rangle = \langle \epsilon, \psi_i \rangle \, \forall \psi_i
+$$
+
+This can be written in matrix form as $\mathbf{P} \mathbf{\beta} = \mathbf{e}$ where $P_{i, j}$ is $\langle D \psi_i, \psi_j \rangle$ and $e_j = \langle \epsilon, \psi_j \rangle$.
+The random vector $\mathbf{e} \sim \mathcal{N}(\mathbf{0}, \mathbf{Q}_e ^{-1})$ where the precision has $(i, j)$th entry $\langle \psi_i, \psi_j \rangle$.
+If $\mathbf{P} \mathbf{\beta} \sim \mathcal{N}(\mathbf{0},  \mathbf{Q}_e ^{-1})$ then $\mathbf{\beta} \sim \mathcal{N}(\mathbf{0},  \mathbf{Q})$ where $\mathbf{Q}$ is such that $\mathbf{Q}^{-1} = \mathbf{P} \mathbf{Q}_e^{-1} \mathbf{P}^\top \implies \mathbf{Q} = \mathbf{P}^\top \mathbf{Q}_e \mathbf{P}$ (does $\mathbf{P}^\top \mathbf{P} = I$?).
+
+The steps are to use finite element method to compute $\mathbf{Q}$, then simulate $\tilde \beta$ from the Gaussian, then you have a sample $\tilde f$ from the stochastic process which is a solution to the SPDE.
+
+Need to choose a mesh, grid, triangulation to do the FEM.
+`R-INLA` uses regular grid in 1D, or constrained Delaunay triangulation in 2D to produce a mesh.
+Piecewise linear basis functions (linear B-spline).
+
+### Connection to basis-penalty smoothing
+
+Assume $f$ to have the form $f(x) = \sum_{j = 1}^M \beta_j \psi_j$.
+Observations give a log-likelihood of $\ell(\beta)$.
+Point estimate $\hat \beta$ leads to function $\hat f$.
+Smoothing penalty $J(\beta, \lambda)$ to give penalised log-likelihood $\ell_p(\beta, \lambda) = \ell(\beta) - J(\beta, \lambda)$.
+Estimate both $\lambda$ and $\beta$ using REML.
+
+Lots of choices for the penalty!
+
+* Second derivative
+* Thin-plate spline (total variation in the gradient of $f$ including the interaction between coordinates). Ends up being $J(\beta, \lambda) = \lambda \int (Df)^2 \text{d} x$ for some $D$ (can also write using inner product). Can also write this in matrix form
+
+You can interpret penalised likelihood as just Bayesian.
+This gets you to the following (improper) prior:
+
+$$
+p(\beta) \propto \text{exp}( - \lambda \beta^\top S \beta)
+$$
+
+This is just a Gaussian with precision $\lambda S$.
+
+Approximate precision matrix for SPDE $Df = \epsilon$ is the same as $\lambda S$ computed using the smoothing penalty $\langle Df, Df, \rangle$.
+
+1. Any SPDE of the form $Df = \epsilon$ can be interpreted instead as a smoothing penalty and vice-versa
+2. Differences in the approaches are differences in implementation only
+
+What smoothing penalty does the Matérn correspond to?
+This one:
+
+$$\tau \int (\kappa^2 f - \Delta f)^2 \text{d} x$$
+
+Trade off between the value of $f$ and the second derivative in each direction.
+Higher $\kappa$ means that $\Delta f$ can be higher without incurring penalty.
+The other parameter $\tau$ controls the overall smoothness.
+Similar question about how distinuishable these are as with lengthscale and noise (probably not very).
+
+
+## A short introduction on how to fit a SPDE model with INLA (Krainski and Rue)
+
+```{r message=FALSE}
+library(INLA)
+```
+
+Generate fake data:
+
+```{r}
+n <- 200
+coo <- matrix(runif(2 * n), n)
+
+plot(coo[,1], coo[,2])
+```
+
+```{r}
+s2u <- 0.5 # "sigma squared u"
+k <- 10
+r <- 2/k
+
+R <- s2u * exp(-k * as.matrix(dist(coo)))
+
+image(R)
+```
+
+Sample one multivariate Gaussian observation (note that `rnorm(n) %*% chol(R)` is equivalent to `MASS::mvrnorm`):
+
+```{r}
+u <- drop(rnorm(n) %*% chol(R))
+u2 <- MASS::mvrnorm(1, rep(0, n), Sigma = R)
+
+plot(u)
+points(u2, add = TRUE, col = "red")
+```
+
+Add a covariate effect and noise (nugget) terms:
+
+```{r}
+x <- runif(n)
+beta <- 1:2
+s2e <- 0.2 # "sigma squared e"
+lin.pred <- beta[1] + beta[2] * x + u # "linear predictor"
+e <- rnorm(n, 0, sqrt(s2e)) # "noise"
+y <- lin.pred + e
+```
+
+Mesh:
+
+```{r}
+mesh <- inla.mesh.2d(
+  coo, 
+  cutoff = r/10, 
+  max.edge = c(r/4, r/2),
+  offset = c(r/2, r)
+)
+
+plot(mesh, asp = 1)
+points(coo, col = "red")
+```
+
+Question as to if all of the points lie at verticies?
+It doesn't look like it, but most of them are.
+
+Create the projection matrix `A`:
+
+```{r}
+A <- inla.spde.make.A(mesh = mesh, loc = coo)
+class(A)
+```
+
+`A` is a $200 \times 1740$ sparse Matrix.
+Where do the dimensions come from?
+200 is the number of data points, what about the 1740?
+I'd guess the number of mesh points but it's not exactly right:
+
+```{r}
+mesh$n
+```
+
+Set-up the SPDE:
+
+```{r}
+spde <- inla.spde2.pcmatern(
+  mesh = mesh,
+  alpha = 1.5,
+  prior.range = c(0.2, 0.5), # P(range < 0.2) = 0.5
+  prior.sigma = c(1, 0.5)    # P(sigma > 1) = 0.5
+)
+```
+
+```{r}
+stk.e <- inla.stack(
+  tag = "est",
+  data = list(y = y),
+  A = list(1, A),
+  effects = list(
+    data.frame(b0 = 1, x = x),
+    idx.u = 1:spde$n.spde)
+)
+
+pcprec <- list(
+  hyper = list(theta = list(prior = "pc.prec", param = c(1, 0.1)))
+)
+
+mf <- y ~ 0 + b0 + x + f(idx.u, model = spde)
+
+res <- inla(
+  mf, 
+  control.family = pcprec,
+  data = inla.stack.data(stk.e),
+  control.predictor = list(compute = TRUE, A = inla.stack.A(stk.e))
+)
+
+round(res$summary.fixed, 4)
+
+pmd.s2e <- inla.tmarginal(
+  function(x) sqrt(1/x), 
+  res$marginals.hyperpar$`Precision for the Gaussian observations`
+)
+
+plot(pmd.s2e, type = "l", ylab = "Density", xlab = expression(sigma[e]))
+```
+
+## @krainski2018advanced notes
+
+### First result
+
+Consider a regular 2D lattice with number of sites tending to infinity then
+$$
+\mathbb{E}(u_{i, j} \, | \, u_{-i, j}) = \frac{1}{a}(u_{i-1, j} + u_{i + 1, j} + u_{i, j - 1} + u_{i, j + 1})
+$$
+and $\mathbb{V}(u_{i, j} \, | \, u_{-i, j}) = 1/a$ with $|a| > 4$.
+For $\nu = 1$ and $\nu = 2$ the GMRF representation is a convolution of processes with... (missing diagram here but it's a Besag precision).
+As the smoothness $\nu$ increases the precision matrix in GMRF representation becomes less sparse, the conditional distributions depend on a wider neighbourhood.
+
+```{r}
+q1 <- INLA:::inla.rw1(n = 5)
+q1
+
+crossprod(q1)
+
+q2 <- INLA:::inla.rw2(n = 5)
+q2
+```
+
+### Second result
+
+$$
+u(s) = \sum_{k = 1}^m \psi_k(s) w_k
+$$
+where $\psi_k$ are basis functions and $w_k$ are Gaussian weights, $m$ the number of points in the triangulation.
+The distribution of weights determines the full distribution in the continuous domain.
+
+Projector matrix $A$ works using barycentric coordinates of the point with respect to the coordinates of the triangle vertices.
+
+### Toy example
+
+```{r}
+data(SPDEtoy)
+str(SPDEtoy)
+
+plot(x = SPDEtoy$s1, y = SPDEtoy$s2, cex = SPDEtoy$y / 10)
+
+
+pl.dom <- cbind(c(0, 1, 1, 0.7, 0), c(0, 0, 0.7, 1, 1))
+mesh5 <- inla.mesh.2d(loc.domain = pl.dom, max.e = c(0.092, 0.2))
+plot(mesh5)
+
+spde5 <- inla.spde2.pcmatern(
+  mesh = mesh5, alpha = 2,     # Mesh and smoothness parameter
+  prior.range = c(0.3, 0.5),   # P(practic.range < 0.3) = 0.5
+  prior.sigma = c(10, 0.01)    # P(sigma > 10) = 0.01
+) 
+```
+
+Projector matrix is sparse (maximum three elements in each row are non-zero, and each row sums to one).
+
+```{r}
+coords <- as.matrix(SPDEtoy[, 1:2])
+A5 <- inla.spde.make.A(mesh5, loc = coords)
+```
+
+```{r}
+dim(A5)
+
+table(rowSums(A5 > 0)) # Three non-zero elements
+table(rowSums(A5))     # Which add to one
+
+table(colSums(A5) > 0) # Columns which correspond to triangles with no points inside can be dropped
+# This is done automatically by inla.stack()
+```
+
+`inla.stack()` organises the data, covariates, indicies and projector matrices
+
+```{r}
+stk5 <- inla.stack(
+  data = list(resp = SPDEtoy$y),
+  A = list(A5, 1), 
+  effects = list(i = 1:spde5$n.spde, beta0 = rep(1, nrow(SPDEtoy))),
+  tag = 'est'
+)
+```
+
+```{r}
+dim(inla.stack.A(stk5)) # Number of columns in A5 which have non-zero entries, plus one column for the intercept
+```
+
+```{r}
+res5 <- inla(
+  resp ~ 0 + beta0 + f(i, model = spde5),
+  data = inla.stack.data(stk5),
+  control.predictor = list(A = inla.stack.A(stk5))
+)
+
+res5$summary.fixed
+```
+
+Now for predicting at new points.
+
+```{r}
+pts3 <- rbind(c(0.1, 0.1), c(0.5, 0.55), c(0.7, 0.9))
+A5pts3 <- inla.spde.make.A(mesh5, loc = pts3)
+dim(A5pts3)
+
+jj3 <- which(colSums(A5pts3) > 0)
+A5pts3[, jj3]
+```
+
+Interpolation of the posterior mean:
+
+```{r}
+drop(A5pts3 %*% res5$summary.random$i$mean)
+```
+
+Projection onto a grid:
+
+```{r}
+pgrid0 <- inla.mesh.projector(mesh5, xlim = 0:1, ylim = 0:1, dims = c(101, 101))
+
+prd0.m <- inla.mesh.project(pgrid0,  res5$summary.random$i$mean)
+prd0.s <- inla.mesh.project(pgrid0,  res5$summary.random$i$sd)
+
+image(prd0.m)
+image(prd0.s)
+```
+
+Prediction of new data:
+
+```{r}
+# Create a new stack
+stk5.pmu <- inla.stack(
+  data = list(resp = NA),
+  A = list(A5pts3, 1), 
+  effects = list(i = 1:spde5$n.spde, beta0 = rep(1, 3)), 
+  tag = 'prd5.mu'
+)
+
+# Append it
+stk5.full <- inla.stack(stk5, stk5.pmu)
+
+r5pmu <- inla(
+  resp ~ 0 + beta0 + f(i, model = spde5), 
+  data = inla.stack.data(stk5.full), 
+  control.mode = list(theta = res5$mode$theta, restart = FALSE), 
+  control.predictor = list(A = inla.stack.A(stk5.full), compute = TRUE)
+)
+```
+
+```{r}
+indd3r <- inla.stack.index(stk5.full, 'prd5.mu')$data
+indd3r
+
+r5pmu$summary.fitted.values[indd3r, c(1:3, 5)]
+```
+
+## Bibliography {-}
