@@ -38,22 +38,16 @@ assess_marginal_intercept <- function(intercept = -2, fit) {
   marginal <- marginal_intercept(fit)
   obs <- intercept
   error_samples <- (marginal$samples - obs)
-  mean <- marginal$mean
-  mode <- marginal$mode
   f <- approxfun(marginal$df$x, marginal$df$y, yleft = 0, yright = 0)
 
   return(list(
     obs = obs,
-    mean = mean,
-    mode = mode,
+    mean = marginal$mean,
+    mode = marginal$mode,
     lower = marginal$lower,
     upper = marginal$upper,
     mse = mean(error_samples^2),
     mae = mean(abs(error_samples)),
-    mse_mean = (obs - mean)^2,
-    mae_mean = abs(obs - mean),
-    mse_mode = (obs - mode)^2,
-    mae_mode = abs(obs - mode),
     crps = bsae::crps(marginal$samples, obs),
     lds = log(f(obs)),
     quantile = cubature::cubintegrate(f, lower = -Inf, upper = obs, method = "pcubature")$integral

@@ -46,4 +46,13 @@ process_fits <- function(geometry, sim_model, inf_model) {
 #' Eventually this will be iterated over geometries, sim_models and inf_models
 df <- purrr::pmap_df(pars, process_fits)
 
+#' Calculated in post (vectorised) rather than in the purrr:: call
+df <- df %>%
+  mutate(
+    mse_mean = (obs - mean)^2,
+    mae_mean = abs(obs - mean),
+    mse_mode = (obs - mode)^2,
+    mae_mode = abs(obs - mode)
+  )
+
 saveRDS(df, "df.rds")
