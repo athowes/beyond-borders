@@ -1,5 +1,6 @@
 extract_survey <- function(iso3) {
   df <- read_csv(file = paste0("depends/", iso3, "_survey_hiv_indicators.csv"))
+  #' Should make into a sf at this point by left_join to the areas
   df %>%
     separate(area_id, c("iso3", "area_level"), "_") %>%
     mutate(area_level = as.numeric(area_level)) %>%
