@@ -27,12 +27,12 @@ marginal_lengthscale.stanfit <- function(fit, S = 1000) {
   df <- data.frame(x = kde$x, y = kde$y)
   summary <- rstan::summary(fit)$summary["l", ]
   return(list(
-    df = df, samples = samples, mean = summary[, "mean"], mode = summary[, "50%"],
-    lower = summary[, "2.5%"], upper = summary[, "97.5%"]
+    df = df, samples = samples, mean = summary[["mean"]], mode = summary[["50%"]],
+    lower = summary[["2.5%"]], upper = summary[["97.5%"]]
   ))
 }
 
-assess_marginal_lengthscale <- function(lengthscale = 1, fit) {
+assess_marginal_lengthscale <- function(lengthscale = 5/2, fit) {
   marginal <- marginal_lengthscale(fit)
 
   if(is.null(marginal)){
