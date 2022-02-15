@@ -6,6 +6,19 @@ Small-area estimation models typically use the Besag model, a type of Gaussian M
 However, for irregular geometries, the assumptions made by the Besag model do not seem plausible (in the image below, geometric irregularity is increasing from left to right).
 The goal of this work is to determine whether or not, in practice, this matters.
 
+To do so, we consider the performance of eight inferential small-area models:
+
+| Model    | Function |
+|----------|--------------|
+| Constant | [`constant_inla`](https://github.com/athowes/bsae/blob/master/R/constant.R) |
+| Independent and identically distributed | [`iid_inla`](https://github.com/athowes/bsae/blob/master/R/iid.R) |
+| Besag | [`besag_inla`](https://github.com/athowes/bsae/blob/master/R/besag.R) |
+| Besag-York-Mollié  2 | [`bym2_inla`](https://github.com/athowes/bsae/blob/master/R/bym2.R) |
+| Centroid kernel (fixed lengthscale) | [`fck_inla`](https://github.com/athowes/bsae/blob/master/R/fck.R) |
+| Integrated kernel (fixed lengthscale) | [`fik_inla`](https://github.com/athowes/bsae/blob/master/R/fik.R) |
+| Centroid kernel | [`ck_stan`](https://github.com/athowes/bsae/blob/master/R/ck.R) |
+| Integrated kernel | [`ik_inla`](https://github.com/athowes/bsae/blob/master/R/ik.R) |
+
 ![](simulation-geometries.png)
 
 ## R package dependencies
