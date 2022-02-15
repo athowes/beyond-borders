@@ -1,0 +1,38 @@
+script: script.R
+
+artefacts:
+  - data:
+      description: Fitted cross-validation models
+      filenames:
+        - fits_civ_loo.rds
+        - fits_civ_sloo.rds
+        - fits_mwi_loo.rds
+        - fits_mwi_sloo.rds
+        - fits_tza_loo.rds
+        - fits_tza_sloo.rds
+        - fits_zwe_loo.rds
+        - fits_zwe_sloo.rds
+
+packages:
+  - sf
+  - bsae
+  - ggplot2
+  - dplyr
+  - reshape2
+  - viridis
+  - tikzDevice
+  - cubature
+  - magrittr
+  - gt
+  - tidyr
+  - sn
+  - purrr
+
+depends:
+  process_hiv-surveys:
+    id: latest
+    use:
+      depends/civ2012dhs.csv: civ2012dhs.csv
+      depends/mwi2015dhs.csv: mwi2015dhs.csv
+      depends/tza2012ais.csv: tza2012ais.csv
+      depends/zwe2015dhs.csv: zwe2015dhs.csv
