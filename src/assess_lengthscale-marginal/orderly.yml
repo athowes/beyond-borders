@@ -24,6 +24,9 @@ packages:
   - sn
   - purrr
 
+resources:
+  - benchmark.R
+
 depends:
   fit_ck-stan:
     id: latest

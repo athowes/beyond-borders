@@ -39,8 +39,8 @@ ith_marginal_rho.stanfit <- function(fit, i, S = 1000){
   df <- data.frame(x = kde$x, y = kde$y)
   summary <- rstan::summary(fit)$summary[paste0("rho[", i, "]"), ]
   return(list(
-    df = df, samples = samples, mean = summary[, "mean"], mode = summary[, "50%"],
-    lower = summary[, "2.5%"], upper = summary[, "97.5%"]
+    df = df, samples = samples, mean = summary[["mean"]], mode = summary[["50%"]],
+    lower = summary[["2.5%"]], upper = summary[["97.5%"]]
   ))
 }
 
