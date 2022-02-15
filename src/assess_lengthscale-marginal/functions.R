@@ -25,12 +25,11 @@ marginal_lengthscale.stanfit <- function(fit, S = 1000) {
   samples <- rstan::extract(fit, pars = "l")$l
   kde <- density(samples)
   df <- data.frame(x = kde$x, y = kde$y)
-  summary <- rstan::summary(fit)$summary
-  mean <- summary["l", "mean"]
-  mode <- summary["l", "50%"]
-  lower <- summary["l", "2.5%"]
-  upper <- summary["l", "97.5%"]
-  return(list(df = df, samples = samples, mean = mean, mode = mode, lower = lower, upper = upper))
+  summary <- rstan::summary(fit)$summary["l", ]
+  return(list(
+    df = df, samples = samples, mean = summary[, "mean"], mode = summary[, "50%"],
+    lower = summary[, "2.5%"], upper = summary[, "97.5%"]
+  ))
 }
 
 assess_marginal_lengthscale <- function(lengthscale = 1, fit) {
@@ -42,22 +41,16 @@ assess_marginal_lengthscale <- function(lengthscale = 1, fit) {
 
   obs <- lengthscale
   error_samples <- (marginal$samples - obs)
-  mean <- marginal$mean
-  mode <- marginal$mode
   f <- approxfun(marginal$df$x, marginal$df$y, yleft = 0, yright = 0)
 
   return(list(
     obs = obs,
-    mean = mean,
-    mode = mode,
+    mean = marginal$mean,
+    mode = marginal$mode,
     lower = marginal$lower,
     upper = marginal$upper,
     mse = mean(error_samples^2),
     mae = mean(abs(error_samples)),
-    mse_mean = (obs - mean)^2,
-    mae_mean = abs(obs - mean),
-    mse_mode = (obs - mode)^2,
-    mae_mode = abs(obs - mode),
     crps = bsae::crps(marginal$samples, obs),
     lds = log(f(obs)),
     quantile = cubature::cubintegrate(f, lower = 0, upper = obs, method = "pcubature")$integral
