@@ -7,7 +7,7 @@ artefacts:
   - data:
       description: Results of lengthscale marginal assessment
       filenames:
-        - df_lengthscale.rds
+        - df.rds
 
 packages:
   - sf

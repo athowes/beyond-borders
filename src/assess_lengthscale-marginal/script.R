@@ -52,3 +52,5 @@ df <- df %>%
     mse_mode = (obs - mode)^2,
     mae_mode = abs(obs - mode)
   )
+
+saveRDS(df, "df.rds")
