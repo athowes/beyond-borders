@@ -1,0 +1,10 @@
+source("make/utils.R")
+
+run_commit_push("cv_constant-inla")
+run_commit_push("cv_iid-inla")
+run_commit_push("cv_besag-inla")
+run_commit_push("cv_bym2-inla")
+run_commit_push("cv_fck-inla")
+run_commit_push("cv_fik-inla")
+run_commit_push("cv_ck-stan")
+run_commit_push("cv_ik-stan")
