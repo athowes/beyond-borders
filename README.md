@@ -17,7 +17,7 @@ To do so, we consider the performance of eight inferential small-area models:
 | Centroid kernel (fixed lengthscale) | [`fck_inla`](https://github.com/athowes/bsae/blob/master/R/fck.R) |
 | Integrated kernel (fixed lengthscale) | [`fik_inla`](https://github.com/athowes/bsae/blob/master/R/fik.R) |
 | Centroid kernel | [`ck_stan`](https://github.com/athowes/bsae/blob/master/R/ck.R) |
-| Integrated kernel | [`ik_inla`](https://github.com/athowes/bsae/blob/master/R/ik.R) |
+| Integrated kernel | [`ik_stan`](https://github.com/athowes/bsae/blob/master/R/ik.R) |
 
 ![](simulation-geometries.png)
 
