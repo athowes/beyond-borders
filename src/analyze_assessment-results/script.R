@@ -2,24 +2,19 @@
 # orderly::orderly_develop_start("analyze_assessment-results")
 # setwd("src/analyze_assessment-results")
 
-#' Placeholder
+#' Analysis of lengthscale recovery
 
-df_intercept <- readRDS("depends/df_intercept.rds")
-df_lengthscale <- readRDS("depends/df_lengthscale.rds")
-df_rho <- readRDS("depends/df_rho.rds")
-df_time <- readRDS("depends/df_time.rds")
+#' Values of the length-scale recovered by the best_average() function, without any data
+calc_best_average <- function(file) {
+  readRDS(paste0("depends/", file)) %>%
+    centroid_distance() %>%
+    bsae::best_average()
+}
 
-#' #' For IK simulated data, what's the difference between Besag, FCK and FIK over the different geometries?
-#' irregularity_effect <- df_rho %>%
-#'   filter(sim_model == "IK", inf_model %in% c("Besag", "FCK", "FIK")) %>%
-#'   group_by(geometry) %>%
-#'   mutate(crps = 1000 * crps_mean,
-#'          crps_min = min(crps),
-#'          diff = crps - crps_min) %>%
-#'   select(inf_model, diff)
-#'
-#' # FCK versus best (FIK)
-#' irregularity_effect %>% filter(inf_model == "FCK") %>% mutate_if(is.numeric, round, 1)
-#'
-#' # Besag versus best (FIK)
-#' irregularity_effect %>% filter(inf_model == "Besag") %>% mutate_if(is.numeric, round, 1)
+l_grid <- calc_best_average("grid.rds")
+l_ci <- calc_best_average("civ.rds")
+l_tex <- calc_best_average("tex.rds")
+l_1 <- calc_best_average("geometry-1.rds")
+l_2 <- calc_best_average("geometry-2.rds")
+l_3 <- calc_best_average("geometry-3.rds")
+l_4 <- calc_best_average("geometry-4.rds")
