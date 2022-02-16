@@ -7,10 +7,11 @@ artefacts:
   - data:
       description: Processed HIV surveys
       filenames:
-        - civ2012dhs.rds
-        - mwi2015dhs.rds
-        - tza2012ais.rds
-        - zwe2015dhs.rds
+        - civ2017phia.csv
+        - mwi2016phia.csv
+        - tza2017phia.csv
+        - zwe2016phia.csv
+        - hiv-surveys.pdf
 
 packages:
   - sf
@@ -27,6 +28,7 @@ packages:
   - sn
   - purrr
   - readr
+  - scales
 
 depends:
   civ_data_survey:

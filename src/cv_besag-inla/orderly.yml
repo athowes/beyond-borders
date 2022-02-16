@@ -32,7 +32,7 @@ depends:
   process_hiv-surveys:
     id: latest
     use:
-      depends/civ2012dhs.rds: civ2012dhs.rds
-      depends/mwi2015dhs.rds: mwi2015dhs.rds
-      depends/tza2012ais.rds: tza2012ais.rds
-      depends/zwe2015dhs.rds: zwe2015dhs.rds
+      depends/civ2017phia.csv: civ2017phia.csv
+      depends/mwi2016phia.csv: mwi2016phia.csv
+      depends/tza2017phia.csv: tza2017phia.csv
+      depends/zwe2016phia.csv: zwe2016phia.csv

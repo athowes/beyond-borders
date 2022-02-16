@@ -2,7 +2,7 @@
 # orderly::orderly_develop_start("cv_constant-inla")
 # setwd("src/cv_constant-inla")
 
-surveys <- c("civ2012dhs", "mwi2015dhs", "tza2012ais", "zwe2015dhs")
+surveys <- c("civ2017phia", "mwi2016phia", "tza2017phia", "zwe2016phia")
 types <- c("loo", "sloo")
 
 pars <- expand.grid(
