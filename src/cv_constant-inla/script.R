@@ -2,8 +2,10 @@
 # orderly::orderly_develop_start("cv_constant-inla")
 # setwd("src/cv_constant-inla")
 
-surveys <- c("civ2017phia", "mwi2016phia", "tza2017phia", "zwe2016phia")
-types <- c("loo", "sloo")
+surveys <- c("civ2017phia", "mwi2016phia")
+# surveys <- c("civ2017phia", "mwi2016phia", "tza2017phia", "zwe2016phia")
+types <- c("loo")
+# types <- c("loo", "sloo")
 
 pars <- expand.grid(
   "survey" = surveys,
@@ -12,7 +14,7 @@ pars <- expand.grid(
 
 #' Function to run bsae::constant_inla for each cross-validation fold
 run_cv_models <- function(survey, type) {
-  sf <- sf <- readRDS(paste0("depends/", survey, ".rds"))
+  sf <- read_csv(paste0("depends/", survey, ".csv"))
   training_sets <- create_folds(sf, type = toupper(type))
 
   print(paste0("Begin ", toupper(type), " cross-valdiation of ", toupper(survey)))
@@ -27,7 +29,5 @@ run_cv_models <- function(survey, type) {
   saveRDS(training_sets, file = paste0("fits_", substr(survey, 1, 3), "_", tolower(type), ".rds"))
 }
 
-run_cv_models("mwi2015dhs", "loo")
-
-#' #' Run models and save for each row of pars
-#' purrr::pmap_df(pars, run_models)
+#' Run models and save for each row of pars
+purrr::pmap_df(pars, run_cv_models)

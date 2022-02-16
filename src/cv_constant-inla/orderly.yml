@@ -27,6 +27,7 @@ packages:
   - tidyr
   - sn
   - purrr
+  - readr
 
 depends:
   process_hiv-surveys:

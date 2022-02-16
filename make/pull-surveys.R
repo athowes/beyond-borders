@@ -1,10 +1,10 @@
 source("make/utils.R")
 
 #' The four surveys required are:
-#' * CIV2012DHS
-#' * MWI2015DHS
-#' * TZA2012AIS
-#' * ZWE2015DHS
+#' * civ2017phia
+#' * mwi2016phia
+#' * tza2017phia
+#' * zwe2016phia
 
 orderly::orderly_pull_archive("civ_data_survey", remote = "naomi2")
 orderly::orderly_pull_archive("mwi_data_survey-indicators", remote = "malawi")
