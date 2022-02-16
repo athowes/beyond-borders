@@ -31,3 +31,13 @@ run_cv_models <- function(survey, type) {
 
 #' Run models and save for each row of pars
 purrr::pmap_df(pars, run_cv_models)
+
+#' Function to run bsae::constant_inla for the whole dataset
+#' This will be useful for comparing R-INLA and Stan inbuilt model comparison metrics to manual CV
+run_models <- function(survey, type) {
+  sf <- read_csv(paste0("depends/", survey, ".csv"))
+  fit <- bsae::constant_inla(sf)
+  saveRDS(fit, file = paste0("fit_", substr(survey, 1, 3), ".rds"))
+}
+
+purrr::pmap_df(expand.grid("survey" = surveys), run_models)
