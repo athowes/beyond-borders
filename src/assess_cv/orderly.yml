@@ -1,0 +1,90 @@
+script: script.R
+
+artefacts:
+  - data:
+      description: Results of cross-validation assessment
+      filenames:
+        - df.rds
+
+packages:
+  - sf
+  - bsae
+  - ggplot2
+  - dplyr
+  - reshape2
+  - viridis
+  - tikzDevice
+  - cubature
+  - magrittr
+  - gt
+  - tidyr
+  - sn
+  - purrr
+
+depends:
+  cv_constant-inla:
+    id: latest
+    use:
+      depends/fits_civ_loo_constant_inla.rds: fits_civ_loo.rds
+      # depends/fits_civ_sloo_constant_inla.rds: fits_civ_sloo.rds
+      depends/fits_mwi_loo_constant_inla.rds: fits_mwi_loo.rds
+      # depends/fits_mwi_sloo_constant_inla.rds: fits_mwi_sloo.rds
+      # depends/fits_tza_loo_constant_inla.rds: fits_tza_loo.rds
+      # depends/fits_tza_sloo_constant_inla.rds: fits_tza_sloo.rds
+      # depends/fits_zwe_loo_constant_inla.rds: fits_zwe_loo.rds
+      # depends/fits_zwe_sloo_constant_inla.rds: fits_zwe_sloo.rds
+  # cv_iid-inla:
+  #   id: latest
+  #   use:
+  #     depends/fits_civ_loo_constant_inla.rds: fits_civ_loo.rds
+  #     depends/fits_civ_sloo_constant_inla.rds: fits_civ_sloo.rds
+  #     depends/fits_mwi_loo_constant_inla.rds: fits_mwi_loo.rds
+  #     depends/fits_mwi_sloo_constant_inla.rds: fits_mwi_sloo.rds
+  #     depends/fits_tza_loo_constant_inla.rds: fits_tza_loo.rds
+  #     depends/fits_tza_sloo_constant_inla.rds: fits_tza_sloo.rds
+  #     depends/fits_zwe_loo_constant_inla.rds: fits_zwe_loo.rds
+  #     depends/fits_zwe_sloo_constant_inla.rds: fits_zwe_sloo.rds
+  # cv_besag-inla:
+  #   id: latest
+  #   use:
+  #     depends/fits_civ_loo_constant_inla.rds: fits_civ_loo.rds
+  #     depends/fits_civ_sloo_constant_inla.rds: fits_civ_sloo.rds
+  #     depends/fits_mwi_loo_constant_inla.rds: fits_mwi_loo.rds
+  #     depends/fits_mwi_sloo_constant_inla.rds: fits_mwi_sloo.rds
+  #     depends/fits_tza_loo_constant_inla.rds: fits_tza_loo.rds
+  #     depends/fits_tza_sloo_constant_inla.rds: fits_tza_sloo.rds
+  #     depends/fits_zwe_loo_constant_inla.rds: fits_zwe_loo.rds
+  #     depends/fits_zwe_sloo_constant_inla.rds: fits_zwe_sloo.rds
+  # cv_bym2-inla:
+  #   id: latest
+  #   use:
+  #     depends/fits_civ_loo_constant_inla.rds: fits_civ_loo.rds
+  #     depends/fits_civ_sloo_constant_inla.rds: fits_civ_sloo.rds
+  #     depends/fits_mwi_loo_constant_inla.rds: fits_mwi_loo.rds
+  #     depends/fits_mwi_sloo_constant_inla.rds: fits_mwi_sloo.rds
+  #     depends/fits_tza_loo_constant_inla.rds: fits_tza_loo.rds
+  #     depends/fits_tza_sloo_constant_inla.rds: fits_tza_sloo.rds
+  #     depends/fits_zwe_loo_constant_inla.rds: fits_zwe_loo.rds
+  #     depends/fits_zwe_sloo_constant_inla.rds: fits_zwe_sloo.rds
+  # cv_fck-inla:
+  #   id: latest
+  #   use:
+  #     depends/fits_civ_loo_constant_inla.rds: fits_civ_loo.rds
+  #     depends/fits_civ_sloo_constant_inla.rds: fits_civ_sloo.rds
+  #     depends/fits_mwi_loo_constant_inla.rds: fits_mwi_loo.rds
+  #     depends/fits_mwi_sloo_constant_inla.rds: fits_mwi_sloo.rds
+  #     depends/fits_tza_loo_constant_inla.rds: fits_tza_loo.rds
+  #     depends/fits_tza_sloo_constant_inla.rds: fits_tza_sloo.rds
+  #     depends/fits_zwe_loo_constant_inla.rds: fits_zwe_loo.rds
+  #     depends/fits_zwe_sloo_constant_inla.rds: fits_zwe_sloo.rds
+  # cv_fik-inla:
+  #   id: latest
+  #   use:
+  #     depends/fits_civ_loo_constant_inla.rds: fits_civ_loo.rds
+  #     depends/fits_civ_sloo_constant_inla.rds: fits_civ_sloo.rds
+  #     depends/fits_mwi_loo_constant_inla.rds: fits_mwi_loo.rds
+  #     depends/fits_mwi_sloo_constant_inla.rds: fits_mwi_sloo.rds
+  #     depends/fits_tza_loo_constant_inla.rds: fits_tza_loo.rds
+  #     depends/fits_tza_sloo_constant_inla.rds: fits_tza_sloo.rds
+  #     depends/fits_zwe_loo_constant_inla.rds: fits_zwe_loo.rds
+  #     depends/fits_zwe_sloo_constant_inla.rds: fits_zwe_sloo.rds
