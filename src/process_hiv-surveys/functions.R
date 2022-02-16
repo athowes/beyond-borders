@@ -14,6 +14,11 @@ extract_survey <- function(iso3) {
       age_group == "Y015_049",
       sex == "both",
       area_level == analysis_level[toupper(iso3)]
+    ) %>%
+    mutate(
+      y = estimate * n_eff_kish,
+      n_obs = n_eff_kish,
+      .after = ci_upper
     )
 
   saveRDS(sf, file = paste0(tolower(survey_name[toupper(iso3)]), ".rds"))
