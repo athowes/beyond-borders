@@ -1,9 +1,13 @@
 extract_survey <- function(iso3) {
   df <- read_csv(file = paste0("depends/", iso3, "_survey_hiv_indicators.csv"))
-  #' Should make into a sf at this point by left_join to the areas
-  df %>%
-    separate(area_id, c("iso3", "area_level"), "_") %>%
-    mutate(area_level = as.numeric(area_level)) %>%
+  areas <- read_sf(paste0("depends/", tolower(iso3), "_areas.geojson"))
+
+  sf <- df  %>%
+    mutate(iso3 = substr(area_id, 1, 3)) %>%
+    left_join(
+      areas,
+      by = c("area_id", "area_name")
+    ) %>%
     filter(
       survey_id == survey_name[toupper(iso3)],
       indicator == "prevalence",
@@ -11,5 +15,6 @@ extract_survey <- function(iso3) {
       sex == "both",
       area_level == analysis_level[toupper(iso3)]
     )
-  write_csv(df, file = paste0(tolower(survey_name[toupper(iso3)]), ".csv"))
+
+  saveRDS(sf, file = paste0(tolower(survey_name[toupper(iso3)]), ".rds"))
 }
