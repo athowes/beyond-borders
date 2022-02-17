@@ -1,6 +1,11 @@
 # orderly::orderly_develop_start("explore_hrsl-sampling")
 # setwd("src/explore_hrsl-sampling")
 
+#' Resources:
+#' * https://www.ciesin.columbia.edu/data/hrsl/
+#' * https://datacarpentry.org/r-raster-vector-geospatial/
+#' * https://gis.stackexchange.com/questions/207119/sampling-random-points-from-large-raster-file-with-replacement-using-r
+
 GDALinfo("hrsl/hrsl_mwi_pop.tif")
 mwi_pop <- raster("hrsl/hrsl_mwi_pop.tif")
 mwi_pop <- aggregate(mwi_pop, fact = 100)
