@@ -15,7 +15,7 @@ pars <- expand.grid(
   "survey" = surveys
 )
 
-purrr::pmap_df(pars, function(inf_model, survey) {
+direct <- purrr::pmap_df(pars, function(inf_model, survey) {
   fit <- readRDS(paste0("depends/fit_", substr(survey, 1, 3), "_", inf_model, ".rds"))
   data.frame(survey = survey, inf_model = inf_model) %>%
     mutate(
@@ -24,3 +24,28 @@ purrr::pmap_df(pars, function(inf_model, survey) {
       cpo = sum(fit$cpo$cpo)
     )
 })
+
+#' Manual cross-validation model fit measures
+#' Direct model fit measures (DIC, WAIC and CPO)
+pars <- expand.grid(
+  "inf_model" = inf_models,
+  "survey" = surveys,
+  "type" = types
+)
+
+manual <- purrr::pmap_df(pars, function(inf_model, survey, type) {
+  fits <- readRDS(paste0("depends/fits_", substr(survey, 1, 3), "_", type, "_", inf_model, ".rds"))
+  df <- read_csv(paste0("depends/", survey, ".csv"))
+  sapply(fits, function(x) held_out_metrics(fit = x$fit, sf = df, i = x$predict_on, S = 1000)) %>%
+    t() %>%
+    data.frame() %>%
+    mutate(
+      survey = survey,
+      inf_model = inf_model,
+      .before = id
+    )
+})
+
+saveRDS(direct, "direct.rds")
+saveRDS(manual, "manual.rds")
+

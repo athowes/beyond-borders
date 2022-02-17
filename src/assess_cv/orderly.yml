@@ -4,7 +4,8 @@ artefacts:
   - data:
       description: Results of cross-validation assessment
       filenames:
-        - df.rds
+        - direct.rds
+        - manual.rds
 
 packages:
   - sf
@@ -112,3 +113,10 @@ depends:
   #     depends/fit_mwi_fik_inla.rds: fit_mwi.rds
   #     depends/fit_tza_fik_inla.rds: fit_tza.rds
   #     depends/fit_zwe_fik_inla.rds: fit_zwe.rds
+  process_hiv-surveys:
+    id: latest
+    use:
+      depends/civ2017phia.csv: civ2017phia.csv
+      depends/mwi2016phia.csv: mwi2016phia.csv
+      depends/tza2017phia.csv: tza2017phia.csv
+      depends/zwe2016phia.csv: zwe2016phia.csv
