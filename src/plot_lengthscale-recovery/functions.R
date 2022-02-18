@@ -1,3 +1,10 @@
+#' Values of the length-scale recovered by the best_average() function, without any data
+calc_best_average <- function(file) {
+  readRDS(paste0("depends/", file)) %>%
+    centroid_distance() %>%
+    bsae::best_average()
+}
+
 lengthscale_plot <- function(df, inf_model, geometry, best = NA, subtitle = NA) {
 
   overall_mean <- df %>%
@@ -16,9 +23,6 @@ lengthscale_plot <- function(df, inf_model, geometry, best = NA, subtitle = NA) 
     geom_hline(yintercept = overall_mean, col = lightgreen, size = 1.5) +
     geom_hline(yintercept = best, col = "#E69F00", size = 1.5) +
     labs(x = "Simulation number", y = "Lengthscale", subtitle = subtitle) +
-    theme_minimal() +
-    theme(
-      axis.text.x=element_blank(),
-      axis.ticks.x=element_blank()
-    )
+    theme(axis.text.x=element_blank(),
+          axis.ticks.x=element_blank())
 }
