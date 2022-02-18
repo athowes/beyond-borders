@@ -1,13 +1,10 @@
 script: script.R
 
-sources:
-  - functions.R
-
 artefacts:
   - data:
-      description: Metric boxplots
+      description: PIT histograms and ECDF difference plots
       filenames:
-        - histogram-no-constant.pdf
+        - histogram-ecdf-no-constant.pdf
 
 packages:
   - sf
