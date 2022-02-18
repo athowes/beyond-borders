@@ -3,7 +3,7 @@
 # setwd("src/assess_lengthscale-marginal")
 
 geometries <- c("grid", "civ", "tex", as.character(1:4))
-sim_models <- c("iid", "icar", "ik")
+sim_models <- c("ik")
 
 inf_models <- c("ck_stan")
 # inf_models <- c("ck_stan", "ik_stan")
