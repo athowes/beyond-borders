@@ -5,7 +5,7 @@ sources:
 
 artefacts:
   - data:
-      description: Metric boxplots
+      description: Metric boxplots (simulation study)
       filenames:
         - crps-map-rho-civ.pdf
         - crps-map-rho-no-constant-civ.pdf
@@ -36,6 +36,9 @@ packages:
   - tidyr
   - sn
   - purrr
+  - grid
+  - gtable
+  - ggplotify
 
 depends:
   assess_rho-marginals:
