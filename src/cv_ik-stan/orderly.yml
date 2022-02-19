@@ -5,13 +5,20 @@ artefacts:
       description: Fitted cross-validation models
       filenames:
         - fits_civ_loo.rds
-        - fits_civ_sloo.rds
+        # - fits_civ_sloo.rds
         - fits_mwi_loo.rds
-        - fits_mwi_sloo.rds
-        - fits_tza_loo.rds
-        - fits_tza_sloo.rds
-        - fits_zwe_loo.rds
-        - fits_zwe_sloo.rds
+        # - fits_mwi_sloo.rds
+        # - fits_tza_loo.rds
+        # - fits_tza_sloo.rds
+        # - fits_zwe_loo.rds
+        # - fits_zwe_sloo.rds
+  - data:
+      description: Models fit directly
+      filenames:
+        - fit_civ.rds
+        - fit_mwi.rds
+        # - fits_tza.rds
+        # - fits_zwe.rds
 
 packages:
   - sf
@@ -27,6 +34,7 @@ packages:
   - tidyr
   - sn
   - purrr
+  - readr
 
 depends:
   process_hiv-surveys:
