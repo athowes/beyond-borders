@@ -38,19 +38,19 @@ depends:
       depends/fit_mwi_constant_inla.rds: fit_mwi.rds
       # depends/fit_tza_constant_inla.rds: fit_tza.rds
       # depends/fit_zwe_constant_inla.rds: fit_zwe.rds
-  # cv_iid-inla:
-  #   id: latest
-  #   use:
-  #     depends/fits_civ_loo_iid_inla.rds: fits_civ_loo.rds
+  cv_iid-inla:
+    id: latest
+    use:
+      depends/fits_civ_loo_iid_inla.rds: fits_civ_loo.rds
   #     depends/fits_civ_sloo_iid_inla.rds: fits_civ_sloo.rds
-  #     depends/fits_mwi_loo_iid_inla.rds: fits_mwi_loo.rds
+      depends/fits_mwi_loo_iid_inla.rds: fits_mwi_loo.rds
   #     depends/fits_mwi_sloo_iid_inla.rds: fits_mwi_sloo.rds
   #     depends/fits_tza_loo_iid_inla.rds: fits_tza_loo.rds
   #     depends/fits_tza_sloo_iid_inla.rds: fits_tza_sloo.rds
   #     depends/fits_zwe_loo_iid_inla.rds: fits_zwe_loo.rds
   #     depends/fits_zwe_sloo_iid_inla.rds: fits_zwe_sloo.rds
-  #     depends/fit_civ_iid_inla.rds: fit_civ.rds
-  #     depends/fit_mwi_iid_inla.rds: fit_mwi.rds
+      depends/fit_civ_iid_inla.rds: fit_civ.rds
+      depends/fit_mwi_iid_inla.rds: fit_mwi.rds
   #     depends/fit_tza_iid_inla.rds: fit_tza.rds
   #     depends/fit_zwe_iid_inla.rds: fit_zwe.rds
   # cv_besag-inla:

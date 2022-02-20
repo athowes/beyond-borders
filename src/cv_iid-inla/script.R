@@ -14,7 +14,7 @@ pars <- expand.grid(
 
 #' Function to run bsae::iid_inla for each cross-validation fold
 run_cv_models <- function(survey, type) {
-  sf <- read_csv(paste0("depends/", survey, ".csv"))
+  sf <- st_read(paste0("depends/", survey, ".geojson"))
   training_sets <- create_folds(sf, type = toupper(type))
 
   print(paste0("Begin ", toupper(type), " cross-valdiation of ", toupper(survey)))
@@ -35,7 +35,7 @@ purrr::pmap_df(pars, run_cv_models)
 #' Function to run bsae::iid_inla for the whole dataset
 #' This will be useful for comparing R-INLA and Stan inbuilt model comparison metrics to manual CV
 run_models <- function(survey, type) {
-  sf <- read_csv(paste0("depends/", survey, ".csv"))
+  sf <- st_read(paste0("depends/", survey, ".geojson"))
   fit <- bsae::iid_inla(sf)
   saveRDS(fit, file = paste0("fit_", substr(survey, 1, 3), ".rds"))
 }

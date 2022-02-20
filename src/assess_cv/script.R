@@ -2,7 +2,7 @@
 # orderly::orderly_develop_start("assess_cv")
 # setwd("src/assess_cv")
 
-inf_models <- c("constant_inla")
+inf_models <- c("constant_inla", "iid_inla")
 # inf_models <- c("constant_inla", "iid_inla", "besag_inla", "bym2_inla", "fck_inla", "fik_inla", "ck_stan", "ik_stan")
 surveys <- c("civ2017phia", "mwi2016phia")
 # surveys <- c("civ2017phia", "mwi2016phia", "tza2017phia", "zwe2016phia")
@@ -48,4 +48,3 @@ manual <- purrr::pmap_df(pars, function(inf_model, survey, type) {
 
 saveRDS(direct, "direct.rds")
 saveRDS(manual, "manual.rds")
-

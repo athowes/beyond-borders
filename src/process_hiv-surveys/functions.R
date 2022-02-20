@@ -22,7 +22,7 @@ extract_survey <- function(iso3) {
     ) %>%
     st_as_sf()
 
-  write_sf(sf, paste0(tolower(survey_name[toupper(iso3)]), ".csv"))
+  st_write(sf, paste0(tolower(survey_name[toupper(iso3)]), ".geojson"))
 
   return(sf)
 }
