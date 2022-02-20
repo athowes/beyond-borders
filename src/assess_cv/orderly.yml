@@ -53,34 +53,34 @@ depends:
       depends/fit_mwi_iid_inla.rds: fit_mwi.rds
   #     depends/fit_tza_iid_inla.rds: fit_tza.rds
   #     depends/fit_zwe_iid_inla.rds: fit_zwe.rds
-  # cv_besag-inla:
-  #   id: latest
-  #   use:
-  #     depends/fits_civ_loo_besag_inla.rds: fits_civ_loo.rds
+  cv_besag-inla:
+    id: latest
+    use:
+      depends/fits_civ_loo_besag_inla.rds: fits_civ_loo.rds
   #     depends/fits_civ_sloo_besag_inla.rds: fits_civ_sloo.rds
-  #     depends/fits_mwi_loo_besag_inla.rds: fits_mwi_loo.rds
+      depends/fits_mwi_loo_besag_inla.rds: fits_mwi_loo.rds
   #     depends/fits_mwi_sloo_besag_inla.rds: fits_mwi_sloo.rds
   #     depends/fits_tza_loo_besag_inla.rds: fits_tza_loo.rds
   #     depends/fits_tza_sloo_besag_inla.rds: fits_tza_sloo.rds
   #     depends/fits_zwe_loo_besag_inla.rds: fits_zwe_loo.rds
   #     depends/fits_zwe_sloo_besag_inla.rds: fits_zwe_sloo.rds#
-  #     depends/fit_civ_besag_inla.rds: fit_civ.rds
-  #     depends/fit_mwi_besag_inla.rds: fit_mwi.rds
+      depends/fit_civ_besag_inla.rds: fit_civ.rds
+      depends/fit_mwi_besag_inla.rds: fit_mwi.rds
   #     depends/fit_tza_besag_inla.rds: fit_tza.rds
   #     depends/fit_zwe_besag_inla.rds: fit_zwe.rds
-  # cv_bym2-inla:
-  #   id: latest
-  #   use:
-  #     depends/fits_civ_loo_bym2_inla.rds: fits_civ_loo.rds
+  cv_bym2-inla:
+    id: latest
+    use:
+      depends/fits_civ_loo_bym2_inla.rds: fits_civ_loo.rds
   #     depends/fits_civ_sloo_bym2_inla.rds: fits_civ_sloo.rds
-  #     depends/fits_mwi_loo_bym2_inla.rds: fits_mwi_loo.rds
+      depends/fits_mwi_loo_bym2_inla.rds: fits_mwi_loo.rds
   #     depends/fits_mwi_sloo_bym2_inla.rds: fits_mwi_sloo.rds
   #     depends/fits_tza_loo_bym2_inla.rds: fits_tza_loo.rds
   #     depends/fits_tza_sloo_bym2_inla.rds: fits_tza_sloo.rds
   #     depends/fits_zwe_loo_bym2_inla.rds: fits_zwe_loo.rds
   #     depends/fits_zwe_sloo_bym2_inla.rds: fits_zwe_sloo.rds
-  #     depends/fit_civ_bym2_inla.rds: fit_civ.rds
-  #     depends/fit_mwi_bym2_inla.rds: fit_mwi.rds
+      depends/fit_civ_bym2_inla.rds: fit_civ.rds
+      depends/fit_mwi_bym2_inla.rds: fit_mwi.rds
   #     depends/fit_tza_bym2_inla.rds: fit_tza.rds
   #     depends/fit_zwe_bym2_inla.rds: fit_zwe.rds
   # cv_fck-inla:
@@ -116,7 +116,7 @@ depends:
   process_hiv-surveys:
     id: latest
     use:
-      depends/civ2017phia.csv: civ2017phia.csv
-      depends/mwi2016phia.csv: mwi2016phia.csv
-      depends/tza2017phia.csv: tza2017phia.csv
-      depends/zwe2016phia.csv: zwe2016phia.csv
+      depends/civ2017phia.geojson: civ2017phia.geojson
+      depends/mwi2016phia.geojson: mwi2016phia.geojson
+      depends/tza2017phia.geojson: tza2017phia.geojson
+      depends/zwe2016phia.geojson: zwe2016phia.geojson

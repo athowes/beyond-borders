@@ -2,7 +2,7 @@
 # orderly::orderly_develop_start("assess_cv")
 # setwd("src/assess_cv")
 
-inf_models <- c("constant_inla", "iid_inla")
+inf_models <- c("constant_inla", "iid_inla", "besag_inla", "bym2_inla")
 # inf_models <- c("constant_inla", "iid_inla", "besag_inla", "bym2_inla", "fck_inla", "fik_inla", "ck_stan", "ik_stan")
 surveys <- c("civ2017phia", "mwi2016phia")
 # surveys <- c("civ2017phia", "mwi2016phia", "tza2017phia", "zwe2016phia")
@@ -35,7 +35,7 @@ pars <- expand.grid(
 
 manual <- purrr::pmap_df(pars, function(inf_model, survey, type) {
   fits <- readRDS(paste0("depends/fits_", substr(survey, 1, 3), "_", type, "_", inf_model, ".rds"))
-  df <- read_csv(paste0("depends/", survey, ".csv"))
+  df <- st_read(paste0("depends/", survey, ".geojson"))
   sapply(fits, function(x) held_out_metrics(fit = x$fit, sf = df, i = x$predict_on, S = 1000)) %>%
     t() %>%
     data.frame() %>%
