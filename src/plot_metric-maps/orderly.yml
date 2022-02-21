@@ -21,6 +21,34 @@ artefacts:
         - crps-map-rho-no-constant-3.pdf
         - crps-map-rho-4.pdf
         - crps-map-rho-no-constant-4.pdf
+        - crps-map-rho-civ.pdf
+        - mse-map-rho-no-constant-civ.pdf
+        - mse-map-rho-grid.pdf
+        - mse-map-rho-no-constant-grid.pdf
+        - mse-map-rho-tex.pdf
+        - mse-map-rho-no-constant-tex.pdf
+        - mse-map-rho-1.pdf
+        - mse-map-rho-no-constant-1.pdf
+        - mse-map-rho-2.pdf
+        - mse-map-rho-no-constant-2.pdf
+        - mse-map-rho-3.pdf
+        - mse-map-rho-no-constant-3.pdf
+        - mse-map-rho-4.pdf
+        - mse-map-rho-no-constant-4.pdf
+        - mae-map-rho-civ.pdf
+        - mae-map-rho-no-constant-civ.pdf
+        - mae-map-rho-grid.pdf
+        - mae-map-rho-no-constant-grid.pdf
+        - mae-map-rho-tex.pdf
+        - mae-map-rho-no-constant-tex.pdf
+        - mae-map-rho-1.pdf
+        - mae-map-rho-no-constant-1.pdf
+        - mae-map-rho-2.pdf
+        - mae-map-rho-no-constant-2.pdf
+        - mae-map-rho-3.pdf
+        - mae-map-rho-no-constant-3.pdf
+        - mae-map-rho-4.pdf
+        - mae-map-rho-no-constant-4.pdf
 
 packages:
   - sf
