@@ -1,23 +1,3 @@
-sf_lightgrey <- "#E6E6E6"
-lightgrey <- "#D3D3D3"
-
-lightblue <- "#56B4E9"
-lightgreen <- "#009E73"
-lightpink <- "#CC79A7"
-light_palette <- c(lightblue, lightgreen, lightpink)
-
-midblue <- "#3D9BD0"
-midgreen <- "#00855A"
-midpink <- "#B3608E"
-mid_palette <- c(midblue, midgreen, midpink)
-
-darkblue <- "#004E83"
-darkgreen <- "#00380D"
-darkpink <- "#802D5B"
-dark_palette <- c(darkblue, darkgreen, darkpink)
-
-cbpalette <- c("#56B4E9", "#009E73", "#E69F00", "#F0E442", "#0072B2", "#D55E00", "#CC79A7", "#999999")
-
 group_mean_and_se <- function(df, group_variables) {
   df %>%
     select(-c(obs, mean, mode, lower, upper)) %>%
@@ -91,19 +71,19 @@ metric_map <- function(df, metric, sf, remove_constant = FALSE) {
   ggplotify::as.ggplot(z)
 }
 
-produce_crps_maps <- function(arg1, arg2) {
+produce_maps <- function(arg1, arg2, arg3) {
   df_rho %>%
     filter(geometry == arg1) %>%
     bsae::update_naming() %>%
     group_mean_and_se(c("geometry", "sim_model", "inf_model", "id")) %>%
-    metric_map(metric = "crps", sf = arg2) %>%
-    ggsave(filename = paste0("crps-map-rho-", tolower(arg1), ".pdf"), width = 6.25, height = 4)
+    metric_map(metric = arg3, sf = arg2) %>%
+    ggsave(filename = paste0(arg3, "-map-rho-", tolower(arg1), ".pdf"), width = 6.25, height = 4)
 
   df_rho %>%
     filter(geometry == arg1) %>%
     filter(inf_model != "constant_inla") %>%
     bsae::update_naming() %>%
     group_mean_and_se(c("geometry", "sim_model", "inf_model", "id")) %>%
-    metric_map(metric = "crps", sf = arg2) %>%
-    ggsave(filename = paste0("crps-map-rho-", tolower(arg1), "-no-constant.pdf"), width = 6.25, height = 4)
+    metric_map(metric = arg3, sf = arg2) %>%
+    ggsave(filename = paste0(arg3, "-map-rho-", tolower(arg1), "-no-constant.pdf"), width = 6.25, height = 4)
 }
