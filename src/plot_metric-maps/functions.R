@@ -54,12 +54,12 @@ metric_map <- function(df, metric, sf, remove_constant = FALSE) {
 
   stripR <- grid::gTree(name = "Strip_right", children = grid::gList(
     grid::rectGrob(gp = grid::gpar(col = NA, fill = NA)),
-    grid::textGrob(labelR, rot = -90, gp = grid::gpar(fontsize = 8.8, col = "black"))
+    grid::textGrob(labelR, rot = -90, gp = grid::gpar(fontsize = 8.8, col = "black", fontface = "bold"))
   ))
 
   stripT <- grid::gTree(name = "Strip_top", children = grid::gList(
     grid::rectGrob(gp = grid::gpar(col = NA, fill = NA)),
-    grid::textGrob(labelT, gp = grid::gpar(fontsize = 8.8, col = "black"))
+    grid::textGrob(labelT, gp = grid::gpar(fontsize = 8.8, col = "black", fontface = "bold"))
   ))
 
   z <- gtable::gtable_add_grob(z, stripR, t = min(posR$t) + 1, l = max(posR$r) + 1, b = max(posR$b) + 1, name = "strip-right")
