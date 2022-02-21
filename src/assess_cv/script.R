@@ -36,14 +36,15 @@ pars <- expand.grid(
 manual <- purrr::pmap_df(pars, function(inf_model, survey, type) {
   fits <- readRDS(paste0("depends/fits_", substr(survey, 1, 3), "_", type, "_", inf_model, ".rds"))
   df <- st_read(paste0("depends/", survey, ".geojson"))
-  sapply(fits, function(x) held_out_metrics(fit = x$fit, sf = df, i = x$predict_on, S = 1000)) %>%
-    t() %>%
-    data.frame() %>%
+  lapply(fits, function(x) held_out_metrics(fit = x$fit, sf = df, i = x$predict_on, S = 1000)) %>%
+    dplyr::bind_rows(.id = "id") %>%
+    as.data.frame() %>%
     mutate(
       survey = survey,
       inf_model = inf_model,
       .before = id
-    )
+    ) %>%
+    mutate(id = as.numeric(id))
 })
 
 saveRDS(direct, "direct.rds")
