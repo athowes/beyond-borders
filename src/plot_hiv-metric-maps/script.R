@@ -32,30 +32,20 @@ sf <- readRDS("depends/df.rds") %>%
   ) %>%
   st_as_sf()
 
-pdf("crps-map-hiv-surveys.pdf", h = 8, w = 6.25)
+pdf("crps-map-hiv-surveys-no-constant.pdf", h = 5, w = 6.25)
 
-sf %>%
-  filter(inf_model != "Constant") %>%
-  #' Need to find way to facet geom_sf with scales = "free"
-  #' https://jayrobwilliams.com/posts/2021/05/geom-sf-facet
-  filter(survey == "MWI2016PHIA") %>%
-  ggplot(aes(fill = crps)) +
-  geom_sf() +
-  scale_fill_viridis_c(option = "C") +
-  facet_grid(survey ~ inf_model) +
-  theme_minimal() +
-  labs(fill = "CRPS") +
-  theme(
-    axis.title.x = element_blank(),
-    axis.text.x = element_blank(),
-    axis.ticks.x = element_blank(),
-    axis.title.y = element_blank(),
-    axis.text.y = element_blank(),
-    axis.ticks.y = element_blank(),
-    strip.text = element_text(face = "bold"),
-    plot.title = element_text(face = "bold"),
-    legend.position = "bottom",
-    legend.key.width = unit(4, "lines")
-  )
+metric_map(sf, metric = "crps")
+
+dev.off()
+
+pdf("mse-map-hiv-surveys-no-constant.pdf", h = 5, w = 6.25)
+
+metric_map(sf, metric = "mse")
+
+dev.off()
+
+pdf("mae-map-hiv-surveys-no-constant.pdf", h = 5, w = 6.25)
+
+metric_map(sf, metric = "mae")
 
 dev.off()

@@ -1,10 +1,15 @@
 script: script.R
 
+source:
+  - functions.R
+
 artefacts:
   - data:
       description: Metric boxplots (HIV study)
       filenames:
-        - crps-map-hiv-surveys.pdf
+        - crps-map-hiv-surveys-no-constant.pdf
+        - mse-map-hiv-surveys-no-constant.pdf
+        - mae-map-hiv-surveys-no-constant.pdf
 
 packages:
   - sf
