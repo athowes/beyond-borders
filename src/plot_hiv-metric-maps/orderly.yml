@@ -1,6 +1,6 @@
 script: script.R
 
-source:
+sources:
   - functions.R
 
 artefacts:
