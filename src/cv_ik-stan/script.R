@@ -2,8 +2,7 @@
 # orderly::orderly_develop_start("cv_ik-stan")
 # setwd("src/cv_ik-stan")
 
-surveys <- c("civ2017phia", "mwi2016phia")
-# surveys <- c("civ2017phia", "mwi2016phia", "tza2017phia", "zwe2016phia")
+surveys <- c("civ2017phia", "mwi2016phia", "tza2017phia", "zwe2016phia")
 types <- c("loo", "sloo")
 
 pars <- expand.grid(
