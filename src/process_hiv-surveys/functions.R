@@ -20,7 +20,8 @@ extract_survey <- function(iso3) {
       n_obs = n_eff_kish,
       .after = ci_upper
     ) %>%
-    st_as_sf()
+    st_as_sf() %>%
+    st_transform(4326)
 
   st_write(sf, paste0(tolower(survey_name[toupper(iso3)]), ".geojson"))
 
