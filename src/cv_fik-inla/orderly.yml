@@ -17,8 +17,8 @@ artefacts:
       filenames:
         - fit_civ.rds
         - fit_mwi.rds
-        - fits_tza.rds
-        - fits_zwe.rds
+        - fit_tza.rds
+        - fit_zwe.rds
 
 packages:
   - sf
