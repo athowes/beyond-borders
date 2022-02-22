@@ -17,12 +17,14 @@ pars <- expand.grid(
 
 direct <- purrr::pmap_df(pars, function(inf_model, survey) {
   fit <- readRDS(paste0("depends/fit_", substr(survey, 1, 3), "_", inf_model, ".rds"))
-  data.frame(survey = survey, inf_model = inf_model) %>%
+  data.frame(dic = fit$dic$local.dic, waic = fit$waic$local.waic, cpo = fit$cpo$cpo) %>%
+    tibble::rownames_to_column("id") %>%
     mutate(
-      dic = fit$dic$dic,
-      waic = fit$waic$waic,
-      cpo = sum(fit$cpo$cpo)
-    )
+      survey = survey,
+      inf_model = inf_model,
+      .before = id
+    ) %>%
+    mutate(id = as.numeric(id))
 })
 
 #' Manual cross-validation model fit measures
