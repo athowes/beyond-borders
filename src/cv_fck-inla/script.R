@@ -4,8 +4,7 @@
 
 surveys <- c("civ2017phia", "mwi2016phia")
 # surveys <- c("civ2017phia", "mwi2016phia", "tza2017phia", "zwe2016phia")
-types <- c("loo")
-# types <- c("loo", "sloo")
+types <- c("loo", "sloo")
 
 pars <- expand.grid(
   "survey" = surveys,
@@ -14,7 +13,8 @@ pars <- expand.grid(
 
 #' Function to run bsae::fck_inla for each cross-validation fold
 run_cv_models <- function(survey, type) {
-  sf <- st_read(paste0("depends/", survey, ".geojson"))
+  sf <- st_read(paste0("depends/", survey, ".geojson")) %>%
+    st_transform(3857)
   training_sets <- create_folds(sf, type = toupper(type))
 
   print(paste0("Begin ", toupper(type), " cross-valdiation of ", toupper(survey)))

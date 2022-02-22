@@ -4,8 +4,7 @@
 
 surveys <- c("civ2017phia", "mwi2016phia")
 # surveys <- c("civ2017phia", "mwi2016phia", "tza2017phia", "zwe2016phia")
-types <- c("loo")
-# types <- c("loo", "sloo")
+types <- c("loo", "sloo")
 
 pars <- expand.grid(
   "survey" = surveys,
