@@ -4,10 +4,8 @@
 
 inf_models <- c("constant_inla", "iid_inla", "besag_inla", "bym2_inla")
 # inf_models <- c("constant_inla", "iid_inla", "besag_inla", "bym2_inla", "fck_inla", "fik_inla", "ck_stan", "ik_stan")
-surveys <- c("civ2017phia", "mwi2016phia")
-# surveys <- c("civ2017phia", "mwi2016phia", "tza2017phia", "zwe2016phia")
-types <- c("loo")
-# types <- c("loo", "sloo")
+surveys <- c("civ2017phia", "mwi2016phia", "tza2017phia", "zwe2016phia")
+types <- c("loo", "sloo")
 
 #' Direct model fit measures (DIC, WAIC and CPO)
 pars <- expand.grid(
