@@ -5,7 +5,6 @@ Code for the manuscript Howes *et al.* "Models for spatial structure in small-ar
 Small-area estimation models typically use the Besag model, a type of Gaussian Markov random field, to model spatial structure.
 However, for irregular geometries, the assumptions made by the Besag model do not seem plausible (in the image below, geometric irregularity is increasing from left to right).
 The goal of this work is to determine whether or not, in practice, this matters.
-
 To do so, we consider the performance of eight inferential small-area models:
 
 | Model    | Function |
@@ -41,6 +40,14 @@ The directories of this repository are:
 | `misc`      | Miscellaneous code, not used as part of `orderly`. |
 | `src`       | All `orderly` reports. |
 | `utils`     | Helper scripts for common development tasks. |
+
+Within the `src` directory, reports are prefixed by a number (0-2) designating:
+
+| Number prefix | Description |
+|---------------|--------------|
+| 0             | Applicable to both studies. |
+| 1             | Corresponds to the study on simulated data (see Section 5 of the manuscript). |
+| 2             | Corresponds to the study on HIV data from household surveys in sub-Saharan Africa (see Section 6 of the manuscript). |
 
 ## `orderly`
 
