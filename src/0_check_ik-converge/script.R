@@ -1,11 +1,11 @@
-# orderly::orderly_develop_start("check_ik-converge")
-# setwd("src/check_ik-converge")
+# orderly::orderly_develop_start("0_check_ik-converge")
+# setwd("src/0_check_ik-converge")
 
 #' Checking the convergence of the integrated kernel as a function of number of samples per area
 
 type <- "random"
 L <- 200
-grid <- readRDS("depends/geometry_grid.rds")
+grid <- readRDS("depends/grid.rds")
 n <- nrow(grid)
 samples <- sf::st_sample(grid, type = type, exact = TRUE, size = rep(L, n))
 length(samples) # n * L

@@ -1,6 +1,6 @@
 #' Uncomment and run the two line below to resume development of this script
-# orderly::orderly_develop_start("plot_areal-data")
-# setwd("src/plot_areal-data")
+# orderly::orderly_develop_start("0_plot_areal-data")
+# setwd("src/0_plot_areal-data")
 
 sf_lightgrey <- "#E6E6E6"
 lightgrey <- "#D3D3D3"

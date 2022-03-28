@@ -21,7 +21,7 @@ packages:
   - rmarkdown
 
 depends:
-  sim_grid:
+  1_sim_realistic-geometries:
     id: latest
     use:
-      depends/geometry_grid.rds: geometry.rds
+      depends/grid.rds: grid.rds

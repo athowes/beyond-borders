@@ -1,5 +1,5 @@
-# orderly::orderly_develop_start("check_bin-gaussian")
-# setwd("src/check_bin-gaussian")
+# orderly::orderly_develop_start("0_check_bin-gaussian")
+# setwd("src/0_check_bin-gaussian")
 
 #' Binomial of sum of Gaussians versus sum of binomial of Gaussians
 #' IID latent field
@@ -28,11 +28,11 @@ sd(result$y_agg) / sd(result$y) #' Ratio
 #' Probability approximately 1/2 setting (elections)
 #' As before but with different `phi_mean` settings:
 result_half <- experiment(nsim, n, 0, 0.5, 30)
-plot_hist(result_half$rho)
+plot(result_half$rho)
 
 pdf("histogram-election.pdf", h = 4, w = 6.25)
 
-hist_fun(result_half)
+plot_hist(result_half)
 
 dev.off()
 

@@ -1,5 +1,5 @@
-# orderly::orderly_develop_start("check_ik-compute")
-# setwd("src/check_ik-compute")
+# orderly::orderly_develop_start("0_check_ik-compute")
+# setwd("src/0_check_ik-compute")
 
 #' Checking that the Stan code to calculate the integrated kernel is correct
 

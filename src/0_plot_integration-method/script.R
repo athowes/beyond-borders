@@ -1,6 +1,6 @@
 #' Uncomment and run the two line below to resume development of this script
-# orderly::orderly_develop_start("plot_integration-method")
-# setwd("src/plot_integration-method")
+# orderly::orderly_develop_start("0_plot_integration-method")
+# setwd("src/0_plot_integration-method")
 
 #' The number of points in each area
 L <- 10
