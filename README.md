@@ -43,7 +43,7 @@ The directories of this repository are:
 
 Within the `src` directory, reports are prefixed by a number (0-2) designating:
 
-| Number prefix | Description |
+| Prefix | Description |
 |---------------|--------------|
 | 0             | Applicable to both studies. |
 | 1             | Corresponds to the study on simulated data (see Section 5 of the manuscript). |
