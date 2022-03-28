@@ -1,0 +1,58 @@
+#' Uncomment and run the two line below to resume development of this script
+# orderly::orderly_develop_start("assess_intercept-marginal")
+# setwd("src/assess_intercept-marginal")
+
+geometries <- c("grid", "civ", "tex", as.character(1:4))
+sim_models <- c("iid", "icar", "ik")
+
+#' Currently we're testing with a subset, but in future it will seven different models
+inf_models <- c("constant_inla", "iid_inla", "besag_inla", "bym2_inla", "fck_inla", "fik_inla")
+# inf_models <- c("constant_inla", "iid_inla", "besag_inla", "bym2_inla", "fck_inla", "fik_inla", "ck_stan", "ik_stan")
+
+pars <- expand.grid(
+  "geometry" = geometries,
+  "sim_model" = sim_models,
+  "inf_model" = inf_models
+)
+
+#' Initialise progress bar
+pb <- progress_estimated(nrow(pars))
+
+#' Function to process fits
+process_fits <- function(geometry, sim_model, inf_model) {
+  pb$tick()$print()
+
+  #' CK models can't handle concentric circles
+  if(geometry == "2" & inf_model %in% c("fck_inla", "ck_stan")) return(NULL)
+
+  #' The fitted models
+  fits_loc <- paste0("depends/fits_", sim_model, "_", geometry, "_", inf_model, ".rds")
+  fits <- readRDS(fits_loc)
+
+  #' Assess the intercept marginal
+  df <- lapply(fits, assess_marginal_intercept, intercept = -2) %>%
+    bsae::list_to_df() %>%
+    #' Add columns for meta data
+    mutate(
+      geometry = geometry,
+      sim_model = sim_model,
+      inf_model = inf_model,
+      .before = replicate
+    )
+
+  return(df)
+}
+
+#' Eventually this will be iterated over geometries, sim_models and inf_models
+df <- purrr::pmap_df(pars, process_fits)
+
+#' Calculated in post (vectorised) rather than in the purrr:: call
+df <- df %>%
+  mutate(
+    mse_mean = (obs - mean)^2,
+    mae_mean = abs(obs - mean),
+    mse_mode = (obs - mode)^2,
+    mae_mode = abs(obs - mode)
+  )
+
+saveRDS(df, "df.rds")

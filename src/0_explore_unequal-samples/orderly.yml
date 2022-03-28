@@ -1,0 +1,7 @@
+script: script.R
+
+packages:
+  - bsae
+  - sf
+  - rstan
+  - ggplot2

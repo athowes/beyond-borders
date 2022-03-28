@@ -1,0 +1,28 @@
+script: script.R
+
+sources:
+  - functions.R
+
+artefacts:
+  - data:
+      description: Can particular values for the lengthscale be recovered?
+      filenames:
+        - 1-recovery-lengthscale.pdf
+        - 1-recovery-sigma.pdf
+        - 1-lengthscale-sigma-relationship-mean.pdf
+        - 1-lengthscale-sigma-relationship-contour.pdf
+
+packages:
+  - bsae
+  - sf
+  - rstan
+  - ggplot2
+  - bayesplot
+  - rmarkdown
+  - dplyr
+
+depends:
+  sim_realistic-geometries:
+    id: latest
+    use:
+      depends/grid.rds: grid.rds

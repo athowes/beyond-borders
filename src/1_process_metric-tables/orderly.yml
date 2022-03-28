@@ -1,0 +1,40 @@
+script: script.R
+
+sources:
+  - functions.R
+
+artefacts:
+  - data:
+      description: Metric tables in LaTeX for the manuscript
+      filenames:
+        - crps-table-rho.txt
+        - time-table.txt
+
+packages:
+  - sf
+  - bsae
+  - ggplot2
+  - dplyr
+  - reshape2
+  - viridis
+  - tikzDevice
+  - cubature
+  - magrittr
+  - gt
+  - tidyr
+  - sn
+  - purrr
+
+depends:
+  assess_rho-marginals:
+    id: latest
+    use:
+      depends/df_rho.rds: df.rds
+  assess_intercept-marginal:
+    id: latest
+    use:
+      depends/df_intercept.rds: df.rds
+  assess_time-taken:
+    id: latest
+    use:
+      depends/df_time.rds: df.rds

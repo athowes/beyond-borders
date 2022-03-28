@@ -1,0 +1,88 @@
+script: script.R
+
+sources:
+  - functions.R
+
+artefacts:
+  - data:
+      description: Metric boxplots (simulation study)
+      filenames:
+        - crps-map-rho-civ.pdf
+        - crps-map-rho-civ-no-constant.pdf
+        - crps-map-rho-grid.pdf
+        - crps-map-rho-grid-no-constant.pdf
+        - crps-map-rho-tex.pdf
+        - crps-map-rho-tex-no-constant.pdf
+        - crps-map-rho-1.pdf
+        - crps-map-rho-1-no-constant.pdf
+        - crps-map-rho-2.pdf
+        - crps-map-rho-2-no-constant.pdf
+        - crps-map-rho-3.pdf
+        - crps-map-rho-3-no-constant.pdf
+        - crps-map-rho-4.pdf
+        - crps-map-rho-4-no-constant.pdf
+        - mse-map-rho-civ.pdf
+        - mse-map-rho-civ-no-constant.pdf
+        - mse-map-rho-grid.pdf
+        - mse-map-rho-grid-no-constant.pdf
+        - mse-map-rho-tex.pdf
+        - mse-map-rho-tex-no-constant.pdf
+        - mse-map-rho-1.pdf
+        - mse-map-rho-1-no-constant.pdf
+        - mse-map-rho-2.pdf
+        - mse-map-rho-2-no-constant.pdf
+        - mse-map-rho-3.pdf
+        - mse-map-rho-3-no-constant.pdf
+        - mse-map-rho-4.pdf
+        - mse-map-rho-4-no-constant.pdf
+        - mae-map-rho-civ.pdf
+        - mae-map-rho-civ-no-constant.pdf
+        - mae-map-rho-grid.pdf
+        - mae-map-rho-grid-no-constant.pdf
+        - mae-map-rho-tex.pdf
+        - mae-map-rho-tex-no-constant.pdf
+        - mae-map-rho-1.pdf
+        - mae-map-rho-1-no-constant.pdf
+        - mae-map-rho-2.pdf
+        - mae-map-rho-2-no-constant.pdf
+        - mae-map-rho-3.pdf
+        - mae-map-rho-3-no-constant.pdf
+        - mae-map-rho-4.pdf
+        - mae-map-rho-4-no-constant.pdf
+
+packages:
+  - sf
+  - bsae
+  - ggplot2
+  - dplyr
+  - reshape2
+  - viridis
+  - tikzDevice
+  - cubature
+  - magrittr
+  - gt
+  - tidyr
+  - sn
+  - purrr
+  - grid
+  - gtable
+  - ggplotify
+
+depends:
+  assess_rho-marginals:
+    id: latest
+    use:
+      depends/df_rho.rds: df.rds
+  draw_vignette-geometries:
+    id: latest
+    use:
+      depends/geometry-1.rds: geometry-1.rds
+      depends/geometry-2.rds: geometry-2.rds
+      depends/geometry-3.rds: geometry-3.rds
+      depends/geometry-4.rds: geometry-4.rds
+  sim_realistic-geometries:
+    id: latest
+    use:
+      depends/grid.rds: grid.rds
+      depends/civ.rds: civ.rds
+      depends/tex.rds: tex.rds

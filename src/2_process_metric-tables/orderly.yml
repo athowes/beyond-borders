@@ -1,0 +1,32 @@
+script: script.R
+
+sources:
+  - functions.R
+
+artefacts:
+  - data:
+      description: Metric tables in LaTeX for the manuscript
+      filenames:
+        - crps-table-rho.txt
+        - time-table.txt
+
+packages:
+  - sf
+  - bsae
+  - ggplot2
+  - dplyr
+  - reshape2
+  - viridis
+  - tikzDevice
+  - cubature
+  - magrittr
+  - gt
+  - tidyr
+  - sn
+  - purrr
+
+depends:
+  assess_cv:
+    id: latest
+    use:
+      depends/manual.rds: manual.rds

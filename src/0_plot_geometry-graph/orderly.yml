@@ -1,0 +1,14 @@
+script: script.R
+
+artefacts:
+  - data:
+      description: Geometry graph comparison plot
+      filenames:
+        - geometry-graph-mwi.pdf
+        - geometry-graph-zwe.pdf
+
+packages:
+  - bsae
+  - sf
+  - ggplot2
+  - cowplot

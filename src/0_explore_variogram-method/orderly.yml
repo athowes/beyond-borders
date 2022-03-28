@@ -1,0 +1,16 @@
+script: script.R
+
+artefacts:
+  - data:
+      description: Plots that, at some point, I thought would be useful for learning about variograms
+      filenames:
+        - bubble-plot.pdf
+        - variogram.pdf
+
+packages:
+  - bsae
+  - sf
+  - rstan
+  - ggplot2
+  - bayesplot
+  - gstat

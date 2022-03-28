@@ -1,0 +1,26 @@
+script: script.R
+
+artefacts:
+  - data:
+      description: Visual checks that the cross-validation code is working as expected
+      filenames:
+        - loo-sloo-test-sets.pdf
+        - y-mis-preds.pdf
+
+resources:
+  - constant.stan
+
+packages:
+  - sf
+  - bsae
+  - ggplot2
+  - dplyr
+  - reshape2
+  - viridis
+  - tikzDevice
+  - cubature
+  - magrittr
+  - gt
+  - tidyr
+  - sn
+  - purrr

@@ -1,0 +1,26 @@
+script: script.R
+
+artefacts:
+  - data:
+      description: Four geometries with the same adjacency graph
+      filenames:
+        - geometry-1.rds
+        - geometry-2.rds
+        - geometry-3.rds
+        - geometry-4.rds
+        - geometries.pdf
+
+packages:
+  - sf
+  - bsae
+  - ggplot2
+  - dplyr
+  - reshape2
+  - viridis
+  - tikzDevice
+  - cubature
+  - magrittr
+  - gt
+  - tidyr
+  - sn
+  - purrr

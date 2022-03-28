@@ -1,0 +1,66 @@
+script: script.R
+
+sources:
+  - functions.R
+
+artefacts:
+  - data:
+      description: Results of lengthscale marginal assessment
+      filenames:
+        - df.rds
+
+packages:
+  - sf
+  - bsae
+  - ggplot2
+  - dplyr
+  - reshape2
+  - viridis
+  - tikzDevice
+  - cubature
+  - magrittr
+  - gt
+  - tidyr
+  - sn
+  - purrr
+
+resources:
+  - benchmark.R
+
+depends:
+  fit_ck-stan:
+    id: latest
+    use:
+      depends/fits_ik_civ_ck_stan.rds: fits_ik_civ.rds
+      depends/fits_ik_grid_ck_stan.rds: fits_ik_grid.rds
+      depends/fits_ik_tex_ck_stan.rds: fits_ik_tex.rds
+      depends/fits_ik_1_ck_stan.rds: fits_ik_1.rds
+      depends/fits_ik_2_ck_stan.rds: fits_ik_2.rds
+      depends/fits_ik_3_ck_stan.rds: fits_ik_3.rds
+      depends/fits_ik_4_ck_stan.rds: fits_ik_4.rds
+  # fit_ik-stan:
+  #   id: latest
+  #   use:
+  #     depends/fits_iid_civ_ik_stan.rds: fits_iid_civ.rds
+  #     depends/fits_iid_grid_ik_stan.rds: fits_iid_grid.rds
+  #     depends/fits_iid_tex_ik_stan.rds: fits_iid_tex.rds
+  #     depends/fits_iid_1_ik_stan.rds: fits_iid_1.rds
+  #     depends/fits_icar_1_ik_stan.rds: fits_icar_1.rds
+  #     depends/fits_ik_1_ik_stan.rds: fits_ik_1.rds
+  #     depends/fits_ik_2_ik_stan.rds: fits_ik_2.rds
+  #     depends/fits_ik_3_ik_stan.rds: fits_ik_3.rds
+  #     depends/fits_ik_4_ik_stan.rds: fits_ik_4.rds
+  sim_realistic-geometries:
+    id: latest
+    use:
+      depends/data_ik_grid.rds: data_ik_grid.rds
+      depends/data_ik_civ.rds: data_ik_civ.rds
+      depends/data_ik_tex.rds: data_ik_tex.rds
+  sim_vignette-geometries:
+    id: latest
+    use:
+      depends/data_ik_1.rds: data_ik_1.rds
+      depends/data_ik_2.rds: data_ik_2.rds
+      depends/data_ik_3.rds: data_ik_3.rds
+      depends/data_ik_4.rds: data_ik_4.rds
+

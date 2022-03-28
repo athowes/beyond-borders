@@ -1,0 +1,13 @@
+script: script.R
+
+artefacts:
+  - data:
+      description: Annotated Besag equation
+      filenames:
+        - besag.pdf
+
+resources:
+  - besag.tex
+
+packages:
+  - tools

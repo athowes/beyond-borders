@@ -1,0 +1,33 @@
+script: script.R
+
+sources:
+  - functions.R
+
+artefacts:
+  - data:
+      description: Plausible lengthscale checks
+      filenames:
+        - plausible-lengthscale.pdf
+
+packages:
+  - bsae
+  - sf
+  - rstan
+  - ggplot2
+  - bayesplot
+  - rmarkdown
+  - dplyr
+
+depends:
+  sim_civ:
+    id: latest
+    use:
+      depends/geometry_civ.rds: geometry.rds
+  sim_grid:
+    id: latest
+    use:
+      depends/geometry_grid.rds: geometry.rds
+  sim_tex:
+    id: latest
+    use:
+      depends/geometry_tex.rds: geometry.rds

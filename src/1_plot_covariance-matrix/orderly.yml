@@ -1,0 +1,13 @@
+script: script.R
+
+artefacts:
+  - data:
+      description: Covariance matrices
+      filenames:
+        - covariance-matrix.pdf
+
+packages:
+  - bsae
+  - sf
+  - ggplot2
+  - cowplot

@@ -1,0 +1,18 @@
+script: script.R
+
+artefacts:
+  - data:
+      description: Check that the integrated kernel is being correctly computed in Stan
+      filenames:
+        - cov-comparison.pdf
+
+resources:
+  - cov_sample_average.stan
+
+packages:
+  - bsae
+  - sf
+  - rstan
+  - ggplot2
+  - bayesplot
+  - rmarkdown

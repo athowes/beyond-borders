@@ -1,0 +1,38 @@
+script: script.R
+
+sources:
+  - functions.R
+
+artefacts:
+  - data:
+      description: Metric boxplots
+      filenames:
+        - crps-boxplot-rho.pdf
+        - crps-boxplot-rho-no-constant.pdf
+        - crps-boxplot-intercept.pdf
+        - crps-boxplot-intercept-no-constant.pdf
+
+packages:
+  - sf
+  - bsae
+  - ggplot2
+  - dplyr
+  - reshape2
+  - viridis
+  - tikzDevice
+  - cubature
+  - magrittr
+  - gt
+  - tidyr
+  - sn
+  - purrr
+
+depends:
+  assess_rho-marginals:
+    id: latest
+    use:
+      depends/df_rho.rds: df.rds
+  assess_intercept-marginal:
+    id: latest
+    use:
+      depends/df_intercept.rds: df.rds

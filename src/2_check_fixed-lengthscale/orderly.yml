@@ -1,0 +1,21 @@
+script: script.R
+
+sources:
+  - functions.R
+
+artefacts:
+  - data:
+      description: Comparison of fixed lengthscale in Stan and R-INLA
+      filenames:
+        - fixed-lengthscale.pdf
+
+resources:
+  fixed-stan
+
+packages:
+  - bsae
+  - sf
+  - rstan
+  - ggplot2
+  - bayesplot
+  - rmarkdown

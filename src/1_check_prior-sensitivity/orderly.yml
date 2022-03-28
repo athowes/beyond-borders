@@ -1,0 +1,22 @@
+script: script.R
+
+artefacts:
+  - data:
+      description: Prior sensitivity analysis
+      filenames:
+        - prior-comparison.pdf
+        - posterior-comparison.pdf
+
+packages:
+  - bsae
+  - sf
+  - rstan
+  - ggplot2
+  - bayesplot
+  - rmarkdown
+
+depends:
+  sim_realistic-geometries:
+    id: latest
+    use:
+      depends/data_iid_grid.rds: data_iid_grid.rds
