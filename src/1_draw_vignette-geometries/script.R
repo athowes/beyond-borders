@@ -1,6 +1,6 @@
 #' Uncomment and run the two line below to resume development of this script
-# orderly::orderly_develop_start("draw_vignette-geometries")
-# setwd("src/draw_vignette-geometries")
+# orderly::orderly_develop_start("1_draw_vignette-geometries")
+# setwd("src/1_draw_vignette-geometries")
 
 #' Geometry 1
 area1 <- matrix(c(0, 0, 1, 0, 1, 1, 0, 1, 0, 0), ncol = 2, byrow = TRUE)

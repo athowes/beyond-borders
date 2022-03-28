@@ -16,29 +16,29 @@ packages:
   - purrr
 
 depends:
-  assess_intercept-marginal:
+  1_assess_intercept-marginal:
     id: latest
     use:
       depends/df_intercept.rds: df.rds
-  assess_lengthscale-marginal:
+  1_assess_lengthscale-marginal:
     id: latest
     use:
       depends/df_lengthscale.rds: df.rds
-  assess_rho-marginals:
+  1_assess_rho-marginals:
     id: latest
     use:
       depends/df_rho.rds: df.rds
-  assess_time-taken:
+  1_assess_time-taken:
     id: latest
     use:
       depends/df_time.rds: df.rds
-  sim_realistic-geometries:
+  1_sim_realistic-geometries:
     id: latest
     use:
       depends/grid.rds: grid.rds
       depends/civ.rds: civ.rds
       depends/tex.rds: tex.rds
-  draw_vignette-geometries:
+  1_draw_vignette-geometries:
     id: latest
     use:
       depends/geometry-1.rds: geometry-1.rds

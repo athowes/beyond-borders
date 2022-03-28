@@ -31,7 +31,7 @@ packages:
   - purrr
 
 depends:
-  fit_constant-inla:
+  1_fit_constant-inla:
     id: latest
     use:
       depends/fits_iid_civ_constant_inla.rds: fits_iid_civ.rds
@@ -55,7 +55,7 @@ depends:
       depends/fits_iid_4_constant_inla.rds: fits_iid_4.rds
       depends/fits_icar_4_constant_inla.rds: fits_icar_4.rds
       depends/fits_ik_4_constant_inla.rds: fits_ik_4.rds
-  fit_iid-inla:
+  1_fit_iid-inla:
     id: latest
     use:
       depends/fits_iid_civ_iid_inla.rds: fits_iid_civ.rds
@@ -79,7 +79,7 @@ depends:
       depends/fits_iid_4_iid_inla.rds: fits_iid_4.rds
       depends/fits_icar_4_iid_inla.rds: fits_icar_4.rds
       depends/fits_ik_4_iid_inla.rds: fits_ik_4.rds
-  fit_besag-inla:
+  1_fit_besag-inla:
     id: latest
     use:
       depends/fits_iid_civ_besag_inla.rds: fits_iid_civ.rds
@@ -103,7 +103,7 @@ depends:
       depends/fits_iid_4_besag_inla.rds: fits_iid_4.rds
       depends/fits_icar_4_besag_inla.rds: fits_icar_4.rds
       depends/fits_ik_4_besag_inla.rds: fits_ik_4.rds
-  fit_bym2-inla:
+  1_fit_bym2-inla:
     id: latest
     use:
       depends/fits_iid_civ_bym2_inla.rds: fits_iid_civ.rds
@@ -127,7 +127,7 @@ depends:
       depends/fits_iid_4_bym2_inla.rds: fits_iid_4.rds
       depends/fits_icar_4_bym2_inla.rds: fits_icar_4.rds
       depends/fits_ik_4_bym2_inla.rds: fits_ik_4.rds
-  fit_fck-inla:
+  1_fit_fck-inla:
     id: latest
     use:
       depends/fits_iid_civ_fck_inla.rds: fits_iid_civ.rds
@@ -151,7 +151,7 @@ depends:
       depends/fits_iid_4_fck_inla.rds: fits_iid_4.rds
       depends/fits_icar_4_fck_inla.rds: fits_icar_4.rds
       depends/fits_ik_4_fck_inla.rds: fits_ik_4.rds
-  fit_fik-inla:
+  1_fit_fik-inla:
     id: latest
     use:
       depends/fits_iid_civ_fik_inla.rds: fits_iid_civ.rds

@@ -1,6 +1,6 @@
 #' Uncomment and run the two line below to resume development of this script
-# orderly::orderly_develop_start("assess_lengthscale-marginal")
-# setwd("src/assess_lengthscale-marginal")
+# orderly::orderly_develop_start("1_assess_lengthscale-marginal")
+# setwd("src/1_assess_lengthscale-marginal")
 
 geometries <- c("grid", "civ", "tex", as.character(1:4))
 sim_models <- c("ik")

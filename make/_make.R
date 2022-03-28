@@ -1,11 +1,14 @@
 source("make/create-plots")
 
+#' Misc.
+source("make/0_all.R")
+
 #' Simulation study
-source("make/simulate-data.R")
-source("make/fit-models.R")
-source("make/assess-marginals.R")
-source("make/post-process.R")
+source("make/1_simulate-data.R")
+source("make/1_fit-models.R")
+source("make/1_assess-marginals.R")
+source("make/1_post-process.R")
 
 #' HIV data study
-source("make/pull-surveys")
-source("make/cv-models")
+source("make/2_pull-surveys")
+source("make/2_cv-models")

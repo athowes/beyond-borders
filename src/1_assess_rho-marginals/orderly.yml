@@ -28,7 +28,7 @@ resources:
   - benchmark.R
 
 depends:
-  fit_constant-inla:
+  1_fit_constant-inla:
     id: latest
     use:
       depends/fits_iid_civ_constant_inla.rds: fits_iid_civ.rds
@@ -52,7 +52,7 @@ depends:
       depends/fits_iid_4_constant_inla.rds: fits_iid_4.rds
       depends/fits_icar_4_constant_inla.rds: fits_icar_4.rds
       depends/fits_ik_4_constant_inla.rds: fits_ik_4.rds
-  fit_iid-inla:
+  1_fit_iid-inla:
     id: latest
     use:
       depends/fits_iid_civ_iid_inla.rds: fits_iid_civ.rds
@@ -76,7 +76,7 @@ depends:
       depends/fits_iid_4_iid_inla.rds: fits_iid_4.rds
       depends/fits_icar_4_iid_inla.rds: fits_icar_4.rds
       depends/fits_ik_4_iid_inla.rds: fits_ik_4.rds
-  fit_besag-inla:
+  1_fit_besag-inla:
     id: latest
     use:
       depends/fits_iid_civ_besag_inla.rds: fits_iid_civ.rds
@@ -100,7 +100,7 @@ depends:
       depends/fits_iid_4_besag_inla.rds: fits_iid_4.rds
       depends/fits_icar_4_besag_inla.rds: fits_icar_4.rds
       depends/fits_ik_4_besag_inla.rds: fits_ik_4.rds
-  fit_bym2-inla:
+  1_fit_bym2-inla:
     id: latest
     use:
       depends/fits_iid_civ_bym2_inla.rds: fits_iid_civ.rds
@@ -124,7 +124,7 @@ depends:
       depends/fits_iid_4_bym2_inla.rds: fits_iid_4.rds
       depends/fits_icar_4_bym2_inla.rds: fits_icar_4.rds
       depends/fits_ik_4_bym2_inla.rds: fits_ik_4.rds
-  fit_fck-inla:
+  1_fit_fck-inla:
     id: latest
     use:
       depends/fits_iid_civ_fck_inla.rds: fits_iid_civ.rds
@@ -148,7 +148,7 @@ depends:
       depends/fits_iid_4_fck_inla.rds: fits_iid_4.rds
       depends/fits_icar_4_fck_inla.rds: fits_icar_4.rds
       depends/fits_ik_4_fck_inla.rds: fits_ik_4.rds
-  fit_fik-inla:
+  1_fit_fik-inla:
     id: latest
     use:
       depends/fits_iid_civ_fik_inla.rds: fits_iid_civ.rds
@@ -172,7 +172,7 @@ depends:
       depends/fits_iid_4_fik_inla.rds: fits_iid_4.rds
       depends/fits_icar_4_fik_inla.rds: fits_icar_4.rds
       depends/fits_ik_4_fik_inla.rds: fits_ik_4.rds
-  sim_realistic-geometries:
+  1_sim_realistic-geometries:
     id: latest
     use:
       depends/data_iid_grid.rds: data_iid_grid.rds
@@ -184,7 +184,7 @@ depends:
       depends/data_iid_tex.rds: data_iid_tex.rds
       depends/data_icar_tex.rds: data_icar_tex.rds
       depends/data_ik_tex.rds: data_ik_tex.rds
-  sim_vignette-geometries:
+  1_sim_vignette-geometries:
     id: latest
     use:
       depends/data_iid_1.rds: data_iid_1.rds

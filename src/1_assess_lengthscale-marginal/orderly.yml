@@ -28,7 +28,7 @@ resources:
   - benchmark.R
 
 depends:
-  fit_ck-stan:
+  1_fit_ck-stan:
     id: latest
     use:
       depends/fits_ik_civ_ck_stan.rds: fits_ik_civ.rds
@@ -38,7 +38,7 @@ depends:
       depends/fits_ik_2_ck_stan.rds: fits_ik_2.rds
       depends/fits_ik_3_ck_stan.rds: fits_ik_3.rds
       depends/fits_ik_4_ck_stan.rds: fits_ik_4.rds
-  # fit_ik-stan:
+  # 1_fit_ik-stan:
   #   id: latest
   #   use:
   #     depends/fits_iid_civ_ik_stan.rds: fits_iid_civ.rds
@@ -63,4 +63,3 @@ depends:
       depends/data_ik_2.rds: data_ik_2.rds
       depends/data_ik_3.rds: data_ik_3.rds
       depends/data_ik_4.rds: data_ik_4.rds
-

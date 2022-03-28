@@ -1,6 +1,6 @@
 #' Uncomment and run the two line below to resume development of this script
-# orderly::orderly_develop_start("fit_fik-inla")
-# setwd("src/fit_fik-inla")
+# orderly::orderly_develop_start("1_fit_fik-inla")
+# setwd("src/1_fit_fik-inla")
 
 vignette_geometries <- as.character(1:4)
 realistic_geometries <- c("grid", "civ", "tex")
