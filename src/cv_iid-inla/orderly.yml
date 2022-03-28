@@ -40,7 +40,7 @@ depends:
   process_hiv-surveys:
     id: latest
     use:
-      depends/civ2017phia.csv: civ2017phia.csv
-      depends/mwi2016phia.csv: mwi2016phia.csv
-      depends/tza2017phia.csv: tza2017phia.csv
-      depends/zwe2016phia.csv: zwe2016phia.csv
+      depends/civ2017phia.geojson: civ2017phia.geojson
+      depends/mwi2016phia.geojson: mwi2016phia.geojson
+      depends/tza2017phia.geojson: tza2017phia.geojson
+      depends/zwe2016phia.geojson: zwe2016phia.geojson
