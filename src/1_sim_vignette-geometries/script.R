@@ -1,6 +1,6 @@
 #' Uncomment and run the two line below to resume development of this script
-# orderly::orderly_develop_start("sim_vignette-geometries")
-# setwd("src/sim_vignette-geometries")
+# orderly::orderly_develop_start("1_sim_vignette-geometries")
+# setwd("src/1_sim_vignette-geometries")
 
 #' Import geometries
 geometry_1 <- readRDS("depends/geometry-1.rds")

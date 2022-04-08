@@ -43,7 +43,7 @@ packages:
   - purrr
 
 depends:
-  draw_vignette-geometries:
+  1_draw_vignette-geometries:
     id: latest
     use:
       depends/geometry-1.rds: geometry-1.rds
