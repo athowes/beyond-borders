@@ -30,11 +30,11 @@ packages:
   - ggplotify
 
 depends:
-  assess_cv:
+  2_assess_cv:
     id: latest
     use:
       depends/df.rds: manual.rds
-  process_hiv-surveys:
+  2_process_hiv-surveys:
     id: latest
     use:
       depends/civ2017phia.geojson: civ2017phia.geojson

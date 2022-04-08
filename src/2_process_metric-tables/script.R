@@ -1,6 +1,6 @@
 #' Uncomment and run the two line below to resume development of this script
-# orderly::orderly_develop_start("process_hiv-metric-tables")
-# setwd("src/process_hiv-metric-tables")
+# orderly::orderly_develop_start("2_process_hiv-metric-tables")
+# setwd("src/2_process_hiv-metric-tables")
 
 manual <- readRDS("depends/manual.rds")
 

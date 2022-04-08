@@ -9,11 +9,11 @@ metric_map <- function(sf, metric, remove_constant = TRUE) {
     lapply(function(x) {
       x %>%
         ggplot(aes(fill = .data[[metric]])) +
-        geom_sf() +
+        geom_sf(size = 0.1, colour = scales::alpha("grey", 0.25)) +
         scale_fill_viridis_c(option = "C") +
-        facet_grid(survey ~ inf_model) +
+        facet_grid(~ inf_model) +
         theme_minimal() +
-        labs(fill = toupper(metric)) +
+        labs(fill = toupper(metric), title = x$survey_id[1]) +
         theme(
           axis.title.x = element_blank(),
           axis.text.x = element_blank(),

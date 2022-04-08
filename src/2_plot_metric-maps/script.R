@@ -32,19 +32,19 @@ sf <- readRDS("depends/df.rds") %>%
   ) %>%
   st_as_sf()
 
-pdf("crps-map-hiv-surveys-no-constant.pdf", h = 5, w = 6.25)
+pdf("crps-map-hiv-surveys-no-constant.pdf", h = 4, w = 6.25)
 
 metric_map(sf, metric = "crps")
 
 dev.off()
 
-pdf("mse-map-hiv-surveys-no-constant.pdf", h = 5, w = 6.25)
+pdf("mse-map-hiv-surveys-no-constant.pdf", h = 4, w = 6.25)
 
 metric_map(sf, metric = "mse")
 
 dev.off()
 
-pdf("mae-map-hiv-surveys-no-constant.pdf", h = 5, w = 6.25)
+pdf("mae-map-hiv-surveys-no-constant.pdf", h = 4, w = 6.25)
 
 metric_map(sf, metric = "mae")
 
