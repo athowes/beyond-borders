@@ -1,50 +1,38 @@
 #' Uncomment and run the two line below to resume development of this script
-# orderly::orderly_develop_start("plot_simulation-geometries")
-# setwd("src/plot_simulation-geometries")
+# orderly::orderly_develop_start("1_plot_simulation-geometries")
+# setwd("src/1_plot_simulation-geometries")
 
-grid <- readRDS("depends/grid.rds")
-civ <- readRDS("depends/civ.rds")
-tex <- readRDS("depends/tex.rds")
-geometry_1 <- readRDS("depends/geometry-1.rds")
-geometry_2 <- readRDS("depends/geometry-2.rds")
-geometry_3 <- readRDS("depends/geometry-3.rds")
-geometry_4 <- readRDS("depends/geometry-4.rds")
+df <- bind_rows(
+  data.frame(name = "Grid", type = "Realistic", geometry = readRDS("depends/grid.rds")),
+  data.frame(name = "Cote d'Ivoire", type = "Realistic", geometry = readRDS("depends/civ.rds")),
+  data.frame(name = "Texas", type = "Realistic", geometry = readRDS("depends/tex.rds")),
+  data.frame(name = "Base", type = "Vignette", geometry = readRDS("depends/geometry-1.rds")),
+  data.frame(name = "Circles", type = "Vignette", geometry = readRDS("depends/geometry-2.rds")),
+  data.frame(name = "Triangle", type = "Vignette", geometry = readRDS("depends/geometry-3.rds")),
+  data.frame(name = "Widths", type = "Vignette", geometry = readRDS("depends/geometry-4.rds")),
+) %>%
+  st_as_sf()
 
-area_plot <- function(geometry, title) {
-  ggplot(geometry) +
-    geom_sf() +
-    theme_minimal() +
-    labs(subtitle = paste0(title)) +
-    theme_void()
-}
+pdf(file = "simulation-geometries.pdf", height = 4, width = 6.25)
 
-pdf(file = "simulation-geometries.pdf", height = 4.5, width = 6.25)
+plots <- df %>%
+  split(~name) %>%
+  lapply(function(x) {
+    ggplot(x) +
+      geom_sf() +
+      theme_minimal() +
+      theme_void()
+  })
 
-plotA <- cowplot::plot_grid(
-  area_plot(geometry_1, "Base"),
-  area_plot(geometry_2, "Concentric circles"),
-  area_plot(geometry_3, "Trianglular"),
-  area_plot(geometry_4, "Unequal widths"),
-  ncol = 4,
-  align = "h"
-)
+top_row <- cowplot::plot_grid(plots[["Base"]],  plots[["Triangle"]], plots[["Widths"]], plots[["Circles"]], nrow = 1)
+bottom_row <- cowplot::plot_grid(plots[["Grid"]], plots[["Cote d'Ivoire"]], plots[["Texas"]], nrow = 1)
 
-plotB <- cowplot::plot_grid(
-  area_plot(grid, "6 x 6 grid"),
-  area_plot(ci, "33 districts, Cote d'Ivoire"),
-  area_plot(tex, "36 electoral districts, Texas"),
-  ncol = 3,
-  align = "h"
-)
-
-cowplot::plot_grid(
-  plotA,
-  plotB,
-  ncol = 1,
-  rel_heights = c(0.6, 1)
-  # labels = "AUTO",
-  # label_size = 12,
-  # vjust = 0.5
-)
+cowplot::plot_grid(top_row, bottom_row, nrow = 2)
 
 dev.off()
+
+ggsave(
+  "simulation-geometries.png",
+  cowplot::plot_grid(top_row, bottom_row, nrow = 2),
+  width = 6.25, height = 4, units = "in", dpi = 300
+)
