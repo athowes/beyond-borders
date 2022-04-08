@@ -1,13 +1,12 @@
 #' Uncomment and run the two line below to resume development of this script
-# orderly::orderly_develop_start("plot_prev-ladder")
-# setwd("src/plot_prev-ladder")
+# orderly::orderly_develop_start("2_plot_prev-ladder")
+# setwd("src/2_plot_prev-ladder")
 
 df <- readRDS("depends/df.rds")
 
-surveys <- c("civ2017phia", "mwi2016phia")
-# surveys <- c("civ2017phia", "mwi2016phia", "tza2017phia", "zwe2016phia")
+surveys <- c("civ2017phia", "mwi2016phia", "tza2017phia", "zwe2016phia")
 
-pdf("prev-ladder.pdf", h = 6, w = 6.25)
+pdf("prev-ladder.pdf", h = 7, w = 6.25)
 
 lapply(surveys, function(x) {
   df %>%
@@ -23,12 +22,18 @@ lapply(surveys, function(x) {
       "fik_inla" = "FIK",
       "ik_stan" = "IK")
     ) %>%
-    ggplot(aes(x = area_name, by, y = estimate, ymin = ci_lower, ymax = ci_upper, group = inf_model, color = inf_model)) +
+    ggplot(aes(x = area_name, y = estimate, ymin = ci_lower, ymax = ci_upper, group = inf_model, color = inf_model)) +
     geom_pointrange(position = position_dodge(width = 0.6), alpha = 0.8) +
-    labs(x = "District", y = "Posterior prevalence estimate", col = "Inferential model") +
+    labs(x = "", y = "Posterior HIV prevalence estimate", col = "Inferential model") +
     theme_minimal() +
     scale_color_manual(values = multi.utils::cbpalette()) +
-    coord_flip()
+    coord_flip() +
+    theme_minimal() +
+    theme(
+      legend.position = "bottom",
+      legend.title = element_text(size = 9),
+      legend.text = element_text(size = 9)
+    )
 })
 
 dev.off()
