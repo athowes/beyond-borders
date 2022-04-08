@@ -1,6 +1,6 @@
 #' Uncomment and run the two line below to resume development of this script
-# orderly::orderly_develop_start("plot_hiv-metric-maps")
-# setwd("src/plot_hiv-metric-maps")
+# orderly::orderly_develop_start("plot_metric-maps")
+# setwd("src/plot_metric-maps")
 
 surveys <- c("civ2017phia", "mwi2016phia", "tza2017phia", "zwe2016phia")
 
