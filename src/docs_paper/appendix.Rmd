@@ -1,0 +1,50 @@
+---
+title: Appendix to "Models for spatial structure in small-area estimation"
+subtitle: |
+  Corresponding author: Adam Howes (`ath19@ic.ac.uk`)
+output:
+  pdf_document:
+    toc: true
+    number_sections: true
+    keep_tex: true
+    includes:
+      in_header: preamble.tex
+bibliography: citations.bib
+---
+
+<!-- So that the tables and figures in this appendix are prefixed by "A." -->
+\setcounter{table}{0}  
+\renewcommand{\thetable}{A.\arabic{table}} 
+\setcounter{figure}{0} 
+\renewcommand{\thefigure}{A.\arabic{figure}}
+
+\newpage
+
+# Implementation details for the Besag model \label{app:freni}
+
+Here we briefly review three best practices for using the Besag model, scaling, singletons, and constraints, as recommended by @freni2018note: 
+
+1. \textit{Scaling}
+The structure matrix $\mathbf{R}$ should be rescaled to have generalised variance, defined by the geometric mean of the diagonal elements of its generalised inverse
+\begin{equation}
+    \sigma^2_{\text{GV}}(\mathbf{R}) = \prod_{i = 1}^n (R^-_{ii})^{1/n} = \exp \left( \frac{1}{n} \sum_{i = 1}^n \log (R^-_{ii}) \right),
+\end{equation}
+equal to one, by replacing $\mathbf{R}$ with $\mathbf{R}^\star = \mathbf{R} / \sigma^2_{\text{GV}}(\mathbf{R})$.
+As the diagonal elements $R^-_{ii}$ correspond to marginal variances, the generalised variance gives a measure of the average marginal variance.
+However, this measure, introduced by @sorbye2014scaling, ignores off-diagonal entries and more broadly any measure of typical variance could be used.
+Scaling mitigates the influence of the adjacency graph on the variance of $\bphi$.
+Allowing the variance to be controlled by $\tau_\phi$ alone is important as it allows for consistent, interpretable prior selection.
+When the adjacency graph is disconnected it is not appropriate to scale the structure matrix $\mathbf{R}$ uniformly since for a given precision $\tau_\phi$, local smoothing operates on each connected component independently.
+As such, each connected component should be scaled independently to have generalised variance one giving $\mathbf{R}^\star_I = \mathbf{R}_I / \sigma^2_{\text{GV}}(\mathbf{R}_I)$ where $\mathbf{R}_I$ is the sub-matrix of the structure matrix corresponding to index set $I$.
+
+2.
+\textit{Singletons}
+When one of the connected components is a single area, known either as a singleton or an island, the probability density $\exp \left( -\frac{\tau_\phi}{2} \sum_{i \sim j} (\phi_i - \phi_j)^2 \right)$ has no dependence on $\phi_i$.
+This is equivalent to using an improper prior $p(\phi_i) \propto 1$ and can be avoided by setting each singleton to have independent Gaussian noise $p(\phi_i) \sim \mathcal{N}(0, 1)$.
+
+3.
+\textit{Constraints}
+To avoid confounding of the spatial random effects with the intercept, it is recommended to place a sum-to-zero constraint on each non-singleton connected component.
+In other words, for each $|I| > 1$ that $\sum_{i \in I} \phi_i = 0$.
+
+# References {#references .unnumbered}

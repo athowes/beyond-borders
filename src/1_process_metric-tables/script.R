@@ -1,6 +1,6 @@
 #' Uncomment and run the two line below to resume development of this script
-# orderly::orderly_develop_start("process_metric-tables")
-# setwd("src/process_metric-tables")
+# orderly::orderly_develop_start("1_process_metric-tables")
+# setwd("src/1_process_metric-tables")
 
 df_rho <- readRDS("depends/df_rho.rds")
 df_intercept <- readRDS("depends/df_intercept.rds")

@@ -26,15 +26,15 @@ packages:
   - purrr
 
 depends:
-  assess_rho-marginals:
+  1_assess_rho-marginals:
     id: latest
     use:
       depends/df_rho.rds: df.rds
-  assess_intercept-marginal:
+  1_assess_intercept-marginal:
     id: latest
     use:
       depends/df_intercept.rds: df.rds
-  assess_time-taken:
+  1_assess_time-taken:
     id: latest
     use:
       depends/df_time.rds: df.rds

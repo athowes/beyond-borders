@@ -22,7 +22,7 @@ packages:
   - purrr
 
 depends:
-  assess_cv:
+  2_assess_cv:
     id: latest
     use:
       depends/df.rds: df.rds

@@ -1,0 +1,45 @@
+script: script.R
+
+artefacts:
+  - data:
+      description: Main paper
+      filenames:
+        - paper.pdf
+        - paper.tex
+  - data:
+      description: Appendix
+      filenames:
+        - appendix.pdf
+        - appendix.tex
+
+resources:
+  - paper.Rmd
+  - citations.bib
+  - appendix.Rmd
+
+packages:
+  - rmarkdown
+  - dplyr
+  - ggplot2
+  - forcats
+  - tidyverse
+
+depends:
+  0_plot_areal-data:
+    id: latest
+    use:
+      depends/areal-data.pdf: areal-data.pdf
+  0_plot_geometry-graph:
+    id: latest
+    use:
+      depends/geometry-graph-zwe.pdf: geometry-graph-zwe.pdf
+  0_plot-tikz_maup:
+    id: latest
+    use:
+      depends/maup1.pdf: maup1.pdf
+      depends/maup2.pdf: maup2.pdf
+      depends/maup3.pdf: maup3.pdf
+  0_plot_integration-method:
+    id: latest
+    use:
+      depends/integration-method.pdf: integration-method.pdf
