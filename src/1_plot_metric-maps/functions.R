@@ -19,7 +19,7 @@ metric_map <- function(df, metric, sf, remove_constant = FALSE) {
     st_as_sf() %>%
     ggplot(aes(fill = .data[[metric_mean]])) +
     facet_grid(sim_model ~ inf_model) +
-    geom_sf() +
+    geom_sf(size = 0.1, colour = scales::alpha("grey", 0.25)) +
     scale_fill_viridis_c(option = "C") +
     labs(fill = toupper(metric)) +
     scale_y_continuous(sec.axis = sec_axis(~ . , name = "SECOND Y AXIS", breaks = NULL, labels = NULL)) +
@@ -71,7 +71,7 @@ metric_map <- function(df, metric, sf, remove_constant = FALSE) {
   ggplotify::as.ggplot(z)
 }
 
-produce_map <- function(arg1, arg2, arg3) {
+produce_maps <- function(arg1, arg2, arg3) {
   df_rho %>%
     filter(geometry == arg1) %>%
     filter(inf_model != "constant_inla") %>%

@@ -4,7 +4,7 @@ artefacts:
   - data:
       description: PIT histograms and ECDF difference plots
       filenames:
-        - histogram-ecdf-no-constant.pdf
+        - histogram-ecdf.pdf
 
 packages:
   - sf
@@ -23,7 +23,7 @@ packages:
   - multi.utils
 
 depends:
-  assess_rho-marginals:
+  1_assess_rho-marginals:
     id: latest
     use:
       depends/df_rho.rds: df.rds

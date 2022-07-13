@@ -1,6 +1,6 @@
 #' Uncomment and run the two line below to resume development of this script
-# orderly::orderly_develop_start("plot_coverage")
-# setwd("src/plot_coverage")
+# orderly::orderly_develop_start("1_plot_coverage")
+# setwd("src/1_plot_coverage")
 
 df <- readRDS("depends/df_rho.rds") %>%
   mutate(replicate = as.numeric(replicate)) %>%
@@ -9,7 +9,7 @@ df <- readRDS("depends/df_rho.rds") %>%
 
 geometries <- unique(df$geometry)
 
-pdf("histogram-ecdf-no-constant.pdf", h = 8, w = 6.25)
+pdf("histogram-ecdf.pdf", h = 8, w = 6.25)
 
 lapply(geometries, function(x) {
   df <- filter(df, geometry == as.character(x))

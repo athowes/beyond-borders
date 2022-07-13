@@ -43,3 +43,19 @@ depends:
     id: latest
     use:
       depends/integration-method.pdf: integration-method.pdf
+  1_plot_simulation-geometries:
+    id: latest
+    use:
+      depends/simulation-geometries.pdf: simulation-geometries.pdf
+  1_plot_metric-maps:
+    id: latest
+    use:
+      depends/crps-maps.pdf: crps-maps.pdf
+  1_plot_metric-boxplots:
+    id: latest
+    use:
+      depends/crps-boxplot-rho.pdf: crps-boxplot-rho.pdf
+  1_plot_coverage:
+    id: latest
+    use:
+      depends/histogram-ecdf.pdf: histogram-ecdf.pdf
