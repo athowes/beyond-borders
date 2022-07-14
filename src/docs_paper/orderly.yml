@@ -59,3 +59,7 @@ depends:
     id: latest
     use:
       depends/histogram-ecdf.pdf: histogram-ecdf.pdf
+  0_plot_sloo-cv:
+    id: latest
+    use:
+      depends/sloo-cv.pdf: sloo-cv.pdf

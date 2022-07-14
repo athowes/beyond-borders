@@ -141,7 +141,7 @@ Bayesian hierarchical models are an attractive framework for small-area estimati
 &\text{(Parameters)}    & \qquad \theta &\sim p(\theta), \label{eq:parameters}
 \end{alignat}
 where $x$ is the $n$-dimensional latent field, $\theta$ are the $m$-dimensional parameters, $m < n$, and $g$ is a link function.
-Spatial structure is modelled at the level of the latent field, and the observation model, often either binomial or Poisson, is conditionally independent and identically distributed $p(\y \, | \, x, \theta) = \prod_{i = 1}^n p(y_i \, | \, x_i, \theta)$.
+Spatial structure is modelled at the level of the latent field, and the observation model, often either binomial or Poisson, is conditionally independent and identically distributed $p(y \, | \, x, \theta) = \prod_{i = 1}^n p(y_i \, | \, x_i, \theta)$.
 As small-area estimation models are descriptive rather than mechanistic, it is natural [@best2005comparison] to use a flexible and computationally efficient Gaussian distribution $x \sim \mathcal{N}(\mu, \Sigma)$ for the latent field.
 Three-layer models with Gaussian latent fields comprise a wide array of popular models, including generalised linear mixed models (GLMMs), and have been collectively studied under the title latent Gaussian models (LGMs) [@rue2009approximate].
 
@@ -426,7 +426,7 @@ Like the Besag model, we scaled the Gram matrix to have generalised variance one
 
 We studied robustness to spatial misspecification, by simulating synthetic data-sets from three known data generating processes.
 The spatial random effects $\phi$ were generated according to IID, Besag and integrated kernel (IK) simulation models (Table \ref{tab:simulationmodels}).
-We then generated synthetic data $\y = (y_1, \ldots, y_n)^\top$ of a form analogous to a household survey whereby $y_i \sim \text{Bin}(m_i, \rho_i)$ where the probabilities $\rho_i \in [0, 1]$ are linked to the latent random variables $x_i \in \mathbb{R}$ via
+We then generated synthetic data $y = (y_1, \ldots, y_n)^\top$ of a form analogous to a household survey whereby $y_i \sim \text{Bin}(m_i, \rho_i)$ where the probabilities $\rho_i \in [0, 1]$ are linked to the latent random variables $x_i \in \mathbb{R}$ via
 \begin{equation}
 \log \left( \frac{\rho_i}{1 - \rho_i} \right) = x_i = \beta_0 + \phi_i, \quad i = 1, \ldots, n.
 \end{equation}
@@ -507,7 +507,7 @@ In the following two sections we describe our approach to model assessment.
 ### Continuous ranked probability score
 
 The continuous ranked probability score (CRPS) [@matheson1976scoring] gives an overall measure of forecasting performance and can be seen as a generalisation of the Brier score [@brier1950verification] to distributional forecasts.
-For a given fitted model and area $A_i$ let $\rho_i$ have posterior marginal $f(\rho_i) = p(\rho_i \, | \, \y)$ and $\omega_i$ be the true value.
+For a given fitted model and area $A_i$ let $\rho_i$ have posterior marginal $f(\rho_i) = p(\rho_i \, | \, y)$ and $\omega_i$ be the true value.
 Writing $F$ as the cumulative distribution corresponding to $f$ then
 \begin{equation}
 \text{CRPS}(f, \omega_i) = \int_{-\infty}^{\infty} (F(\rho_i) - \mathbbm{1} \{\rho_i \geq \omega_i \} )^2 \text{d}\rho_i = \int_{0}^{1} (F(\rho_i) - \mathbbm{1} \{\rho_i \geq \omega_i \} )^2 \text{d}\rho_i, \label{eq:crps}
@@ -523,11 +523,79 @@ In contrast, given a collection of Monte Carlo samples $\{\rho_i^s\}_{s = 1}^S \
 \end{equation}
 We obtained these samples using the function \texttt{INLA::inla.posterior.sample} for models fit with \texttt{R-INLA} and directly from the Markov chain using \texttt{rstan::extract} for models fit with Stan.
 
-\subsubsection{Coverage}
+### Coverage
 
 To assess the coverage of our estimates, we considered probability integral transform (PIT) histograms and empirical cumulative distribution function (ECDF) difference plots [@sailynoja2021graphical].
 We estimated the quantile $q_i = F(\omega_i)$ of the true value within the marginal posterior using numerical integration.
 For calibrated models, over repeated simulations, $q_i \sim \mathcal{U}[0, 1]$ such that for any given nominal significance level $1 - \alpha$, the proportion of quantile-based credible intervals containing the true value $\omega_i$, should be $1 - \alpha$.
+
+# HIV prevalence study \label{sec:hiv}
+
+We compared model performance as, again varying the spatial random effect specification, in estimating HIV prevalence in adults aged $15-49$ across four countries in sub-Saharan Africa: Côte d'Ivoire ($n = 33$), Malawi ($n = 28$), Tanzania ($n = 159$) and Zimbabwe ($n = 60$).
+As with the simulation study, \textsf{R} code for this study is available from \url{https://github.com/athowes/areal-comparison}.
+
+<!-- Our motivating application is the small-area estimation of HIV epidemic indicators in sub-Saharan Africa. -->
+<!-- Epidemic estimates are required to help plan, implement, and evaluate the success of programmes, as well as allocate limited resources [@hallett2016evaluation; @cuadros2017mapping]. -->
+<!-- Household surveys provide nationally representative data about the general population, but are expensive to carry out and as such have small sample sizes at a district level. -->
+<!-- Sometimes auxiliary covariates can be used to aid estimation, but data on the covariates most strongly associated with HIV, such as sexual risk behaviour or the prevalence of male circumcision, faces similar measurement difficulties as the HIV indicators themselves. -->
+<!-- In light of this fact, models including covariates have only been found to modestly improve predictions \citep[Supplementary Figure 20]{dwyer2019mapping}, unlike other infectious diseases like Malaria where transmission is driven by more predictive and easily-measurable environmental factors [@weiss2015re]. -->
+<!-- These circumstances foreground the sharing information between districts via spatial smoothing in HIV mapping. -->
+
+## Household survey data
+
+We used data from the most recent publicly available Population Health Impact Assessment (PHIA) survey in each country.
+These surveys utilise a complex design, where each individual $k$ in area $i$ has an unequal probability $\pi_{ik}$ of being included in the sample.
+<!-- A two-stage design in which enumeration areas are first drawn from a stratified sample and then households are chosen using equal probability systematic sampling from within each enumeration area, is common. -->
+To account for the survey design we used sampling weights $\omega_{ik} = 1/\pi_{ik}$ to adjust the raw data in each district, obtaining the Kish effective sample size $m_i^\star = (\sum_k \omega_{ik})^2 / \sum_k \omega_{ik}^2$ and effective number of cases $y_i^\star$.
+These effective values may be thought of as what would have been observed had the survey been a simple random sample.
+
+## Model structure
+
+We used a similar model structure as Section \ref{sec:simulation}, with a minor alteration to the likelihood.
+The effective number of cases and effective sample size may not be integers, so we modelled the effective number of cases $y_i^\star \in \mathbb{R}$ according to a generalised binomial distribution $y_i^\star \sim \text{xBin}(m_i^\star, \rho_i)$, where $m_i^\star \in \mathbb{R}$ is the effective sample size and $\rho_i \in [0, 1]$ is the adult (15-49) HIV prevalence.
+The working likelihood under this model for $m^\star_i \geq y^\star_i$ is given by
+\begin{equation}
+p(y_i^\star \, | \, m_i^\star, \rho_i) = 
+\frac{\Gamma(m_i^\star + 1)}{\Gamma(y_i^\star + 1) \Gamma(m_i^\star - y_i^\star + 1)}  \rho_i ^{y_i^\star}  (1 - \rho_i)^{(m_i^\star - y_i^\star)}. \label{eq:xbinomial}
+\end{equation}
+As with the simulation study we linked the prevalence $\rho_i \in [0, 1]$ to $x_i$ via
+\begin{equation}
+\log \left( \frac{\rho_i}{1 - \rho_i} \right) = x_i = \beta_0 + \phi_i, \label{eq:linear}
+\end{equation}
+and again considered the range of models for $\bphi$ given by Table \ref{tab:inferentialmodels}.
+
+## Cross-validation \label{sec:cv}
+
+<!-- \begin{figure} -->
+<!--     \centering -->
+<!-- 	\includegraphics[width=\textwidth]{depends/sloo-cv.pdf} -->
+<!-- 	\caption{The $i$th fold in a SLOO-CV in which the model is fitted on the grey (\lightgreyline) areas $A_{-(i, \delta i)}$ with the blue (\lightblueline) areas $A_{\delta i}$ held-out, to be assessed in predicting the green (\lightgreenline) area $A_i$.} -->
+<!-- 	\label{fig:sloo} -->
+<!-- \end{figure} -->
+
+```{r sloo-cv, fig.align="center", fig.cap="SLOO-CV."}
+knitr::include_graphics("depends/sloo-cv.pdf")
+```
+
+We assessed each model using two cross-validation approaches: (1) LOO-CV, a standard leave-one-out cross-validation, in which the prevalence data from a single district were removed, and (2) SLOO-CV, a spatial leave-one-out cross-validation, in which the data from a single district and each of its neighbouring districts were removed.
+We performed cross-validation manually as we found approximations that avoid refitting the model, such as the built-in conditional predictive ordinate statistic in `R-INLA` package [@held2010posterior] and the Pareto smoothed importance sampling [@vehtari2015pareto] approach implemented in the `loo` package [@vehtari2017practical], to be inaccurate in this setting, perhaps because individual observations in spatial random effect models can exert high influence toward local parameters.
+
+\subsubsection{LOO-CV}
+
+In the $i$th LOO-CV fold, the model was fit using the data $y_{-i}$ and assessed according to its prediction on $y_i$.
+We assessed forecasting performance using the CRPS, at the level of the data $y_i$ rather than at the level of the prevalence $\rho_i$.
+To compute the value of CRPS for the $i$th fold we use samples $\{ y_i^s \}_{s = 1}^S$ from the LOO posterior predictive distribution $p(y_i \, | \, y_{-i})$ giving
+\begin{equation}
+\text{LOO-CRPS}_i = \frac{1}{S} \sum_{s = 1}^S | y_i^s - y_i | - \frac{1}{2S^2} \sum_{s = 1}^S \sum_{l = 1}^S | y_i^s - y_i |. \label{eq:crpsapprox2}
+\end{equation}
+
+\subsubsection{SLOO-CV}
+
+If structural dependencies, like spatial dependence, exist in the data then results from LOO-CV tend to underestimate predictive error [@roberts2017cross].
+To counteract this effect, we modify the spatial leave-one-out (SLOO) approach of @le2014spatial.
+As illustrated by Figure \ref{fig:sloo}, during the $i$th fold of SLOO-CV we leave-out the block $(i, \delta i)$.
+This increases the extent to which the training and validation sets are conditionally independent.
+The result is a SLOO posterior predictive distribution $p(y_i \, | \, y_{-(i, \delta i)})$ from which, analogously to Equation \ref{eq:crpsapprox2}, we may compute the corresponding value of $\text{SLOO-CRPS}_i$.
 
 # Funding {-}
 
