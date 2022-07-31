@@ -6,10 +6,10 @@ source("make/utils.R")
 #' * tza2017phia
 #' * zwe2016phia
 
-orderly::orderly_pull_archive("civ_data_survey", remote = "naomi2") #' [x]
+orderly::orderly_pull_archive("civ_data_survey", remote = "naomi2")            #' [x]
 orderly::orderly_pull_archive("mwi_data_survey-indicators", remote = "malawi") #' [x]
-orderly::orderly_pull_archive("tza_data_survey", remote = "naomi2") #' [x]
-orderly::orderly_pull_archive("zwe_data_survey", remote = "naomi2") #' [x]
+orderly::orderly_pull_archive("tza_data_survey", remote = "naomi2")            #' [x]
+orderly::orderly_pull_archive("zwe_data_survey", remote = "naomi2")            #' [x]
 
 run_commit_push("2_process_hiv-surveys", push = FALSE) #' [x]
 

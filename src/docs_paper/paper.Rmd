@@ -332,12 +332,12 @@ More recently, @teh2021efficient used a centroid kernel as a part of a spatio-te
 
 ## Integrated kernel \label{sec:ik}
 
-<!-- \begin{figure} -->
-<!-- \centering -->
-<!-- \includegraphics[width=\textwidth]{depends/integration-method.pdf} -->
-<!-- \caption{Three ways to choose integration points with $L_i = 10$ for all $i$ in Malawi, as implemented by \texttt{sf::st\_sample} [@pebesma2018sf].} -->
-<!-- \label{fig:41} -->
-<!-- \end{figure} -->
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth]{depends/integration-method.pdf}
+\caption{Three ways to choose integration points with $L_i = 10$ for all $i$ in Malawi, as implemented by \texttt{sf::st\_sample} [@pebesma2018sf].}
+\label{fig:41}
+\end{figure}
 
 Rather than attempting to choose a single representative point, an alternative is to represent the whole area by integrating the kernel over the areas of interest.
 This results in the integrated kernel
@@ -538,7 +538,7 @@ For calibrated models, over repeated simulations, $q_i \sim \mathcal{U}[0, 1]$ s
 
 # HIV prevalence study \label{sec:hiv}
 
-We compared model performance as, again varying the spatial random effect specification, in estimating HIV prevalence in adults aged $15-49$ across four countries in sub-Saharan Africa: Côte d'Ivoire ($n = 33$), Malawi ($n = 28$), Tanzania ($n = 159$) and Zimbabwe ($n = 60$).
+We compared model performance in estimating HIV prevalence in adults aged $15-49$ across four countries in sub-Saharan Africa: Côte d'Ivoire ($n = 33$), Malawi ($n = 28$), Tanzania ($n = 159$) and Zimbabwe ($n = 60$), again varying the spatial random effect specification.
 As with the simulation study, \textsf{R} code for this study is available from \url{https://github.com/athowes/areal-comparison}.
 
 ## Household survey data

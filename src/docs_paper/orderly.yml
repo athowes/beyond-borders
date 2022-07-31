@@ -2,20 +2,21 @@ script: script.R
 
 artefacts:
   - data:
-      description: Main paper
+      description: Main paper and appendix .pdf
       filenames:
         - paper.pdf
-        - paper.tex
-  - data:
-      description: Appendix
-      filenames:
         - appendix.pdf
+  - data:
+      description: Main paper and appendix .tex
+      filenames:
+        - paper.tex
         - appendix.tex
 
 resources:
   - paper.Rmd
   - citations.bib
   - appendix.Rmd
+  - preamble.tex
 
 packages:
   - rmarkdown
