@@ -25,4 +25,5 @@ depends:
   2_assess_cv:
     id: latest
     use:
-      depends/df.rds: df.rds
+      depends/manual.rds: manual.rds
+      depends/direct.rds: direct.rds
