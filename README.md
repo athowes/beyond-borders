@@ -1,6 +1,6 @@
 # areal-comparison
 
-Code for the manuscript Howes *et al.* "Modelling spatial structure in small-area estimation" (in preparation).
+Code for the manuscript Howes *et al.* "Understanding models for spatial structure in small-area estimation" (in preparation).
 
 Small-area estimation models typically use the Besag model, a type of Gaussian Markov random field, to model spatial structure.
 However, for irregular geometries, the assumptions made by the Besag model do not seem plausible (in the image below, geometric irregularity is increasing from left to right).
@@ -22,7 +22,7 @@ To do so, we consider the performance of eight inferential small-area models:
 
 ## R package dependencies
 
-This repository is supported by the [`bsae`](https://github.com/athowes/bsae) package, which can be installed from Github via:
+This analysis is supported by the [`bsae`](https://github.com/athowes/bsae) package, which can be installed from Github via:
 
 ```r
 devtools::install_github("athowes/bsae")

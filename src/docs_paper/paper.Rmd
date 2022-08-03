@@ -1,5 +1,5 @@
 ---
-title: Modelling spatial structure in small-area estimation
+title: Understanding models for spatial structure in small-area estimation
 author:
   - name: Adam Howes
     email: ath19@ic.ac.uk
