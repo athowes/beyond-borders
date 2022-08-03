@@ -5,6 +5,10 @@ artefacts:
       description: Prevalence ladder plots
       filenames:
         - prev-ladder.pdf
+  - data:
+      description: CRPS ladder plots
+      filenames:
+        - crps-ladder.pdf
 
 packages:
   - sf
@@ -29,3 +33,4 @@ depends:
     id: latest
     use:
       depends/df.rds: df.rds
+      depends/manual.rds: manual.rds
