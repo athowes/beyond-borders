@@ -588,18 +588,13 @@ We performed cross-validation manually as we found approximations that avoid ref
 
 In the $i$th LOO-CV fold, the model was fit using the data $y_{-i}$ and assessed according to its prediction on $y_i$.
 We assessed forecasting performance using the CRPS, at the level of the data $y_i$ rather than at the level of the prevalence $\rho_i$.
-To compute the value of CRPS for the $i$th fold we use samples $\{ y_i^s \}_{s = 1}^S$ from the LOO posterior predictive distribution $p(y_i \, | \, y_{-i})$ giving
-\begin{equation}
-\text{LOO-CRPS}_i = \frac{1}{S} \sum_{s = 1}^S | y_i^s - y_i | - \frac{1}{2S^2} \sum_{s = 1}^S \sum_{l = 1}^S | y_i^s - y_i |. \label{eq:crpsapprox2}
-\end{equation}
+To compute the value of CRPS for the $i$th fold we use samples $\{ y_i^s \}_{s = 1}^S$ from the LOO posterior predictive distribution $p(y_i \, | \, y_{-i})$ giving $\text{LOO-CRPS}_i = \frac{1}{S} \sum_{s = 1}^S | y_i^s - y_i | - \frac{1}{2S^2} \sum_{s = 1}^S \sum_{l = 1}^S | y_i^s - y_i |. \label{eq:crpsapprox2}$
 
 ### Spatial leave-one-out cross-validation
 
-If structural dependencies, like spatial dependence, exist in the data then results from LOO-CV tend to underestimate predictive error [@roberts2017cross].
-To counteract this effect, we modify the spatial leave-one-out (SLOO) approach of @le2014spatial.
-As illustrated by Figure \ref{fig:sloo}, during the $i$th fold of SLOO-CV we leave-out the block $(i, \delta i)$.
-This increases the extent to which the training and validation sets are conditionally independent.
-The result is a SLOO posterior predictive distribution $p(y_i \, | \, y_{-(i, \delta i)})$ from which, analogously to Equation \ref{eq:crpsapprox2}, we may compute the corresponding value of $\text{SLOO-CRPS}_i$.
+When structural dependencies, like spatial dependence, exist in the data then results from LOO-CV tend to underestimate predictive error [@roberts2017cross].
+To counteract this effect, we modified the spatial leave-one-out (SLOO) approach of @le2014spatial by leaving-out the block $(i, \delta i)$ during the $i$th fold of SLOO-CV (Figure \ref{fig:sloo}), thereby increasing the extent to which the training and validation sets are conditionally independent.
+From the SLOO posterior predictive distribution $p(y_i \, | \, y_{-(i, \delta i)})$  we analogously computed $\text{SLOO-CRPS}_i$.
 
 ## Results
 
