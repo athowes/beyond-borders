@@ -1,7 +1,7 @@
 ---
 title: "SPDE approach notes"
 author: "Adam Howes"
-output: pdf_document
+output: html_document
 bibliography: citations.bib
 ---
 
