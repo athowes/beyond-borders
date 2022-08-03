@@ -4,10 +4,11 @@ artefacts:
   - data:
       description: Check that the integrated kernel is being correctly computed in Stan
       filenames:
-        - cov-comparison.pdf
+        - ik-compute.html
 
 resources:
   - cov_sample_average.stan
+  - ik-compute.Rmd
 
 packages:
   - bsae
