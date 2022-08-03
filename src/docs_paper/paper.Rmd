@@ -603,6 +603,12 @@ The result is a SLOO posterior predictive distribution $p(y_i \, | \, y_{-(i, \d
 
 ## Results
 
+```{r results="asis"}
+#' Some of the lines should not be included
+lines_remove <- c(1)
+cat(readLines("depends/metric-table.txt")[-lines_remove], sep = "\n")
+```
+
 # Discussion \label{sec:discussion}
 
 # Funding {-}

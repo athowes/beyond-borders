@@ -64,6 +64,10 @@ depends:
     id: latest
     use:
       depends/histogram-ecdf.pdf: histogram-ecdf.pdf
+  2_process_metric-tables:
+    id: latest
+    use:
+      depends/metric-table.txt: metric-table.txt
   0_plot_sloo-cv:
     id: latest
     use:
