@@ -8,7 +8,8 @@ artefacts:
       description: Metric tables in LaTeX for the manuscript
       filenames:
         - crps-table-rho.txt
-        - time-table.txt
+        - crps-table-intercept.txt
+        # - time-table.txt
 
 packages:
   - sf

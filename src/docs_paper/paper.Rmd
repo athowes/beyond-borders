@@ -536,6 +536,14 @@ To assess the coverage of our estimates, we considered probability integral tran
 We estimated the quantile $q_i = F(\omega_i)$ of the true value within the marginal posterior using numerical integration.
 For calibrated models, over repeated simulations, $q_i \sim \mathcal{U}[0, 1]$ such that for any given nominal significance level $1 - \alpha$, the proportion of quantile-based credible intervals containing the true value $\omega_i$, should be $1 - \alpha$.
 
+## Results
+
+```{r results="asis"}
+#' Some of the lines should not be included
+lines_remove <- c(1, 3, 4, 5)
+cat(readLines("depends/crps-table-rho.txt")[-lines_remove], sep = "\n")
+```
+
 # HIV prevalence study \label{sec:hiv}
 
 We compared model performance in estimating HIV prevalence in adults aged $15-49$ across four countries in sub-Saharan Africa: Côte d'Ivoire ($n = 33$), Malawi ($n = 28$), Tanzania ($n = 159$) and Zimbabwe ($n = 60$), again varying the spatial random effect specification.
@@ -592,6 +600,8 @@ To counteract this effect, we modify the spatial leave-one-out (SLOO) approach o
 As illustrated by Figure \ref{fig:sloo}, during the $i$th fold of SLOO-CV we leave-out the block $(i, \delta i)$.
 This increases the extent to which the training and validation sets are conditionally independent.
 The result is a SLOO posterior predictive distribution $p(y_i \, | \, y_{-(i, \delta i)})$ from which, analogously to Equation \ref{eq:crpsapprox2}, we may compute the corresponding value of $\text{SLOO-CRPS}_i$.
+
+## Results
 
 # Discussion \label{sec:discussion}
 

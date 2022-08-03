@@ -61,8 +61,7 @@ metric_table <- function(df, metric, title = NULL, subtitle = NULL, latex = FALS
     return(
       table %>%
         as_latex() %>%
-        as.character() %>%
-        cat()
+        as.character()
     )
   } else {
     return(table)
@@ -107,8 +106,7 @@ coverage_table <- function(full_df_renamed, latex = FALSE) {
     return(
       table %>%
         as_latex() %>%
-        as.character() %>%
-        cat()
+        as.character()
     )
   } else {
     return(table)

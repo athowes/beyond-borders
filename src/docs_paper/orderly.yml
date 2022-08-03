@@ -56,6 +56,10 @@ depends:
     id: latest
     use:
       depends/crps-boxplot-rho.pdf: crps-boxplot-rho.pdf
+  1_process_metric-tables:
+    id: latest
+    use:
+      depends/crps-table-rho.txt: crps-table-rho.txt
   1_plot_coverage:
     id: latest
     use:
