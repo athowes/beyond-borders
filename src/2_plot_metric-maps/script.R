@@ -1,5 +1,5 @@
 #' Uncomment and run the two line below to resume development of this script
-# orderly::orderly_develop_start("plot_metric-maps")
+# orderly::orderly_develop_start("2_plot_metric-maps")
 # setwd("src/plot_metric-maps")
 
 surveys <- c("civ2017phia", "mwi2016phia", "tza2017phia", "zwe2016phia")
@@ -32,20 +32,20 @@ sf <- readRDS("depends/df.rds") %>%
   ) %>%
   st_as_sf()
 
-pdf("crps-map-hiv-surveys-no-constant.pdf", h = 4, w = 6.25)
+pdf("crps-map-hiv-surveys.pdf", h = 4, w = 6.25)
 
-metric_map(sf, metric = "crps")
-
-dev.off()
-
-pdf("mse-map-hiv-surveys-no-constant.pdf", h = 4, w = 6.25)
-
-metric_map(sf, metric = "mse")
+metric_map(sf, metric = "crps", remove_constant = FALSE)
 
 dev.off()
 
-pdf("mae-map-hiv-surveys-no-constant.pdf", h = 4, w = 6.25)
+pdf("mse-map-hiv-surveys.pdf", h = 4, w = 6.25)
 
-metric_map(sf, metric = "mae")
+metric_map(sf, metric = "mse", remove_constant = FALSE)
+
+dev.off()
+
+pdf("mae-map-hiv-surveys.pdf", h = 4, w = 6.25)
+
+metric_map(sf, metric = "mae", remove_constant = FALSE)
 
 dev.off()
