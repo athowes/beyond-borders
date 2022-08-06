@@ -17,5 +17,7 @@ archive_to_docs <- function(report) {
 
 #' Names of the reports to move
 archive_to_docs("docs_paper")
+archive_to_docs("0_check_bin-gaussian")
 archive_to_docs("0_check_ik-compute")
+archive_to_docs("0_check_ik-converge")
 archive_to_docs("0_explore_inla-spde")

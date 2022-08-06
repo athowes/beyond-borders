@@ -7,6 +7,7 @@
 
 * [bin-gaussian](https://athowes.github.io/areal-comparison/bin-gaussian.html)
 * [ik-compute](https://athowes.github.io/areal-comparison/ik-compute.html)
+* [ik-converge](https://athowes.github.io/areal-comparison/ik-converge.html)
 
 ## Explorations
 
