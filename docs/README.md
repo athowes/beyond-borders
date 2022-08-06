@@ -11,7 +11,7 @@
 
 ## Demonstrations
 
-* [areal-kernels]](https://athowes.github.io/areal-comparison/areal-kernels.html)
+* [areal-kernels](https://athowes.github.io/areal-comparison/areal-kernels.html)
 
 ## Explorations
 
