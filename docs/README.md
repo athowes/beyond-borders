@@ -5,6 +5,7 @@
 
 ## Checks
 
+* [bin-gaussian](https://athowes.github.io/areal-comparison/bin-gaussian.html)
 * [ik-compute](https://athowes.github.io/areal-comparison/ik-compute.html)
 
 ## Explorations

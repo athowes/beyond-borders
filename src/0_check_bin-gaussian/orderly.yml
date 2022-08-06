@@ -1,14 +1,13 @@
 script: script.R
 
-sources:
-  - functions.R
-
 artefacts:
   - data:
       description: Comparison of first aggregating Gaussians then doing a binomial, versus doing a binomial of Gaussians then aggregating
       filenames:
-        - histogram-disease.pdf
-        - histogram-election.pdf
+        - bin-gaussian.html
+
+resources:
+  - bin-gaussian.Rmd
 
 packages:
   - bsae
