@@ -9,6 +9,10 @@
 * [ik-compute](https://athowes.github.io/areal-comparison/ik-compute.html)
 * [ik-converge](https://athowes.github.io/areal-comparison/ik-converge.html)
 
+## Demonstrations
+
+* [areal-kernels]](https://athowes.github.io/areal-comparison/areal-kernels.html)
+
 ## Explorations
 
 * [inla-spde](https://athowes.github.io/areal-comparison/inla-spde.html)

@@ -5,17 +5,10 @@ artefacts:
       description: Demonstration of areal kernels HTML report
       filenames:
         - areal-kernels.html
-  - data:
-      description: Centroid and integrated kernel results
-      filenames:
-        - centroid.rds
-        - integrated.rds
 
 resources:
   - areal-kernels.Rmd
-  - centroid.R
   - centroid.stan
-  - integrated.R
   - integrated.stan
 
 packages:
