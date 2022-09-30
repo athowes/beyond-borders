@@ -1,7 +1,6 @@
-## Manuscript
+## Resources
 
-* [paper](https://athowes.github.io/areal-comparison/paper.pdf)
-* [appendix](https://athowes.github.io/areal-comparison/appendix.pdf)
+* [resources](https://athowes.github.io/areal-comparison/resources.html)
 
 ## Checks
 
@@ -16,3 +15,8 @@
 ## Explorations
 
 * [inla-spde](https://athowes.github.io/areal-comparison/inla-spde.html)
+
+## Manuscript
+
+* [paper](https://athowes.github.io/areal-comparison/paper.pdf)
+* [appendix](https://athowes.github.io/areal-comparison/appendix.pdf)

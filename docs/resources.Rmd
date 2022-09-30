@@ -1,0 +1,178 @@
+---
+title: "Resources"
+author: "Adam Howes"
+date: "2022-09-30"
+output: html_document
+---
+
+# GMRFs
+
+* [Lecture 4: Numerical methods for sparse matrices](http://www.math.chalmers.se/~bodavid/GMRF2015/Lectures/F4slides.pdf)
+
+# Cross-validation
+
+* [Spatial leave-one-out blog post](https://davidrroberts.wordpress.com/2016/03/11/spatial-leave-one-out-sloo-cross-validation/)
+* [mlr3spatiotempcv package](https://github.com/mlr-org/mlr3spatiotempcv)
+* [https://github.com/paul-buerkner/brms/issues/637](https://github.com/paul-buerkner/brms/issues/637)
+* [https://github.com/jayverhoef/spAReco](https://github.com/jayverhoef/spAReco)
+* [Efficient LOO-CV, the `loo` package](http://mc-stan.org/loo/reference/loo-package.html)
+* [Approximate cross‐validatory predictive checks in disease mapping models](https://onlinelibrary.wiley.com/doi/abs/10.1002/sim.1403?casa_token=G0o6vee_DZQAAAAA:WB3XhagKTyVQ0FQBtfzT8LOVvwZB0o4vywZhB-ulmgx5zCQ2-AOa2qdkgyA23m_7KnVacuoNC6XoMQ)
+* [When LOO and other cross-validation approaches are valid](https://statmodeling.stat.columbia.edu/2018/08/03/loo-cross-validation-approaches-valid/)
+* [I am the supercargo](https://statmodeling.stat.columbia.edu/2018/06/21/i-am-the-supercargo/)
+* [Comments on Limitations of Bayesian Leave-One-Out Cross-Validation for Model Selection](https://statmodeling.stat.columbia.edu/2018/06/05/comments-limitations-bayesian-leave-one-cross-validation-model-selection/)
+* [Bayesian leave-one-out cross-validation for large data](https://arxiv.org/pdf/1904.10679.pdf)
+
+# INLA
+
+* [Bayesian inference with INLA](https://becarioprecario.bitbucket.io/inla-gitbook/index.html)
+* [The R-INLA package, David Bolin](https://sites.stat.washington.edu/peter/PASI/pasi_practical_intro.pdf)
+* [Haakon Bakka](https://haakonbakkagit.github.io/index.html)
+* Posterior predictive
+    * [http://noserose.net/e/mmm3-blog/2018/03/17/posterior-predictive-in-inla/](http://noserose.net/e/mmm3-blog/2018/03/17/posterior-predictive-in-inla/)
+    * [Julian Faraway](https://people.bath.ac.uk/jjf23/)
+    * [Obtain summary of posterior predictive distribution, R-INLA Google group](https://groups.google.com/g/r-inla-discussion-group/c/2FYu8lAqid4)
+* [Defining a latent model in R: The rgeneric model](https://raw.githubusercontent.com/inbo/INLA/master/vignettes/rgeneric.pdf)
+
+# Stan
+
+* [https://mc-stan.org/users/documentation/case-studies/mbjoseph-CARStan.html](https://mc-stan.org/users/documentation/case-studies/mbjoseph-CARStan.html)
+* [https://mc-stan.org/users/documentation/case-studies/icar_stan.html](https://mc-stan.org/users/documentation/case-studies/icar_stan.html)
+* [https://insp.memberclicks.net/assets/docs/Local_Events/2018/Paris/Stanforpmx2018_MitziMorris.pdf](https://insp.memberclicks.net/assets/docs/Local_Events/2018/Paris/Stanforpmx2018_MitziMorris.pdf)
+* [https://statmodeling.stat.columbia.edu/2016/09/02/two-weird-tricks-for-fast-conditional-autoregressive-models-in-stan/](https://statmodeling.stat.columbia.edu/2016/09/02/two-weird-tricks-for-fast-conditional-autoregressive-models-in-stan/)
+* [https://github.com/stan-dev/rstanarm/issues/207](https://github.com/stan-dev/rstanarm/issues/207)
+* [https://mc-stan.org/loo/articles/loo2-with-rstan.html](https://mc-stan.org/loo/articles/loo2-with-rstan.html)
+
+# Hilbert space methods
+
+* [http://gpss.cc/gpa15/assets/sarkka.pdf](http://gpss.cc/gpa15/assets/sarkka.pdf)
+* [https://discourse.mc-stan.org/t/practical-hilbert-space-approximate-bayesian-gaussian-processes-for-probabilistic-programming/14633](https://discourse.mc-stan.org/t/practical-hilbert-space-approximate-bayesian-gaussian-processes-for-probabilistic-programming/14633)
+* [https://github.com/gabriuma/basis_functions_approach_to_GP/blob/master/uni_dimensional/simulated_dataset/stancode_BF_1dim.stan](https://github.com/gabriuma/basis_functions_approach_to_GP/blob/master/uni_dimensional/simulated_dataset/stancode_BF_1dim.stan)
+* [https://arxiv.org/pdf/2004.11408.pdf](https://arxiv.org/pdf/2004.11408.pdf)
+
+# Gaussian processes in Stan
+
+* [https://github.com/paul-buerkner/brms/issues/234](https://github.com/paul-buerkner/brms/issues/234)
+* [https://discourse.mc-stan.org/t/multilevel-gaussian-proccess-with-spectral-mixture-kernel/13335](https://discourse.mc-stan.org/t/multilevel-gaussian-proccess-with-spectral-mixture-kernel/13335)
+* [https://github.com/paul-buerkner/brms/issues/540](https://github.com/paul-buerkner/brms/issues/540)
+* [https://discourse.mc-stan.org/t/adding-gaussian-process-covariance-functions/237/12](https://discourse.mc-stan.org/t/adding-gaussian-process-covariance-functions/237/12)
+* [https://discourse.mc-stan.org/t/approximate-gps-with-spectral-stuff/1041](https://discourse.mc-stan.org/t/approximate-gps-with-spectral-stuff/1041)
+* [https://discourse.mc-stan.org/t/approximate-gp-prediction-question/11519](https://discourse.mc-stan.org/t/approximate-gp-prediction-question/11519)
+
+# Non-stationarity
+
+* [https://cran.r-project.org/web/packages/BayesNSGP/index.html](https://cran.r-project.org/web/packages/BayesNSGP/index.html)
+* [https://arxiv.org/pdf/1910.14101.pdf](https://arxiv.org/pdf/1910.14101.pdf)
+
+# R packages
+
+* Both TMB and Stan working in an R package
+    * [https://stackoverflow.com/questions/48627069/guidelines-for-including-tmb-c-code-in-an-r-package](https://stackoverflow.com/questions/48627069/guidelines-for-including-tmb-c-code-in-an-r-package)
+    * [https://rtbecard.gitlab.io/2018/02/11/Distributing-TMB-in-R-packages.html](https://rtbecard.gitlab.io/2018/02/11/Distributing-TMB-in-R-packages.html)
+    * [https://stackoverflow.com/questions/52537897/tmb-c-code-in-r-package-and-cran-checks](https://stackoverflow.com/questions/52537897/tmb-c-code-in-r-package-and-cran-checks)
+    * [https://github.com/kaskr/adcomp/issues/43#issuecomment-204719483](https://github.com/kaskr/adcomp/issues/43#issuecomment-204719483)
+* Formatting Rd files
+    * [https://cran.r-project.org/web/packages/roxygen2/vignettes/rd-formatting.html#lists](https://cran.r-project.org/web/packages/roxygen2/vignettes/rd-formatting.html#lists)
+* Getting a Linux R package to work on Windows
+    * [https://stackoverflow.com/questions/1685181/making-r-package-work-in-both-windows-and-linux](https://stackoverflow.com/questions/1685181/making-r-package-work-in-both-windows-and-linux)
+    * [https://win-builder.r-project.org/](https://win-builder.r-project.org/)
+    * [https://seandavi.github.io/post/build-linux-r-binary-packages/](https://seandavi.github.io/post/build-linux-r-binary-packages/)
+* [https://r-pkgs.org/description.html](https://r-pkgs.org/description.html)
+
+# Weights
+
+* [https://www.sciencedirect.com/science/article/pii/S0047259X12000589](https://www.sciencedirect.com/science/article/pii/S0047259X12000589)
+* [Evaluating the effect of neighbourhood weight matrices on smoothing properties of Conditional Autoregressive (CAR) models](https://ij-healthgeographics.biomedcentral.com/articles/10.1186/1476-072X-6-54)
+* [Spatial smoothing in Bayesian models: a comparison of weights matrix specifications and their impact on inference](https://ij-healthgeographics.biomedcentral.com/track/pdf/10.1186/s12942-017-0120-x.pdf)
+
+# Gerrymandering
+
+* [https://warwick.ac.uk/fac/sci/statistics/staff/academic-research/pollock/projects/m_gerrymandering.pdf](https://warwick.ac.uk/fac/sci/statistics/staff/academic-research/pollock/projects/m_gerrymandering.pdf)
+
+# Model comparison
+
+* [https://avehtari.github.io/modelselection/](https://avehtari.github.io/modelselection/)
+* [https://radfordneal.wordpress.com/2009/03/07/does-coverage-matter/](https://radfordneal.wordpress.com/2009/03/07/does-coverage-matter/)
+* [Simulation-based calibration](https://arxiv.org/abs/1804.06788)
+* A random interval $(L(X), U(X))$ has $100(1 * \alpha)$% frequentist coverage for $\theta$ if, before the data are gathered $P(L(X) < \theta < U(X) | \theta) = 1 * \alpha$
+* DIC
+    * [https://www.mrc-bsu.cam.ac.uk/software/bugs/the-bugs-project-dic](https://www.mrc-bsu.cam.ac.uk/software/bugs/the-bugs-project-dic)
+
+# Coresets
+
+* [https://people.csail.mit.edu/tbroderick/nips_2016_spotlight_coresets_bayes.html](https://people.csail.mit.edu/tbroderick/nips_2016_spotlight_coresets_bayes.html)
+* [Coreset (Wikipedia)](https://en.wikipedia.org/wiki/Coreset)
+* [Automated Scalable Bayesian Inference via Hilbert Coresets](https://arxiv.org/abs/1710.05053)
+
+# Modifiable areal unit problem
+
+* [Flowerdew slides](https://www.ed.ac.uk/files/imports/fileManager/RFlowerdew_Slides.pdf)
+* [The modifiable areal unit problem (MAUP) in physical geography](https://journals.sagepub.com/doi/pdf/10.1177/0309133307083294)
+* [Neighbourhood effects on health: does it matter where you draw the boundaries?](https://pubmed.ncbi.nlm.nih.gov/18177988/)
+* [Spatio-Temporal Change of Support Modeling with R](https://arxiv.org/pdf/1904.12092.pdf)
+
+# Log scoring
+
+* [Predictive Inference Based on Markov Chain Monte Carlo Output](https://arxiv.org/abs/1608.06802)
+
+# Variograms
+
+* [Optimal interpolation and isarithmic mapping of soil properties: I The semi‐variogram and punctual kriging](https://onlinelibrary.wiley.com/doi/epdf/10.1111/ejss.12784?saml_referrer)
+* [Quantifying the scale effect in geospatial big data using semi-variograms](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0225139)
+* `[gstat` package](https://cran.r-project.org/web/packages/gstat/vignettes/gstat.pdf)
+* [Implementing variograms in R](https://www.aspexit.com/en/implementing-variograms-in-r/)
+* [http://gsp.humboldt.edu/OLM/R/04_01_Variograms.html](http://gsp.humboldt.edu/OLM/R/04_01_Variograms.html)
+
+"Some software for geostatistical analysis uses an empirical variogram to fit the parameters of the correlation function. However, this option does not make any assumptions about a likelihood function for the data or uses a multivariate Gaussian distribution for the spatially structured random effect. A good description of these techniques is available in Cressie (1993)."
+
+# Chosing sample sizes
+
+* [http://finzi.psych.upenn.edu/library/mcmcse/html/minESS.html](http://finzi.psych.upenn.edu/library/mcmcse/html/minESS.html)
+
+# `xbinomial`
+
+* Non-integer counts in `hiv_surveys$y` due to the use of survey weights
+* Currently using `round(hiv_surveys$y)` but this is an unsatisfying solution
+* In `stan` and `TMB` a custom continuous version of the binomial likelihood could be implemented
+* In `R-INLA` there is the `xbinomial` function for non-integer counts
+    * Be warned that this may make the marginal likelihood not interpretable as it is not clear what to do with the normalising constant
+* Keywords to investigate
+    * Bayesian pseudo likelihood
+* [https://stats.stackexchange.com/questions/310676/continuous-generalization-of-the-negative-binomial-distribution](https://stats.stackexchange.com/questions/310676/continuous-generalization-of-the-negative-binomial-distribution)
+* `R-INLA` Google group links
+    * [https://groups.google.com/forum/#!searchin/r-inla-discussion-group/Jeff$20Eaton|sort:date/r-inla-discussion-group/FLpdv5jB90w/kSwlgxb9AgAJ](https://groups.google.com/forum/#!searchin/r-inla-discussion-group/Jeff$20Eaton%7Csort:date/r-inla-discussion-group/FLpdv5jB90w/kSwlgxb9AgAJ)
+    * [https://groups.google.com/forum/#!topic/r-inla-discussion-group/k5KbmV3HKPU](https://groups.google.com/forum/#!topic/r-inla-discussion-group/k5KbmV3HKPU)
+
+# Compact support kernels
+
+* Empty so far!
+
+# Multiple instance learning
+
+* [Multiple Instance Learning with Bag Dissimilarities](https://arxiv.org/pdf/1309.5643.pdf)
+* [Gaussian Processes Multiple Instance Learning](https://icml.cc/Conferences/2010/papers/412.pdf)
+* [Variational Bayesian Multiple Instance Learning with Gaussian Processes](https://openaccess.thecvf.com/content_cvpr_2017/papers/Haussmann_Variational_Bayesian_Multiple_CVPR_2017_paper.pdf)
+
+# Graph Laplacians
+
+* https://csustan.csustan.edu/~tom/Clustering/GraphLaplacian-tutorial.pdf
+
+# To categorise
+
+* [Developing a Cancer Atlas using Bayesian Methods: A Practical Guide for Application and Interpretation](https://atlas.cancer.org.au/developing-a-cancer-atlas/Chapter_10.html#modelling)
+    * [https://cancerqld.blob.core.windows.net/content/docs/Investigation-of-Bayesian-spatial-models.pdf](https://cancerqld.blob.core.windows.net/content/docs/Investigation-of-Bayesian-spatial-models.pdf)
+* [A quick refresher on the coordinate reference system](https://s3.amazonaws.com/assets.datacamp.com/production/course_4422/slides/chapter2.pdf)
+* [Variational Learning on Aggregate Outputs with Gaussian Processes](https://arxiv.org/pdf/1805.08463.pdf)
+* [Multi-resolution Multi-task Gaussian Processes](https://arxiv.org/pdf/1906.08344.pdf)
+* [A Case Study Competition Among Methods for Analyzing Large Spatial Data](https://imperiallondon-my.sharepoint.com/personal/sflaxman_ic_ac_uk/Documents/Microsoft%20Teams%20Chat%20Files/Heaton2019_Article_ACaseStudyCompetitionAmongMeth%20(1).pdf)
+* [A spatial regression model for the disaggregation of areal unit based data to high-resolution grids with application to vaccination coverage mapping](https://journals.sagepub.com/doi/pdf/10.1177/0962280218797362)
+* [Generalized spatial fusion model framework for joint analysis of point and areal data](https://www.sciencedirect.com/science/article/pii/S2211675317302531)
+* [https://cran.r-project.org/web/packages/SUMMER/vignettes/summer-vignette.html](https://cran.r-project.org/web/packages/SUMMER/vignettes/summer-vignette.html)
+* [Generalised inverse](https://www.math.wustl.edu/~sawyer/handouts/GenrlInv.pdf)
+* [Spatial change-of-support and misalignment problems](https://sites.stat.washington.edu/peter/PASI/Craigmile_misalignment_problems.pdf)
+* [https://docs.displayr.com/wiki/Design_Effects_and_Effective_Sample_Size](https://docs.displayr.com/wiki/Design_Effects_and_Effective_Sample_Size)
+* [Hierarchical Bayesian species distribution models with the hSDMR Package](https://bioscenemada.cirad.fr/FileTransfer/hSDM-vignette.pdf)
+* [[R-sig-Geo] Choosing the right nb2listw-style](https://stat.ethz.ch/pipermail/r-sig-geo/2010-August/009059.html)
+* [Spatial weights objects as sparse matrices and graphs](https://cran.r-project.org/web/packages/spdep/vignettes/nb_igraph.html)
+* [The Effect of Bias, Variance Estimation, Skewness and Kurtosis of the Empirical Logit on Weighted Least Squares Analyses on JSTOR](https://www.jstor.org/stable/2336348?casa_token=VEgq0pe9p8cAAAAA:Uo9-8vSQpPaw0KGjL7J4kEs7aBjIIuTNRFYiZPoGcDVtSQ7khYsHVwMbrqy5SIGBvz1s7DD2DPriO_ff8VkPoHiLeGHVk0Y36jA9BunjS1qcekIdPobO&seq=1)
+* [Comparing Bayesian spatial models:Goodness-of-smoothing criteria for assessing under-and over-smoothin](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7239453/pdf/pone.0233019.pdf)g
+* [change of support / moving average /kernel smoothing](https://groups.google.com/g/r-inla-discussion-group/c/SL5McDqCRyI/m/j1veDTtJaDQJ) INLA Google group
