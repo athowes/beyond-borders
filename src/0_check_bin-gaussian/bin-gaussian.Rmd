@@ -1,17 +1,42 @@
 ---
 title: "Binomial of sum of Gaussians versus sum of binomial of Gaussians"
-author: "Adam Howes"
-output: html_document
+author:
+- name: Adam Howes
+output:
+  html_document:
+    toc: yes
+    toc_float: yes
+    toc_collapsed: yes
+    df_print: paged
+    code_folding: show
+    theme: lumen
+abstract: |
+  **Background**
+  
+  **Task**
 ---
 
-```{r}
-#' Binomial of sum of Gaussians versus sum of binomial of Gaussians
-#' IID latent field
-#' Without aggregation:
-#' `y = \sum_{i = 1}^n y_i$, $y_i \sim \text{Bin}(m, \rho_i)$, $\rho_i \sim \text{Logitnormal}(\mu, \sigma^2)`
-#' With aggregation:
-#' `y \sim \text{Bin}(nm, \bar \rho)$, $\bar \rho = \frac{1}{n} \sum_{i = 1}^n \rho_i$, $\rho_i \sim \text{Logitnormal}(\mu, \sigma^2)`
+## Set-up
 
+Consider an IID latent field.
+Without aggregation:
+$$
+\begin{align*}
+y &= \sum_{i = 1}^n y_i, \\
+y_i &\sim \text{Bin}(m, \rho_i), \\
+\rho_i &\sim \text{Logitnormal}(\mu, \sigma^2)
+\end{align*}
+$$
+With aggregation:
+$$
+\begin{align*}
+y &\sim \text{Bin}(nm, \bar \rho), \\
+\bar \rho &= \frac{1}{n} \sum_{i = 1}^n \rho_i, \\
+\rho_i &\sim \text{Logitnormal}(\mu, \sigma^2)
+\end{align*}
+$$
+
+```{r}
 experiment <- function(nsim, n, phi_mean, phi_sd, y_sample_size) {
   phi <- rnorm(n, phi_mean, phi_sd)
   rho <- plogis(phi)
@@ -42,8 +67,11 @@ plot_hist <- function(result) {
 
 nsim <- 500
 n <- 36
+```
 
-#' Low prevalence setting (disease)
+## Low prevalence setting (disease)
+
+```{r}
 result <- experiment(nsim, n, -2.5, 0.5, 30)
 plot(result$rho) #' This is what the underlying latent field looks like for these settings
 
@@ -52,9 +80,13 @@ plot_hist(result) #' And then the difference between the truth and the aggregate
 sd(result$y)
 sd(result$y_agg)
 sd(result$y_agg) / sd(result$y) #' Ratio
+```
 
-#' Probability approximately 1/2 setting (elections)
-#' As before but with different `phi_mean` settings:
+## Probability approximately 1/2 setting (elections)
+
+As before but with different `phi_mean` settings:
+
+```{r}
 result_half <- experiment(nsim, n, 0, 0.5, 30)
 plot(result_half$rho)
 
@@ -63,10 +95,11 @@ plot_hist(result_half)
 sd(result_half$y)
 sd(result_half$y_agg)
 sd(result_half$y_agg) / sd(result_half$y) #' Ratio
-
-#' Conclusions, things to add:
-#' * Standard deviation of aggregation tends to overestimate true standard deviation,
-#' * Effect is larger in the small `\rho` setting than the large `\rho` setting
-#' * Should test latent field with spatial structure e.g. ICAR latent field and so on
-#' * What is the effect of varying `sd_phi`? What is the effect of varying `y_sample_size`?
 ```
+
+## Conclusions, things to add
+
+* Standard deviation of aggregation tends to overestimate true standard deviation,
+* Effect is larger in the small `rho` setting than the large `rho` setting
+* Should test latent field with spatial structure e.g. ICAR latent field and so on
+* What is the effect of varying `sd_phi`? What is the effect of varying `y_sample_size`?
