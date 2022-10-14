@@ -1,4 +1,6 @@
-\documentclass[letterpaper,twocolumn,10pt]{article}
+\documentclass{article}
+
+\pagestyle{empty}
 
 \usepackage[dvipsnames]{xcolor}
 \usepackage{tikz}
@@ -14,20 +16,10 @@
 \usepackage{wrapfig}
 \usepackage{comment}
 
-% To generate dummy text
-\usepackage{blindtext}
-
-%\usepackage[pdftex]{graphicx}
 \usepackage{graphicx}
 
 % for custom commands
 \usepackage{xspace}
-
-% table alignment
-\usepackage{array}
-\usepackage{ragged2e}
-\newcolumntype{P}[1]{>{\RaggedRight\hspace{0pt}}p{#1}}
-\newcolumntype{X}[1]{>{\RaggedRight\hspace*{0pt}}p{#1}}
 
 % color box
 \usepackage{tcolorbox}
@@ -56,37 +48,36 @@
 % my custom colors for shading
 \colorlet{mhpurple}{Plum!80}
 
+\definecolor{lightblue}{HTML}{56B4E9}
+\definecolor{lightgreen}{HTML}{009E73}
+\definecolor{lightorange}{HTML}{E69F00}
+
 % Commands for Highlighting text -- non tikz method
 \renewcommand{\highlight}[2]{\colorbox{#1!17}{#2}}
 \renewcommand{\highlightdark}[2]{\colorbox{#1!47}{#2}}
 
-% Some math definitions
-\newcommand{\lap}{\mathrm{Lap}}
-\newcommand{\pr}{\mathrm{Pr}}
-
-\newcommand{\Tset}{\mathcal{T}}
-\newcommand{\Dset}{\mathcal{D}}
-\newcommand{\Rbound}{\widetilde{\mathcal{R}}}
-
 \begin{document}
 
-\begin{wrapfigure}{l}{0.5\columnwidth}
-    \vspace{\baselineskip}
-    \begin{equation}
-    \label{eq:laplace_density}
-        \lap (x\ |\ \tikzmarknode{u}{\highlight{red}{$\mu$}}, \tikzmarknode{b}{\highlight{blue}{b}}) = \frac{1}{2b} \mathrm{exp}(-\frac{|x-\mu|}{b})
-    \end{equation}
-    \begin{tikzpicture}[overlay,remember picture,>=stealth,nodes={align=left,inner ysep=1pt},<-]
-        % For "mu"
-        \path (u.north) ++ (0,2em) node[anchor=south west,color=red!67] (scalep){\textbf{location parameter, mean}};
-        \draw [color=red!57](u.north) |- ([xshift=-0.3ex,color=red]scalep.south east);
-        % For "b"
-        \path (b.south) ++ (0,-1.5em) node[anchor=north west,color=blue!67] (mean){\textbf{$b >0$, scale parameter}};
-        \draw [color=blue!57](b.south) |- ([xshift=-0.3ex,color=blue]mean.south east);
-    \end{tikzpicture}
-    \vspace{0.5\baselineskip}
-    \caption{An example in the single column format using the wrapfig construct.}
-    \vspace{0.5\baselineskip}
-\end{wrapfigure}
+\begin{equation*}
+  \label{eq:besag}
+  \tikzmarknode{fc}{\highlight{lightorange}{$\phi_i \, | \, \phi_{-i}$}}
+  \sim \mathcal{N}
+  \left(
+  \tikzmarknode{mean}{\highlight{lightblue}{$\frac{1}{n_{\delta i}} \sum_{j: j \sim i} \phi_j$}},
+  \tikzmarknode{var}{\highlight{lightgreen}{$\frac{1}{n_{\delta i}\tau_\phi}$}}
+  \right)
+\end{equation*}
+
+\begin{tikzpicture}[overlay,remember picture,>=stealth,nodes={align=left,inner ysep=1pt},<-]
+  % For "fc"
+  \path (fc.south) ++ (0,-2em) node[anchor=south west,color=lightorange] (scalep){$i$th full conditional};
+  \draw [color=lightorange](fc.south) |- ([color=lightorange]scalep.south east);
+  % For "mean"
+  \path (mean.north) ++ (0,2em) node[anchor=south east,color=lightblue] (scalep){Average of neighbours};
+  \draw [color=lightblue](mean.north) |- ([color=lightblue]scalep.south west);
+  % For "var"
+  \path (var.north) ++ (0,4em) node[anchor=south east,color=lightgreen] (scalep){Proportional to number of neighbours};
+  \draw [color=lightgreen](var.north) |- ([color=lightgreen]scalep.south west);
+\end{tikzpicture}
 
 \end{document}
