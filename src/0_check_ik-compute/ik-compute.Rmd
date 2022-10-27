@@ -14,6 +14,8 @@ abstract: |
   **Task** We check that the Stan code to calculate the integrated kernel is correct.
 ---
 
+# Performing the check
+
 ```{r}
 sf <- mw
 L <- 10
