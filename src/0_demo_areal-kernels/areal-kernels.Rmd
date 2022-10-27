@@ -99,7 +99,8 @@ S <- sf::st_distance(samples, samples)
 dim(S)
 ```
 
-Data structure for unequal number of points in each area:
+We use a start index data structure for unequal number of points in each area.
+Note that other possible ways to do this include a padded data structure (`matrix(unlist(padded_sample_index), nrow = n, ncol = max_length, byrow = TRUE)`) and a database structure `group_db <- data.frame(i = unlist(sample_index), group_id = rep(seq(length(sample_index)), lengths(sample_index)))`).
 
 ```{r}
 sample_index <- sf::st_intersects(sf, samples)
