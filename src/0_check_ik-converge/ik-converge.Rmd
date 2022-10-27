@@ -1,12 +1,22 @@
 ---
 title: "Check integrated kernel convergence"
-author: "Adam Howes"
-output: html_document
+author:
+- name: Adam Howes
+output:
+  html_document:
+    toc: yes
+    toc_float: yes
+    toc_collapsed: yes
+    df_print: paged
+    code_folding: show
+    theme: lumen
+abstract: |
+  **Task** We check how the convergence of the integrated kernel varies as a function of number of samples per area.
 ---
 
-```{r}
-#' Checking the convergence of the integrated kernel as a function of number of samples per area
+# Performing the check
 
+```{r}
 type <- "random"
 L <- 200
 grid <- readRDS("depends/grid.rds")
@@ -14,21 +24,30 @@ n <- nrow(grid)
 samples <- sf::st_sample(grid, type = type, exact = TRUE, size = rep(L, n))
 length(samples) # n * L
 sf::st_crs(samples) <- NA
+```
 
-#' Add id column
+Add an `id` column:
+
+```{r}
 samples <- st_sf(id = rep(seq_along(1:L), n), geom = samples)
 
 sample_sets <- lapply(seq(10, L, by = 10), function(i) subset(samples, id <= i))
+```
 
-# Checking that the samples look OK
+Check that the samples look OK:
+
+```{r}
 cowplot::plot_grid(
   plot_samples(sample_sets[[1]]),
   plot_samples(sample_sets[[10]]),
   plot_samples(sample_sets[[20]]),
   ncol = 3
 )
+```
 
-#' Calculate the Gram matrices
+Calculate the Gram matrices:
+
+```{r}
 covs <- lapply(sample_sets, adapted_integrated_covariance)
 
 cowplot::plot_grid(
@@ -40,8 +59,11 @@ cowplot::plot_grid(
 
 matrix_comparison <- outer(covs, covs, Vectorize(frobenius))
 plot_matrix(matrix_comparison)
+```
 
-#' Experiment: 10, 20 and 50 points versus ground truth 300 points
+Perform an experiment with 10, 20 and 50 points versus ground truth 300 points:
+
+```{r}
 L_settings <- list(10, 20, 50)
 gt_samples <- sf::st_sample(grid, type = type, exact = TRUE, size = rep(300, n))
 gt_cov <- adapted_integrated_covariance(gt_samples)
@@ -63,4 +85,15 @@ ggplot(result, aes(x = value)) +
   facet_grid(~L) +
   labs(x = "Frobenius norm", y = "") +
   theme_minimal()
+```
+
+# `functions.R`
+
+```{r, echo=TRUE, eval=FALSE, code=readLines('functions.R')}
+```
+
+# Original computing environment
+
+```{r}
+sessionInfo()
 ```

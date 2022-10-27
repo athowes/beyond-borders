@@ -6,7 +6,7 @@
 
 * [bin-gaussian](https://athowes.github.io/areal-comparison/bin-gaussian.html): comparison of binomial of sum of Gaussians versus sum of binomial of Gaussians
 * [ik-compute](https://athowes.github.io/areal-comparison/ik-compute.html): check that the Stan code indeed calculates the integrated kernel correctly
-* [ik-converge](https://athowes.github.io/areal-comparison/ik-converge.html)
+* [ik-converge](https://athowes.github.io/areal-comparison/ik-converge.html): compare convergence rate of the integrated kernel by number of samples
 
 ## Demonstrations
 
