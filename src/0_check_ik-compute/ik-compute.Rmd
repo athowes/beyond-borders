@@ -1,12 +1,20 @@
 ---
 title: "Check integrated kernel computation"
-author: "Adam Howes"
-output: html_document
+author:
+- name: Adam Howes
+output:
+  html_document:
+    toc: yes
+    toc_float: yes
+    toc_collapsed: yes
+    df_print: paged
+    code_folding: show
+    theme: lumen
+abstract: |
+  **Task** We check that the Stan code to calculate the integrated kernel is correct.
 ---
 
 ```{r}
-#' Checking that the Stan code to calculate the integrated kernel is correct
-
 sf <- mw
 L <- 10
 type = "random"
@@ -17,8 +25,11 @@ S <- sf::st_distance(samples, samples)
 sample_index <- sf::st_intersects(sf, samples)
 sample_lengths <- lengths(sample_index)
 start_index <- sapply(sample_index, function(x) x[1])
+```
 
-#' First calculate it directly using R only
+First, calculate the integrated kernel directly using R only:
+
+```{r}
 D <- sf::st_distance(samples, samples)
 kD <- matern(D, l = 1)
 K <- matrix(nrow = n, ncol = n)
@@ -35,12 +46,18 @@ for(i in 1:(n - 1)) {
 }
 
 cov_r <- K
+```
 
-#' Now calculate it in Stan via two different methods
-#' rstan::expose_stan_functions puts the C++ functions into the R local workspace to use
+Now, calculate it in Stan via two different methods.
+We use `rstan::expose_stan_functions` to put the C++ functions into the R local workspace to use:
+
+```{r}
 rstan::expose_stan_functions("cov_sample_average.stan")
+```
 
-#' 1. Newer method
+Newer method (using `cov_sample_average`):
+
+```{r}
 cov_stan <- cov_sample_average(
   S = S,
   l = 1,
@@ -49,25 +66,46 @@ cov_stan <- cov_sample_average(
   sample_lengths = sample_lengths,
   total_samples = sum(sample_lengths)
 )
+```
 
-#' 2. Old method
+Old method (using `cov_sample_average_old`):
+
+```{r}
 cov_stan_old <- cov_sample_average_old(
   n = n,
   L = 10,
   l = 1,
   S = S
 )
+```
 
-#' Comparison (these statements should all be TRUE)
+Comparison (these statements should all be TRUE):
+
+```{r}
 all.equal(cov_r, cov_stan)
 all.equal(cov_r, cov_stan_old)
 all.equal(cov_stan, cov_stan_old)
+```
 
-#' Hard to tell from an image if something is identical but anyway
+And here are the images (it's hard to tell from an image if something is identical, but anyway):
+
+```{r}
+
 cowplot::plot_grid(
   plot_matrix(cov_r) + labs(title = "R"),
   plot_matrix(cov_stan_old) + labs(title = "Stan old"),
   plot_matrix(cov_stan) + labs(title = "Stan new"),
   ncol = 2
 )
+```
+
+# `cov_sample_average.stan`
+
+```{cpp, echo=TRUE, eval=FALSE, output.var="ex", code=readLines('cov_sample_average.stan')}
+```
+
+# Original computing environment
+
+```{r}
+sessionInfo()
 ```

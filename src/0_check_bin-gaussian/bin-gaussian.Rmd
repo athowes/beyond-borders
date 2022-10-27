@@ -11,12 +11,12 @@ output:
     code_folding: show
     theme: lumen
 abstract: |
-  **Background**
+  **Background** Suppose that you take a binomial sample from the average of Gaussians. How different is that to if you aggregated binomial samples from each Gaussian?
   
-  **Task**
+  **Task** We simulate data from both models in a setting where $\rho$ is low (disease prevalence) and when $\rho \approx 0.5$ (elections) and compare.
 ---
 
-## Set-up
+# Set-up
 
 Consider an IID latent field.
 Without aggregation:
@@ -69,7 +69,7 @@ nsim <- 500
 n <- 36
 ```
 
-## Low prevalence setting (disease)
+# Low probability setting (disease prevalence)
 
 ```{r}
 result <- experiment(nsim, n, -2.5, 0.5, 30)
@@ -82,7 +82,7 @@ sd(result$y_agg)
 sd(result$y_agg) / sd(result$y) #' Ratio
 ```
 
-## Probability approximately 1/2 setting (elections)
+# Probability approximately 1/2 setting (elections)
 
 As before but with different `phi_mean` settings:
 
@@ -97,9 +97,15 @@ sd(result_half$y_agg)
 sd(result_half$y_agg) / sd(result_half$y) #' Ratio
 ```
 
-## Conclusions, things to add
+# Conclusions, things to add
 
 * Standard deviation of aggregation tends to overestimate true standard deviation,
 * Effect is larger in the small `rho` setting than the large `rho` setting
 * Should test latent field with spatial structure e.g. ICAR latent field and so on
 * What is the effect of varying `sd_phi`? What is the effect of varying `y_sample_size`?
+
+# Original computing environment
+
+```{r}
+sessionInfo()
+```
