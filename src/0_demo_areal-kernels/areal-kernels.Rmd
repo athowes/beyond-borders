@@ -1,7 +1,17 @@
 ---
 title: "Areal kernel demonstration"
-author: "Adam Howes"
-output: html_document
+author:
+- name: Adam Howes
+output:
+  html_document:
+    toc: yes
+    toc_float: yes
+    toc_collapsed: yes
+    df_print: paged
+    code_folding: show
+    theme: lumen
+abstract: |
+  **Task** We briefly demonstrate the fitting of areal kernel models in Stan.
 ---
 
 # Code to fit centroid kernel
@@ -41,17 +51,29 @@ fit_centroid <- rstan::stan(
 
 ```{r}
 sf <- mw
+```
 
-# The number of integration points within each area
+The number of integration points within each area:
+
+```{r}
 L <- 10
+```
 
-# The method for selecting integration points
+The method for selecting integration points:
+
+```{r}
 type <- "hexagonal"
+```
 
-# The number of areas
+The number of areas:
+
+```{r}
 n <- nrow(sf)
+```
 
-# Draw L samples from each area according to method type
+Draw $L$ samples from each area according to method type:
+
+```{r}
 samples <- sf::st_sample(sf, type = type, size = rep(L, n))
 
 plot_samples <- function(samples){
@@ -67,13 +89,19 @@ plot_samples <- function(samples){
 }
 
 plot_samples(samples)
+```
 
-# Construct an (L * n) * (L * n) matrix containing the Euclidean distance between each sample
-# Note that this ^ will not be exact for some settings of type (hexagonal, regular)
+Construct an $nL \times nL$ matrix containing the Euclidean distance between each sample.
+Note that this the $L$ actually obtained will not be exact for some settings of type (`hexagonal`, `regular`):
+
+```{r}
 S <- sf::st_distance(samples, samples)
 dim(S)
+```
 
-# Data structure for unequal number of points in each area
+Data structure for unequal number of points in each area:
+
+```{r}
 sample_index <- sf::st_intersects(sf, samples)
 sample_lengths <- lengths(sample_index)
 start_index <- sapply(sample_index, function(x) x[1])
@@ -148,4 +176,22 @@ Fitted values comparison:
 fitted_centroid <- summary(fit_centroid)$summary[paste0("rho[", 1:28, "]"), "mean"]
 fitted_integrated <- summary(fit_integrated)$summary[paste0("rho[", 1:28, "]"), "mean"]
 plot(fitted_centroid, fitted_integrated)
+```
+
+# Stan code
+
+## `centroid.stan`
+
+```{cpp, echo=TRUE, eval=FALSE, output.var="ex", code=readLines('centroid.stan')}
+```
+
+## `integrated.stan`
+
+```{cpp, echo=TRUE, eval=FALSE, output.var="ex", code=readLines('integrated.stan')}
+```
+
+# Original computing environment
+
+```{r}
+sessionInfo()
 ```
