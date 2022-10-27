@@ -4,9 +4,10 @@ artefacts:
   - data:
       description: Do the `xbinom` and `xbinom_logit` custom functions work?
       filenames:
-        - xbinom-ecdf-comparison.pdf
+        - xbinom.html
 
 resources:
+  - xbinom.Rmd
   - xbinom.stan
   - xbinom_logit.stan
 
