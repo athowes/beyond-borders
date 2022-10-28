@@ -16,6 +16,7 @@
 ## Explorations
 
 * [inla-spde](https://athowes.github.io/areal-comparison/inla-spde.html)
+* [pointless](https://athowes.github.io/areal-comparison/pointless.html): following code from Wilson and Wakefield
 
 ## Manuscript
 
