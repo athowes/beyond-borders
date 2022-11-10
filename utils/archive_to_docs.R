@@ -25,3 +25,9 @@ archive_to_docs("0_demo_areal-kernels")
 archive_to_docs("0_explore_inla-spde")
 archive_to_docs("0_explore_wilson-pointless")
 archive_to_docs("0_explore_inla-spde")
+
+archive_to_docs("1_plot_coverage")
+archive_to_docs("1_plot_metric-boxplots")
+
+archive_to_docs("2_plot_metric-maps")
+archive_to_docs("2_plot_prev-ladder")

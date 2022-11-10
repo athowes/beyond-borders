@@ -1,3 +1,22 @@
+## Experiments
+
+### Simulation study
+
+| Description | File |
+|:------------|:-----|
+| CRPS boxplots of the intercept parameter | [crps-boxplot-intercept](https://athowes.github.io/areal-comparison/crps-boxplot-intercept.pdf) |
+| CRPS boxplots of the spatial random effect parameter | [crps-boxplot-rho](https://athowes.github.io/areal-comparison/crps-boxplot-rho.pdf) |
+| PIT histograms and ECDF difference plots | [histogram-ecdf](https://athowes.github.io/areal-comparison/histogram-ecdf.pdf) |
+
+### HIV prevalence study
+
+| Description | File |
+|:------------|:-----|
+| Prevalence ladder plots | [prev-ladder](https://athowes.github.io/areal-comparison/prev-ladder.pdf) |
+| CRPS maps for estimating prevalence | [crps-map-hiv-surveys-no-constant](https://athowes.github.io/areal-comparison/crps-map-hiv-surveys-no-constant.pdf) |
+| MAE maps for estimating prevalence | [mae-map-hiv-surveys-no-constant](https://athowes.github.io/areal-comparison/mae-map-hiv-surveys-no-constant.pdf) |
+| MSE maps for estimating prevalence | [mse-map-hiv-surveys-no-constant](https://athowes.github.io/areal-comparison/mse-map-hiv-surveys-no-constant.pdf) |
+
 ## Resources
 
 * [resources](https://athowes.github.io/areal-comparison/resources.html): a collection of links to resources I found useful
