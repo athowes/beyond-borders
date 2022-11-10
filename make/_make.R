@@ -1,17 +1,11 @@
-#' Misc.
+#' 0. Misc.
 source("make/0_all.R")
 
-#' Simulation study
-source("make/1_simulate-data.R")
-source("make/1_create-plots")
-source("make/1_fit-models.R")
-source("make/1_assess-marginals.R")
-source("make/1_post-process.R")
+#' 1. Simulation study
+source("make/1_all.R")
 
-#' HIV data study
-source("make/2_pull-surveys")
-source("make/2_cv-models")
-source("make/2_post-process")
+#' 2. HIV data study
+source("make/2_all.R")
 
 #' Documentation
 run_commit_push("docs_paper")
