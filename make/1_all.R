@@ -9,7 +9,7 @@ run_commit_push("1_plot_simulated-data")      #' [ ]
 #' 2. Create plots
 run_commit_push("1_plot_simulation-geometries") #' [x]
 
-#' Fit models
+#' 3. Fit models
 
 #' Vignette and realistic together
 run_commit_push("1_fit_constant-inla") #' [x]
@@ -37,13 +37,13 @@ run_commit_push("1_fit_ik-stan")       #' [ ]
 #' run_commit_push("1_fit_fck-inla", param = list(vignette = FALSE))
 #' run_commit_push("1_fit_fik-inla", param = list(vignette = FALSE))
 
-#' 3. Assess marginals
+#' 4. Assess marginals
 run_commit_push("1_assess_rho-marginals")        #' [x]
 run_commit_push("1_assess_intercept-marginal")   #' [x]
 run_commit_push("1_assess_lengthscale-marginal") #' [ ]
 run_commit_push("1_assess_time-taken")           #' [/]
 
-#' 4. Post-process
+#' 5. Post-process
 run_commit_push("1_process_metric-tables")     #' [x]
 run_commit_push("1_plot_metric-maps")          #' [x]
 run_commit_push("1_plot_metric-boxplots")      #' [x]
