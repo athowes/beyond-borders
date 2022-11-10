@@ -1,11 +1,21 @@
 ---
 title: "SPDE approach notes"
-author: "Adam Howes"
-output: html_document
+author:
+- name: Adam Howes
+output:
+  html_document:
+    toc: yes
+    toc_float: yes
+    toc_collapsed: yes
+    df_print: paged
+    code_folding: show
+    theme: lumen
 bibliography: citations.bib
+abstract: |
+  **Background** To write.
 ---
 
-## List of possible sources
+# Resources
 
 * @miller2020understanding (recommended by Samir)
 * [Chapter 9](https://www.paulamoraga.com/book-geospatial/) of Geospatial Health Data: Modeling and Visualization with R-INLA and Shiny by Paula Moraga
@@ -13,7 +23,7 @@ bibliography: citations.bib
 * [Comment](https://groups.google.com/g/r-inla-discussion-group/c/4tKXemUciGU) on Google group by Finn
 * [Markdown document](https://rstudio-pubs-static.s3.amazonaws.com/302639_3ccd091c277d4d6c9ad9c2cf524250b6.html) by Zhe Sha
 
-## Background
+# Background
 
 The solution to certain stochastic partial differential equations (SPDEs) is a Gaussian field with Matérn covariance [@whittle1954stationary].
 @lindgren2010explicit propose to represent a Gaussian field with Matérn covariance as a GMRF by representing the solution of the SPDE using the finite element method.
@@ -30,7 +40,7 @@ $$
 \sigma^2 = \frac{\Gamma(\nu)}{\Gamma(\nu + d/2)(4\pi)^{d/2}\kappa^{2\nu}}
 $$
 
-## @miller2020understanding explanation
+# @miller2020understanding explanation
 
 SPDE equation:
 
@@ -70,7 +80,7 @@ Need to choose a mesh, grid, triangulation to do the FEM.
 `R-INLA` uses regular grid in 1D, or constrained Delaunay triangulation in 2D to produce a mesh.
 Piecewise linear basis functions (linear B-spline).
 
-### Connection to basis-penalty smoothing
+## Connection to basis-penalty smoothing
 
 Assume $f$ to have the form $f(x) = \sum_{j = 1}^M \beta_j \psi_j$.
 Observations give a log-likelihood of $\ell(\beta)$.
@@ -107,8 +117,7 @@ Higher $\kappa$ means that $\Delta f$ can be higher without incurring penalty.
 The other parameter $\tau$ controls the overall smoothness.
 Similar question about how distinuishable these are as with lengthscale and noise (probably not very).
 
-
-## A short introduction on how to fit a SPDE model with INLA (Krainski and Rue)
+# A short introduction on how to fit a SPDE model with INLA (Krainski and Rue)
 
 ```{r message=FALSE}
 library(INLA)
@@ -231,9 +240,9 @@ pmd.s2e <- inla.tmarginal(
 plot(pmd.s2e, type = "l", ylab = "Density", xlab = expression(sigma[e]))
 ```
 
-## @krainski2018advanced notes
+# @krainski2018advanced notes
 
-### First result
+## First result
 
 Consider a regular 2D lattice with number of sites tending to infinity then
 $$
@@ -253,7 +262,7 @@ q2 <- INLA:::inla.rw2(n = 5)
 q2
 ```
 
-### Second result
+## Second result
 
 $$
 u(s) = \sum_{k = 1}^m \psi_k(s) w_k
@@ -263,7 +272,7 @@ The distribution of weights determines the full distribution in the continuous d
 
 Projector matrix $A$ works using barycentric coordinates of the point with respect to the coordinates of the triangle vertices.
 
-### Toy example
+## Toy example
 
 ```{r}
 data(SPDEtoy)
@@ -383,4 +392,10 @@ indd3r
 r5pmu$summary.fitted.values[indd3r, c(1:3, 5)]
 ```
 
-## Bibliography {-}
+# Original computing environment
+
+```{r}
+sessionInfo()
+```
+
+# Bibliography {-}
