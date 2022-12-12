@@ -24,19 +24,19 @@ orderly::orderly_pull_archive("tza_data_areas", remote = "naomi2") #' [x]
 orderly::orderly_pull_archive("zwe_data_areas", remote = "naomi2") #' [x]
 
 #' 2. Cross-validate models
-run_commit_push("2_cv_constant-inla") #' [x]
-run_commit_push("2_cv_iid-inla")      #' [x]
-run_commit_push("2_cv_besag-inla")    #' [x]
-run_commit_push("2_cv_bym2-inla")     #' [x]
-run_commit_push("2_cv_fck-inla")      #' [/] See issue 35
-run_commit_push("2_cv_fik-inla")      #' [/] See issue 36
-run_commit_push("2_cv_ck-stan")       #' []
-run_commit_push("2_cv_ik-stan")       #' []
+run_commit_push("2_cv", param = list(f = "constant_inla"))
+run_commit_push("2_cv", param = list(f = "iid_inla"))
+run_commit_push("2_cv", param = list(f = "besag_inla"))
+run_commit_push("2_cv", param = list(f = "bym2_inla"))
+run_commit_push("2_cv", param = list(f = "fck_inla"))
+run_commit_push("2_cv", param = list(f = "fik_inla"))
+run_commit_push("2_cv", param = list(f = "ck_stan"))
+run_commit_push("2_cv", param = list(f = "ik_stan"))
 
-run_commit_push("2_assess_cv") #' [x]
+run_commit_push("2_assess_cv") #' [ ]
 
 #' 3. Post-process
-run_commit_push("2_process_metric-tables")        #' [x]
-run_commit_push("2_plot_metric-maps")             #' [x]
-run_commit_push("2_plot_prev-ladder")             #' [x]
+run_commit_push("2_process_metric-tables")        #' [ ]
+run_commit_push("2_plot_metric-maps")             #' [ ]
+run_commit_push("2_plot_prev-ladder")             #' [ ]
 run_commit_push("2_process_compare-to-manual-cv") #' [ ] Probably supplementary material
