@@ -1,5 +1,8 @@
 script: script.R
 
+resources:
+  functions.R
+
 artefacts:
   - data:
       description: Fitted cross-validation models
