@@ -1,5 +1,8 @@
 script: script.R
 
+resources:
+  functions.R
+
 artefacts:
   - data:
       description: Fitted models
@@ -29,6 +32,8 @@ artefacts:
         - fits_ik_4.rds
 
 parameters:
+  f:
+    default: ~
   vignette:
     default: TRUE
   realistic:
@@ -36,7 +41,6 @@ parameters:
 
 packages:
   - sf
-  - rstan
   - bsae
   - ggplot2
   - dplyr
