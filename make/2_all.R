@@ -1,5 +1,7 @@
 source("make/utils.R")
 
+run_commit_push("2_checks")
+
 #' 1. Pull surveys
 
 #' The four surveys required are:

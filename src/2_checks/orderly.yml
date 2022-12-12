@@ -2,12 +2,12 @@ script: script.R
 
 artefacts:
   - data:
-      description: Visual checks that the cross-validation code is working as expected
+      description: Check that the cross-validation code is working as expected
       filenames:
-        - loo-sloo-test-sets.pdf
-        - y-mis-preds.pdf
+        - cv.html
 
 resources:
+  - cv.Rmd
   - constant.stan
 
 packages:

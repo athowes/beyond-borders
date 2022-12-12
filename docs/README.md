@@ -10,12 +10,18 @@
 
 ### HIV prevalence study
 
+#### Outputs
+
 | Description | File |
 |:------------|:-----|
 | Prevalence ladder plots | [prev-ladder](https://athowes.github.io/areal-comparison/prev-ladder.pdf) |
 | CRPS maps for estimating prevalence | [crps-map-hiv-surveys-no-constant](https://athowes.github.io/areal-comparison/crps-map-hiv-surveys-no-constant.pdf) |
 | MAE maps for estimating prevalence | [mae-map-hiv-surveys-no-constant](https://athowes.github.io/areal-comparison/mae-map-hiv-surveys-no-constant.pdf) |
 | MSE maps for estimating prevalence | [mse-map-hiv-surveys-no-constant](https://athowes.github.io/areal-comparison/mse-map-hiv-surveys-no-constant.pdf) |
+
+#### Reports
+
+* [cv](https://athowes.github.io/areal-comparison/cv.html): check that the cross-validation code works as intended
 
 ## Resources
 
