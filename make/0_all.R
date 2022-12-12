@@ -5,7 +5,6 @@ source("make/utils.R")
 #' [/]: tried to run but gave me issues
 
 run_commit_push("checks")                     #' [x]
-run_commit_push("0_check_xbinomial-sampling") #' [x]
 run_commit_push("0_demo_areal-kernels")       #' [x]
 run_commit_push("0_explore_hrsl-sampling")    #' [ ]
 run_commit_push("0_explore_inla-spde")        #' [x]
