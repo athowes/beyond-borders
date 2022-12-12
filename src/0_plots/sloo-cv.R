@@ -1,7 +1,3 @@
-#' Uncomment and run the two line below to resume development of this script
-# orderly::orderly_develop_start("0_plot_sloo-cv")
-# setwd("src/0_plot_sloo-cv")
-
 sf_lightgrey <- "#E6E6E6"
 lightblue <- "#56B4E9"
 lightgreen <- "#009E73"

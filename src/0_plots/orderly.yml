@@ -1,0 +1,34 @@
+script: script.R
+
+sources:
+  - areal-data.R
+  - geometry-graph.R
+  - integration-method.R
+  - sloo-cv.R
+
+artefacts:
+  - data:
+      description: Areal data example plot
+      filenames:
+        - areal-data.pdf
+  - data:
+      description: Geometry graph comparison plot
+      filenames:
+        - geometry-graph-mwi.pdf
+        - geometry-graph-zwe.pdf
+  - data:
+      description: Integration method example plot
+      filenames:
+        - integration-method.pdf
+  - data:
+      description: What does SLOO cross-validation look like?
+      filenames:
+        - sloo-cv.pdf
+        - sloo-cv.png
+
+packages:
+  - bsae
+  - sf
+  - ggplot2
+  - dplyr
+  - cowplot

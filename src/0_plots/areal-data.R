@@ -1,7 +1,3 @@
-#' Uncomment and run the two line below to resume development of this script
-# orderly::orderly_develop_start("0_plot_areal-data")
-# setwd("src/0_plot_areal-data")
-
 set.seed(1)
 
 sf_lightgrey <- "#E6E6E6"
