@@ -72,22 +72,24 @@ The simplest GMRF model is arguably that of @besag1991bayesian, where informatio
 This model requires minimal additional modelling choices and is widely implemented, including as a part of the `R-INLA` package [@rue2017bayesian], popular within spatial statistics.
 Use of this model is widespread, including in agriculture [@oliver2015soil], ecology [@saracco2010modeling], epidemiology [@lawson2013statistical], image analysis [@schmid2006bayesian], neuroscience [@gossl2001bayesian] and public health [@dwyer2015drinking].
 However, for irregular geometries like the administrative divisions of a country, the assumptions made by the Besag model about space are unrealistic.
-We hypothesised that incorporating a spatial structure more faithfully to the specific geometry would improve the performance of small-area estimation models.
-Here, we set out to test this hypothesis, and in doing so provide practical recommendations and further understanding of models for spatial structure.
+In this work, we set out to test the hypothesis that incorporating spatial structure more faithfully to the specific geometry would improve the performance of small-area estimation models, and in doing so provide practical recommendations and further understanding of models for spatial structure.
 <!-- @gutreuter2019improving use the SAR model, which is still adjacency based but is not exactly the Besag model--restructure introduction to be more general and include introduction of other adjacency based models (which all have the same criticisms)? -->
 
 Our motivating application is the small-area estimation of HIV epidemic indicators in sub-Saharan Africa.
-Estimates are required to help plan, implement, and evaluate the success of programmes, ensuring that available resources are most effective used to counter the epidemic [@hallett2016evaluation; @cuadros2017mapping].
+Estimates are required to help plan, implement, and evaluate the success of programmes, ensuring that available resources are most effectively used to respond to the epidemic [@hallett2016evaluation; @cuadros2017mapping].
 Household surveys provide nationally represenative data about the general population, but are expensive to carry out and as such have small sample sizes at a district level.
 Although auxiliary covariates can be used to aid estimation, data on the covariates most strongly associated with HIV, such as sexual risk behaviour or the prevalence of male circumcision, often face similar measurement difficulties as the HIV indicators themselves.
-Models including covariates have only been found to modestly improve predictions \citep[Supplementary Figure 20]{dwyer2019mapping}, unlike other infectious diseases like Malaria where transmission is driven by more predictive and easily-measurable environmental factors [@weiss2015re].
+Models including covariates have only been found to modestly improve predictions \citep[Supplementary Figure 20]{dwyer2019mapping}.
+This stands in contrast to other infectious diseases like Malaria where transmission is driven by more predictive and easily-measurable environmental factors [@weiss2015re].
 These circumstances foreground the importance of sharing information between districts via spatial smoothing in HIV mapping.
 
 Within the GRMF framework, attempts to more accurately reflect irregular spatial structure have defined weights specifying the extent to which neighbours are related.
-@duncan2017spatial compared seventeen methods for specifying these weights, but surprisingly did not find any which outperform the Besag model, though this conclusion was specific to the (often-analysed) Scottish lip cancer example, and based on the recommended against [@vehtari2017practical] deviance information criteria (DIC).
-Another approach is to take into account that areal data is typically produced by aggregating higher resolution data, so as to be a particular instance of the broader challenge of inference about a variable at a different resolution to that it was observed at, known in geostatistics as the change-of-support problem [@gelfand2001change] and dating to foundational work on block kriging [@krige1951statistical; @matheron1976forecasting].
+@duncan2017spatial compared seventeen methods for specifying these weights, but surprisingly did not find any which outperform the Besag model, though this conclusion was specific to the often-analysed Scottish lip cancer example, and based on the deviance information criteria (DIC) which is recommended against by @vehtari2017practical.
+Another approach is to take into account that areal data is typically produced by aggregating higher resolution data.
+The problem is then a particular instance of the broader challenge of inference about a variable at a different resolution to that it was observed at, known in geostatistics as the change-of-support problem [@gelfand2001change], which dates to foundational work on block kriging [@krige1951statistical; @matheron1976forecasting].
 Ideas from change-of-support modelling are applied by @kelsall2002modeling to consider areal data as coming about by an aggregation of a continuously-indexed Gaussian process, resulting in a covariance structure between two areas given by the average covariance between two points chosen randomly from those areas.
-This type of model is particularly natural in the log-Gaussian Cox process modelling framework [@li2012log; @diggle2013spatial; @taylor2015bayesian; @johnson2019spatially], `lgcp` [@taylor2015bayesian] and `SDALGCP` [@johnson2019spatially] packages.
+This type of model is particularly natural in the log-Gaussian Cox process modelling framework [@li2012log; @diggle2013spatial; @taylor2015bayesian; @johnson2019spatially].
+<!-- `lgcp` [@taylor2015bayesian] and `SDALGCP` [@johnson2019spatially] packages. -->
 Inference for aggregated data has recently been advanced by @wilson2018pointless who consider the SPDE approach of @lindgren2011explicit, using `R-INLA`, and an empirical Bayes approach, using `TMB` [@kristensen2015tmb], and made available as a part of the `disaggregation` package [@nandi2020disaggregation].
 
 Recognising that spatial heterogeneity in outcomes commonly reflects a combination of both spatially correlated processes and specific circumstances at a given location, it is usually recommended to use a random effect specification which includes both spatially structured and unstructured components.
@@ -530,13 +532,12 @@ The logarithmic score [@good1952rational] given by $\text{LogS}(f, \omega_i) = \
 \begin{equation}
 \text{CRPS}(f, \omega_i) \approx \frac{1}{S} \sum_{s = 1}^S | \rho_i^s - \omega_i | - \frac{1}{2S^2} \sum_{s = 1}^S \sum_{l = 1}^S | \rho_i^s - \rho_i^l |. \label{eq:crpsapprox}
 \end{equation}
-We obtained these samples using the function \texttt{INLA::inla.posterior.sample} for models fit with \texttt{R-INLA} and directly from the Markov chain using \texttt{rstan::extract} for models fit with Stan.
 
-### Coverage
+### Posterior predictive check for coverage
 
-To assess the coverage of our estimates, we considered probability integral transform (PIT) histograms [@dawid1984present] and empirical cumulative distribution function (ECDF) difference plots [@aldor2013power; @sailynoja2021graphical].
-We estimated the quantile $q_i = F(\omega_i)$ of the true value within the marginal posterior using numerical integration.
-For calibrated models, over repeated simulations, $q_i \sim \mathcal{U}[0, 1]$ such that for any given nominal coverage $1 - \alpha$, the proportion of quantile-based credible intervals containing the true value $\omega_i$, in other words the empirical coverage, should also be $1 - \alpha$.
+We assessed the coverage of our estimates using posterior predictive checks based on the quantile $q_i = F(\omega_i)$ of the true value within each marginal posterior predictive distribution, computed using numerical integration.
+For calibrated models, over repeated simulations, then $q_i \sim \mathcal{U}[0, 1]$ such that at any given nominal coverage $1 - \alpha$, the proportion of quantile-based credible intervals containing the true value $\omega_i$ is also be $1 - \alpha$.
+To check uniformity we used probability integral transform (PIT) histograms [@dawid1984present] and empirical cumulative distribution function (ECDF) difference plots [@aldor2013power; @sailynoja2021graphical].
 
 ## Results
 
@@ -548,7 +549,7 @@ cat(readLines("depends/crps-table-rho.txt")[-lines_remove], sep = "\n")
 
 # HIV prevalence study \label{sec:hiv}
 
-We compared model performance in estimating HIV prevalence in adults aged $15-49$ across four countries in sub-Saharan Africa: Côte d'Ivoire ($n = 33$), Malawi ($n = 28$), Tanzania ($n = 159$) and Zimbabwe ($n = 60$), again varying the spatial random effect specification.
+We compared model performance in estimating HIV prevalence in adults aged $15-49$ across four countries in sub-Saharan Africa: Côte d'Ivoire (which has $n = 33$ districts), Malawi ($n = 28$), Tanzania ($n = 159$) and Zimbabwe ($n = 60$), again varying the spatial random effect specification.
 As with the simulation study, \textsf{R} code for this study is available from \url{https://github.com/athowes/areal-comparison}.
 
 ## Household survey data
