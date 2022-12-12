@@ -5,10 +5,8 @@
 surveys <- list("civ2017phia", "mwi2016phia", "tza2017phia", "zwe2016phia")
 types <- list("loo", "sloo")
 fs <- list(bsae::constant_inla)
-pars <- expand.grid("survey" = surveys, "type" = types, "f" = fs)
+pars <- expand.grid("survey" = surveys, "f" = fs)
+cv_pars <- expand.grid("survey" = surveys, "type" = types, "f" = fs)
 
-#' Run CV and save for each row of pars
-purrr::pmap(pars, run_cv_models)
-
-#' For the whole dataset
-purrr::pmap(expand.grid("survey" = surveys), run_models)
+purrr::pmap(cv_pars, bsae:::run_cv_models)
+purrr::pmap(pars, bsae:::run_models)
