@@ -20,6 +20,10 @@ artefacts:
         - fit_tza.rds
         - fit_zwe.rds
 
+parameters:
+  f:
+    default: ~
+
 packages:
   - sf
   - bsae
