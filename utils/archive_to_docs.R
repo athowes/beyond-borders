@@ -1,9 +1,10 @@
 #' Set the working directory to the project root
 setwd(rprojroot::find_rstudio_root_file())
 
-archive_to_docs <- function(report) {
+#' @param i Index of the artefacts to get
+archive_to_docs <- function(report, i = 1) {
   #' Artefacts to be moved
-  filenames <- yaml::read_yaml(file.path(paste0("src/", report, "/orderly.yml")))$artefacts[[1]]$data$filenames
+  filenames <- yaml::read_yaml(file.path(paste0("src/", report, "/orderly.yml")))$artefacts[[i]]$data$filenames
 
   #' Latest version in archive
   latest <- orderly::orderly_latest(report)
@@ -17,9 +18,9 @@ archive_to_docs <- function(report) {
 
 #' Names of the reports to move
 archive_to_docs("docs_paper")
-archive_to_docs("0_check_bin-gaussian")
-archive_to_docs("0_check_ik-compute")
-archive_to_docs("0_check_ik-converge")
+archive_to_docs("checks", i = 1)
+archive_to_docs("checks", i = 2)
+archive_to_docs("checks", i = 3)
 archive_to_docs("0_check_xbinomial-sampling")
 archive_to_docs("0_demo_areal-kernels")
 archive_to_docs("0_explore_inla-spde")
