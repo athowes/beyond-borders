@@ -2,22 +2,22 @@ source("make/utils.R")
 
 #' 1. Simulate data
 run_commit_push("1_draw_vignette-geometries") #' [x]
-run_commit_push("1_sim_vignette-geometries")  #' [x]
-run_commit_push("1_sim_realistic-geometries") #' [x]
+run_commit_push("1_sim_vignette-geometries")  #' [ ]
+run_commit_push("1_sim_realistic-geometries") #' [ ]
 run_commit_push("1_plot_simulated-data")      #' [ ]
 
 #' 2. Create plots
-run_commit_push("1_plot_simulation-geometries") #' [x]
+run_commit_push("1_plot_simulation-geometries") #' [ ]
 
 #' 3. Fit models
 
 #' Vignette and realistic together
-run_commit_push("1_fit", param = list(f = "constant_inla")) #' [x]
-run_commit_push("1_fit", param = list(f = "iid_inla"))      #' [x]
-run_commit_push("1_fit", param = list(f = "besag_inla"))    #' [x]
-run_commit_push("1_fit", param = list(f = "bym2_inla"))     #' [/]
-run_commit_push("1_fit", param = list(f = "fck_inla"))      #' [x]
-run_commit_push("1_fit", param = list(f = "fik_inla"))      #' [x]
+run_commit_push("1_fit", param = list(f = "constant_inla")) #' [ ]
+run_commit_push("1_fit", param = list(f = "iid_inla"))      #' [ ]
+run_commit_push("1_fit", param = list(f = "besag_inla"))    #' [ ]
+run_commit_push("1_fit", param = list(f = "bym2_inla"))     #' [ ]
+run_commit_push("1_fit", param = list(f = "fck_inla"))      #' [ ]
+run_commit_push("1_fit", param = list(f = "fik_inla"))      #' [ ]
 run_commit_push("1_fit", param = list(f = "ck_stan"))       #' [ ]
 run_commit_push("1_fit", param = list(f = "ik_stan"))       #' [ ]
 
@@ -42,14 +42,14 @@ run_commit_push("1_fit", param = list(f = "ck_stan", vignette = FALSE))
 run_commit_push("1_fit", param = list(f = "ik_stan", vignette = FALSE))
 
 #' 4. Assess marginals
-run_commit_push("1_assess_rho-marginals")        #' [x]
-run_commit_push("1_assess_intercept-marginal")   #' [x]
+run_commit_push("1_assess_rho-marginals")        #' [ ]
+run_commit_push("1_assess_intercept-marginal")   #' [ ]
 run_commit_push("1_assess_lengthscale-marginal") #' [ ]
-run_commit_push("1_assess_time-taken")           #' [/]
+run_commit_push("1_assess_time-taken")           #' [ ]
 
 #' 5. Post-process
-run_commit_push("1_process_metric-tables")     #' [x]
-run_commit_push("1_plot_metric-maps")          #' [x]
-run_commit_push("1_plot_metric-boxplots")      #' [x]
-run_commit_push("1_plot_coverage")             #' [x]
+run_commit_push("1_process_metric-tables")     #' [ ]
+run_commit_push("1_plot_metric-maps")          #' [ ]
+run_commit_push("1_plot_metric-boxplots")      #' [ ]
+run_commit_push("1_plot_coverage")             #' [ ]
 run_commit_push("1_plot_lengthscale-recovery") #' [ ]

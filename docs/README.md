@@ -4,6 +4,7 @@
 
 | Description | File |
 |:------------|:-----|
+| Vignette geometries | [crps-boxplot-intercept](https://athowes.github.io/areal-comparison/vignette-geometries.pdf) |
 | CRPS boxplots of the intercept parameter | [crps-boxplot-intercept](https://athowes.github.io/areal-comparison/crps-boxplot-intercept.pdf) |
 | CRPS boxplots of the spatial random effect parameter | [crps-boxplot-rho](https://athowes.github.io/areal-comparison/crps-boxplot-rho.pdf) |
 | PIT histograms and ECDF difference plots | [histogram-ecdf](https://athowes.github.io/areal-comparison/histogram-ecdf.pdf) |

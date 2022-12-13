@@ -8,7 +8,10 @@ artefacts:
         - geometry-2.rds
         - geometry-3.rds
         - geometry-4.rds
-        - geometries.pdf
+  - data:
+      description: Check what the vignette geometries look like
+      filenames:
+        - vignette-geometries.pdf
 
 packages:
   - sf
