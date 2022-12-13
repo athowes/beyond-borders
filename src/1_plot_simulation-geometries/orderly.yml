@@ -2,9 +2,12 @@ script: script.R
 
 artefacts:
   - data:
-      description: The three simulation geometries we considered
+      description: The geometries we considered
       filenames:
         - simulation-geometries.pdf
+  - data:
+      description: The geometries we considered
+      filenames:
         - simulation-geometries.png
 
 packages:
