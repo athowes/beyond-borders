@@ -32,7 +32,7 @@ artefacts:
 
 parameters:
   nsim:
-    default: 20
+    default: 10
 
 packages:
   - sf
