@@ -1,0 +1,47 @@
+script: script.R
+
+sources:
+  - functions.R
+
+artefacts:
+  - data:
+      description: Comparison between INLA (R-INLA) and MCMC (Stan)
+      filenames:
+        - inla-mcmc.html
+  - data:
+      description: Can particular values for the lengthscale be recovered?
+      filenames:
+        - lengthscale-recovery.html
+  - data:
+      description: Plausible lengthscale checks
+      filenames:
+        - plausible-lengthscale.html
+  - data:
+      description: Prior sensitivity analysis
+      filenames:
+        - prior-sensitivity.html
+
+resources:
+  - inla-mcmc.Rmd
+  - lengthscale-recovery.Rmd
+  - plausible-lengthscale.Rmd
+  - prior-sensitivity.Rmd
+  - prior-sensitivity
+
+packages:
+  - bsae
+  - sf
+  - rstan
+  - ggplot2
+  - bayesplot
+  - rmarkdown
+  - dplyr
+
+depends:
+  1_sim_realistic-geometries:
+    id: latest
+    use:
+      depends/data_iid_grid.rds: data_iid_grid.rds
+      depends/grid.rds: grid.rds
+      depends/civ.rds: civ.rds
+      depends/tex.rds: tex.rds

@@ -1,8 +1,20 @@
-# orderly::orderly_develop_start("check_prior-sensitivity")
-# setwd("src/check_prior-sensitivity")
+---
+title: "Sensitivity of the length-scale posterior to prior specification"
+author:
+  - name: "Adam Howes"
+output:
+  html_document:
+    toc: yes
+    toc_float: yes
+    toc_collapsed: yes
+    df_print: paged
+    code_folding: show
+    theme: lumen
+abstract: |
+  **Task**
+---
 
-#' Investigating the sensitivity of the length-scale posterior to prior specification
-
+```{r}
 rstan_options(auto_write = TRUE)
 options(mc.cores = parallel::detectCores())
 
@@ -68,8 +80,6 @@ cbpalette <- c("#56B4E9", "#009E73", "#E69F00", "#F0E442", "#0072B2", "#D55E00",
 
 # Prior comparison
 
-pdf("prior-comparison.pdf", h = 4, w = 6.25)
-
 ggplot(data = data.frame(x = c(0, 10)), aes(x)) +
   stat_function(fun = dnorm, n = 101, args = list(mean = 0, sd = 2.3), col = cbpalette[1]) +
   stat_function(fun = dgamma, n = 101, args = list(1, 1), col = cbpalette[2]) +
@@ -78,8 +88,6 @@ ggplot(data = data.frame(x = c(0, 10)), aes(x)) +
   stat_function(fun = dunif, n = 101, args = list(0, 100), col = cbpalette[5]) +
   labs(x = "l", y = "p(l)") +
   theme_minimal()
-
-dev.off()
 
 # Posterior comparison
 
@@ -103,8 +111,6 @@ df <- do.call(
   )
 )
 
-pdf("posterior-comparison.pdf", h = 8, w = 6.25)
-
 ggplot(df, aes(x = l, fill = type)) +
   geom_histogram(aes(y = ..density..), alpha = 0.8) +
   geom_vline(aes(xintercept = mean, fill = type)) +
@@ -113,5 +119,4 @@ ggplot(df, aes(x = l, fill = type)) +
   scale_fill_manual(values = cbpalette) +
   labs(y = "Density", x = "Lengthscale", fill = "Prior type") +
   theme_minimal()
-
-dev.off()
+```

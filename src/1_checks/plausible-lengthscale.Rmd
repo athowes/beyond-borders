@@ -1,8 +1,20 @@
-# orderly::orderly_develop_start("check_plausible-lengthscale")
-# setwd("src/check_plausible-lengthscale")
+---
+title: "Average distances between centroids for plausible lengthscale choice"
+author:
+  - name: "Adam Howes"
+output:
+  html_document:
+    toc: yes
+    toc_float: yes
+    toc_collapsed: yes
+    df_print: paged
+    code_folding: show
+    theme: lumen
+abstract: |
+  **Task**
+---
 
-#' Checking the average distances between centroids in order to chose a plausible lengthscale to recover
-
+```{r}
 grid <- readRDS("depends/geometry_grid.rds")
 civ <- readRDS("depends/geometry_civ.rds")
 tex <- readRDS("depends/geometry_tex.rds")
@@ -15,8 +27,6 @@ min(civ_distances[ci_distances > 0])
 
 tex_distances <- c(centroid_distance(tex))
 min(tex_distances[tex_distances > 0])
-
-pdf("plausible-lengthscale.pdf", h = 6, w = 8)
 
 cowplot::plot_grid(
   graph_length_plot(grid),
@@ -32,5 +42,4 @@ cowplot::plot_grid(
   graph_length_plot(tex),
   ggplot() + geom_histogram(data = data.frame(x = tex_distances), aes(x = x))
 )
-
-dev.off()
+```
