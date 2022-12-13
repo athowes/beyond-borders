@@ -12,7 +12,7 @@ run_models <- function(geometry, sim_model, f) {
   pb$tick()$print()
 
   #' This model can't handle the concentric circles case!
-  if(f %in% c(fck_inla, ck_stan) & geometry == "2") return(NULL)
+  if(deparse(substitute(f)) %in% c("fck_inla", "ck_stan") & geometry == "2") return(NULL)
 
   data <- readRDS(paste0("depends/data_", sim_model, "_", geometry, ".rds"))
   fits <- lapply(data, function(x) {

@@ -1,7 +1,7 @@
 script: script.R
 
-resources:
-  functions.R
+sources:
+  - functions.R
 
 artefacts:
   - data:
