@@ -75,7 +75,7 @@ produce_maps <- function(arg1, arg2, arg3) {
   df_rho %>%
     filter(geometry == arg1) %>%
     filter(inf_model != "constant_inla") %>%
-    bsae::update_naming() %>%
+    arealutils::update_naming() %>%
     group_mean_and_se(c("geometry", "sim_model", "inf_model", "id")) %>%
     metric_map(metric = arg3, sf = arg2)
     # %>% ggsave(filename = paste0(arg3, "-map-rho-", tolower(arg1), "-no-constant.pdf"), width = 6.25, height = 4)

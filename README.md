@@ -9,23 +9,23 @@ To do so, we consider the performance of eight inferential small-area models:
 
 | Model    | Function |
 |----------|--------------|
-| Constant | [`constant_inla`](https://github.com/athowes/bsae/blob/master/R/constant.R) |
-| Independent and identically distributed | [`iid_inla`](https://github.com/athowes/bsae/blob/master/R/iid.R) |
-| Besag | [`besag_inla`](https://github.com/athowes/bsae/blob/master/R/besag.R) |
-| Besag-York-Mollié  2 | [`bym2_inla`](https://github.com/athowes/bsae/blob/master/R/bym2.R) |
-| Centroid kernel (fixed lengthscale) | [`fck_inla`](https://github.com/athowes/bsae/blob/master/R/fck.R) |
-| Integrated kernel (fixed lengthscale) | [`fik_inla`](https://github.com/athowes/bsae/blob/master/R/fik.R) |
-| Centroid kernel | [`ck_stan`](https://github.com/athowes/bsae/blob/master/R/ck.R) |
-| Integrated kernel | [`ik_stan`](https://github.com/athowes/bsae/blob/master/R/ik.R) |
+| Constant | [`constant_inla`](https://github.com/athowes/arealutils/blob/master/R/constant.R) |
+| Independent and identically distributed | [`iid_inla`](https://github.com/athowes/arealutils/blob/master/R/iid.R) |
+| Besag | [`besag_inla`](https://github.com/athowes/arealutils/blob/master/R/besag.R) |
+| Besag-York-Mollié  2 | [`bym2_inla`](https://github.com/athowes/arealutils/blob/master/R/bym2.R) |
+| Centroid kernel (fixed lengthscale) | [`fck_inla`](https://github.com/athowes/arealutils/blob/master/R/fck.R) |
+| Integrated kernel (fixed lengthscale) | [`fik_inla`](https://github.com/athowes/arealutils/blob/master/R/fik.R) |
+| Centroid kernel | [`ck_stan`](https://github.com/athowes/arealutils/blob/master/R/ck.R) |
+| Integrated kernel | [`ik_stan`](https://github.com/athowes/arealutils/blob/master/R/ik.R) |
 
 ![](simulation-geometries.png)
 
 ## R package dependencies
 
-This analysis is supported by the [`bsae`](https://github.com/athowes/bsae) package, which can be installed from Github via:
+This analysis is supported by the [`arealutils`](https://github.com/athowes/arealutils) package (I'd usually use the name `areal.utils` but C++ doesn't like having `.` in package names) which can be installed from Github via:
 
 ```r
-devtools::install_github("athowes/bsae")
+devtools::install_github("athowes/arealutils")
 ```
 
 Additionally, the `R-INLA` package is not currently available on CRAN, and instead may be installed by following [instructions](https://www.r-inla.org/download-install) from the project website.

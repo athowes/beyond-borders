@@ -24,14 +24,14 @@ orderly::orderly_pull_archive("tza_data_areas", remote = "naomi2") #' [x]
 orderly::orderly_pull_archive("zwe_data_areas", remote = "naomi2") #' [x]
 
 #' 2. Cross-validate models
-run_commit_push("2_cv", param = list(f = "constant_inla"))
-run_commit_push("2_cv", param = list(f = "iid_inla"))
-run_commit_push("2_cv", param = list(f = "besag_inla"))
-run_commit_push("2_cv", param = list(f = "bym2_inla"))
-run_commit_push("2_cv", param = list(f = "fck_inla"))
-run_commit_push("2_cv", param = list(f = "fik_inla"))
-run_commit_push("2_cv", param = list(f = "ck_stan"))
-run_commit_push("2_cv", param = list(f = "ik_stan"))
+run_commit_push("2_cv", param = list(f = "constant_inla")) #' [ ]
+run_commit_push("2_cv", param = list(f = "iid_inla"))      #' [ ]
+run_commit_push("2_cv", param = list(f = "besag_inla"))    #' [ ]
+run_commit_push("2_cv", param = list(f = "bym2_inla"))     #' [ ]
+run_commit_push("2_cv", param = list(f = "fck_inla"))      #' [ ]
+run_commit_push("2_cv", param = list(f = "fik_inla"))      #' [ ]
+run_commit_push("2_cv", param = list(f = "ck_stan"))       #' [ ]
+run_commit_push("2_cv", param = list(f = "ik_stan"))       #' [ ]
 
 run_commit_push("2_assess_cv") #' [ ]
 

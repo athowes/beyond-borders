@@ -5,13 +5,13 @@ sources:
 
 artefacts:
   - data:
-      description: To be determined
+      description: Check that assessment code works as intended
       filenames:
-        - inla-posterior.sample-vs-marginal.pdf
+        - assess.html
 
 packages:
   - sf
-  - bsae
+  - arealutils
   - ggplot2
   - dplyr
   - reshape2
@@ -25,7 +25,7 @@ packages:
   - purrr
 
 depends:
-  sim_realistic-geometries:
+  1_sim_realistic-geometries:
     id: latest
     use:
       depends/data_iid_grid.rds: data_iid_grid.rds

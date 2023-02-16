@@ -9,7 +9,7 @@ df_intercept <- readRDS("depends/df_intercept.rds")
 #' CRPS table for rho
 df_rho %>%
   group_mean_and_se(group_variables = c("geometry", "sim_model", "inf_model")) %>%
-  bsae::update_naming() %>%
+  arealutils::update_naming() %>%
   metric_table(
     metric = "crps",
     title = "Continuous Ranked Probability Score",
@@ -23,7 +23,7 @@ df_rho %>%
 #' CRPS table for the intercept
 df_intercept %>%
   group_mean_and_se(group_variables = c("geometry", "sim_model", "inf_model")) %>%
-  bsae::update_naming() %>%
+  arealutils::update_naming() %>%
   metric_table(
     metric = "crps",
     title = "Continuous Ranked Probability Score",
@@ -36,7 +36,7 @@ df_intercept %>%
 #' #' Time table
 #' df_time %>%
 #'   group_by(geometry, sim_model, inf_model) %>%
-#'   bsae::update_naming() %>%
+#'   arealutils::update_naming() %>%
 #'   summarise(n = n(), across(t, list(mean = mean, se = ~ sd(.x) / sqrt(length(.x))))) %>%
 #'   metric_table(
 #'     metric = "t",

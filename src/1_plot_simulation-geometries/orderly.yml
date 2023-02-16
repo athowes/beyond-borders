@@ -11,7 +11,7 @@ artefacts:
         - simulation-geometries.png
 
 packages:
-  - bsae
+  - arealutils
   - sf
   - ggplot2
   - cowplot

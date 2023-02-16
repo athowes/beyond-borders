@@ -48,7 +48,7 @@ assess_marginal_intercept <- function(intercept = -2, fit) {
     upper = marginal$upper,
     mse = mean(error_samples^2),
     mae = mean(abs(error_samples)),
-    crps = bsae::crps(marginal$samples, obs),
+    crps = arealutils::crps(marginal$samples, obs),
     lds = log(f(obs)),
     quantile = cubature::cubintegrate(f, lower = -Inf, upper = obs, method = "pcubature")$integral
   ))

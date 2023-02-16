@@ -1,6 +1,6 @@
 #' Uncomment and run the two line below to resume development of this script
-# orderly::orderly_develop_start("process_hiv-surveys")
-# setwd("src/process_hiv-surveys")
+# orderly::orderly_develop_start("2_process_hiv-surveys")
+# setwd("src/2_process_hiv-surveys")
 
 analysis_level <- c(
   "CIV" = 1,
@@ -17,6 +17,8 @@ survey_name <- c(
 )
 
 iso3 <- c("civ", "mwi", "tza", "zwe")
+
+#' This function writes the survey to file as well as outputing
 surveys <- lapply(iso3, extract_survey)
 
 pdf("hiv-surveys.pdf", h = 5, w = 6.25)

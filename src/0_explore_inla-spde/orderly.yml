@@ -11,7 +11,7 @@ resources:
   - citations.bib
 
 packages:
-  - bsae
+  - arealutils
   - sf
   - rstan
   - ggplot2

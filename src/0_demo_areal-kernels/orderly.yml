@@ -12,7 +12,7 @@ resources:
   - integrated.stan
 
 packages:
-  - bsae
+  - arealutils
   - sf
   - rstan
   - ggplot2

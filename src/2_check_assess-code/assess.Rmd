@@ -1,0 +1,145 @@
+---
+title: "Marginal assessment code check"
+author:
+- name: Adam Howes
+output:
+  html_document:
+    toc: yes
+    toc_float: yes
+    toc_collapsed: yes
+    df_print: paged
+    code_folding: show
+    theme: lumen
+abstract: |
+  **Background**
+  
+  **Task**
+---
+
+Does the code to assess each of the posterior marginals work as intended?
+There is also a possibility to switch some of the assessment code to use `INLA::` inbuilt functions if they are more efficient.
+It would also be helpful to know what proportion of the computation is assessing models.
+
+Fit a quick constant model on example data:
+
+```{r}
+data <- readRDS("depends/data_iid_grid.rds")
+sf <- data[[1]]$sf
+fit <- arealutils::constant_inla(sf)
+```
+
+Some made-up values for the truth:
+
+```{r}
+rho <- rep(0.14, 28)
+```
+
+Draws from the first posterior marginal:
+
+```{r}
+marginal <- ith_marginal_rho(fit, 1)
+plot(marginal$samples)
+```
+
+Check that the mean and mode are above the minimum sample and below the maximum sample:
+
+```{r}
+stopifnot(min(marginal$samples) < marginal$mean)
+stopifnot(max(marginal$samples) > marginal$mean)
+stopifnot(min(marginal$samples) < marginal$mode)
+stopifnot(max(marginal$samples) > marginal$mode)
+```
+
+A list of the evaluation metrics:
+
+```{r}
+metrics <- assess_ith_marginal_rho(rho, fit, 1)
+
+metric_names <- c(
+  "obs", "mean", "mode", "lower", "upper", "mse", "mae", "mse_mean",
+  "mae_mean", "mse_mode", "mae_mode", "crps", "lds", "quantile"
+)
+
+stopifnot(names(metrics) == metric_names)
+```
+
+`df` with columns giving evaluation metrics with first row as above.
+Note that the model fitted is a constant so the metrics should all be equal.
+
+```{r}
+df <- assess_marginals_rho(rho, fit)
+
+plot(df$mse)
+plot(df$mae)
+plot(df$lds)
+plot(df$crps)
+plot(df$quantile)
+```
+
+Test that `assess_replicates` works as intended:
+
+```{r}
+x <- assess_replicates(list(list(rho = rho)), list(fit))
+```
+
+This is for the lengthscale test:
+
+```{r}
+fit2 <- arealutils::ck_stan(mw)
+x2 <- assess_replicates(list(list(rho = rho)), list(fit2))
+```
+
+Does `inla.posterior.sample` match `$fitted.values`?
+
+```{r}
+samples_list <- INLA::inla.posterior.sample(n = 100000, fit, selection = list(Predictor = 1))
+eta_samples = sapply(samples_list, function(x) x$latent)
+samples <- plogis(eta_samples)
+samples_df <- data.frame(x = samples)
+
+cbpalette <- c("#56B4E9","#009E73", "#E69F00", "#F0E442", "#0072B2", "#D55E00", "#CC79A7", "#999999")
+
+ggplot(marginal$df) +
+  geom_histogram(data = samples_df, aes(x = x, y = ..density..), bins = 100, alpha = 0.5) +
+  geom_line(aes(x = x, y = y), col = cbpalette[1])
+
+f <- approxfun(marginal$df$x, marginal$df$y, yleft = 0, yright = 0)
+
+#' Are samples generated outside the range of f (from $fitted.values)
+log(f(max(samples))) #' Not -Inf
+log(f(min(samples)))
+
+#' Kernel density approach on samples
+kde <- density(samples, bw = 0.1, n = 256, from = 0, to = 1)
+df2 <- data.frame(x = kde$x, y = kde$y)
+plot(df2$x, df2$y) #' What is going on here?
+plot(marginal$df$x, marginal$df$y)
+f2 <- approxfun(df2$x, df2$y, yleft = 0, yright = 0)
+log(f2(max(samples))) #' Not -Inf
+log(f2(min(samples)))
+
+#' inla. function testing
+
+#' Should be approximately the same
+INLA::inla.dmarginal(0.14, marginal$df, log = TRUE)
+log(f(0.14))
+
+#' inla.qmarginals gives the value corresponding to a quantile q
+#' inla.pmarginal gives the cumulative distribution function at p
+#' Should be approxiamtely the same
+INLA::inla.pmarginal(0.14, marginal$df)
+cubature::cubintegrate(f, lower = 0, upper = 0.14, method = "pcubature")$integral
+
+#' Do these functions work for df created outside of INLA (I don't see why not)
+#' Yes they do, so is it worth switching to them?
+fit_stan <- arealutils::constant_stan(sf)
+marginal_stan <- ith_marginal_rho(fit_stan, 1)
+plot(marginal_stan$df$x, marginal_stan$df$y)
+plot(df2$x, df2$y)
+
+#' Looks the same as that based upon inla.posterior.sample
+INLA::inla.dmarginal(0.14, marginal_stan$df, log = TRUE)
+INLA::inla.dmarginal(0.14, df2, log = TRUE)
+INLA::inla.pmarginal(0.14, marginal_stan$df)
+INLA::inla.pmarginal(0.14, df2)
+```

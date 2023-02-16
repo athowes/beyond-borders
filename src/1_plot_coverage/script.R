@@ -4,7 +4,7 @@
 
 df <- readRDS("depends/df_rho.rds") %>%
   mutate(replicate = as.numeric(replicate)) %>%
-  bsae::update_naming() %>%
+  arealutils::update_naming() %>%
   filter(inf_model != "Constant")
 
 geometries <- unique(df$geometry)

@@ -2,7 +2,7 @@
 calc_best_average <- function(file) {
   readRDS(paste0("depends/", file)) %>%
     centroid_distance() %>%
-    bsae::best_average()
+    arealutils::best_average()
 }
 
 lengthscale_plot <- function(df, inf_model, geometry, best = NA, subtitle = NA) {

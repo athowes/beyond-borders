@@ -30,7 +30,7 @@ process_fits <- function(geometry, sim_model, inf_model) {
 
   #' Assess the lengthscale marginal
   df <- lapply(fits, assess_marginal_lengthscale, lengthscale = 5/2) %>%
-    bsae::list_to_df() %>%
+    arealutils::list_to_df() %>%
     #' Add columns for meta data
     mutate(
       geometry = geometry,

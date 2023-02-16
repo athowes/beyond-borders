@@ -28,7 +28,7 @@ process_fits <- function(geometry, sim_model, inf_model) {
 
   #' Assess the intercept marginal
   df <- lapply(fits, function(fit) list(t = get_time(fit))) %>%
-    bsae::list_to_df() %>%
+    arealutils::list_to_df() %>%
     #' Add columns for meta data
     mutate(
       geometry = geometry,

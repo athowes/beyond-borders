@@ -22,7 +22,7 @@ grid <- readRDS("depends/grid.rds")
 #' l = 1
 ck_one <- sim_ck(grid, nsim = 10, l = 1, save = FALSE)
 
-fits_one <- lapply(ck_one, FUN = function(x) bsae::ck_stan(x$sf))
+fits_one <- lapply(ck_one, FUN = function(x) arealutils::ck_stan(x$sf))
 lengthscale_summary_one <- lapply(fits_one, FUN = function(fit) summary(fit)$summary["l", ])
 df_lengthscale_one <- list_to_df(lengthscale_summary_one)
 
@@ -66,7 +66,7 @@ cbind(bind_rows(lengthscale_draws_one, .id = "replicate"), bind_rows(sigma_draws
 
 # ck_three <- sim_ck(grid, nsim = 30, l = 3, save = FALSE)
 #
-# fits_three <- lapply(ck_three, FUN = function(x) bsae::ck_stan(x$sf))
+# fits_three <- lapply(ck_three, FUN = function(x) arealutils::ck_stan(x$sf))
 # lengthscale_summary_three <- lapply(fits_three, FUN = function(fit) summary(fit)$summary["l", ])
 # df_lengthscale_three <- list_to_df(lengthscale_summary_three)
 #

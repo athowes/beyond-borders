@@ -27,7 +27,7 @@ df_lengthscale %>%
     lengthscale_mean,
     by = c("inf_model", "geometry")
   ) %>%
-  bsae::update_naming() %>%
+  arealutils::update_naming() %>%
   split(.$geometry) %>%
   lapply(function(x) {
     x_max <- max(as.numeric(x$replicate))

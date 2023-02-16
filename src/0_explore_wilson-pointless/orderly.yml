@@ -15,7 +15,7 @@ resources:
   - gpw_v4_population_count_rev11_2015_2pt5_min.tif
 
 packages:
-  - bsae
+  - arealutils
   - sf
   - rstan
   - ggplot2

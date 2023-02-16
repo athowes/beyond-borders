@@ -6,7 +6,7 @@ manual <- readRDS("depends/manual.rds")
 
 df <- manual %>%
   mutate(geometry = "missing", sim_model = "missing") %>%
-  bsae::update_naming() %>%
+  arealutils::update_naming() %>%
   select(-geometry, -sim_model) %>%
   group_by(survey, inf_model) %>%
   summarise(

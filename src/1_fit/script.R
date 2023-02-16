@@ -10,7 +10,7 @@ if(realistic) geometries <- c(geometries, realistic_geometries)
 if(length(geometries) == 0) stop("Either vignette or realistic must be TRUE")
 
 sim_models <- c("iid", "icar", "ik")
-fs <- list(get(f, envir = asNamespace("bsae")))
+fs <- list(get(f, envir = asNamespace("arealutils")))
 
 pars <- expand.grid("geometry" = geometries, "sim_model" = sim_models, "f" = fs)
 

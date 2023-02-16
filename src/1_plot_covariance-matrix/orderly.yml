@@ -7,7 +7,7 @@ artefacts:
         - covariance-matrix.pdf
 
 packages:
-  - bsae
+  - arealutils
   - sf
   - ggplot2
   - cowplot

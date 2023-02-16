@@ -1,6 +1,6 @@
 #' Uncomment and run the two line below to resume development of this script
-# orderly::orderly_develop_start("assess_cv")
-# setwd("src/assess_cv")
+# orderly::orderly_develop_start("2_assess_cv")
+# setwd("src/2_assess_cv")
 
 inf_models <- c("constant_inla", "iid_inla", "besag_inla", "bym2_inla")
 # inf_models <- c("constant_inla", "iid_inla", "besag_inla", "bym2_inla", "fck_inla", "fik_inla", "ck_stan", "ik_stan")

@@ -29,7 +29,7 @@ resources:
   - prior-sensitivity
 
 packages:
-  - bsae
+  - arealutils
   - sf
   - rstan
   - ggplot2

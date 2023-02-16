@@ -36,7 +36,7 @@ parameters:
 
 packages:
   - sf
-  - bsae
+  - arealutils
   - ggplot2
   - dplyr
   - reshape2

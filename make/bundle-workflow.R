@@ -39,7 +39,7 @@ config <- didehpc::didehpc_config(
   # "fi--didemrchnb"
 )
 
-src <- conan::conan_sources("athowes/bsae")
+src <- conan::conan_sources("athowes/arealutils")
 
 ctx <- context::context_save(
   "context",

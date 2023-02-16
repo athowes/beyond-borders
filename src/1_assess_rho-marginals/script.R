@@ -36,7 +36,7 @@ process_fits <- function(geometry, sim_model, inf_model) {
   #' Assess the rho marginals
   rhos <- lapply(data, "[[", "rho")
   df <- Map(assess_marginals_rho, rhos, fits) %>%
-    bsae::list_to_df() %>%
+    arealutils::list_to_df() %>%
     #' Add columns for meta data
     mutate(
       geometry = geometry,

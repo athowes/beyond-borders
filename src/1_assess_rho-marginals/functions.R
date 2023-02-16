@@ -67,7 +67,7 @@ assess_ith_marginal_rho <- function(rho, fit, i) {
     upper = marginal$upper,
     mse = mean(error_samples^2),
     mae = mean(abs(error_samples)),
-    crps = bsae::crps(marginal$samples, obs),
+    crps = arealutils::crps(marginal$samples, obs),
     lds = lds,
     quantile = quantile
   ))

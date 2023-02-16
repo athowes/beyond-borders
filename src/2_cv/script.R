@@ -4,9 +4,9 @@
 
 surveys <- list("civ2017phia", "mwi2016phia", "tza2017phia", "zwe2016phia")
 types <- list("loo", "sloo")
-fs <- list(get(f, envir = asNamespace("bsae")))
+fs <- list(get(f, envir = asNamespace("arealutils")))
 pars <- expand.grid("survey" = surveys, "f" = fs)
 cv_pars <- expand.grid("survey" = surveys, "type" = types, "f" = fs)
 
-purrr::pmap(cv_pars, bsae:::run_cv_models)
-purrr::pmap(pars, bsae:::run_models)
+purrr::pmap(cv_pars, arealutils:::run_cv_models)
+purrr::pmap(pars, arealutils:::run_models)

@@ -31,7 +31,7 @@ resources:
   - xbinom_logit.stan
 
 packages:
-  - bsae
+  - arealutils
   - sf
   - rstan
   - ggplot2

@@ -6,13 +6,6 @@
 #' Kruger, Lerch, Thorarinsdottir, Gneiting https://arxiv.org/pdf/1608.06802v1.pdf
 #' Best probably to avoid (my take) and stick to CRPS
 
-#' Bind the rows of a list together, adding an `id` column.
-#'
-#' @param list A list.
-list_to_df <- function(list){
-  data.frame(dplyr::bind_rows(list, .id = "replicate"))
-}
-
 ith_marginal_rho <- function(fit, ...) {
   UseMethod("ith_marginal_rho")
 }
@@ -61,7 +54,7 @@ assess_ith_marginal_rho <- function(rho, fit, i) {
     mae_mean = abs(obs - mean),
     mse_mode = (obs - mode)^2,
     mae_mode = abs(obs - mode),
-    crps = bsae::crps(marginal$samples, obs),
+    crps = arealutils::crps(marginal$samples, obs),
     lds = log(f(obs)),
     quantile = cubature::cubintegrate(f, lower = 0, upper = obs, method = "pcubature")$integral
   ))
