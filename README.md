@@ -3,22 +3,28 @@
 Code for the manuscript Howes *et al.* "Understanding models for spatial structure in small-area estimation" (in preparation).
 
 Small-area estimation models typically use the Besag model, a type of Gaussian Markov random field, to model spatial structure.
-However, for irregular geometries, the assumptions made by the Besag model do not seem plausible (in the image below, geometric irregularity is increasing from left to right).
+However, for irregular geometries, the assumptions made by the Besag model do not seem plausible.
+For example, consider the three geometries below, with irregularity increasing from left to right.
+
+![](simulation-geometries.png)
+
+The Besag model was designed to work well for grids, as are used in image analysis, but in small-area estimation the geometries we encounter, like the districts of a country, are more irregular.
 The goal of this work is to determine whether or not, in practice, this matters.
 To do so, we consider the performance of eight inferential small-area models:
 
 | Model    | Function |
 |----------|--------------|
-| Constant | [`constant_inla`](https://github.com/athowes/arealutils/blob/master/R/constant.R) |
-| Independent and identically distributed | [`iid_inla`](https://github.com/athowes/arealutils/blob/master/R/iid.R) |
-| Besag | [`besag_inla`](https://github.com/athowes/arealutils/blob/master/R/besag.R) |
-| Besag-York-Mollié  2 | [`bym2_inla`](https://github.com/athowes/arealutils/blob/master/R/bym2.R) |
-| Centroid kernel (fixed lengthscale) | [`fck_inla`](https://github.com/athowes/arealutils/blob/master/R/fck.R) |
-| Integrated kernel (fixed lengthscale) | [`fik_inla`](https://github.com/athowes/arealutils/blob/master/R/fik.R) |
-| Centroid kernel | [`ck_stan`](https://github.com/athowes/arealutils/blob/master/R/ck.R) |
-| Integrated kernel | [`ik_stan`](https://github.com/athowes/arealutils/blob/master/R/ik.R) |
+| Constant | [`constant_aghq`](https://github.com/athowes/arealutils/blob/master/R/constant.R) |
+| Independent and identically distributed | [`iid_aghq`](https://github.com/athowes/arealutils/blob/master/R/iid.R) |
+| Besag | [`besag_aghq`](https://github.com/athowes/arealutils/blob/master/R/besag.R) |
+| Besag-York-Mollié  2 | [`bym2_aghq`](https://github.com/athowes/arealutils/blob/master/R/bym2.R) |
+| Centroid kernel (fixed lengthscale) | [`fck_aghq`](https://github.com/athowes/arealutils/blob/master/R/fck.R) |
+| Integrated kernel (fixed lengthscale) | [`fik_aghq`](https://github.com/athowes/arealutils/blob/master/R/fik.R) |
+| Centroid kernel | [`ck_aghq`](https://github.com/athowes/arealutils/blob/master/R/ck.R) |
+| Integrated kernel | [`ik_aghq`](https://github.com/athowes/arealutils/blob/master/R/ik.R) |
 
-![](simulation-geometries.png)
+We use the `aghq` package for adaptive Gauss-Hermite quadrature to conduct Bayesian inference for each of the models.
+Where possible, alternative implementions using `TMB`, `R-INLA` and `rstan` are provided.
 
 ## R package dependencies
 
@@ -28,7 +34,13 @@ This analysis is supported by the [`arealutils`](https://github.com/athowes/area
 devtools::install_github("athowes/arealutils")
 ```
 
-Additionally, the `R-INLA` package is not currently available on CRAN, and instead may be installed by following [instructions](https://www.r-inla.org/download-install) from the project website.
+The `aghq`[https://github.com/awstringer1/aghq] package is available from CRAN, though the latest development version can be installed from Github via:
+
+```r
+devtools::install_github("awstringer1/aghq")
+```
+
+Additionally, if required, the `R-INLA` package is not currently available on CRAN, and instead may be installed by following [instructions](https://www.r-inla.org/download-install) from the project website.
 
 ## File structure
 
@@ -46,8 +58,8 @@ Within the `src` directory, reports are prefixed by a number (0-2) designating:
 | Prefix | Description |
 |---------------|--------------|
 | 0             | Applicable to both studies. |
-| 1             | Corresponds to the study on simulated data (see Section 5 of the manuscript). |
-| 2             | Corresponds to the study on HIV data from household surveys in sub-Saharan Africa (see Section 6 of the manuscript). |
+| 1             | Corresponds to the study on simulated data (Section 5 of the manuscript). |
+| 2             | Corresponds to the study on HIV data from household surveys in sub-Saharan Africa (Section 6 of the manuscript). |
 
 ## `orderly`
 
