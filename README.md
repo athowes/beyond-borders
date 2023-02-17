@@ -34,7 +34,7 @@ This analysis is supported by the [`arealutils`](https://github.com/athowes/area
 devtools::install_github("athowes/arealutils")
 ```
 
-The `aghq`[https://github.com/awstringer1/aghq] package is available from CRAN, though the latest development version can be installed from Github via:
+The [`aghq`](https://github.com/awstringer1/aghq) package is available from CRAN, though the latest development version can be installed from Github via:
 
 ```r
 devtools::install_github("awstringer1/aghq")
