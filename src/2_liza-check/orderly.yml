@@ -1,0 +1,29 @@
+script: script.R
+
+artefacts:
+  - data:
+      description: Models fit directly
+      filenames:
+        - fit_mwi.rds
+
+packages:
+  - sf
+  - arealutils
+  - ggplot2
+  - dplyr
+  - reshape2
+  - viridis
+  - tikzDevice
+  - cubature
+  - magrittr
+  - gt
+  - tidyr
+  - sn
+  - purrr
+  - readr
+
+depends:
+  2_process_hiv-surveys:
+    id: latest
+    use:
+      depends/mwi2016phia.geojson: mwi2016phia.geojson
