@@ -13,7 +13,7 @@ The goal of this work is to determine whether or not, in practice, this matters.
 To do so, we consider the performance of eight inferential small-area models:
 
 | Model    | Function |
-|----------|--------------|
+|:---------|--------------|
 | Constant | [`constant_aghq`](https://github.com/athowes/arealutils/blob/master/R/constant.R) |
 | Independent and identically distributed | [`iid_aghq`](https://github.com/athowes/arealutils/blob/master/R/iid.R) |
 | Besag | [`besag_aghq`](https://github.com/athowes/arealutils/blob/master/R/besag.R) |
