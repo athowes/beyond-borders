@@ -49,6 +49,10 @@ In other words, for each $|I| > 1$ that $\sum_{i \in I} \phi_i = 0$.
 
 \clearpage
 
+# Comparison of AGHQ to NUTS \label{app:aghq-nuts}
+
+\clearpage
+
 # Simulation study
 
 \begin{figure}[h]
