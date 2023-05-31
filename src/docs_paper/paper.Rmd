@@ -188,13 +188,13 @@ Specifying $\bphi = (\phi_i)_{i \in [n]}$ amounts to specifying the entries of a
 
 ## Besag \label{sec:besag}
 
-```{r geometry-graph-zwe, fig.align="center", fig.cap="A map of the districts of Zimbabwe together with the corresponding adjacency graph structure $\\mathcal{G}$. \\label{fig:geometry-graph-zwe}"}
+```{r geometry-graph-zwe, fig.align="center", fig.cap="A map of the districts of Zimbabwe together with the corresponding adjacency graph structure $\\mathcal{G}$. The Besag model operates on the adjacency graph, rather than the geometry. \\label{fig:geometry-graph-zwe}"}
 knitr::include_graphics("depends/geometry-graph-zwe.pdf")
 ```
 
 Spatial structure can be encoded using a symmetric relation between areas.
 Let $i \sim j$ if the areas $A_i$ and $A_j$ are adjacent or neighbouring.
-Adjacency is often defined by a shared border, though other choices are also possible [@paciorek2013spatial].
+Adjacency is often defined by a shared border, though other choices are possible [@paciorek2013spatial].
 The Besag model [@besag1991bayesian] is an improper conditional auto-regressive (ICAR) model where the full conditional distribution of the $i$th spatial random effect is given by
 \begin{equation}
     \phi_i \, | \, \bphi_{-i} \sim \N \left(\frac{1}{n_{\delta i}} \sum_{j: j \sim i} \phi_j, \frac{1}{n_{\delta i}\tau_\phi}\right), \label{eq:besag}
@@ -215,7 +215,7 @@ where $\bR^{-}$ is the generalised inverse of the rank-deficient structure matri
     \end{cases}
 \end{equation}
 The Markov property arises due to the conditional independence structure $p(\phi_i \, | \, \bphi_{-i}) = p(\phi_i \, | \, \bphi_{\delta i})$ whereby each area only depends on its neighbours.
-This is reflected in the sparsity of $\bR$ whereby $\phi_i \perp \phi_j \, | \, \bphi_{-ij}$ if and only if $R_{ij} = 0$.
+This is reflected in the sparsity of $\bR$ such that $\phi_i \perp \phi_j \, | \, \bphi_{-ij}$ if and only if $R_{ij} = 0$.
 The structure matrix $\bR$ may also be expressed as the Laplacian of the adjacency graph $\mathcal{G} = (\mathcal{V}, \mathcal{E})$ with vertices $v \in \mathcal{V}$ corresponding to each area and edges $e \in \mathcal{E}$ between vertices $i$ and $j$ when $i \sim j$.
 Figure \ref{fig:geometry-graph-zwe} shows the adjacency graph for the districts of Zimbabwe alongside the geometry.
 In Section \ref{sec:concerns} we will discuss the appropriateness of using the graph rather than the complete geometry.
@@ -255,25 +255,25 @@ If $\mathcal{G}$ is connected, in that by traversing the edges, any vertex can b
 The Besag model was originally proposed for use in image analysis, where areas correspond to pixels arranged in a regular lattice structure.
 Since then, it has seen wider use, including in situations where the spatial structure is less regular.
 We highlight a number of concerns about the model's applicability to this broader setting.
-This discussion is closely linked to the modifiable areal unit problem [@openshow1979million] whereby statistical conclusions change as a result of seemingly arbitrary changes in data aggregation, and the challenge of ecological inference and the ecological fallacy [@wakefield2010aggregation], which applies particularly to inference about individuals and groups.
+This discussion is closely linked to the modifiable areal unit problem [@openshow1979million], whereby statistical conclusions change as a result of seemingly arbitrary changes in data aggregation, as well as the challenge of ecological inference and the ecological fallacy [@wakefield2010aggregation].
 <!-- Missing an item about potential loss of information by using a sparse matrix, though I don't actually think this is very important. -->
 
 ### Adjacency compression
 
-Summarising all spatial information with an adjacency graph represents a loss of information.
+Summarising a geometry by an adjacency graph represents a loss of information.
 Many geometries share the same adjacency graph, and therefore the same probability model, as illustrated by Figure \ref{fig:tikz1}.
-This fact is not concerning in itself, but it prompts consideration as to whether the class of geometries with the same adjacency graph is sufficiently similar to merit identical models.^[The regularity of realistic geometries may help to constrain each class to be more similar than it strictly has to be. In other words, although pathological geometries can be constructed, they are implausible in statistical practise and so not of great concern to us here.]
+This fact is not concerning in itself, but does prompt consideration as to whether the class of geometries with the same adjacency graph is sufficiently similar to merit identical models.^[The regularity of realistic geometries may help to constrain each class to be more similar than it strictly has to be. In other words, although pathological geometries can be constructed, they are implausible in statistical practise and so not of great concern to us here.]
 Intuitively the more regular the spatial structure, the less information is lost in compression to an adjacency graph.
-In image analysis, very little spatial information is lost in compression a lattice structure to an adjacency graph.
+In image analysis, very little spatial information is lost in compression of a lattice structure to an adjacency graph.
 On the other hand, the regions of a country, determined by political and geographic forces, tend to display greater irregularity.
 As such, the appropriateness of adjacency compression varies by the type of geometry common to the application setting.
 
 ### Mean structure
 
 In the Besag model is all adjacent areas count equally.
-This assumption is unsatisfying: for most geometries, we expect some areas to be more highly correlated to some neighbours than to others.
+This assumption is unsatisfying: for most geometries, we expect different amounts of correlation between neighbours.
 Figure \ref{fig:tikz1} illustrates a number of heuristic features for neighbour importance, including length of shared border, and the proximity of centers of mass.
-This may be remedied using more general weighted ICAR models, as we outline in Section \ref{sec:icar}.
+More general weighted ICAR models remedy this problem, as we outline in Section \ref{sec:icar}.
 
 ### Variance structure
 
@@ -342,14 +342,14 @@ We consider a simple method to construct $K$ from $k$: namely averaging the kern
 ## Centroid kernel
 
 The simplest approach is to use a single point.
-A natural choice is the centroid $c_i \in A_i$, given by the arithmetic mean of the latitude and longitude, which we might hope to be representative of the area.
+A natural choice is the centroid $c_i \in A_i$, given by the arithmetic mean of the latitude and longitude, which may be representative of the area.^[Though note that it is not guaranteed for the centroid to (even) lie within the area.]
 This results in the centroid kernel
 \begin{equation}
     K(A_i, A_j) = k(c_i, c_j).
 \end{equation}
 <!-- More broadly, given a weighting distribution $W_i$ with probability density proportional to $w_i(s)$ over $A_i$, weighted centroids could be used in the above equation. -->
 The centroid kernel has been used in environmental epidemiology [@wakefield1999spatial] and to model the reproduction number of COVID-19 [@teh2021efficient].
-In a model comparison study \citet[Section 3]{best2005comparison} simulated data representing heterogeneous exposure to air pollution, including elevated rates of exposure near two hypothetical point source locations, and found that the centroid kernel tended to over-smooth the high-risk areas (though it is unsuprising that a stationary covariance would struggle to recover non-stationary structure).
+In a model comparison study \citet[Section 3]{best2005comparison} simulated data representing heterogeneous exposure to air pollution, including elevated rates of exposure near two hypothetical point source locations, and found that the centroid kernel tended to over-smooth the high-risk areas.^[Though it is unsuprising that a stationary covariance would struggle to recover non-stationary structure.]
 
 ## Integrated kernel \label{sec:ik}
 
@@ -365,14 +365,14 @@ This results in the integrated kernel
 \begin{equation}
 K(A_i, A_j) = \frac{1}{|A_i||A_j|} \int_{A_i} \int_{A_j} k(s, s') \text{d} s \text{d} s'. \label{eq:ik1}
 \end{equation}
-This covariance structure is equivalent to that obtained by aggregating a spatially continuous Gaussian process with kernel $k$ over the areal partition, studied in the machine learning literature under the name aggregated Gaussian processes [@law2018variational; @tanaka2019spatially; @yousefi2019multi; @hamelijnck2019multi].
+This covariance structure is equivalent to that obtained by aggregating a spatially continuous Gaussian process with kernel $k$ over the areal partition, and has been studied in the machine learning literature under the title aggregated Gaussian processes [@law2018variational; @tanaka2019spatially; @yousefi2019multi; @hamelijnck2019multi].
 <!-- @law2018variational develop a variational Bayesian inference method for aggregated observation models. -->
 <!-- @tanaka2019spatially consider aggregation over a linear combination of latent Gaussian processes, each of which is associated to data corresponding to a different partition of the study region. -->
 Unlike for the centroid kernel where $K_{ii} = 1$ for all $i$, the marginal variance of the $i$th spatial random effect $K_{ii} = K(A_i, A_i)$ varies depending on the area: becoming smaller for more compact areas and larger for areas which are of greater extent or more spread out.
 
 ### Accounting for heterogeneity
 
-If available, additional information accounting for heterogeneity over $A_i$ may be incorporated into the integrated kernel.
+Additional information accounting for heterogeneity over $A_i$ may be incorporated into the integrated kernel.
 This can be accomplished using weighting distributions $\{W_i\}$ which represent an unequal contribution of each point to the similarity measure, to give a weighted integrated kernel
 \begin{equation}
 K(A_i, A_j) = \frac{1}{|A_i||A_j|}\int_{A_i} \int_{A_j} w_i(s) w_j(s') k(s, s') \text{d} s \text{d} s', \label{eq:ik2}
@@ -403,7 +403,7 @@ On the other hand, for non-linear link functions $g$ such as the exponential or 
 <!-- Add equations for mean $\mathbb{E}(y_i)$ and variance $\mathbb{V}(y_i)$ of under this model, as a function of $g$. -->
 <!-- Explain under what circumstances we believe this approximation to be acceptable. -->
 
-### Connection to log-Gaussian Cox processes
+### Log-Gaussian Cox processes
 
 The log-Gaussian Cox Process framework [@diggle2013spatial] arrives naturally at the integrated kernel formulation.
 A Cox process is an inhomogeneous Poisson process with a continuous stochastic intensity function $\{ x(s), s \in \Sc \}$ such that conditional on the realisation of $x(s)$ the number of points in any area $A_i$ follows a Poisson distribution.
@@ -421,10 +421,12 @@ with covariance structure
 \end{equation}
 corresponding to an areal integrated kernel with a logarithmic link function and Poisson likelihood.
 
-### Connection to disaggregation regression
+<!-- Discuss Gary's paper here? [@konstantinoudis2020discrete] -->
+
+### Disaggregation regression
 
 Disaggregation regression, also known as downscaling or interpolation, is another closely related approach.
-Rather than focusing on the aggregate nature of areal observations as primarily a route towards better area-level estimates, disaggregation regression aims to produce high-resolution or point-level estimates from areal observations [@utazi2019spatial; @nandi2020disaggregation].
+Rather than focusing on the aggregate nature of areal observations as primarily a route towards better area-level estimates, disaggregation regression aims to produce high-resolution or point-level estimates from areal observations [@utazi2019spatial; @nandi2023disaggregation].
 <!-- Accurate point-level estimates are close to being a necessary intermediate goal towards obtaining accurate area-level estimates. -->
 <!-- Disaggregation is challenging without auxiliary information. -->
 <!-- A unified view on Bayesian varying coefficient models by Franco-Villoria et al. -->
@@ -552,11 +554,10 @@ Writing $F$ as the cumulative distribution function corresponding to $f$ then
 \end{equation}
 where $\mathbbm{1}$ denotes the indicator function and the second equality follows from $0 \leq \rho_i \leq 1$.
 $\text{CRPS}(f, \omega_i)$ if and only if $f(\rho_i) = \delta_{\omega_i}$.
-The CRPS is a strictly proper scoring rule [@gneiting2007strictly] and can be evaluated directly using samples $\{\rho_i^s\}_{s = 1}^S$ as
+The CRPS is a strictly proper scoring rule^[As is the logarithmic score [@good1952rational] given by $\text{LogS}(f, \omega_i) = \log f(\omega_i)$, though in line with the findings of @kruger2020predictive, we found it difficult to compute satisfactorily using kernel density estimation.] [@gneiting2007strictly] and can be evaluated directly using samples $\{\rho_i^s\}_{s = 1}^S$ as
 \begin{equation}
 \text{CRPS}(f, \omega_i) \approx \frac{1}{S} \sum_{s = 1}^S | \rho_i^s - \omega_i | - \frac{1}{2S^2} \sum_{s = 1}^S \sum_{l = 1}^S | \rho_i^s - \rho_i^l |. \label{eq:crpsapprox}
 \end{equation}
-<!-- The logarithmic score [@good1952rational] given by $\text{LogS}(f, \omega_i) = \log f(\omega_i)$ is another popular strictly proper scoring rule, though in line with the findings of @kruger2020predictive, we found it difficult to compute satisfactorily using kernel density estimation. -->
 
 ### Posterior predictive check for coverage
 
