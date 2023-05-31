@@ -24,7 +24,7 @@ To do so, we consider the performance of eight inferential small-area models:
 | Integrated kernel | [`ik_aghq`](https://github.com/athowes/arealutils/blob/master/R/ik.R) |
 
 We use the `aghq` package for adaptive Gauss-Hermite quadrature to conduct Bayesian inference for each of the models.
-Where possible, alternative implementions using `TMB`, `R-INLA` and `rstan` are provided.
+Where possible, alternative implementions using `TMB`, `tmbstan`, `R-INLA` and `rstan` are provided in the `arealutils` package.
 
 ## R package dependencies
 
