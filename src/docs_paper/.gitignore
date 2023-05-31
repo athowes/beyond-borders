@@ -1,4 +1,6 @@
 *.log
 appendix.tex
 paper.tex
-elsarticle.cls
+imsart.cls
+imsart.sty
+ba.bst
