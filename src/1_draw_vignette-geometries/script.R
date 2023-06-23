@@ -48,7 +48,7 @@ geometry_4 <- lapply(list(area1, area2, area3), function(area) list(area) %>% sf
 
 saveRDS(geometry_4, "geometry-4.rds")
 
-pdf("vignette-geometries.pdf", h = 4, w = 6.25)
+pdf("vignette-geometries.pdf", h = 4.5, w = 5)
 
 cowplot::plot_grid(
   ggplot() +

@@ -15,7 +15,7 @@ bundle <- orderly::orderly_bundle_pack(path_bundles, "fit_ik-stan")
 
 #' A2.
 spud <- spud::sharepoint$new("https://imperiallondon.sharepoint.com/")
-folder <- spud$folder("HIVInferenceGroup-WP", "Shared Documents/orderly/areal-comparison/bundle-input", verify = TRUE)
+folder <- spud$folder("HIVInferenceGroup-WP", "Shared Documents/orderly/beyond-borders/bundle-input", verify = TRUE)
 folder$upload(path = bundle$path)
 
 recent_bundle <- folder$list() %>%

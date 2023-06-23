@@ -1,5 +1,6 @@
 ---
-title: Appendix to "Understanding models for spatial structure in small-area estimation"
+title: |
+  | Appendix to "Beyond borders: evaluating the suitability of spatial adjacency for small-area estimation"
 author:
   - Adam Howes^[Department of Mathematics, Imperial College London]
   - Jeffrey W. Eaton^[Department of Epidemiology, Harvard University]
@@ -37,7 +38,7 @@ comma <- function(x) formatC(x, format = "d", big.mark = ",")
 
 \clearpage
 
-# Comparison of AGHQ to other inference methods \label{app:aghq-nuts}
+# Comparison of AGHQ to NUTS \label{app:aghq-nuts}
 
 \newpage
 

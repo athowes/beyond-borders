@@ -13,7 +13,7 @@ run_commit_push("1_plot_simulation-geometries") #' [x]
 #' 3. Fit models
 
 #' Vignette and realistic together
-run_commit_push("1_fit", param = list(f = "constant_inla")) #' [x]
+run_commit_push("1_fit", param = list(f = "constant_aghq")) #' [x]
 run_commit_push("1_fit", param = list(f = "iid_inla"))      #' [ ]
 run_commit_push("1_fit", param = list(f = "besag_inla"))    #' [ ]
 run_commit_push("1_fit", param = list(f = "bym2_inla"))     #' [ ]

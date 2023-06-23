@@ -18,7 +18,7 @@ plot <- ggplot(df, aes(fill = as.factor(left_out))) +
   scale_fill_manual(
     values = c(sf_lightgrey, lightblue, lightgreen),
     name = "",
-    labels = c("Areas the model is fit to", "Areas left out", "Areas predicted on")
+    labels = c("Fit to", "Left out", "Predicted on")
   ) +
   theme_void() +
   theme(

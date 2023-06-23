@@ -1,6 +1,6 @@
 script: script.R
 
-sources:
+resources:
   - areal-data.R
   - geometry-graph.R
   - integration-method.R

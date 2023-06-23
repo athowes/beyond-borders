@@ -1,6 +1,6 @@
-# areal-comparison
+# beyond-borders
 
-Code for the manuscript Howes *et al.* "Understanding models for spatial structure in small-area estimation" (in preparation).
+Code for the manuscript Howes, Eaton, Flaxman "Beyond borders: evaluating the suitability of spatial adjacency for small-area estimation" (in preparation).
 
 Small-area estimation models typically use the Besag model, a type of Gaussian Markov random field, to model spatial structure.
 However, for irregular geometries, the assumptions made by the Besag model do not seem plausible.

@@ -11,7 +11,7 @@ output:
     code_folding: show
     theme: lumen
 abstract: |
-  A compliation of links to resources which I've found useful while working on `areal-comparison`.
+  A compliation of links to resources which I've found useful while working on `beyond-borders`.
 ---
 
 # GMRFs
