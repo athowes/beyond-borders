@@ -275,7 +275,7 @@ The appropriateness of adjacency compression therefore varies by the type of geo
 
 ### Mean structure
 
-In the Besag model is all adjacent areas count equally.
+In the Besag model all adjacent areas count equally.
 This assumption is unsatisfying: for most geometries, we expect different amounts of correlation between neighbours.
 Figure \ref{fig:tikz1} illustrates a number of heuristic features for neighbour importance, including length of shared border, and the proximity of centers of mass.
 More general weighted ICAR models remedy this problem, as we outline in Section \ref{sec:icar}.
