@@ -30,17 +30,14 @@ knitr::opts_chunk$set(
 comma <- function(x) formatC(x, format = "d", big.mark = ",")
 ```
 
-<!-- So that the tables and figures in this appendix are prefixed by "A." -->
 \setcounter{table}{0}  
-\renewcommand{\thetable}{A.\arabic{table}} 
+\renewcommand{\thetable}{S\arabic{table}} 
 \setcounter{figure}{0} 
-\renewcommand{\thefigure}{A.\arabic{figure}}
+\renewcommand{\thefigure}{S\arabic{figure}}
+\setcounter{section}{0} 
+\renewcommand{\thesection}{S\arabic{section}}
 
 \clearpage
-
-# Comparison of AGHQ to NUTS \label{app:aghq-nuts}
-
-\newpage
 
 # Implementation details for the Besag model \label{app:freni}
 
@@ -69,6 +66,10 @@ This is equivalent to using an improper prior $p(\phi_i) \propto 1$ and can be a
 
 To avoid confounding of the spatial random effects with the intercept, it is recommended to place a sum-to-zero constraint on each non-singleton connected component.
 In other words, for each $|I| > 1$ that $\sum_{i \in I} \phi_i = 0$.
+
+\clearpage
+
+# Comparison of AGHQ to NUTS \label{app:aghq-nuts}
 
 \clearpage
 

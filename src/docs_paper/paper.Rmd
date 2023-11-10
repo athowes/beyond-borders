@@ -1,6 +1,7 @@
 ---
 title: |
   | Beyond borders: evaluating the suitability of spatial adjacency for small-area estimation
+runtitle: "Evaluating the suitability of spatial adjacency for small-area estimation"
 classoption: ba
 author:
   - firstname: Adam 
@@ -44,12 +45,12 @@ abstract: |
   |  The results of this analysis are forthcoming, and will be described here.
 date: "`r Sys.Date()`"
 bibliography: citations.bib
-#linenumbers: true
+linenumbers: true
 #numbersections: true
 output: 
   bookdown::pdf_book: 
     base_format: rticles::isba_article
-    md_extensions: -autolink_bare_uris #keep these off or \printead{} will fail on email addresses
+    md_extensions: -autolink_bare_uris
     includes:
       in_header: preamble.tex
 ---
@@ -116,6 +117,8 @@ Finally, we discuss our conclusions and directions for future research in Sectio
 <!-- @bradley2015spatio develop a framework for spatio-temporal change of support (STCOS) modelling, and a review of its implementation in \textsc{R} is provided by @raim2021spatio. -->
 <!-- Lee find that Leroux model of @leroux2000estimation achieves consistently good performance across a range of spatial correlation settings. -->
 <!-- @riebler2016intuitive reach a similar conclusion about both the Leroux and BYM2 model. -->
+
+\newpage
 
 # Background \label{sec:background}
 
@@ -188,6 +191,8 @@ Should no spatial structure remain, then independent and identically distributed
 Exploratory data analysis techniques such as visual inspection or Moran's $I$ coefficient [@cliff1981spatial] may be used to determine if there remains any spatial auto-correlation in the data.
 <!-- TODO: Add calculation of Moran's $I$ to my HIV survey data-sets. -->
 Specifying $\bphi = (\phi_i)_{i \in [n]}$ amounts to specifying the entries of a precision or covariance matrix, as we discuss in the following sections.
+
+\newpage
 
 # Spatial random effects defined using adjacency \label{sec:ab}
 
@@ -323,9 +328,11 @@ Building on the models of @leroux2000estimation and @dean2001detecting which tac
 \begin{align}
 \bphi = \frac{1}{\tau_\phi} \left( \sqrt{1- \pi} \, \bv + \sqrt{\pi} \, \bu^\star \right), \label{eq:bym2}
 \end{align}
-where $\tau_\phi$ is the marginal precision of $\bphi$, $\pi \in [0, 1]$ gives the proportion of the marginal variance explained by each component, and $\bu^\star$ is a scaled version of $u$ with precision matrix given by the scaled structure matrix $\mathbf{R}^\star$ (see Appendix).
+where $\tau_\phi$ is the marginal precision of $\bphi$, $\pi \in [0, 1]$ gives the proportion of the marginal variance explained by each component, and $\bu^\star$ is a scaled version of $u$ with precision matrix given by the scaled structure matrix $\mathbf{R}^\star$ (see Appendix S1).
 When $\pi = 0$ the random effects are IID, and when $\pi = 1$ the random effects follow the Besag model.
 To borrow an analogy [@rue2020comment] the parameterisation $(\tau_v, \tau_u)$ is like having one hot water and one cold water tap, whereas the parameterisation $(\tau_\phi, \pi)$ is like a mixer tap where the amount of water and its temperature can be adjusted separately.
+
+\newpage
 
 # Spatial random effects defined using kernels \label{sec:ks}
 
@@ -435,12 +442,14 @@ Rather than focusing on the aggregate nature of areal observations as primarily 
 <!-- Disaggregation is challenging without auxiliary information. -->
 <!-- A unified view on Bayesian varying coefficient models by Franco-Villoria et al. -->
 
+\newpage
+
 # Simulation study \label{sec:simulation}
 
 \begin{figure}
 \centering
 \includegraphics[width=\textwidth]{depends/simulation-geometries.pdf}
-\caption{The seven simulation geometries that we considered.}
+\caption{The seven simulation geometries that we considered. The top row contains the four vignette geometries from \ref{fig:tikz1}, and the bottom row contains three more realistic geometries.}
 \label{fig:51}
 \end{figure}
 
@@ -494,7 +503,7 @@ No spatial random effects \label{row:I1} \\
 \hypertarget{I2}{\texttt{I2}} & IID &
 $\bphi \sim \mathcal{N}(0, \tau_\phi^{-1} \mathbf{I}_n)$\\
 \hypertarget{I3}{\texttt{I3}} & Besag &
-$\bphi \sim \mathcal{N}(0, (\tau_\phi \mathbf{R}^\star)^{-})$ following additional recommendations of \citet{freni2018note}  \\
+$\bphi \sim \mathcal{N}(0, (\tau_\phi \mathbf{R}^\star)^{-})$ following additional recommendations of \citet{freni2018note} (Appendix S1)  \\
 \hypertarget{I4}{\texttt{I4}} & BYM2 &
 $\bphi = \tau_\phi^{-1} \left( \sqrt{1- \pi} \, \bv + \sqrt{\pi} \, \bu^\star \right)$ with a $\text{Beta}(0.5, 0.5)$ prior on $\pi \in [0, 1]$ \\
 \hypertarget{I5}{\texttt{I5}} & FCK &
@@ -504,7 +513,7 @@ $\bphi \sim \mathcal{N}(0, \tau_\phi^{-1} \mathbf{K})$ with $K_{ij} = k(c_i, c_j
 \hypertarget{I8}{\texttt{I8}} & IK & As \hypertarget{I7}{\texttt{I7}}, with length-scale prior $l \sim \mathrm{Inv{\text-}Gamma}(a, b)$ \\
 \bottomrule
 \end{tabularx}
-\caption{All inferential models are implemented as a part of the \textsf{R} package \texttt{arealutils} \citep{arealutils}. The AGHQ algorithm was used for approximate Bayesian inference of all inferential models, via the \texttt{aghq} \textsf{R} package \citep{stringer2021implementing}}
+\caption{All inferential models are implemented as a part of the \textsf{R} package \texttt{arealutils} \citep{arealutils}. We used adaptive Gauss-Hermite quadrature for approximate Bayesian inference, implemented via the \texttt{aghq} \textsf{R} package \citep{stringer2021implementing}}
 \label{tab:inferentialmodels}
 \small
 \end{table}
@@ -538,14 +547,14 @@ For Model \hyperlink{I6}{\texttt{I6}} the Gram matrix is only computed once and 
 ## Inference
 
 We used adaptive Gauss-Hermite quadrature [AGHQ; @stringer2022fast] with $k = 3$ quadrature points per hyperparameter dimension to perform approximate Bayesian inference.
-Each model was implemented using a Template Model Builder \textsc{C++} template for the log-posterior via the `TMB` package [@kristensen2016tmb]
+Each model was implemented using a Template Model Builder \textsc{C++} template for the log-posterior via the `TMB` package [@kristensen2016tmb].
 We were then able to conduct inference using both AGHQ via the `aghq` package [@stringer2021implementing] and the No-U-Turn Sampling (NUTS) Hamiltonian Monte Carlo (HMC) algorithm using Stan [@carpenter2017stan] via the `tmbstan` package [@monnahan2018no].
-In Appendix we demonstrate that the inference results from AGHQ are comparable to those obtained running NUTS over a longer time.
-We also compare to empirical Bayes, and where possible integrated nested Laplace approximation via `R-INLA` [@martins2013bayesian].
+In Appendix S2 we demonstrate that the inference results from AGHQ are comparable to those obtained running NUTS to convergence.
+<!-- We also compare to empirical Bayes, and where possible integrated nested Laplace approximation via `R-INLA` [@martins2013bayesian]. -->
 
 ## Model assessment
 
-We assessed each fitted inferential model according to its ability to recover the true underlying value of the probabilities $\rho_i$ at each area in the study region, as well as the calibration of the model's estimates.
+We assessed each fitted inferential model according to its ability to recover the true underlying value of $\rho_i$ at each area in the study region, as well as the calibration of the model's estimates.
 <!-- We describe our approach to model assessment in the following sections. -->
 <!-- Analogous approaches may be used to check recovery of the intercept parameter $\beta_0$, precision parameter $\tau_\phi$, and, when relevant, the length-scale $l$. -->
 
@@ -559,7 +568,7 @@ Writing $F$ as the cumulative distribution function corresponding to $f$ then
 \end{equation}
 where $\mathbbm{1}$ denotes the indicator function and the second equality follows from $0 \leq \rho_i \leq 1$.
 $\text{CRPS}(f, \omega_i)$ if and only if $f(\rho_i) = \delta_{\omega_i}$.
-The CRPS is a strictly proper scoring rule^[As is the logarithmic score [@good1952rational] given by $\text{LogS}(f, \omega_i) = \log f(\omega_i)$, though in line with the findings of @kruger2020predictive, we found it difficult to compute satisfactorily using kernel density estimation.] [@gneiting2007strictly] and can be evaluated directly using samples $\{\rho_i^s\}_{s = 1}^S$ as
+The CRPS is a strictly proper scoring rule and can be evaluated directly using samples^[The logarithmic score [@good1952rational] given by $\text{LogS}(f, \omega_i) = \log f(\omega_i)$ is another strictly proper scoring rule, however we found it difficult to compute satisfactorily using kernel density estimation, in line with the findings of @kruger2020predictive.] [@gneiting2007strictly] $\{\rho_i^s\}_{s = 1}^S$ as
 \begin{equation}
 \text{CRPS}(f, \omega_i) \approx \frac{1}{S} \sum_{s = 1}^S | \rho_i^s - \omega_i | - \frac{1}{2S^2} \sum_{s = 1}^S \sum_{l = 1}^S | \rho_i^s - \rho_i^l |. \label{eq:crpsapprox}
 \end{equation}
@@ -571,7 +580,7 @@ We checked uniformity using probability integral transform (PIT) histograms [@da
 
 ## Results
 
-See Appendix.
+See Appendix S3.
 
 \newpage
 
@@ -622,6 +631,8 @@ To counteract this effect, during fold $i$ we left out the block $(i, \delta i)$
 
 ## Results
 
+See Appendix S4.
+
 ```{r results="asis"}
 #' Some of the lines should not be included
 lines_remove <- c(1)
@@ -631,6 +642,8 @@ readLines("depends/metric-table.txt")[-lines_remove] %>%
   stringr::str_replace(pattern = "\\(\\\\\\$n\\\\\\$", replacement = "($n$") %>%
   cat(sep = "\n")
 ```
+
+\newpage
 
 # Discussion \label{sec:discussion}
 
