@@ -1,10 +1,8 @@
 source("make/utils.R")
 
-run_commit_push("1_checks") #' [ ]
-
 #' 1. Simulate data
-run_commit_push("1_draw_vignette-geometries") #' [ ]
-run_commit_push("1_sim_vignette-geometries")  #' [ ]
+run_commit_push("1_draw_vignette-geometries") #' [x]
+run_commit_push("1_sim_vignette-geometries")  #' [x]
 run_commit_push("1_sim_realistic-geometries") #' [ ]
 
 #' 2. Create plots
@@ -34,3 +32,6 @@ run_commit_push("1_plot_metric-maps")          #' [ ]
 run_commit_push("1_plot_metric-boxplots")      #' [ ]
 run_commit_push("1_plot_coverage")             #' [ ]
 run_commit_push("1_plot_lengthscale-recovery") #' [ ]
+
+#' 6. Checks
+run_commit_push("1_checks") #' [ ]

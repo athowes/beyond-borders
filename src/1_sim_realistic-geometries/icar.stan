@@ -6,11 +6,11 @@ data {
 }
 
 parameters {
-  vector[n] phi;
+  vector[n] u;
 }
 
 model {
-  target += -0.5 * dot_self(phi[node1] - phi[node2]);
-  sum(phi) ~ normal(0, 0.001 * n);
+  target += -0.5 * dot_self(u[node1] - u[node2]);
+  sum(u) ~ normal(0, 0.001 * n);
 }
 

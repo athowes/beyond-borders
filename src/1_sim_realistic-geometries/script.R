@@ -2,6 +2,10 @@
 # orderly::orderly_develop_start("1_sim_realistic-geometries")
 # setwd("src/1_sim_realistic-geometries")
 
+#' Parameter settings
+L <- 100
+l <- 2.5
+
 #' Grid
 
 #' Create grid geometry
@@ -16,10 +20,14 @@ dev.off()
 #' Save a copy of the geometry
 saveRDS(grid, "grid.rds")
 
-#' Simulate and save IID, ICAR and IK data
-sim_iid(grid, nsim) %>% saveRDS("data_iid_grid.rds")
-sim_icar(grid, nsim) %>% saveRDS("data_icar_grid.rds")
-sim_ik(grid, L = 100, nsim, l = 2.5) %>% saveRDS("data_ik_grid.rds")
+data <- sim_iid(grid, nsim)
+saveRDS(data, "data_iid_grid.rds")
+
+data <- sim_icar(grid, nsim)
+saveRDS(data, "data_icar_grid.rds")
+
+data <- sim_ik(grid, L = L, nsim, l = l)
+saveRDS(data, "data_ik_grid.rds")
 
 #' Cote d'Ivoire
 
@@ -35,10 +43,14 @@ dev.off()
 #' Save a copy of the geometry
 saveRDS(civ, "civ.rds")
 
-#' Simulate and save IID, ICAR and IK data
-sim_iid(civ, nsim) %>% saveRDS("data_iid_civ.rds")
-sim_icar(civ, nsim) %>% saveRDS("data_icar_civ.rds")
-sim_ik(civ, L = 100, nsim, l = 2.5) %>% saveRDS("data_ik_civ.rds")
+data <- sim_iid(civ, nsim)
+saveRDS(data, "data_iid_civ.rds")
+
+data <- sim_icar(civ, nsim)
+saveRDS(data, "data_icar_civ.rds")
+
+data <- sim_ik(civ, L = L, nsim, l = l)
+saveRDS(data, "data_ik_civ.rds")
 
 #' Texas
 
@@ -57,7 +69,11 @@ dev.off()
 #' Save a copy of the geometry
 saveRDS(tex, "tex.rds")
 
-#' Simulate and save IID, ICAR and IK data
-sim_iid(tex, nsim) %>% saveRDS("data_iid_tex.rds")
-sim_icar(tex, nsim) %>% saveRDS("data_icar_tex.rds")
-sim_ik(tex, L = 100, nsim, l = 2.5) %>% saveRDS("data_ik_tex.rds")
+data <- sim_iid(tex, nsim)
+saveRDS(data, "data_iid_tex.rds")
+
+data <- sim_icar(tex, nsim)
+saveRDS(data, "data_icar_tex.rds")
+
+data <- sim_ik(tex, L = L, nsim, l = l)
+saveRDS(data, "data_ik_tex.rds")
