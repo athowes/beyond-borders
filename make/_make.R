@@ -9,3 +9,4 @@ source("make/2_all.R")
 
 #' Documentation
 run_commit_push("docs_paper")
+run_commit_push("docs_thesis-resources")

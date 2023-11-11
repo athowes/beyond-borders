@@ -18,24 +18,30 @@ survey_name <- c(
 
 iso3 <- c("civ", "mwi", "tza", "zwe")
 
-#' This function writes the survey to file as well as outputing
+#' This function writes the survey to file as well as outputting
 surveys <- lapply(iso3, extract_survey)
 
-pdf("hiv-surveys.pdf", h = 5, w = 6.25)
-
-lapply(surveys, function(x) {
-  x %>%
+plot_survey <- function(i, tag) {
+  surveys[[i]] %>%
     ggplot(aes(fill = estimate)) +
-    geom_sf(size = 0.1, colour = scales::alpha("grey", 0.25)) +
+    geom_sf(colour = scales::alpha("grey", 0.25)) +
     scale_fill_viridis_c(option = "C", label = label_percent()) +
-    labs(fill = "HIV prevalence estimate", title = paste0(x$survey_id[1])) +
+    labs(fill = "", tag = tag) +
     theme_minimal() +
     theme(
       axis.text = element_blank(),
       axis.ticks = element_blank(),
       panel.grid = element_blank(),
       strip.text = element_text(face = "bold"),
+      legend.key.size = unit(1, "lines")
     )
-})
+}
 
-dev.off()
+figA <- plot_survey(1, tag = "A")
+figB <- plot_survey(2, tag = "B")
+figC <- plot_survey(3, tag = "C")
+figD <- plot_survey(4, tag = "D")
+
+figA + figB + figC + figD + plot_layout(widths = c(1, 1, 1, 1), ncol = 2)
+
+ggsave("hiv-surveys.png", h = 5, w = 6.25)

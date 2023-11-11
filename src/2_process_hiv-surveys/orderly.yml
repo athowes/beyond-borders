@@ -11,7 +11,7 @@ artefacts:
         - mwi2016phia.geojson
         - tza2017phia.geojson
         - zwe2016phia.geojson
-        - hiv-surveys.pdf
+        - hiv-surveys.png
 
 packages:
   - sf
@@ -29,6 +29,7 @@ packages:
   - purrr
   - readr
   - scales
+  - patchwork
 
 depends:
   civ_data_survey:

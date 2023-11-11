@@ -1,0 +1,13 @@
+script: script.R
+
+artefacts:
+  - data:
+      description: Thesis resources
+      filenames:
+        - depends/hiv-surveys.png
+
+depends:
+  2_process_hiv-surveys:
+    id: latest
+    use:
+      depends/hiv-surveys.png: hiv-surveys.png
