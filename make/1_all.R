@@ -6,7 +6,7 @@ run_commit_push("1_sim_vignette-geometries")  #' [x]
 run_commit_push("1_sim_realistic-geometries") #' [x]
 
 #' 2. Create plots
-run_commit_push("1_plot_simulation-geometries") #' [ ]
+run_commit_push("1_plot_simulation-geometries") #' [x]
 
 #' 3. Fit models
 
