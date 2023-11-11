@@ -4,7 +4,6 @@ Code for the manuscript Howes, Eaton, Flaxman "Beyond borders: evaluating the su
 
 Small-area estimation models typically use the Besag model, a type of Gaussian Markov random field, to model spatial structure.
 However, for irregular geometries, the assumptions made by the Besag model do not seem plausible.
-For example, consider the three geometries below, with irregularity increasing from left to right.
 
 ![](simulation-geometries.png)
 
@@ -24,7 +23,7 @@ To do so, we consider the performance of eight inferential small-area models:
 | Integrated kernel | [`ik_aghq`](https://github.com/athowes/arealutils/blob/master/R/ik.R) |
 
 We use the `aghq` package for adaptive Gauss-Hermite quadrature to conduct Bayesian inference for each of the models.
-Where possible, alternative implementions using `TMB`, `tmbstan`, `R-INLA` and `rstan` are provided in the `arealutils` package.
+Where possible, alternative implementions using `TMB`, `tmbstan`, `R-INLA` and `rstan` are provided by the `arealutils` package.
 
 ## R package dependencies
 
@@ -58,8 +57,8 @@ Within the `src` directory, reports are prefixed by a number (0-2) designating:
 | Prefix | Description |
 |---------------|--------------|
 | 0             | Applicable to both studies. |
-| 1             | Corresponds to the study on simulated data (Section 5 of the manuscript). |
-| 2             | Corresponds to the study on HIV data from household surveys in sub-Saharan Africa (Section 6 of the manuscript). |
+| 1             | Corresponds to the study on synthetic data. |
+| 2             | Corresponds to the study on HIV data from household surveys in sub-Saharan Africa. |
 
 ## `orderly`
 
