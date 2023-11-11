@@ -48,3 +48,9 @@ packages:
   - tidyr
   - sn
   - purrr
+
+depends:
+  civ_data_areas:
+    id: latest
+    use:
+      depends/civ_areas.geojson: civ_areas.geojson

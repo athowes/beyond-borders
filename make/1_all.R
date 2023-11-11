@@ -3,7 +3,7 @@ source("make/utils.R")
 #' 1. Simulate data
 run_commit_push("1_draw_vignette-geometries") #' [x]
 run_commit_push("1_sim_vignette-geometries")  #' [x]
-run_commit_push("1_sim_realistic-geometries") #' [ ]
+run_commit_push("1_sim_realistic-geometries") #' [x]
 
 #' 2. Create plots
 run_commit_push("1_plot_simulation-geometries") #' [ ]

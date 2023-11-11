@@ -32,7 +32,10 @@ saveRDS(data, "data_ik_grid.rds")
 #' Cote d'Ivoire
 
 #' Create Cote d'Ivoire geometry
-civ <- ci %>% select(geometry)
+civ <- read_sf("depends/civ_areas.geojson") %>%
+  filter(area_level == 1) %>%
+  select(geometry)
+
 sf::st_crs(civ) <- NA
 
 #' Check the geometry
