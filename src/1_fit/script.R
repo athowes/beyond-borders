@@ -1,5 +1,5 @@
 #' Uncomment and run the two line below to resume development of this script
-# orderly::orderly_develop_start("1_fit", parameters = list(f = "constant_inla"))
+# orderly::orderly_develop_start("1_fit", parameters = list(f = "iid_aghq"))
 # setwd("src/1_fit")
 
 geometries <- c()

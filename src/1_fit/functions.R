@@ -15,14 +15,16 @@ run_models <- function(geometry, sim_model, f) {
   if(deparse(substitute(f)) %in% c("fck_inla", "ck_stan") & geometry == "2") return(NULL)
 
   data <- readRDS(paste0("depends/data_", sim_model, "_", geometry, ".rds"))
+
   fits <- lapply(data, function(x) {
     fit <- f(x$sf)
-    if(class(fit) == "inla") {
+    if("inla" %in% class(fit)) {
       samples <- INLA::inla.posterior.sample(n = 1000, fit)
       fit[["samples"]] <- samples
       class(fit) <- "inlax"
     }
     return(fit)
   })
+
   saveRDS(fits, file = paste0("fits_", sim_model, "_", geometry, ".rds"))
 }

@@ -11,14 +11,29 @@ run_commit_push("1_plot_simulation-geometries") #' [x]
 #' 3. Fit models
 
 #' Vignette and realistic together
-run_commit_push("1_fit", param = list(f = "constant_aghq")) #' [ ]
-run_commit_push("1_fit", param = list(f = "iid_inla"))      #' [ ]
-run_commit_push("1_fit", param = list(f = "besag_inla"))    #' [ ]
-run_commit_push("1_fit", param = list(f = "bym2_inla"))     #' [ ]
-run_commit_push("1_fit", param = list(f = "fck_inla"))      #' [ ]
-run_commit_push("1_fit", param = list(f = "fik_inla"))      #' [ ]
-run_commit_push("1_fit", param = list(f = "ck_stan"))       #' [ ]
-run_commit_push("1_fit", param = list(f = "ik_stan"))       #' [ ]
+id <- orderly::orderly_run("1_fit", param = list(f = "constant_aghq")) #' [ ]
+orderly::orderly_commit(id)
+
+id <- orderly::orderly_run("1_fit", param = list(f = "iid_aghq"))      #' [x]
+orderly::orderly_commit(id)
+
+id <- orderly::orderly_run("1_fit", param = list(f = "besag_aghq"))    #' [ ]
+orderly::orderly_commit(id)
+
+id <- orderly::orderly_run("1_fit", param = list(f = "bym2_aghq"))     #' [ ]
+orderly::orderly_commit(id)
+
+id <- orderly::orderly_run("1_fit", param = list(f = "fck_aghq"))      #' [ ]
+orderly::orderly_commit(id)
+
+id <- orderly::orderly_run("1_fit", param = list(f = "fik_aghq"))      #' [ ]
+orderly::orderly_commit(id)
+
+id <- orderly::orderly_run("1_fit", param = list(f = "ck_aghq"))       #' [ ]
+orderly::orderly_commit(id)
+
+id <- orderly::orderly_run("1_fit", param = list(f = "ik_aghq"))       #' [ ]
+orderly::orderly_commit(id)
 
 #' 4. Assess marginals
 run_commit_push("1_assess_rho-marginals")        #' [ ]
