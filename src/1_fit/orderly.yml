@@ -5,31 +5,9 @@ sources:
 
 artefacts:
   - data:
-      description: Fitted models
+      description: Simulation study output
       filenames:
-        #' Realsitic
-        - fits_iid_civ.rds
-        - fits_icar_civ.rds
-        - fits_ik_civ.rds
-        - fits_iid_grid.rds
-        - fits_icar_grid.rds
-        - fits_ik_grid.rds
-        - fits_iid_tex.rds
-        - fits_icar_tex.rds
-        - fits_ik_tex.rds
-        #' Vignette
-        - fits_iid_1.rds
-        - fits_icar_1.rds
-        - fits_ik_1.rds
-        - fits_iid_2.rds
-        - fits_icar_2.rds
-        - fits_ik_2.rds
-        - fits_iid_3.rds
-        - fits_icar_3.rds
-        - fits_ik_3.rds
-        - fits_iid_4.rds
-        - fits_icar_4.rds
-        - fits_ik_4.rds
+        results.rds
 
 parameters:
   f:

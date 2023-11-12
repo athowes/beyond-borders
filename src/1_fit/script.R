@@ -19,7 +19,4 @@ results <- purrr::pmap(pars, run, .progress = TRUE)
 results <- data.frame(dplyr::bind_rows(results))
 results$inf_model <- f
 
-results
-
-#' Prevent orderly complaining by generating all possible simulations
-orderly_shush()
+saveRDS(results, "results.rds")
