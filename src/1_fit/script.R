@@ -1,6 +1,6 @@
 #' Uncomment and run the two line below to resume development of this script
 # orderly::orderly_develop_start("1_fit", parameters = list(f = "iid_aghq"))
-# setwd("src/1_fit")
+# setwd("src/1_run")
 
 geometries <- c()
 vignette_geometries <- as.character(1:4)
@@ -12,11 +12,15 @@ if(length(geometries) == 0) stop("Either vignette or realistic must be TRUE")
 sim_models <- c("iid", "icar", "ik")
 fs <- list(get(f, envir = asNamespace("arealutils")))
 
+geometries <- c("1")
+
 pars <- expand.grid("geometry" = geometries, "sim_model" = sim_models, "f" = fs)
 
 #' Prevent orderly complaining by generating all possible simulations
 orderly_shush()
 
-# Run models and save for each row of pars
+#' Run models and assessment
 pb <- progress_estimated(nrow(pars))
-purrr::pmap(pars, run_models)
+results <- purrr::pmap(pars, run)
+
+results <- data.frame(dplyr::bind_rows(results))

@@ -8,23 +8,28 @@ orderly_shush <- function() {
   )
 }
 
-run_models <- function(geometry, sim_model, f) {
+run <- function(geometry, sim_model, f) {
   pb$tick()$print()
 
-  #' This model can't handle the concentric circles case!
-  if(deparse(substitute(f)) %in% c("fck_inla", "ck_stan") & geometry == "2") return(NULL)
+  #' These models can't handle the concentric circles case!
+  if(deparse(substitute(f)) %in% c("fck_aghq", "ck_aghq") & geometry == "2") return(NULL)
 
   data <- readRDS(paste0("depends/data_", sim_model, "_", geometry, ".rds"))
 
-  fits <- lapply(data, function(x) {
+  results <- lapply(data, function(x) {
     fit <- f(x$sf)
-    if("inla" %in% class(fit)) {
-      samples <- INLA::inla.posterior.sample(n = 1000, fit)
-      fit[["samples"]] <- samples
-      class(fit) <- "inlax"
-    }
-    return(fit)
+    samples_aghq <- aghq::sample_marginal(fit, 100)
+    samples <- samples_aghq$samps
+    samples <- rbind(samples, unlist(samples_aghq$thetasamples))
+    true_values <- c(-2, x$u, 0)
+    result <- mapply(function(x, y) arealutils::crps(x, y), split(samples, seq(nrow(samples))), true_values)
+    names(result) <- c("beta_0", paste0("u", 1:length(x$u)), names(fit$optresults$mode))
+    return(result)
   })
 
-  saveRDS(fits, file = paste0("fits_", sim_model, "_", geometry, ".rds"))
+  df <- data.frame(dplyr::bind_rows(results, .id = "replicate"))
+  df$geometry <- geometry
+  df$sim_model <- sim_model
+
+  return(df)
 }
