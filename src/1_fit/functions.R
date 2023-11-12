@@ -8,6 +8,10 @@ orderly_shush <- function() {
   )
 }
 
+summaries <- function(x, y) {
+  list("mse" = mean((x - y)^2), "crps" = arealutils::crps(x, y))
+}
+
 run <- function(geometry, sim_model, f) {
   if(deparse(substitute(f)) %in% c("fck_aghq", "ck_aghq") & geometry == "2") return(NULL)
 
@@ -19,8 +23,8 @@ run <- function(geometry, sim_model, f) {
     samples <- samples_aghq$samps
     samples <- rbind(samples, unlist(samples_aghq$thetasamples))
     true_values <- c(-2, x$u, 0)
-    result <- mapply(function(x, y) arealutils::crps(x, y), split(samples, seq(nrow(samples))), true_values)
-    names(result) <- c("beta_0", paste0("u", 1:length(x$u)), names(fit$optresults$mode))
+    result <- purrr::map2_df(split(samples, seq(nrow(samples))), true_values, summaries)
+    result$par <- c("beta_0", paste0("u", 1:length(x$u)), names(fit$optresults$mode))
     return(result)
   })
 
