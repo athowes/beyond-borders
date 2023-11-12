@@ -1,13 +1,3 @@
-orderly_shush <- function() {
-  lapply(
-    expand.grid("sim_model" = sim_models, "geometry" = c(vignette_geometries, realistic_geometries)) %>%
-      as.data.frame() %>%
-      mutate(file = paste0("fits_", sim_model, "_", geometry, ".rds")) %>%
-      pull(file),
-    function(file) saveRDS(NULL, file)
-  )
-}
-
 summaries <- function(x, y) {
   list("mse" = mean((x - y)^2), "crps" = arealutils::crps(x, y))
 }

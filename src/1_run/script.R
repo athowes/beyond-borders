@@ -1,5 +1,5 @@
 #' Uncomment and run the two line below to resume development of this script
-# orderly::orderly_develop_start("1_fit", parameters = list(f = "besag_aghq"))
+# orderly::orderly_develop_start("1_run", parameters = list(f = "ck_aghq"))
 # setwd("src/1_run")
 
 geometries <- c()
@@ -10,7 +10,7 @@ if(length(geometries) == 0) stop("Either vignette or realistic must be TRUE")
 sim_models <- c("iid", "icar", "ik")
 fs <- list(get(f, envir = asNamespace("arealutils")))
 
-geometries <- c("1")
+geometries <- c("grid")
 
 pars <- expand.grid("geometry" = geometries, "sim_model" = sim_models, "f" = fs)
 
@@ -20,3 +20,10 @@ results <- data.frame(dplyr::bind_rows(results))
 results$inf_model <- f
 
 saveRDS(results, "results.rds")
+
+results %>%
+  group_by(geometry, sim_model) %>%
+  summarise(
+    mean_mse = mean(mse),
+    mean_crps = mean(crps)
+  )
