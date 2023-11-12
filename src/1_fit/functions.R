@@ -9,15 +9,12 @@ orderly_shush <- function() {
 }
 
 run <- function(geometry, sim_model, f) {
-  pb$tick()$print()
-
-  #' These models can't handle the concentric circles case!
   if(deparse(substitute(f)) %in% c("fck_aghq", "ck_aghq") & geometry == "2") return(NULL)
 
   data <- readRDS(paste0("depends/data_", sim_model, "_", geometry, ".rds"))
 
   results <- lapply(data, function(x) {
-    fit <- f(x$sf)
+    capture.output(fit <- f(x$sf))
     samples_aghq <- aghq::sample_marginal(fit, 100)
     samples <- samples_aghq$samps
     samples <- rbind(samples, unlist(samples_aghq$thetasamples))
