@@ -5,6 +5,7 @@ artefacts:
       description: Annotated Besag equation
       filenames:
         - besag.pdf
+        - besag.png
 
 resources:
   - besag.tex

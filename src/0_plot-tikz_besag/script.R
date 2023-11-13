@@ -4,3 +4,8 @@
 
 tools::texi2dvi("besag.tex", pdf = TRUE, clean = TRUE)
 knitr::plot_crop("besag.pdf")
+
+system(paste0(
+  "convert -density ", 600, " besag.pdf -scene 1 -background white",
+  " -alpha remove -alpha off -quality 100 besag.png"
+))

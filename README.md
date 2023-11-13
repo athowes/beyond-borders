@@ -3,11 +3,18 @@
 Code for the manuscript Howes, Eaton, Flaxman "Beyond borders: evaluating the suitability of spatial adjacency for small-area estimation" (in preparation).
 
 Small-area estimation models typically use the Besag model, a type of Gaussian Markov random field, to model spatial structure.
+
+<p align="center">
+<img src="besag.png" width="500">
+</p>
+
 However, for irregular geometries, the assumptions made by the Besag model do not seem plausible.
-
-![](simulation-geometries.png)
-
 The Besag model was designed to work well for grids, as are used in image analysis, but in small-area estimation the geometries we encounter, like the districts of a country, are more irregular.
+
+<p align="center">
+![](simulation-geometries.png)
+</p>
+
 The goal of this work is to determine whether or not, in practice, this matters.
 To do so, we consider the performance of eight inferential small-area models:
 
