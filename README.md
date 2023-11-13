@@ -12,7 +12,7 @@ However, for irregular geometries, the assumptions made by the Besag model do no
 The Besag model was designed to work well for grids, as are used in image analysis, but in small-area estimation the geometries we encounter, like the districts of a country, are more irregular.
 
 <p align="center">
-![](simulation-geometries.png)
+<img src="simulation-geometries.png" width="700">
 </p>
 
 The goal of this work is to determine whether or not, in practice, this matters.
