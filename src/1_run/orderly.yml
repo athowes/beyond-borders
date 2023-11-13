@@ -10,7 +10,7 @@ artefacts:
         results.rds
 
 parameters:
-  f:
+  inf_function:
     default: ~
   vignette:
     default: TRUE
