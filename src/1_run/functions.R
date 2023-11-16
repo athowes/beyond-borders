@@ -1,8 +1,12 @@
 summaries <- function(x, y) {
   list(
+    "mean" = mean(x),
+    "upper" = stats::quantile(x, 0.975),
+    "lower" = stats::quantile(x, 0.025),
     "mse" = mean((x - y)^2),
     "crps" = arealutils::crps(x, y),
-    "q" = stats::ecdf(x)(y)
+    "q" = stats::ecdf(x)(y),
+    "truth" = y
   )
 }
 
