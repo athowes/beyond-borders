@@ -2,7 +2,7 @@ summaries <- function(x, y) {
   list(
     "mse" = mean((x - y)^2),
     "crps" = arealutils::crps(x, y),
-    "q" = arealutils::quantile(x, y)
+    "q" = stats::ecdf(x)(y)
   )
 }
 

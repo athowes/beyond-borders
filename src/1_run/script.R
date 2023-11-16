@@ -1,5 +1,5 @@
 #' Uncomment and run the two line below to resume development of this script
-# orderly::orderly_develop_start("1_run", parameters = list(inf_function = "iid_aghq"))
+# orderly::orderly_develop_start("1_run", parameters = list(f = "iid_aghq"))
 # setwd("src/1_run")
 
 geometries <- c()
