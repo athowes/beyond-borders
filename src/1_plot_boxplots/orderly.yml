@@ -30,3 +30,7 @@ depends:
      id: latest(parameter:f == "besag_aghq")
      use:
        depends/results_besag.rds: results.rds
+  - 1_run:
+     id: latest(parameter:f == "bym2_aghq")
+     use:
+       depends/results_bym2.rds: results.rds

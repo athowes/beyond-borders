@@ -4,9 +4,9 @@
 
 df <- bind_rows(
   readRDS("depends/results_iid.rds"),
-  readRDS("depends/results_besag.rds")
-) %>%
-  mutate(replicate = as.numeric(replicate))
+  readRDS("depends/results_besag.rds"),
+  readRDS("depends/results_bym2.rds")
+)
 
 geometries <- unique(df$geometry)
 

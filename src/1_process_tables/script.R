@@ -4,14 +4,15 @@
 
 df <- bind_rows(
   readRDS("depends/results_iid.rds"),
-  readRDS("depends/results_besag.rds")
+  readRDS("depends/results_besag.rds"),
+  readRDS("depends/results_bym2.rds")
 )
 
 #' CRPS table
 df_crps <- df %>%
   arealutils::update_naming() %>%
   group_by(geometry, sim_model, inf_model) %>%
-  summarise(crps = mean(crps)) %>%
+  summarise(crps = mean(crps, na.rm = TRUE)) %>%
   tidyr::spread(inf_model, crps)
 
 gt_crps <- gt(df_crps, rowname_col = "sim_model", groupname_col = "geometry") %>%
