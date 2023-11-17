@@ -24,10 +24,21 @@ run <- function(geometry, sim_model, inf_function) {
     capture.output(fit <- inf_function(x$sf))
     samples_aghq <- aghq::sample_marginal(fit, 100)
     x_samples <- samples_aghq$samps
+
+    # Want to keep only beta_0 and u. Omit w in the case of BYM2
+    x_samples <- x_samples[rownames(x_samples) %in% c("beta_0", "u"), ]
     theta_samples <- do.call(rbind, samples_aghq$thetasamples)
     samples <- rbind(x_samples, theta_samples)
 
+    # beta_0 is set to -2 and sigma_phi is set to 1
     true_values <- c(-2, x$u, log(1))
+
+    # The phi hyperparameter of BYM2 is not set
+    if(f %in% c("bym2_aghq")) {
+      true_values <- c(true_values, NA)
+    }
+
+    # The lengthscale parameter is set to 2.5
     if(f %in% c("ck_aghq", "ik_aghq")) {
       true_values <- c(true_values, log(2.5))
     }
