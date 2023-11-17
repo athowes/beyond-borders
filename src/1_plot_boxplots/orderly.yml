@@ -1,0 +1,32 @@
+script: script.R
+
+artefacts:
+  - data:
+      description: Metric boxplots
+      filenames:
+        - crps-boxplot.png
+
+packages:
+  - sf
+  - arealutils
+  - ggplot2
+  - dplyr
+  - reshape2
+  - viridis
+  - tikzDevice
+  - cubature
+  - magrittr
+  - gt
+  - tidyr
+  - sn
+  - purrr
+
+depends:
+  - 1_run:
+     id: latest(parameter:f == "iid_aghq")
+     use:
+       depends/results_iid.rds: results.rds
+  - 1_run:
+     id: latest(parameter:f == "besag_aghq")
+     use:
+       depends/results_besag.rds: results.rds
