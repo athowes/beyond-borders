@@ -13,6 +13,7 @@ summaries <- function(x, y) {
 run <- function(geometry, sim_model, inf_function) {
 
   if(f %in% c("fck_aghq", "ck_aghq") & geometry == "2") {
+    message("The centroid kernel is not defined for geometry 2!")
     return(NULL)
   }
 
@@ -38,9 +39,13 @@ run <- function(geometry, sim_model, inf_function) {
       true_values <- c(true_values, NA)
     }
 
-    # The lengthscale parameter is set to 2.5
+    # The lengthscale parameter is set to 2.5 (only in the IK simulated data case)
     if(f %in% c("ck_aghq", "ik_aghq")) {
-      true_values <- c(true_values, log(2.5))
+      if(sim_model == "ik") {
+        true_values <- c(true_values, log(2.5))
+      } else {
+        true_values <- c(true_values, NA)
+      }
     }
 
     result <- purrr::map2_df(split(samples, seq(nrow(samples))), true_values, summaries)
