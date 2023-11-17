@@ -38,6 +38,7 @@ run <- function(geometry, sim_model, inf_function) {
   })
 
   df <- data.frame(dplyr::bind_rows(results, .id = "replicate"))
+  df$replicate <- as.numeric(df$replicate)
   df$geometry <- geometry
   df$sim_model <- sim_model
 
