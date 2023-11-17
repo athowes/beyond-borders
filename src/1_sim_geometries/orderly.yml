@@ -2,11 +2,25 @@ script: script.R
 
 resources:
   - icar.stan
+  - texas
 
 sources:
   - functions.R
 
 artefacts:
+  - data:
+      description: Plot and copy of the geometries
+      filenames:
+        - geometry-1.rds
+        - geometry-2.rds
+        - geometry-3.rds
+        - geometry-4.rds
+        - grid.rds
+        - civ.rds
+        - tex.rds
+        - geometries.pdf
+        - geometries.png
+
   - data:
       description: Simulated data
       filenames:
@@ -22,6 +36,15 @@ artefacts:
         - data_iid_4.rds
         - data_icar_4.rds
         - data_ik_4.rds
+        - data_iid_grid.rds
+        - data_icar_grid.rds
+        - data_ik_grid.rds
+        - data_iid_civ.rds
+        - data_icar_civ.rds
+        - data_ik_civ.rds
+        - data_iid_tex.rds
+        - data_icar_tex.rds
+        - data_ik_tex.rds
 
 parameters:
   nsim:
@@ -43,10 +66,7 @@ packages:
   - purrr
 
 depends:
-  1_draw_vignette-geometries:
+  civ_data_areas:
     id: latest
     use:
-      depends/geometry-1.rds: geometry-1.rds
-      depends/geometry-2.rds: geometry-2.rds
-      depends/geometry-3.rds: geometry-3.rds
-      depends/geometry-4.rds: geometry-4.rds
+      depends/civ_areas.geojson: civ_areas.geojson
