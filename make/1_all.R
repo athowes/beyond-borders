@@ -17,7 +17,7 @@ run_commit_push("1_run", param = list(f = "ik_aghq"))       #' [ ]
 run_commit_push("1_process_tables")    #' [x]
 run_commit_push("1_plot_boxplots")     #' [x]
 run_commit_push("1_plot_maps")         #' [ ]
-run_commit_push("1_plot_coverage")     #' [ ]
+run_commit_push("1_plot_coverage")     #' [x]
 run_commit_push("1_plot_lengthscales") #' [ ]
 
 #' 5. Checks

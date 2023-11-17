@@ -2,9 +2,15 @@ script: script.R
 
 artefacts:
   - data:
-      description: PIT histograms and ECDF difference plots
+      description: PIT histograms and ECDF difference plots for each geometry
       filenames:
-        - histogram-ecdf.pdf
+        - histogram-ecdf-diff-1.png
+        - histogram-ecdf-diff-2.png
+        - histogram-ecdf-diff-3.png
+        - histogram-ecdf-diff-4.png
+        - histogram-ecdf-diff-grid.png
+        - histogram-ecdf-diff-civ.png
+        - histogram-ecdf-diff-tex.png
 
 packages:
   - sf
@@ -21,9 +27,14 @@ packages:
   - sn
   - purrr
   - multi.utils
+  - patchwork
 
 depends:
-  1_assess_rho-marginals:
-    id: latest
-    use:
-      depends/df_rho.rds: df.rds
+  - 1_run:
+     id: latest(parameter:f == "iid_aghq")
+     use:
+       depends/results_iid.rds: results.rds
+  - 1_run:
+     id: latest(parameter:f == "besag_aghq")
+     use:
+       depends/results_besag.rds: results.rds

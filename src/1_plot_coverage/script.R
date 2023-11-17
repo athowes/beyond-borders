@@ -2,18 +2,22 @@
 # orderly::orderly_develop_start("1_plot_coverage")
 # setwd("src/1_plot_coverage")
 
-df <- readRDS("depends/df_rho.rds") %>%
-  mutate(replicate = as.numeric(replicate)) %>%
-  arealutils::update_naming() %>%
-  filter(inf_model != "Constant")
+df <- bind_rows(
+  readRDS("depends/results_iid.rds"),
+  readRDS("depends/results_besag.rds")
+) %>%
+  mutate(replicate = as.numeric(replicate))
 
 geometries <- unique(df$geometry)
 
-pdf("histogram-ecdf.pdf", h = 8, w = 6.25)
+histogram_ecdf_diff_plot <- function(i) {
+  x <- geometries[i]
 
-lapply(geometries, function(x) {
-  df <- filter(df, geometry == as.character(x))
-  S <- max(df$replicate) * max(df$id) #' Number of Monte Carlo samples
+  df <- filter(df, geometry == as.character(x)) %>%
+    arealutils::update_naming()
+
+  S <- max(df$replicate) #' Number of Monte Carlo samples
+
   bins <- 20
   alpha <- 0.05
 
@@ -28,22 +32,21 @@ lapply(geometries, function(x) {
     y = c(ci[1], ci[2], ci[2], ci[2], ci[3], ci[3], ci[2], ci[1], ci[1]) / S
   )
 
-  plotA <- ggplot(df, aes(x = quantile)) +
+  figA <- ggplot(df, aes(x = q)) +
     facet_grid(sim_model ~ inf_model, drop = TRUE, scales = "free") +
-    geom_histogram(aes(y = (..count..) / tapply(..count..,..PANEL..,sum)[..PANEL..]),
-                   breaks = seq(0, 1, length.out = bins + 1), fill = "#009E73", col = "black", alpha = 0.9) +
-    geom_polygon(data = polygon_data, aes(x = x, y = y), fill = "grey75", color = "grey50", alpha = 0.6) +
-    labs(x = "", y = "", title = paste0(x)) +
+    geom_histogram(aes(y = (..count..) / tapply(..count..,..PANEL..,sum)[..PANEL..]), breaks = seq(0, 1, length.out = bins + 1), fill = "#009E73", col = "black", alpha = 0.9) +
+    geom_polygon(data = polygon_data, aes(x = x, y = y), fill = "grey75", color = "grey50", alpha = 0.4) +
+    labs(x = "", y = "", title = paste0(df$geometry)) +
     scale_x_continuous(breaks = c(0, 0.25, 0.5, 0.75, 1), labels = c(0, 0.25, 0.5, 0.75, 1)) +
     theme_minimal()
 
-  lims <- get_lims(n = S, alpha, K = 100)
+  lims <- multi.utils::get_lims(n = S, alpha, K = 100)
 
-  plotB <- df %>%
-    filter(!is.na(quantile)) %>%
-    split(~sim_model + inf_model) %>%
+  figB <- df %>%
+    filter(!is.na(q)) %>%
+    split(~ sim_model + inf_model) %>%
     lapply(function(y) {
-      empirical_coverage <- purrr::map_dbl(seq(0, 1, by = 0.01), ~ multi.utils::empirical_coverage(y$quantile, .x))
+      empirical_coverage <- purrr::map_dbl(seq(0, 1, by = 0.01), ~ multi.utils::empirical_coverage(y$q, .x))
       data.frame(nominal_coverage = seq(0, 1, by = 0.01), empirical_coverage = empirical_coverage) %>%
         mutate(
           ecdf_diff = empirical_coverage - nominal_coverage,
@@ -51,13 +54,12 @@ lapply(geometries, function(x) {
           ecdf_diff_upper = lims$upper / S - nominal_coverage,
         )
     }) %>%
-    purrr::map_df(~as.data.frame(.x), .id = "indicator") %>%
+    purrr::map_df(~ as.data.frame(.x), .id = "indicator") %>%
     separate(indicator, c("sim_model", "inf_model")) %>%
     mutate(
       sim_model = forcats::fct_relevel(sim_model, "IID", "Besag", "IK"),
-      inf_model = forcats::fct_relevel(inf_model, "Constant", "IID", "Besag", "BYM2", "FCK", "FIK")
+      inf_model = forcats::fct_relevel(inf_model, "IID", "Besag")
     ) %>%
-    filter(inf_model != "Constant") %>%
     ggplot(aes(x = nominal_coverage, y = ecdf_diff)) +
     facet_grid(sim_model ~ inf_model, drop = TRUE, scales = "free") +
     geom_line(col = "#009E73") +
@@ -68,7 +70,9 @@ lapply(geometries, function(x) {
     scale_x_continuous(breaks = c(0, 0.25, 0.5, 0.75, 1), labels = c(0, 0.25, 0.5, 0.75, 1)) +
     theme_minimal()
 
-  cowplot::plot_grid(plotA, plotB, ncol = 1)
-})
+  figA / figB
 
-dev.off()
+  ggsave(paste0("histogram-ecdf-diff-", x, ".png"), h = 8, w = 6.25)
+}
+
+lapply(seq_along(geometries), function(i) histogram_ecdf_diff_plot(i))
