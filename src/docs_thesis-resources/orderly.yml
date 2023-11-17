@@ -7,6 +7,10 @@ artefacts:
         - depends/hiv-surveys.png
 
 depends:
+  1_process_tables:
+    id: latest
+    use:
+      depends/gt_crps.rds: gt_crps.rds
   2_process_hiv-surveys:
     id: latest
     use:
