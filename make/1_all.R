@@ -8,9 +8,9 @@ run_commit_push("1_run", param = list(f = "constant_aghq")) #' [ ]
 run_commit_push("1_run", param = list(f = "iid_aghq"))      #' [x]
 run_commit_push("1_run", param = list(f = "besag_aghq"))    #' [x]
 run_commit_push("1_run", param = list(f = "bym2_aghq"))     #' [x]
-run_commit_push("1_run", param = list(f = "fck_aghq"))      #' [ ]
+run_commit_push("1_run", param = list(f = "fck_aghq"))      #' [x]
 run_commit_push("1_run", param = list(f = "fik_aghq"))      #' [ ]
-run_commit_push("1_run", param = list(f = "ck_aghq"))       #' [ ]
+run_commit_push("1_run", param = list(f = "ck_aghq"))       #' [x]
 run_commit_push("1_run", param = list(f = "ik_aghq"))       #' [ ]
 
 #' 4. Post-process

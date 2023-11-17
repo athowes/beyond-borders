@@ -5,7 +5,9 @@
 df <- bind_rows(
   readRDS("depends/results_iid.rds"),
   readRDS("depends/results_besag.rds"),
-  readRDS("depends/results_bym2.rds")
+  readRDS("depends/results_bym2.rds"),
+  readRDS("depends/results_fck.rds"),
+  readRDS("depends/results_ck.rds")
 )
 
 #' CRPS table
