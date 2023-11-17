@@ -18,6 +18,8 @@ run <- function(geometry, sim_model, inf_function) {
 
   data <- readRDS(paste0("depends/data_", sim_model, "_", geometry, ".rds"))
 
+  message("Fitting ", length(data), " ", f, " models to ", sim_model, " simulated data on the ", geometry, " geometry...")
+
   results <- lapply(data, function(x) {
     capture.output(fit <- inf_function(x$sf))
     samples_aghq <- aghq::sample_marginal(fit, 100)

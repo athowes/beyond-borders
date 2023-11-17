@@ -7,8 +7,6 @@ if(vignette) geometries <- c(geometries, as.character(1:4))
 if(realistic) geometries <- c(geometries, c("grid", "civ", "tex"))
 if(length(geometries) == 0) stop("Either vignette or realistic must be TRUE")
 
-geometries <- c("grid")
-
 sim_models <- c("iid", "icar", "ik")
 fs <- list(get(f, envir = asNamespace("arealutils")))
 
@@ -20,10 +18,3 @@ results <- data.frame(dplyr::bind_rows(results))
 results$inf_model <- f
 
 saveRDS(results, "results.rds")
-
-results %>%
-  group_by(geometry, sim_model) %>%
-  summarise(
-    mean_mse = mean(mse),
-    mean_crps = mean(crps)
-  )

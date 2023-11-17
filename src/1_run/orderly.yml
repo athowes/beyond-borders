@@ -33,19 +33,7 @@ packages:
   - purrr
 
 depends:
-  1_sim_realistic-geometries:
-    id: latest
-    use:
-      depends/data_iid_grid.rds: data_iid_grid.rds
-      depends/data_icar_grid.rds: data_icar_grid.rds
-      depends/data_ik_grid.rds: data_ik_grid.rds
-      depends/data_iid_civ.rds: data_iid_civ.rds
-      depends/data_icar_civ.rds: data_icar_civ.rds
-      depends/data_ik_civ.rds: data_ik_civ.rds
-      depends/data_iid_tex.rds: data_iid_tex.rds
-      depends/data_icar_tex.rds: data_icar_tex.rds
-      depends/data_ik_tex.rds: data_ik_tex.rds
-  1_sim_vignette-geometries:
+  1_sim_geometries:
     id: latest
     use:
       depends/data_iid_1.rds: data_iid_1.rds
@@ -60,3 +48,12 @@ depends:
       depends/data_iid_4.rds: data_iid_4.rds
       depends/data_icar_4.rds: data_icar_4.rds
       depends/data_ik_4.rds: data_ik_4.rds
+      depends/data_iid_grid.rds: data_iid_grid.rds
+      depends/data_icar_grid.rds: data_icar_grid.rds
+      depends/data_ik_grid.rds: data_ik_grid.rds
+      depends/data_iid_civ.rds: data_iid_civ.rds
+      depends/data_icar_civ.rds: data_icar_civ.rds
+      depends/data_ik_civ.rds: data_ik_civ.rds
+      depends/data_iid_tex.rds: data_iid_tex.rds
+      depends/data_icar_tex.rds: data_icar_tex.rds
+      depends/data_ik_tex.rds: data_ik_tex.rds
