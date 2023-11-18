@@ -1,0 +1,42 @@
+script: script.R
+
+artefacts:
+  - data:
+      description: Lengthscale recovery
+      filenames:
+        - lengthscale-recovery.png
+
+packages:
+  - sf
+  - arealutils
+  - ggplot2
+  - dplyr
+  - reshape2
+  - viridis
+  - tikzDevice
+  - cubature
+  - magrittr
+  - gt
+  - tidyr
+  - sn
+  - purrr
+
+depends:
+  - 1_run:
+     id: latest(parameter:f == "fck_aghq")
+     use:
+       depends/results_fck.rds: results.rds
+  - 1_run:
+     id: latest(parameter:f == "ck_aghq")
+     use:
+       depends/results_ck.rds: results.rds
+  - 1_sim_geometries:
+      id: latest
+      use:
+        depends/geometry-1.rds: geometry-1.rds
+        depends/geometry-2.rds: geometry-2.rds
+        depends/geometry-3.rds: geometry-3.rds
+        depends/geometry-4.rds: geometry-4.rds
+        depends/grid.rds: grid.rds
+        depends/civ.rds: civ.rds
+        depends/tex.rds: tex.rds
