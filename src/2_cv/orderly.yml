@@ -41,7 +41,7 @@ packages:
   - readr
 
 depends:
-  2_process_hiv-surveys:
+  2_process_surveys:
     id: latest
     use:
       depends/civ2017phia.geojson: civ2017phia.geojson
