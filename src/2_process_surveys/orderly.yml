@@ -1,8 +1,5 @@
 script: script.R
 
-sources:
-  - functions.R
-
 artefacts:
   - data:
       description: Processed HIV surveys
