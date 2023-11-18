@@ -8,6 +8,7 @@ artefacts:
       description: Metric tables
       filenames:
         - gt_crps.rds
+        - gt_mse.rds
 
 packages:
   - sf

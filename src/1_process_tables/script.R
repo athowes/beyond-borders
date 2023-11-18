@@ -26,3 +26,20 @@ gt_crps <- gt(df_crps, rowname_col = "sim_model", groupname_col = "geometry") %>
   tab_stubhead("Simulation model")
 
 saveRDS(gt_crps, "gt_crps.rds")
+
+#' MSE table
+df_mse <- df %>%
+  arealutils::update_naming() %>%
+  group_by(geometry, sim_model, inf_model) %>%
+  summarise(mse = mean(mse, na.rm = TRUE)) %>%
+  tidyr::spread(inf_model, mse)
+
+gt_mse <- gt(df_mse, rowname_col = "sim_model", groupname_col = "geometry") %>%
+  gt::fmt_number(columns = c(-1, -2), n_sigfig = 2) %>%
+  tab_spanner(
+    label = "Inferential model",
+    columns = everything()
+  ) %>%
+  tab_stubhead("Simulation model")
+
+saveRDS(gt_crps, "gt_mse.rds")
