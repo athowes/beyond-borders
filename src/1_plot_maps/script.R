@@ -63,7 +63,7 @@ map <- function(i) {
       legend.key.width = unit(4, "lines")
     )
 
-  ggsave(paste0("map-crps-", x, ".png"), h = 8, w = 6.25)
+  ggsave(paste0("map-crps-", x, ".png"), h = 8, w = 6.25, bg = "white")
 }
 
 lapply(seq_along(geometry_names), function(i) map(i))

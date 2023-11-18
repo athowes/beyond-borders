@@ -12,7 +12,6 @@ artefacts:
         - map-crps-civ.png
         - map-crps-tex.png
 
-
 packages:
   - sf
   - arealutils
