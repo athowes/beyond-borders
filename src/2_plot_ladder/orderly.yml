@@ -4,11 +4,9 @@ artefacts:
   - data:
       description: Prevalence ladder plots
       filenames:
-        - prev-ladder.pdf
-  - data:
-      description: CRPS ladder plots
-      filenames:
-        - crps-ladder.pdf
+        - ladder-civ2017phia.png
+        - ladder-tza2017phia.png
+        - ladder-zwe2016phia.png
 
 packages:
   - sf
@@ -29,8 +27,7 @@ packages:
   - ggplotify
 
 depends:
-  2_assess_cv:
-    id: latest
-    use:
-      depends/df.rds: df.rds
-      depends/manual.rds: manual.rds
+  - 2_cv:
+     id: latest(parameter:f == "iid_aghq")
+     use:
+       depends/ic_iid.rds: ic.rds
