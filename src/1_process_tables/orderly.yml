@@ -43,6 +43,10 @@ depends:
      use:
        depends/results_fck.rds: results.rds
   - 1_run:
+     id: latest(parameter:f == "fik_aghq")
+     use:
+       depends/results_fik.rds: results.rds
+  - 1_run:
      id: latest(parameter:f == "ck_aghq")
      use:
        depends/results_ck.rds: results.rds

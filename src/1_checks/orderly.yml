@@ -38,7 +38,7 @@ packages:
   - dplyr
 
 depends:
-  1_sim_realistic-geometries:
+  1_sim_geometries:
     id: latest
     use:
       depends/data_iid_grid.rds: data_iid_grid.rds

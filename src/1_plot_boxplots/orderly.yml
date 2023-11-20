@@ -5,6 +5,7 @@ artefacts:
       description: Metric boxplots
       filenames:
         - crps-boxplot.png
+        - mse-boxplot.png
 
 packages:
   - sf
@@ -38,6 +39,10 @@ depends:
      id: latest(parameter:f == "fck_aghq")
      use:
        depends/results_fck.rds: results.rds
+  - 1_run:
+     id: latest(parameter:f == "fik_aghq")
+     use:
+       depends/results_fik.rds: results.rds
   - 1_run:
      id: latest(parameter:f == "ck_aghq")
      use:

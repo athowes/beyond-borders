@@ -33,4 +33,4 @@ df %>%
     labs(x = "Replicate", y = "Lengthscale") +
     theme_minimal()
 
-ggsave("lengthscale-recovery.png", h = 7, w = 6.25)
+ggsave("lengthscale-recovery.png", h = 7, w = 6.25, bg = "white")

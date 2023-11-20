@@ -2,16 +2,48 @@ script: script.R
 
 artefacts:
   - data:
-      description: Thesis resources
+      description: Thesis resources (token)
       filenames:
         - depends/hiv-surveys.png
 
 depends:
-  1_process_tables:
-    id: latest
-    use:
-      depends/gt_crps.rds: gt_crps.rds
-  2_process_hiv-surveys:
-    id: latest
-    use:
-      depends/hiv-surveys.png: hiv-surveys.png
+  - 1_plot_boxplots:
+     id: latest
+     use:
+       depends/crps-boxplot.png: crps-boxplot.png
+       depends/mse-boxplot.png: mse-boxplot.png
+  - 1_plot_maps:
+     id: latest
+     use:
+       depends/map-crps-1.png: map-crps-1.png
+       depends/map-crps-2.png: map-crps-2.png
+       depends/map-crps-3.png: map-crps-3.png
+       depends/map-crps-4.png: map-crps-4.png
+       depends/map-crps-grid.png: map-crps-grid.png
+       depends/map-crps-civ.png: map-crps-civ.png
+       depends/map-crps-tex.png: map-crps-tex.png
+  - 1_process_tables:
+     id: latest
+     use:
+       depends/gt_crps.rds: gt_crps.rds
+       depends/gt_mse.rds: gt_mse.rds
+  - 1_plot_coverage:
+     id: latest
+     use:
+       depends/histogram-ecdf-diff-1.png: histogram-ecdf-diff-1.png
+       depends/histogram-ecdf-diff-2.png: histogram-ecdf-diff-2.png
+       depends/histogram-ecdf-diff-3.png: histogram-ecdf-diff-3.png
+       depends/histogram-ecdf-diff-4.png: histogram-ecdf-diff-4.png
+       depends/histogram-ecdf-diff-grid.png: histogram-ecdf-diff-grid.png
+       depends/histogram-ecdf-diff-civ.png: histogram-ecdf-diff-civ.png
+       depends/histogram-ecdf-diff-tex.png: histogram-ecdf-diff-tex.png
+  - 2_process_surveys:
+     id: latest
+     use:
+       depends/hiv-surveys.png: hiv-surveys.png
+  - 2_plot_ladder:
+     id: latest
+     use:
+       depends/ladder-civ2017phia.png: ladder-civ2017phia.png
+       depends/ladder-tza2017phia.png: ladder-tza2017phia.png
+       depends/ladder-zwe2016phia.png: ladder-zwe2016phia.png
