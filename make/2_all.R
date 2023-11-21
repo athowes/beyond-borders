@@ -24,7 +24,7 @@ run_commit_push("2_process_surveys", push = FALSE) #' [x]
 #' 2. Cross-validate models
 run_commit_push("2_cv", param = list(f = "constant_aghq")) #' [ ]
 run_commit_push("2_cv", param = list(f = "iid_aghq"))      #' [x]
-run_commit_push("2_cv", param = list(f = "besag_aghq"))    #' [ ]
+run_commit_push("2_cv", param = list(f = "besag_aghq"))    #' [x]
 run_commit_push("2_cv", param = list(f = "bym2_aghq"))     #' [ ]
 run_commit_push("2_cv", param = list(f = "fck_aghq"))      #' [ ]
 run_commit_push("2_cv", param = list(f = "fik_aghq"))      #' [ ]
@@ -32,6 +32,6 @@ run_commit_push("2_cv", param = list(f = "ck_aghq"))       #' [ ]
 run_commit_push("2_cv", param = list(f = "ik_aghq"))       #' [ ]
 
 #' 3. Post-process
-run_commit_push("2_plot_ladder")    #' [ ]
+run_commit_push("2_plot_ladder")    #' [x]
 run_commit_push("2_process_tables") #' [ ]
 run_commit_push("2_plot_maps")      #' [ ]

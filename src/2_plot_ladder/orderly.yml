@@ -32,3 +32,7 @@ depends:
      id: latest(parameter:f == "iid_aghq")
      use:
        depends/ic_iid.rds: ic.rds
+  - 2_cv:
+     id: latest(parameter:f == "besag_aghq")
+     use:
+       depends/ic_besag.rds: ic.rds
