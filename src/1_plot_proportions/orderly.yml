@@ -1,0 +1,28 @@
+script: script.R
+
+artefacts:
+  - data:
+      description: BYM2 proportion recovery
+      filenames:
+        - proportion-recovery.png
+
+packages:
+  - sf
+  - arealutils
+  - ggplot2
+  - dplyr
+  - reshape2
+  - viridis
+  - tikzDevice
+  - cubature
+  - magrittr
+  - gt
+  - tidyr
+  - sn
+  - purrr
+
+depends:
+  - 1_run:
+     id: latest(parameter:f == "bym2_aghq")
+     use:
+       depends/results_bym2.rds: results.rds

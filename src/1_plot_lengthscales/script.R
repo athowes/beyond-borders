@@ -17,7 +17,6 @@ best_lengthscales <- sapply(geometry_files, function(file) {
     arealutils::best_average()
 })
 
-
 df %>%
   filter(
     par == "log_l",
