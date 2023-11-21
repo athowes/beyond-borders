@@ -45,5 +45,6 @@ depends:
      id: latest
      use:
        depends/ladder-civ2017phia.png: ladder-civ2017phia.png
+       depends/ladder-mwi2016phia.png: ladder-mwi2016phia.png
        depends/ladder-tza2017phia.png: ladder-tza2017phia.png
        depends/ladder-zwe2016phia.png: ladder-zwe2016phia.png

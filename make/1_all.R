@@ -19,7 +19,7 @@ run_commit_push("1_plot_boxplots")     #' [x]
 run_commit_push("1_plot_maps")         #' [x]
 run_commit_push("1_plot_coverage")     #' [x]
 run_commit_push("1_plot_lengthscales") #' [x]
-run_commit_push("1_plot_proportions") #' [x]
+run_commit_push("1_plot_proportions")  #' [x]
 
 #' 5. Checks
 run_commit_push("1_checks") #' [ ]
