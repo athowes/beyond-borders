@@ -1,5 +1,5 @@
 #' Uncomment and run the two line below to resume development of this script
-# orderly::orderly_develop_start("2_cv", parameters = list(f = "iid_aghq"))
+# orderly::orderly_develop_start("2_cv", parameters = list(f = "fck_aghq"))
 # setwd("src/2_cv")
 
 surveys <- list("civ2017phia", "mwi2016phia", "tza2017phia", "zwe2016phia")
@@ -32,7 +32,9 @@ run_ic <- function(survey, type, inf_function) {
   fit <- inf_function(sf)
   samples <- aghq::sample_marginal(fit, M = 1000)
   x_samples <- samples$samps
-  rho_samples <- plogis(x_samples + x_samples["beta_0", ])[-1, ]
+  u_samples <- x_samples[rownames(x_samples) == "u", ]
+  beta_0_samples <- x_samples[1, ]
+  rho_samples <- plogis(u_samples + beta_0_samples)
   summaries <- function(x) c(mean(x), quantile(x, c(0.5, 0.025, 0.975)))
   rho_summaries <- data.frame(t(apply(rho_samples, 1, summaries)), row.names = NULL)
   names(rho_summaries) <- c("mean", "mode", "lower", "upper")
@@ -42,6 +44,6 @@ run_ic <- function(survey, type, inf_function) {
 }
 
 ic_pars <- expand.grid("survey" = surveys, "inf_function" = fs)
-ic <- purrr::pmap(ic_pars, run_ic)
+ic <- purrr::pmap(ic_pars, safely(run_ic))
 
 saveRDS(ic, file = "ic.rds")
