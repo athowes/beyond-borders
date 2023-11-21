@@ -44,6 +44,9 @@ surveys <- lapply(iso3, function(x) {
     st_as_sf() %>%
     st_transform(4326)
 
+  #' Remove the islands from Malawi
+  if(x == "mwi") sf <- filter(sf, !(area_name %in% c("Likoma", "Chizumulu")))
+
   st_write(sf, paste0(tolower(survey_name[toupper(x)]), ".geojson"))
 
   return(sf)

@@ -42,6 +42,6 @@ run_ic <- function(survey, type, inf_function) {
 }
 
 ic_pars <- expand.grid("survey" = surveys, "inf_function" = fs)
-ic <- purrr::pmap(ic_pars, safely(run_ic))
+ic <- purrr::pmap(ic_pars, run_ic)
 
 saveRDS(ic, file = "ic.rds")

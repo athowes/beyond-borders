@@ -5,6 +5,7 @@ artefacts:
       description: Prevalence ladder plots
       filenames:
         - ladder-civ2017phia.png
+        - ladder-mwi2016phia.png
         - ladder-tza2017phia.png
         - ladder-zwe2016phia.png
 
