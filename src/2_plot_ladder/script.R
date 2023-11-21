@@ -30,12 +30,9 @@ lapply(1:4, function(i) {
       inf_model = "Direct"
     )
 
-  ggplot(df, aes(x = forcats::fct_reorder(area_name, mean), y = mean, ymin = lower, ymax = upper, col = inf_model)) +
-    geom_pointrange(position = position_dodge(width = 0.6), alpha = 0.8) +
-    geom_point(
-      data = df_direct,
-      aes(x = area_name, y = direct, col = inf_model), size = 3, shape = 15, alpha = 0.8
-    ) +
+  ggplot(df_direct) +
+    geom_point(aes(x = forcats::fct_reorder(area_name, direct), y = direct, col = inf_model), size = 3, shape = 15, alpha = 0.8) +
+    geom_pointrange(data = df, aes(x = area_name, y = mean, ymin = lower, ymax = upper, col = inf_model), position = position_dodge(width = 0.6), alpha = 0.8) +
     coord_flip() +
     scale_y_continuous(labels = scales::percent) +
     scale_colour_manual(values = cbpalette, breaks = c("Direct", "IID", "Besag")) +
