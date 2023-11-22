@@ -40,7 +40,7 @@ histogram_ecdf_diff_plot <- function(i) {
     geom_histogram(aes(y = (..count..) / tapply(..count..,..PANEL..,sum)[..PANEL..]), breaks = seq(0, 1, length.out = bins + 1), fill = "#009E73", col = "black", alpha = 0.9) +
     geom_polygon(data = polygon_data, aes(x = x, y = y), fill = "grey75", color = "grey50", alpha = 0.4) +
     labs(x = "", y = "", title = paste0(df$geometry)) +
-    scale_x_continuous(breaks = c(0, 0.25, 0.5, 0.75, 1), labels = c(0, 0.25, 0.5, 0.75, 1)) +
+    scale_x_continuous(breaks = c(0, 0.5, 1), labels = c(0, 0.5, 1)) +
     theme_minimal()
 
   lims <- multi.utils::get_lims(n = S, alpha, K = 100)
@@ -70,7 +70,7 @@ histogram_ecdf_diff_plot <- function(i) {
     geom_step(aes(x = nominal_coverage, y = ecdf_diff_lower), alpha = 0.7, col = "grey50") +
     geom_abline(intercept = 0, slope = 0, linetype = "dashed", col = "grey75") +
     labs(x = "", y = "ECDF difference") +
-    scale_x_continuous(breaks = c(0, 0.25, 0.5, 0.75, 1), labels = c(0, 0.25, 0.5, 0.75, 1)) +
+    scale_x_continuous(breaks = c(0, 0.5, 1), labels = c(0, 0.5, 1)) +
     theme_minimal()
 
   figA / figB
