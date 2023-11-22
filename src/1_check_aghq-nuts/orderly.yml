@@ -1,0 +1,29 @@
+script: script.R
+
+artefacts:
+  - data:
+      description: AGHQ against NUTS comparison
+      filenames:
+        - temp.png
+
+packages:
+  - sf
+  - arealutils
+  - ggplot2
+  - dplyr
+  - reshape2
+  - viridis
+  - tikzDevice
+  - cubature
+  - magrittr
+  - gt
+  - tidyr
+  - sn
+  - purrr
+
+1_sim_geometries:
+  id: latest
+  use:
+    depends/data_iid_grid.rds: data_iid_grid.rds
+    depends/data_icar_grid.rds: data_icar_grid.rds
+    depends/data_ik_grid.rds: data_ik_grid.rds
