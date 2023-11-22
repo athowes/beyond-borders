@@ -2,10 +2,15 @@ script: script.R
 
 artefacts:
   - data:
-      description: Metric boxplots
+      description: Metric mean and standard error
       filenames:
-        - crps-boxplot.png
-        - mse-boxplot.png
+        - crps-mean-se-1.png
+        - crps-mean-se-2.png
+        - crps-mean-se-3.png
+        - crps-mean-se-4.png
+        - crps-mean-se-grid.png
+        - crps-mean-se-civ.png
+        - crps-mean-se-tex.png
 
 packages:
   - sf
