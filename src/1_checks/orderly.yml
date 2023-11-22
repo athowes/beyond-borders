@@ -12,16 +12,10 @@ artefacts:
       description: Plausible lengthscale checks
       filenames:
         - plausible-lengthscale.html
-  - data:
-      description: Prior sensitivity analysis
-      filenames:
-        - prior-sensitivity.html
 
 resources:
   - lengthscale-recovery.Rmd
   - plausible-lengthscale.Rmd
-  - prior-sensitivity.Rmd
-  - prior-sensitivity
 
 packages:
   - arealutils

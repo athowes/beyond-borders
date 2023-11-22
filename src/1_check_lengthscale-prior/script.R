@@ -1,20 +1,7 @@
----
-title: "Sensitivity of the length-scale posterior to prior specification"
-author:
-  - name: "Adam Howes"
-output:
-  html_document:
-    toc: yes
-    toc_float: yes
-    toc_collapsed: yes
-    df_print: paged
-    code_folding: show
-    theme: lumen
-abstract: |
-  **Task**
----
+#' Uncomment and run the two line below to resume development of this script
+# orderly::orderly_develop_start("1_check_lengthscale-prior")
+# setwd("src/1_check_lengthscale-prior")
 
-```{r}
 rstan_options(auto_write = TRUE)
 options(mc.cores = parallel::detectCores())
 
@@ -25,12 +12,13 @@ D <- centroid_distance(sf)
 dat <- list(n = nrow(sf), y = sf$y, m = sf$n_obs, mu = rep(0, nrow(sf)), D = D)
 
 # No prior on l (uniform): this shouldn't be a good idea
-fit_non <- rstan::stan("prior-sensitivity/non-informative.stan", data = dat, warmup = 100, iter = 1000)
+fit_non <- rstan::stan("stan/non-informative.stan", data = dat, warmup = 100, iter = 1000)
+
 # Nice visual checking tool--a lot of between chain posterior variability would be a bad sign
 bayesplot::mcmc_hist_by_chain(fit_non, pars = "l")
 
 # l ~ Gamma(1, 1)
-fit_gamma <- rstan::stan("prior-sensitivity/gamma_.stan", data = dat, warmup = 100, iter = 1000)
+fit_gamma <- rstan::stan("stan/gamma_.stan", data = dat, warmup = 100, iter = 1000)
 bayesplot::mcmc_hist_by_chain(fit_non, pars = "l")
 
 # l ~ N+(0, (ub - lb) / 3): Half-normal with standard deviation based on range of distances
@@ -40,11 +28,11 @@ lb <- min(dist) # Could do dist[dist > 0] here but results in lb = 1
 lb <- 0.1
 ub <- max(dist)
 (ub - lb) / 3 # Approximately 2.3
-fit_normal_data <- rstan::stan("prior-sensitivity/normal-data.stan", data = dat, warmup = 100, iter = 1000)
+fit_normal_data <- rstan::stan("stan/normal-data.stan", data = dat, warmup = 100, iter = 1000)
 bayesplot::mcmc_hist_by_chain(fit_normal_data, pars = "l")
 
 # l ~ N(1, 0.5): Informative prior at the true value
-fit_normal_inform <- rstan::stan("prior-sensitivity/informative.stan", data = dat, warmup = 100, iter = 1000)
+fit_normal_inform <- rstan::stan("stan/informative.stan", data = dat, warmup = 100, iter = 1000)
 bayesplot::mcmc_hist_by_chain(fit_normal_inform, pars = "l")
 
 # l ~ Inverse-Gamma(a, b):
@@ -73,7 +61,7 @@ opt_res <- nleqslv::nleqslv(
 
 exp(opt_res$x) # Approximately a = 1.7, b = 0.6
 
-fit_invgamma_data <- rstan::stan("prior-sensitivity/invgamma-data.stan", data = dat, warmup = 100, iter = 1000)
+fit_invgamma_data <- rstan::stan("stan/invgamma-data.stan", data = dat, warmup = 100, iter = 1000)
 bayesplot::mcmc_hist_by_chain(fit_invgamma_data, pars = "l")
 
 cbpalette <- c("#56B4E9", "#009E73", "#E69F00", "#F0E442", "#0072B2", "#D55E00", "#CC79A7", "#999999")
@@ -119,4 +107,3 @@ ggplot(df, aes(x = l, fill = type)) +
   scale_fill_manual(values = cbpalette) +
   labs(y = "Density", x = "Lengthscale", fill = "Prior type") +
   theme_minimal()
-```
