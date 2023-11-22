@@ -33,7 +33,7 @@ plot_mean_sd <- function(fit_aghq, fit_nuts, subtitle) {
     filter(!is.na(AGHQ), !is.na(NUTS)) %>%
     mutate(
       diff = NUTS - AGHQ,
-      diff_pct = diff / (NUTS),
+      diff_pct = diff / (sign(NUTS) * pmax(0.25, abs(NUTS))),
       type = forcats::fct_recode(type, "Mean" = "mean", "SD" = "sd")
     )
 
@@ -62,3 +62,27 @@ fit_aghq <- arealutils::bym2_aghq(sf, k = 3)
 fit_nuts <- arealutils::bym2_tmbstan(sf, nsim_warm = 500, nsim_iter = 1000, chains = 4)
 plot_mean_sd(fit_aghq, fit_nuts, "BYM2 model")
 ggsave("bym2-aghq-nuts.png", h = 3.5, w = 6.25)
+
+#' FCK
+fit_aghq <- arealutils::fck_aghq(sf, k = 3)
+fit_nuts <- arealutils::fck_tmbstan(sf, nsim_warm = 500, nsim_iter = 1000, chains = 4)
+plot_mean_sd(fit_aghq, fit_nuts, "FCK model")
+ggsave("fck-aghq-nuts.png", h = 3.5, w = 6.25)
+
+#' FIK
+fit_aghq <- arealutils::fik_aghq(sf, k = 3)
+fit_nuts <- arealutils::fik_tmbstan(sf, nsim_warm = 500, nsim_iter = 1000, chains = 4)
+plot_mean_sd(fit_aghq, fit_nuts, "FIK model")
+ggsave("fik-aghq-nuts.png", h = 3.5, w = 6.25)
+
+#' CK
+fit_aghq <- arealutils::ck_aghq(sf, k = 3)
+fit_nuts <- arealutils::ck_tmbstan(sf, nsim_warm = 500, nsim_iter = 1000, chains = 4)
+plot_mean_sd(fit_aghq, fit_nuts, "CK model")
+ggsave("ck-aghq-nuts.png", h = 3.5, w = 6.25)
+
+#' IK
+fit_aghq <- arealutils::ik_aghq(sf, k = 3)
+fit_nuts <- arealutils::ik_tmbstan(sf, nsim_warm = 500, nsim_iter = 1000, chains = 4)
+plot_mean_sd(fit_aghq, fit_nuts, "IK model")
+ggsave("ik-aghq-nuts.png", h = 3.5, w = 6.25)
