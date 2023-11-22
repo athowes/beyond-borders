@@ -7,11 +7,16 @@ artefacts:
         - depends/hiv-surveys.png
 
 depends:
-  - 1_plot_boxplots:
+  - 1_plot_mean-se:
      id: latest
      use:
-       depends/crps-boxplot.png: crps-boxplot.png
-       depends/mse-boxplot.png: mse-boxplot.png
+       depends/crps-mean-se-1.png: crps-mean-se-1.png
+       depends/crps-mean-se-2.png: crps-mean-se-2.png
+       depends/crps-mean-se-3.png: crps-mean-se-3.png
+       depends/crps-mean-se-4.png: crps-mean-se-4.png
+       depends/crps-mean-se-grid.png: crps-mean-se-grid.png
+       depends/crps-mean-se-civ.png: crps-mean-se-civ.png
+       depends/crps-mean-se-tex.png: crps-mean-se-tex.png
   - 1_plot_maps:
      id: latest
      use:
@@ -37,6 +42,12 @@ depends:
        depends/histogram-ecdf-diff-grid.png: histogram-ecdf-diff-grid.png
        depends/histogram-ecdf-diff-civ.png: histogram-ecdf-diff-civ.png
        depends/histogram-ecdf-diff-tex.png: histogram-ecdf-diff-tex.png
+  - 1_check_aghq-nuts:
+     id: latest
+     use:
+      depends/iid-aghq-nuts.png: iid-aghq-nuts.png
+      depends/besag-aghq-nuts.png: besag-aghq-nuts.png
+      depends/bym2-aghq-nuts.png: bym2-aghq-nuts.png
   - 2_process_surveys:
      id: latest
      use:
