@@ -16,16 +16,24 @@ df_crps <- df %>%
   filter(stringr::str_starts(par, c("u")) | par == "beta_0") %>%
   arealutils::update_naming() %>%
   group_by(geometry, sim_model, inf_model) %>%
-  summarise(crps = mean(crps, na.rm = TRUE)) %>%
-  tidyr::spread(inf_model, crps)
+  filter(!is.na(crps)) %>%
+  summarise(
+    mean = mean(crps),
+    se = sd(crps) / n()
+  )
 
-gt_crps <- gt(df_crps, rowname_col = "sim_model", groupname_col = "geometry") %>%
-  gt::fmt_number(columns = c(-1, -2), n_sigfig = 2) %>%
+gt_crps <- df_crps %>%
+  # mutate(value = paste0(round(mean, digits = 3), " (", round(1.96 * se, digits = 3), ")")) %>%
+  mutate(value = round(mean, digits = 3)) %>%
+  select(geometry, sim_model, inf_model, value) %>%
+  spread(inf_model, value) %>%
+  gt(rowname_col = "sim_model", groupname_col = "geometry") %>%
   tab_spanner(
     label = "Inferential model",
     columns = everything()
   ) %>%
-  tab_stubhead("Simulation model")
+  tab_stubhead("Simulation model") %>%
+  sub_missing(missing_text = "-")
 
 saveRDS(gt_crps, "gt_crps.rds")
 
@@ -34,15 +42,23 @@ df_mse <- df %>%
   filter(stringr::str_starts(par, c("u")) | par == "beta_0") %>%
   arealutils::update_naming() %>%
   group_by(geometry, sim_model, inf_model) %>%
-  summarise(mse = mean(mse, na.rm = TRUE)) %>%
-  tidyr::spread(inf_model, mse)
+  filter(!is.na(mse)) %>%
+  summarise(
+    mean = mean(mse),
+    se = sd(mse) / n()
+  )
 
-gt_mse <- gt(df_mse, rowname_col = "sim_model", groupname_col = "geometry") %>%
-  gt::fmt_number(columns = c(-1, -2), n_sigfig = 2) %>%
+gt_mse <- df_mse %>%
+  # mutate(value = paste0(round(mean, digits = 3), " (", round(1.96 * se, digits = 3), ")")) %>%
+  mutate(value = round(mean, digits = 3)) %>%
+  select(geometry, sim_model, inf_model, value) %>%
+  spread(inf_model, value) %>%
+  gt(rowname_col = "sim_model", groupname_col = "geometry") %>%
   tab_spanner(
     label = "Inferential model",
     columns = everything()
   ) %>%
-  tab_stubhead("Simulation model")
+  tab_stubhead("Simulation model") %>%
+  sub_missing(missing_text = "-")
 
-saveRDS(gt_crps, "gt_mse.rds")
+saveRDS(gt_mse, "gt_mse.rds")
