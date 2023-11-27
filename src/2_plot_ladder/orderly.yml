@@ -44,3 +44,11 @@ depends:
      id: latest(parameter:f == "fck_aghq")
      use:
        depends/ic_fck.rds: ic.rds
+  - 2_cv:
+     id: latest(parameter:f == "fik_aghq")
+     use:
+       depends/ic_fik.rds: ic.rds
+  - 2_cv:
+     id: latest(parameter:f == "ck_aghq")
+     use:
+       depends/ic_ck.rds: ic.rds

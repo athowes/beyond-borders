@@ -28,7 +28,7 @@ run_commit_push("2_cv", param = list(f = "besag_aghq"))    #' [x]
 run_commit_push("2_cv", param = list(f = "bym2_aghq"))     #' [x]
 run_commit_push("2_cv", param = list(f = "fck_aghq"))      #' [x]
 run_commit_push("2_cv", param = list(f = "fik_aghq"))      #' [x]
-run_commit_push("2_cv", param = list(f = "ck_aghq"))       #' [ ]
+run_commit_push("2_cv", param = list(f = "ck_aghq"))       #' [x]
 run_commit_push("2_cv", param = list(f = "ik_aghq"))       #' [ ]
 
 #' 3. Post-process

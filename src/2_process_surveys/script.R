@@ -41,13 +41,16 @@ surveys <- lapply(iso3, function(x) {
       n_obs = n_eff_kish,
       .after = ci_upper
     ) %>%
-    st_as_sf() %>%
-    st_transform(4326)
+    st_as_sf()
+
+  #' Set CRS to UTM, zone 35, South
+  utm_crs <- st_crs("+proj=utm +zone=35 +south +datum=WGS84")
+  sf <- st_transform(sf, utm_crs)
 
   #' Remove the islands from Malawi
   if(x == "mwi") sf <- filter(sf, !(area_name %in% c("Likoma", "Chizumulu")))
 
-  st_write(sf, paste0(tolower(survey_name[toupper(x)]), ".geojson"))
+  saveRDS(sf, paste0(tolower(survey_name[toupper(x)]), ".rds"))
 
   return(sf)
 })

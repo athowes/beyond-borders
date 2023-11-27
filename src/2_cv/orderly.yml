@@ -31,7 +31,7 @@ depends:
   2_process_surveys:
     id: latest
     use:
-      depends/civ2017phia.geojson: civ2017phia.geojson
-      depends/mwi2016phia.geojson: mwi2016phia.geojson
-      depends/tza2017phia.geojson: tza2017phia.geojson
-      depends/zwe2016phia.geojson: zwe2016phia.geojson
+      depends/civ2017phia.rds: civ2017phia.rds
+      depends/mwi2016phia.rds: mwi2016phia.rds
+      depends/tza2017phia.rds: tza2017phia.rds
+      depends/zwe2016phia.rds: zwe2016phia.rds

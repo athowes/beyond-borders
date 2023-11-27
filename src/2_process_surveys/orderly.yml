@@ -4,10 +4,10 @@ artefacts:
   - data:
       description: Processed HIV surveys
       filenames:
-        - civ2017phia.geojson
-        - mwi2016phia.geojson
-        - tza2017phia.geojson
-        - zwe2016phia.geojson
+        - civ2017phia.rds
+        - mwi2016phia.rds
+        - tza2017phia.rds
+        - zwe2016phia.rds
         - hiv-surveys.png
 
 packages:

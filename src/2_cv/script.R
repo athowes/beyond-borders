@@ -1,5 +1,5 @@
 #' Uncomment and run the two line below to resume development of this script
-# orderly::orderly_develop_start("2_cv", parameters = list(f = "fck_aghq"))
+# orderly::orderly_develop_start("2_cv", parameters = list(f = "fik_aghq"))
 # setwd("src/2_cv")
 
 surveys <- list("civ2017phia", "mwi2016phia", "tza2017phia", "zwe2016phia")
@@ -28,7 +28,7 @@ saveRDS(NULL, file = "cv.rds")
 #' Information criteria and regular fitting
 run_ic <- function(survey, type, inf_function) {
   message("Begin fitting of ", f, " to the survey ", toupper(survey))
-  sf <- st_read(paste0("depends/", survey, ".geojson"))
+  sf <- readRDS(paste0("depends/", survey, ".rds"))
   fit <- inf_function(sf)
   samples <- aghq::sample_marginal(fit, M = 1000)
   x_samples <- samples$samps
