@@ -11,6 +11,8 @@ df <- bind_rows(
   readRDS("depends/results_ck.rds")
 )
 
+df <- filter(df, stringr::str_starts(par, "rho"))
+
 geometries <- unique(df$geometry)
 
 histogram_ecdf_diff_plot <- function(i) {

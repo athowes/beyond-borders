@@ -13,7 +13,7 @@ df <- bind_rows(
 
 #' CRPS table
 df_crps <- df %>%
-  filter(stringr::str_starts(par, c("u")) | par == "beta_0") %>%
+  filter(stringr::str_starts(par, c("rho"))) %>%
   arealutils::update_naming() %>%
   group_by(geometry, sim_model, inf_model) %>%
   filter(!is.na(crps)) %>%
@@ -39,7 +39,7 @@ saveRDS(gt_crps, "gt_crps.rds")
 
 #' MSE table
 df_mse <- df %>%
-  filter(stringr::str_starts(par, c("u")) | par == "beta_0") %>%
+  filter(stringr::str_starts(par, c("rho"))) %>%
   arealutils::update_naming() %>%
   group_by(geometry, sim_model, inf_model) %>%
   filter(!is.na(mse)) %>%

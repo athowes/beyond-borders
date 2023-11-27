@@ -29,10 +29,19 @@ run <- function(geometry, sim_model, inf_function) {
     # Want to keep only beta_0 and u. Omit w in the case of BYM2
     x_samples <- x_samples[rownames(x_samples) %in% c("beta_0", "u"), ]
     theta_samples <- do.call(rbind, samples_aghq$thetasamples)
-    samples <- rbind(x_samples, theta_samples)
+
+    # Create prevalence samples
+    beta_0_samples <- x_samples[1, ]
+    u_samples <- x_samples[-1, ]
+    rho_samples <- plogis(u_samples + matrix(rep(beta_0_samples, each = nrow(u_samples)), nrow = nrow(u_samples)))
+
+    theta_samples <- do.call(rbind, samples_aghq$thetasamples)
+
+    samples <- rbind(x_samples, rho_samples, theta_samples)
+    rownames(samples) <- NULL
 
     # beta_0 is set to -2 and sigma_phi is set to 1
-    true_values <- c(-2, x$u, log(1))
+    true_values <- c(-2, x$u, x$rho, log(1))
 
     # The phi hyperparameter of BYM2 is not set
     if(f %in% c("bym2_aghq")) {
@@ -49,7 +58,7 @@ run <- function(geometry, sim_model, inf_function) {
     }
 
     result <- purrr::map2_df(split(samples, seq(nrow(samples))), true_values, summaries)
-    result$par <- c("beta_0", paste0("u", 1:length(x$u)), names(fit$optresults$mode))
+    result$par <- c("beta_0", paste0("u", 1:length(x$u)), paste0("rho", 1:length(x$u)), names(fit$optresults$mode))
     return(result)
   })
 

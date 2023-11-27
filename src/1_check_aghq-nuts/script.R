@@ -45,44 +45,115 @@ plot_mean_sd <- function(fit_aghq, fit_nuts, subtitle) {
     theme_minimal()
 }
 
+time_df <- data.frame("inf_model" = c(), "aghq" = c(), "tmbstan" = c())
+
+get_time <- function(t) {
+  as.numeric(t$toc - t$tic)
+}
+
 #' IID
+tictoc::tic()
 fit_aghq <- arealutils::iid_aghq(sf, k = 3)
+time_aghq <- tictoc::toc()
+
+tictoc::tic()
 fit_nuts <- arealutils::iid_tmbstan(sf, nsim_warm = 500, nsim_iter = 1000, chains = 4)
+time_nuts <- tictoc::toc()
+
 plot_mean_sd(fit_aghq, fit_nuts, "IID model")
 ggsave("iid-aghq-nuts.png", h = 3.5, w = 6.25)
 
+time_df <- rbind(c("IID", get_time(time_aghq), get_time(time_nuts))) %>%
+  as.data.frame()
+
 #' Besag
+tictoc::tic()
 fit_aghq <- arealutils::besag_aghq(sf, k = 3)
+time_aghq <- tictoc::toc()
+
+tictoc::tic()
 fit_nuts <- arealutils::besag_tmbstan(sf, nsim_warm = 500, nsim_iter = 1000, chains = 4)
+time_nuts <- tictoc::toc()
+
 plot_mean_sd(fit_aghq, fit_nuts, "Besag model")
 ggsave("besag-aghq-nuts.png", h = 3.5, w = 6.25)
 
+time_df <- rbind(time_df, c("Besag", get_time(time_aghq), get_time(time_nuts)))
+
 #' BYM2
+tictoc::tic()
 fit_aghq <- arealutils::bym2_aghq(sf, k = 3)
+time_aghq <- tictoc::toc()
+
+tictoc::tic()
 fit_nuts <- arealutils::bym2_tmbstan(sf, nsim_warm = 500, nsim_iter = 1000, chains = 4)
+time_nuts <- tictoc::toc()
+
 plot_mean_sd(fit_aghq, fit_nuts, "BYM2 model")
 ggsave("bym2-aghq-nuts.png", h = 3.5, w = 6.25)
 
-#' FCK
-fit_aghq <- arealutils::fck_aghq(sf, k = 3)
-fit_nuts <- arealutils::fck_tmbstan(sf, nsim_warm = 500, nsim_iter = 1000, chains = 4)
-plot_mean_sd(fit_aghq, fit_nuts, "FCK model")
-ggsave("fck-aghq-nuts.png", h = 3.5, w = 6.25)
+time_df <- rbind(time_df, c("BYM2", get_time(time_aghq), get_time(time_nuts)))
 
-#' FIK
-fit_aghq <- arealutils::fik_aghq(sf, k = 3)
-fit_nuts <- arealutils::fik_tmbstan(sf, nsim_warm = 500, nsim_iter = 1000, chains = 4)
-plot_mean_sd(fit_aghq, fit_nuts, "FIK model")
-ggsave("fik-aghq-nuts.png", h = 3.5, w = 6.25)
+#' #' FCK
+#' tictoc::tic()
+#' fit_aghq <- arealutils::fck_aghq(sf, k = 3)
+#' time_aghq <- tictoc::toc()
+#'
+#' tictoc::tic()
+#' fit_nuts <- arealutils::fck_tmbstan(sf, nsim_warm = 500, nsim_iter = 1000, chains = 4)
+#' time_nuts <- tictoc::toc()
+#'
+#' plot_mean_sd(fit_aghq, fit_nuts, "FCK model")
+#' ggsave("fck-aghq-nuts.png", h = 3.5, w = 6.25)
+#'
+#' time_df <- rbind(time_df, c("FCK", get_time(time_aghq), get_time(time_nuts)))
+#'
+#' #' FIK
+#' tictoc::tic()
+#' fit_aghq <- arealutils::fik_aghq(sf, k = 3)
+#' time_aghq <- tictoc::toc()
+#'
+#' tictoc::tic()
+#' fit_nuts <- arealutils::fik_tmbstan(sf, nsim_warm = 500, nsim_iter = 1000, chains = 4)
+#' time_nuts <- tictoc::toc()
+#'
+#' plot_mean_sd(fit_aghq, fit_nuts, "FIK model")
+#' ggsave("fik-aghq-nuts.png", h = 3.5, w = 6.25)
+#'
+#' time_df <- rbind(time_df, c("FIK", get_time(time_aghq), get_time(time_nuts)))
+#'
+#' #' CK
+#' tictoc::tic()
+#' fit_aghq <- arealutils::ck_aghq(sf, k = 3)
+#' time_aghq <- tictoc::toc()
+#'
+#' tictoc::tic()
+#' fit_nuts <- arealutils::ck_tmbstan(sf, nsim_warm = 500, nsim_iter = 1000, chains = 4)
+#' time_nuts <- tictoc::toc()
+#'
+#' plot_mean_sd(fit_aghq, fit_nuts, "CK model")
+#' ggsave("ck-aghq-nuts.png", h = 3.5, w = 6.25)
+#'
+#' time_df <- rbind(time_df, c("CK", get_time(time_aghq), get_time(time_nuts)))
 
-#' CK
-fit_aghq <- arealutils::ck_aghq(sf, k = 3)
-fit_nuts <- arealutils::ck_tmbstan(sf, nsim_warm = 500, nsim_iter = 1000, chains = 4)
-plot_mean_sd(fit_aghq, fit_nuts, "CK model")
-ggsave("ck-aghq-nuts.png", h = 3.5, w = 6.25)
+names(time_df) <- c("inf_model", "aghq", "tmbstan")
+readr::write_csv(time_df, "time.csv")
 
-#' IK
-fit_aghq <- arealutils::ik_aghq(sf, k = 3)
-fit_nuts <- arealutils::ik_tmbstan(sf, nsim_warm = 500, nsim_iter = 1000, chains = 4)
-plot_mean_sd(fit_aghq, fit_nuts, "IK model")
-ggsave("ik-aghq-nuts.png", h = 3.5, w = 6.25)
+time_df %>%
+  pivot_longer(
+    cols = c("aghq", "tmbstan"),
+    names_to = "software",
+    values_to = "time"
+  ) %>%
+  mutate(
+    time = as.numeric(time),
+    inf_model = forcats::fct_relevel(inf_model, "IID", "Besag", "BYM2")
+  ) %>%
+  ggplot(aes(x = inf_model, y = time, fill = software)) +
+    geom_col(position = position_dodge(), width = 0.5) +
+    scale_fill_manual(values = c("#E69F00", "#F0E442")) +
+    coord_flip() +
+    labs(y = "Time taken (s)", x = "Inferential model", fill = "Software") +
+    theme_minimal()
+
+ggsave("time-taken.png", h = 3, w = 6.25)

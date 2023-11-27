@@ -48,6 +48,8 @@ depends:
       depends/iid-aghq-nuts.png: iid-aghq-nuts.png
       depends/besag-aghq-nuts.png: besag-aghq-nuts.png
       depends/bym2-aghq-nuts.png: bym2-aghq-nuts.png
+      depends/time.csv: time.csv
+      depends/time-taken.png: time-taken.png
   - 2_process_surveys:
      id: latest
      use:

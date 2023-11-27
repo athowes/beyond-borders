@@ -34,7 +34,7 @@ lapply(seq_along(geometry_names), function(i) {
 
   df %>%
     filter(geometry == x) %>%
-    filter(stringr::str_starts(par, c("u")) | par == "beta_0") %>%
+    filter(stringr::str_starts(par, c("rho"))) %>%
     arealutils::update_naming() %>%
     ggplot(aes(x = forcats::fct_rev(inf_model), y = crps, col = inf_model)) +
     # stat_summary(fun.data = calc_boxplot_stat, geom = "boxplot", width = 0.5, alpha = 0.9, show.legend = FALSE, fill = NA) +

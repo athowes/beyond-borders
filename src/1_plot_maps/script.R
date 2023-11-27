@@ -28,7 +28,7 @@ map <- function(i) {
 
   map_df <- df %>%
     dplyr::filter(
-      stringr::str_starts(par, "u"),
+      stringr::str_starts(par, "rho"),
       geometry == x
     ) %>%
     arealutils::update_naming() %>%
@@ -37,7 +37,7 @@ map <- function(i) {
     summarise(
       crps = mean(crps, na.rm = TRUE)
     ) %>%
-    tidyr::separate(par, into = c("par", "index"), sep = 1, convert = TRUE) %>%
+    tidyr::separate(par, into = c("par", "index"), sep = nchar("rho"), convert = TRUE) %>%
     left_join(
       geometries[[i]] %>%
         mutate(index = row_number()),
