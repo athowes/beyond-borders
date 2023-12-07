@@ -6,22 +6,38 @@ surveys <- list("civ2017phia", "mwi2016phia", "tza2017phia", "zwe2016phia")
 fs <- list(get(f, envir = asNamespace("arealutils")))
 
 #' Cross-validation
-# run_cv <- function(survey, type, inf_function) {
-#   message("Begin ", toupper(type), " cross-valdiation of ", f, " to the survey ", toupper(survey))
-#   sf <- st_read(paste0("depends/", survey, ".geojson"))
-#   training_sets <- bsae::create_folds(sf, type = toupper(type))
-#
-#   training_sets <- lapply(training_sets, function(x) {
-#     x$fit <- inf_function(x$data)
-#     return(x)
-#   })
-#
-#   return(training_sets)
-# }
-#
-# types <- list("loo", "sloo")
-# cv_pars <- expand.grid("survey" = surveys, "type" = types, "inf_function" = fs)
-# cv <- purrr::pmap(cv_pars, safely(run_cv))
+run_cv <- function(survey, type, inf_function) {
+  message("Begin ", toupper(type), " cross-valdiation of ", f, " to the survey ", toupper(survey))
+  sf <- readRDS(paste0("depends/", survey, ".rds"))
+
+  result <- lapply(1:nrow(sf), function(ii) {
+    fit <- inf_function(sf, ii_mis = ii - 1)
+    samples <- aghq::sample_marginal(fit, M = 1000)
+    x_samples <- samples$samps
+    beta_0_samples <- x_samples[1, ]
+    u_samples <- x_samples[1 + ii, ]
+    rho_samples <- plogis(u_samples + beta_0_samples)
+    summaries <- function(x) c(mean(x), quantile(x, c(0.5, 0.025, 0.975)))
+    rho_summaries <- summaries(rho_samples)
+    out <- c(rho_summaries, ii)
+    names(out) <- c("mean", "mode", "lower", "upper", "index")
+    return(out)
+  })
+
+  result <- bind_rows(result)
+  result$inf_model <- f
+  result$survey <- survey
+  return(result)
+}
+
+test <- run_cv(survey = "civ2017phia", type = "loo", inf_function = iid_aghq)
+
+ggplot(test, aes(x = index, y = mean, ymin = lower, ymax = upper)) +
+  geom_pointrange() +
+  theme_minimal()
+
+cv_pars <- expand.grid("survey" = surveys, "type" = types, "inf_function" = fs)
+cv <- purrr::pmap(cv_pars, safely(run_cv))
 
 saveRDS(NULL, file = "cv.rds")
 
