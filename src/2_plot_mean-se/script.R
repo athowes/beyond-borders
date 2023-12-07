@@ -25,7 +25,9 @@ df$result %>%
     )
   ) %>%
   ggplot(aes(x = inf_model, y = crps, col = inf_model)) +
-    geom_point(shape = 73, size = 10) +
+    stat_summary(fun = "mean", geom = "point", position = position_dodge(width = 0.5), size = 2.5) +
+    stat_summary(fun.data = mean_se, geom = "errorbar", fun.args = list(mult = 1.96), width = 0.2) +
+    geom_jitter(size = 2, width = 0.1, alpha = 0.5, shape = 1) +
     coord_flip() +
     labs(x = "Inferential model", y = "Continuous ranked probability score", col = "") +
     scale_colour_manual(values = cbpalette) +
