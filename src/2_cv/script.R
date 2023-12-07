@@ -6,12 +6,12 @@ surveys <- list("civ2017phia", "mwi2016phia", "tza2017phia", "zwe2016phia")
 fs <- list(get(f, envir = asNamespace("arealutils")))
 
 #' Cross-validation
-run_cv <- function(survey, type, inf_function) {
+run_cv <- function(survey, inf_function) {
   message("Begin ", toupper(type), " cross-valdiation of ", f, " to the survey ", toupper(survey))
   sf <- readRDS(paste0("depends/", survey, ".rds"))
 
   result <- lapply(1:nrow(sf), function(ii) {
-    fit <- inf_function(sf, ii_mis = ii - 1)
+    capture.output(fit <- inf_function(sf, ii_mis = ii - 1))
     samples <- aghq::sample_marginal(fit, M = 1000)
     x_samples <- samples$samps
     beta_0_samples <- x_samples[1, ]
@@ -30,16 +30,10 @@ run_cv <- function(survey, type, inf_function) {
   return(result)
 }
 
-test <- run_cv(survey = "civ2017phia", type = "loo", inf_function = iid_aghq)
-
-ggplot(test, aes(x = index, y = mean, ymin = lower, ymax = upper)) +
-  geom_pointrange() +
-  theme_minimal()
-
-cv_pars <- expand.grid("survey" = surveys, "type" = types, "inf_function" = fs)
+cv_pars <- expand.grid("survey" = surveys, "inf_function" = fs)
 cv <- purrr::pmap(cv_pars, safely(run_cv))
 
-saveRDS(NULL, file = "cv.rds")
+saveRDS(cv, file = "cv.rds")
 
 #' Information criteria and regular fitting
 run_ic <- function(survey, type, inf_function) {
