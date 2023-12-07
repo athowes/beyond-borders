@@ -1,11 +1,24 @@
 #' Uncomment and run the two line below to resume development of this script
-# orderly::orderly_develop_start("2_cv", parameters = list(f = "fik_aghq"))
+# orderly::orderly_develop_start("2_cv", parameters = list(f = "iid_aghq"))
 # setwd("src/2_cv")
 
 surveys <- list("civ2017phia", "mwi2016phia", "tza2017phia", "zwe2016phia")
 fs <- list(get(f, envir = asNamespace("arealutils")))
 
 #' Cross-validation
+summaries <- function(x, y) {
+  list(
+    "mean" = mean(x),
+    "upper" = stats::quantile(x, 0.975),
+    "mode" = stats::quantile(x, 0.5),
+    "lower" = stats::quantile(x, 0.025),
+    "mse" = mean((x - y)^2),
+    "crps" = arealutils::crps(x, y),
+    "q" = stats::ecdf(x)(y),
+    "truth" = y
+  )
+}
+
 run_cv <- function(survey, inf_function) {
   message("Begin ", toupper(type), " cross-valdiation of ", f, " to the survey ", toupper(survey))
   sf <- readRDS(paste0("depends/", survey, ".rds"))
@@ -17,10 +30,9 @@ run_cv <- function(survey, inf_function) {
     beta_0_samples <- x_samples[1, ]
     u_samples <- x_samples[1 + ii, ]
     rho_samples <- plogis(u_samples + beta_0_samples)
-    summaries <- function(x) c(mean(x), quantile(x, c(0.5, 0.025, 0.975)))
-    rho_summaries <- summaries(rho_samples)
-    out <- c(rho_summaries, ii)
-    names(out) <- c("mean", "mode", "lower", "upper", "index")
+    est <- sf$y[ii] / sf$n_obs[ii]
+    out <- summaries(rho_samples, est)
+    out[["index"]] <- ii
     return(out)
   })
 
@@ -32,6 +44,7 @@ run_cv <- function(survey, inf_function) {
 
 cv_pars <- expand.grid("survey" = surveys, "inf_function" = fs)
 cv <- purrr::pmap(cv_pars, safely(run_cv))
+# cv <- bind_rows(lapply(cv, function(x) ifelse(is.null(x$error), x, NULL)))
 
 saveRDS(cv, file = "cv.rds")
 
