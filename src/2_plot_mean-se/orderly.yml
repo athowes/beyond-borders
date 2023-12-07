@@ -1,0 +1,35 @@
+script: script.R
+
+artefacts:
+  - data:
+      description: Metric mean and standard error
+      filenames:
+        - crps-mean-se-1.png
+        - crps-mean-se-2.png
+        - crps-mean-se-3.png
+        - crps-mean-se-4.png
+
+packages:
+  - sf
+  - arealutils
+  - ggplot2
+  - dplyr
+  - reshape2
+  - viridis
+  - tikzDevice
+  - cubature
+  - magrittr
+  - gt
+  - tidyr
+  - sn
+  - purrr
+
+depends:
+  - 2_cv:
+     id: latest(parameter:f == "iid_aghq")
+     use:
+       depends/cv_iid.rds: cv.rds
+  - 2_cv:
+     id: latest(parameter:f == "besag_aghq")
+     use:
+       depends/cv_besag.rds: cv.rds
