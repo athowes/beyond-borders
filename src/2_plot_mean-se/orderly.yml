@@ -4,10 +4,10 @@ artefacts:
   - data:
       description: Metric mean and standard error
       filenames:
-        - crps-mean-se-1.png
-        - crps-mean-se-2.png
-        - crps-mean-se-3.png
-        - crps-mean-se-4.png
+        - crps-mean-se-civ2017phia.png
+        - crps-mean-se-mwi2016phia.png
+        - crps-mean-se-tza2017phia.png
+        - crps-mean-se-zwe2016phia.png
 
 packages:
   - sf
@@ -33,3 +33,19 @@ depends:
      id: latest(parameter:f == "besag_aghq")
      use:
        depends/cv_besag.rds: cv.rds
+  - 2_cv:
+     id: latest(parameter:f == "bym2_aghq")
+     use:
+       depends/cv_bym2.rds: cv.rds
+  - 2_cv:
+     id: latest(parameter:f == "fck_aghq")
+     use:
+       depends/cv_fck.rds: cv.rds
+  - 2_cv:
+     id: latest(parameter:f == "fik_aghq")
+     use:
+       depends/cv_fik.rds: cv.rds
+  - 2_cv:
+     id: latest(parameter:f == "ck_aghq")
+     use:
+       depends/cv_ck.rds: cv.rds

@@ -19,6 +19,8 @@ summaries <- function(x, y) {
   )
 }
 
+type <- "loo"
+
 run_cv <- function(survey, inf_function) {
   message("Begin ", toupper(type), " cross-valdiation of ", f, " to the survey ", toupper(survey))
   sf <- readRDS(paste0("depends/", survey, ".rds"))
