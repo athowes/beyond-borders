@@ -1,15 +1,13 @@
 script: script.R
 
-sources:
-  - functions.R
-
 artefacts:
   - data:
-      description: Metric boxplots (HIV study)
+      description: Metric  maps
       filenames:
-        - crps-map-hiv-surveys-no-constant.pdf
-        - mse-map-hiv-surveys-no-constant.pdf
-        - mae-map-hiv-surveys-no-constant.pdf
+        - map-civ2017phia.png
+        - map-mwi2016phia.png
+        - map-tza2017phia.png
+        - map-zwe2016phia.png
 
 packages:
   - sf
@@ -30,14 +28,34 @@ packages:
   - ggplotify
 
 depends:
-  2_assess_cv:
-    id: latest
-    use:
-      depends/df.rds: manual.rds
-  2_process_hiv-surveys:
-    id: latest
-    use:
-      depends/civ2017phia.geojson: civ2017phia.geojson
-      depends/mwi2016phia.geojson: mwi2016phia.geojson
-      depends/tza2017phia.geojson: tza2017phia.geojson
-      depends/zwe2016phia.geojson: zwe2016phia.geojson
+  - 2_cv:
+     id: latest(parameter:f == "iid_aghq")
+     use:
+       depends/cv_iid.rds: cv.rds
+  - 2_cv:
+     id: latest(parameter:f == "besag_aghq")
+     use:
+       depends/cv_besag.rds: cv.rds
+  - 2_cv:
+     id: latest(parameter:f == "bym2_aghq")
+     use:
+       depends/cv_bym2.rds: cv.rds
+  - 2_cv:
+     id: latest(parameter:f == "fck_aghq")
+     use:
+       depends/cv_fck.rds: cv.rds
+  - 2_cv:
+     id: latest(parameter:f == "fik_aghq")
+     use:
+       depends/cv_fik.rds: cv.rds
+  - 2_cv:
+     id: latest(parameter:f == "ck_aghq")
+     use:
+       depends/cv_ck.rds: cv.rds
+  - 2_process_surveys:
+      id: latest
+      use:
+        depends/civ2017phia.rds: civ2017phia.rds
+        depends/mwi2016phia.rds: mwi2016phia.rds
+        depends/tza2017phia.rds: tza2017phia.rds
+        depends/zwe2016phia.rds: zwe2016phia.rds

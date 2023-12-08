@@ -33,6 +33,6 @@ run_commit_push("2_cv", param = list(f = "ik_aghq"))       #' [ ]
 
 #' 3. Post-process
 run_commit_push("2_plot_mean-se")    #' [x]
+run_commit_push("2_plot_maps")       #' [ ]
 run_commit_push("2_plot_ladder")     #' [ ]
 run_commit_push("2_process_tables")  #' [ ]
-run_commit_push("2_plot_maps")       #' [ ]

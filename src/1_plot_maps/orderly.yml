@@ -2,7 +2,7 @@ script: script.R
 
 artefacts:
   - data:
-      description: Metric boxplots
+      description: Metric maps
       filenames:
         - map-crps-1.png
         - map-crps-2.png
