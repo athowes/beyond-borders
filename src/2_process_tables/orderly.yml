@@ -1,0 +1,48 @@
+script: script.R
+
+artefacts:
+  - data:
+      description: Metric tables
+      filenames:
+        - gt_cv-crps.rds
+
+packages:
+  - sf
+  - arealutils
+  - ggplot2
+  - dplyr
+  - reshape2
+  - viridis
+  - tikzDevice
+  - cubature
+  - magrittr
+  - gt
+  - tidyr
+  - sn
+  - purrr
+
+depends:
+  - 2_cv:
+     id: latest(parameter:f == "iid_aghq")
+     use:
+       depends/cv_iid.rds: cv.rds
+  - 2_cv:
+     id: latest(parameter:f == "besag_aghq")
+     use:
+       depends/cv_besag.rds: cv.rds
+  - 2_cv:
+     id: latest(parameter:f == "bym2_aghq")
+     use:
+       depends/cv_bym2.rds: cv.rds
+  - 2_cv:
+     id: latest(parameter:f == "fck_aghq")
+     use:
+       depends/cv_fck.rds: cv.rds
+  - 2_cv:
+     id: latest(parameter:f == "fik_aghq")
+     use:
+       depends/cv_fik.rds: cv.rds
+  - 2_cv:
+     id: latest(parameter:f == "ck_aghq")
+     use:
+       depends/cv_ck.rds: cv.rds

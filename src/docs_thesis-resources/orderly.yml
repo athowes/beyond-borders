@@ -68,6 +68,10 @@ depends:
        depends/map-mwi2016phia.png: map-mwi2016phia.png
        depends/map-tza2017phia.png: map-tza2017phia.png
        depends/map-zwe2016phia.png: map-zwe2016phia.png
+  - 2_process_tables:
+     id: latest
+     use:
+       depends/gt_cv-crps.rds: gt_cv-crps.rds
   - 2_plot_ladder:
      id: latest
      use:
