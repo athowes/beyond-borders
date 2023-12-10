@@ -72,6 +72,13 @@ depends:
      id: latest
      use:
        depends/gt_cv-crps.rds: gt_cv-crps.rds
+  - 2_plot_coverage:
+     id: latest
+     use:
+       depends/histogram-ecdf-diff-civ2017phia.png: histogram-ecdf-diff-civ2017phia.png
+       depends/histogram-ecdf-diff-mwi2016phia.png: histogram-ecdf-diff-mwi2016phia.png
+       depends/histogram-ecdf-diff-tza2017phia.png: histogram-ecdf-diff-tza2017phia.png
+       depends/histogram-ecdf-diff-zwe2016phia.png: histogram-ecdf-diff-zwe2016phia.png
   - 2_plot_ladder:
      id: latest
      use:
