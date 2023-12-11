@@ -17,6 +17,7 @@ df <- bind_rows(
 
 df_crps <- df %>%
   mutate(
+    type = toupper(type),
     inf_model = recode_factor(
       inf_model,
       "constant_aghq" = "Constant",
@@ -36,7 +37,7 @@ df_crps <- df %>%
       "zwe2016phia" = "Zimbabwe, PHIA 2016"
     )
   ) %>%
-  group_by(inf_model, survey) %>%
+  group_by(inf_model, type, survey) %>%
   filter(!is.na(crps)) %>%
   summarise(
     mean = mean(crps),
@@ -48,8 +49,8 @@ gt_crps <- df_crps %>%
   select(Survey = survey, inf_model, value) %>%
   spread(inf_model, value) %>%
   gt() %>%
-  tab_spanner(label = "Continuous ranked probability score (m)", columns = -Survey) %>%
-  sub_missing(missing_text = "-") %>%
-  cols_align(align = "left", columns = "Survey")
+  cols_align(align = "left", columns = "Survey") %>%
+  tab_spanner(label = "Continuous ranked probability score (units: 1/1000)", columns = -Survey) %>%
+  sub_missing(missing_text = "-")
 
 saveRDS(gt_crps, "gt_cv-crps.rds")

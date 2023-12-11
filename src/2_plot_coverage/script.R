@@ -17,7 +17,7 @@ df <- bind_rows(
 
 survey_names <- unique(df$survey)
 
-title <- c(
+subtitle <- c(
   "Côte d’Ivoire, PHIA 2017",
   "Malawi, PHIA 2016",
   "Tanzania, PHIA 2017",
@@ -30,6 +30,7 @@ lapply(seq_along(survey_names), function(i) {
   df <- df %>%
     filter(survey == as.character(x)) %>%
     mutate(
+      type = toupper(type),
       inf_model = recode_factor(
         inf_model,
         "constant_aghq" = "Constant",
@@ -60,10 +61,10 @@ lapply(seq_along(survey_names), function(i) {
   )
 
   figA <- ggplot(df, aes(x = q)) +
-    facet_grid(. ~ inf_model, drop = TRUE, scales = "free") +
+    facet_grid(type ~ inf_model, drop = TRUE, scales = "free") +
     geom_histogram(aes(y = (..count..) / tapply(..count..,..PANEL..,sum)[..PANEL..]), breaks = seq(0, 1, length.out = bins + 1), fill = "#009E73", col = "black", alpha = 0.9) +
     geom_polygon(data = polygon_data, aes(x = x, y = y), fill = "grey75", color = "grey50", alpha = 0.4) +
-    labs(x = "", y = "", title = title[i]) +
+    labs(x = "", y = "", subtitle = subtitle[i]) +
     scale_x_continuous(breaks = c(0, 0.5, 1), labels = c(0, 0.5, 1)) +
     theme_minimal() +
     theme(
@@ -76,7 +77,7 @@ lapply(seq_along(survey_names), function(i) {
 
   figB <- df %>%
     filter(!is.na(q)) %>%
-    split(~ inf_model) %>%
+    split(~ inf_model + type) %>%
     lapply(function(y) {
       empirical_coverage <- purrr::map_dbl(seq(0, 1, by = 0.01), ~ multi.utils::empirical_coverage(y$q, .x))
       data.frame(nominal_coverage = seq(0, 1, by = 0.01), empirical_coverage = empirical_coverage) %>%
@@ -86,12 +87,14 @@ lapply(seq_along(survey_names), function(i) {
           ecdf_diff_upper = lims$upper / S - nominal_coverage,
         )
     }) %>%
-    purrr::map_df(~ as.data.frame(.x), .id = "inf_model") %>%
+    purrr::map_df(~ as.data.frame(.x), .id = "indicator") %>%
+    separate(indicator, c("inf_model", "type")) %>%
     mutate(
-      inf_model = forcats::fct_relevel(inf_model, "IID", "Besag", "BYM2", "FCK", "FIK", "CK", "IK")
+      inf_model = forcats::fct_relevel(inf_model, "IID", "Besag", "BYM2", "FCK", "FIK", "CK", "IK"),
+      type = forcats::fct_relevel(type, "LOO", "SLOO")
     ) %>%
     ggplot(aes(x = nominal_coverage, y = ecdf_diff)) +
-    facet_grid(. ~ inf_model, drop = TRUE, scales = "free") +
+    facet_grid(type ~ inf_model, drop = TRUE, scales = "free") +
     geom_line(col = "#009E73") +
     geom_step(aes(x = nominal_coverage, y = ecdf_diff_upper), alpha = 0.7, col = "grey50") +
     geom_step(aes(x = nominal_coverage, y = ecdf_diff_lower), alpha = 0.7, col = "grey50") +

@@ -61,6 +61,7 @@ depends:
        depends/crps-mean-se-mwi2016phia.png: crps-mean-se-mwi2016phia.png
        depends/crps-mean-se-tza2017phia.png: crps-mean-se-tza2017phia.png
        depends/crps-mean-se-zwe2016phia.png: crps-mean-se-zwe2016phia.png
+       depends/crps-mean-se-surveys.png: crps-mean-se-surveys.png
   - 2_plot_maps:
      id: latest
      use:

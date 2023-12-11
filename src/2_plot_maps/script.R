@@ -1,6 +1,6 @@
 #' Uncomment and run the two line below to resume development of this script
 # orderly::orderly_develop_start("2_plot_maps")
-# setwd("src/plot_maps")
+# setwd("src/2_plot_maps")
 
 discard_fails <- function(x) {
   lapply(x, function(y) y$result)
@@ -25,6 +25,7 @@ lapply(seq_along(survey_names), function(i) {
   df %>%
     filter(survey == x) %>%
     mutate(
+      type = toupper(type),
       inf_model = recode_factor(
         inf_model,
         "constant_aghq" = "Constant",
@@ -47,7 +48,7 @@ lapply(seq_along(survey_names), function(i) {
     ggplot(aes(fill = log(crps))) +
     geom_sf(size = 0.1, colour = scales::alpha("grey", 0.25)) +
     scale_fill_viridis_c(option = "E") +
-    facet_wrap(~ inf_model) +
+    facet_wrap(~ inf_model + type) +
     theme_minimal() +
     labs(fill = "log(CRPS)") +
     theme(
