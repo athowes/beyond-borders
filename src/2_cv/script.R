@@ -2,6 +2,7 @@
 # orderly::orderly_develop_start("2_cv", parameters = list(f = "iid_aghq"))
 # setwd("src/2_cv")
 
+types <- list("loo", "sloo")
 surveys <- list("civ2017phia", "mwi2016phia", "tza2017phia", "zwe2016phia")
 fs <- list(get(f, envir = asNamespace("arealutils")))
 
@@ -19,10 +20,11 @@ summaries <- function(x, y) {
   )
 }
 
-type <- "loo"
-
-run_cv <- function(survey, inf_function) {
+run_cv <- function(survey, type, inf_function) {
   message("Begin ", toupper(type), " cross-valdiation of ", f, " to the survey ", toupper(survey))
+
+  if(type == "sloo") { return(NULL) } # Not implemented yet!
+
   sf <- readRDS(paste0("depends/", survey, ".rds"))
 
   result <- lapply(1:nrow(sf), function(ii) {
@@ -44,7 +46,7 @@ run_cv <- function(survey, inf_function) {
   return(result)
 }
 
-cv_pars <- expand.grid("survey" = surveys, "inf_function" = fs)
+cv_pars <- expand.grid("survey" = surveys, "type" = types, "inf_function" = fs)
 cv <- purrr::pmap(cv_pars, safely(run_cv))
 # cv <- bind_rows(lapply(cv, function(x) ifelse(is.null(x$error), x, NULL)))
 
