@@ -2,8 +2,8 @@
 # orderly::orderly_develop_start("2_cv", parameters = list(f = "iid_aghq"))
 # setwd("src/2_cv")
 
-types <- list("loo", "sloo")
 surveys <- list("civ2017phia", "mwi2016phia", "tza2017phia", "zwe2016phia")
+types <- list("loo", "sloo")
 fs <- list(get(f, envir = asNamespace("arealutils")))
 
 #' Cross-validation
@@ -23,25 +23,51 @@ summaries <- function(x, y) {
 run_cv <- function(survey, type, inf_function) {
   message("Begin ", toupper(type), " cross-valdiation of ", f, " to the survey ", toupper(survey))
 
-  if(type == "sloo") { return(NULL) } # Not implemented yet!
-
   sf <- readRDS(paste0("depends/", survey, ".rds"))
 
-  result <- lapply(1:nrow(sf), function(ii) {
-    capture.output(fit <- inf_function(sf, ii_mis = ii - 1))
+  index <- which(!is.na(sf$y))
+  n <- length(index)
+  training_indices <- vector(mode = "list", length = n)
+
+  if(type == "sloo"){
+    nb <- sf_to_nb(sf)
+    nb <- lapply(nb, FUN = function(region) {
+      if(region[1] == 0) {
+        return(NULL)
+      } else {
+        return(region)
+      }
+    })
+    for(i in index) {
+      sf_new <- sf
+      i_neighbours <- nb[[i]]
+      held_out <- c(i, i_neighbours)
+      training_indices[[i]] <- list(held_out = held_out, predict_on = i)
+    }
+  }
+
+  if(type == "loo"){
+    for(i in index){
+      training_indices[[i]] <- list(held_out = i, predict_on = i)
+    }
+  }
+
+  result <- lapply(training_indices, function(x) {
+    capture.output(fit <- inf_function(sf, ii_mis = x$held_out - 1))
     samples <- aghq::sample_marginal(fit, M = 1000)
     x_samples <- samples$samps
     beta_0_samples <- x_samples[1, ]
-    u_samples <- x_samples[1 + ii, ]
+    u_samples <- x_samples[1 + x$predict_on, ]
     rho_samples <- plogis(u_samples + beta_0_samples)
-    est <- sf$y[ii] / sf$n_obs[ii]
+    est <- sf$y[x$predict_on] / sf$n_obs[x$predict_on]
     out <- summaries(rho_samples, est)
-    out[["index"]] <- ii
+    out[["index"]] <- x$predict_on
     return(out)
   })
 
   result <- bind_rows(result)
   result$inf_model <- f
+  result$type <- type
   result$survey <- survey
   return(result)
 }
