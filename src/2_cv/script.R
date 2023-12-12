@@ -53,7 +53,7 @@ run_cv <- function(survey, type, inf_function) {
   }
 
   result <- lapply(training_indices, function(x) {
-    capture.output(fit <- inf_function(sf, ii_mis = x$held_out - 1))
+    capture.output(fit <- inf_function(sf, ii = x$held_out - 1))
     samples <- aghq::sample_marginal(fit, M = 1000)
     x_samples <- samples$samps
     beta_0_samples <- x_samples[1, ]
@@ -82,7 +82,7 @@ saveRDS(cv, file = "cv.rds")
 run_ic <- function(survey, type, inf_function) {
   message("Begin fitting of ", f, " to the survey ", toupper(survey))
   sf <- readRDS(paste0("depends/", survey, ".rds"))
-  capture.output(fit <- inf_function(sf, ii_mis = NULL))
+  capture.output(fit <- inf_function(sf, ii = NULL))
   samples <- aghq::sample_marginal(fit, M = 1000)
   x_samples <- samples$samps
   u_samples <- x_samples[rownames(x_samples) == "u", ]
