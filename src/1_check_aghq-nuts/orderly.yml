@@ -7,11 +7,12 @@ artefacts:
         - iid-aghq-nuts.png
         - besag-aghq-nuts.png
         - bym2-aghq-nuts.png
-        # - fck-aghq-nuts.png
+        - fck-aghq-nuts.png
         # - fik-aghq-nuts.png
         # - ck-aghq-nuts.png
         - time.csv
         - time-taken.png
+        - diagnostics.csv
 
 packages:
   - sf
