@@ -28,27 +28,27 @@ packages:
   - ggplotify
 
 depends:
-  - 2_cv:
+  - 2_ic:
      id: latest(parameter:f == "iid_aghq")
      use:
        depends/ic_iid.rds: ic.rds
-  - 2_cv:
+  - 2_ic:
      id: latest(parameter:f == "besag_aghq")
      use:
        depends/ic_besag.rds: ic.rds
-  - 2_cv:
+  - 2_ic:
      id: latest(parameter:f == "bym2_aghq")
      use:
        depends/ic_bym2.rds: ic.rds
-  - 2_cv:
-     id: latest(parameter:f == "fck_aghq")
-     use:
-       depends/ic_fck.rds: ic.rds
-  - 2_cv:
-     id: latest(parameter:f == "fik_aghq")
-     use:
-       depends/ic_fik.rds: ic.rds
-  - 2_cv:
-     id: latest(parameter:f == "ck_aghq")
-     use:
-       depends/ic_ck.rds: ic.rds
+  # - 2_ic:
+  #    id: latest(parameter:f == "fck_aghq")
+  #    use:
+  #      depends/ic_fck.rds: ic.rds
+  # - 2_ic:
+  #    id: latest(parameter:f == "fik_aghq")
+  #    use:
+  #      depends/ic_fik.rds: ic.rds
+  # - 2_ic:
+  #    id: latest(parameter:f == "ck_aghq")
+  #    use:
+  #      depends/ic_ck.rds: ic.rds

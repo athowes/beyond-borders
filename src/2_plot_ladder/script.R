@@ -4,19 +4,18 @@
 
 ic <- list(
   "iid" = readRDS("depends/ic_iid.rds"),
-  "besag" = readRDS("depends/ic_besag.rds"),
-  "bym2" = readRDS("depends/ic_bym2.rds"),
-  "fck" = readRDS("depends/ic_fck.rds"),
-  "fik" = readRDS("depends/ic_fik.rds"),
-  "ck" = readRDS("depends/ic_ck.rds")
+  "besag" = readRDS("depends/ic_besag.rds")
+  # "bym2" = readRDS("depends/ic_bym2.rds"),
+  # "fck" = readRDS("depends/ic_fck.rds"),
+  # "fik" = readRDS("depends/ic_fik.rds"),
+  # "ck" = readRDS("depends/ic_ck.rds")
 )
 
 n_methods <- length(ic)
 
 cbpalette <- c("#999999", "#56B4E9","#009E73", "#E69F00", "#F0E442", "#0072B2", "#D55E00", "#CC79A7")
 
-#' 3 has an error for BYM2
-lapply(c(1, 2, 4), function(i) {
+lapply(1:4, function(i) {
   df <- purrr::map_df(ic, i)$result %>%
     mutate(inf_model = recode_factor(
       inf_model,
