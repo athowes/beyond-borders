@@ -4,7 +4,8 @@ artefacts:
   - data:
       description: Lengthscale prior comparison
       filenames:
-        - temp.png
+        - lengthscale-prior.png
+        - lengthscale-posterior.png
 
 resources:
   - stan
@@ -24,9 +25,8 @@ packages:
   - sn
   - purrr
 
-1_sim_geometries:
-  id: latest
-  use:
-    depends/data_iid_grid.rds: data_iid_grid.rds
-    depends/data_icar_grid.rds: data_icar_grid.rds
-    depends/data_ik_grid.rds: data_ik_grid.rds
+depends:
+  1_sim_geometries:
+    id: latest
+    use:
+      depends/data_ik_grid.rds: data_ik_grid.rds

@@ -22,5 +22,6 @@ run_commit_push("1_plot_lengthscales") #' [x]
 run_commit_push("1_plot_proportions")  #' [x]
 
 #' 5. Checks
-run_commit_push("1_check_aghq-nuts") #' [x]
-run_commit_push("1_checks")          #' [ ]
+run_commit_push("1_check_aghq-nuts")         #' [x]
+run_commit_push("1_check_lengthscale-prior") #' [x]
+run_commit_push("1_checks")                  #' [ ]

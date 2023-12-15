@@ -42,6 +42,11 @@ depends:
        depends/histogram-ecdf-diff-grid.png: histogram-ecdf-diff-grid.png
        depends/histogram-ecdf-diff-civ.png: histogram-ecdf-diff-civ.png
        depends/histogram-ecdf-diff-tex.png: histogram-ecdf-diff-tex.png
+  - 1_check_lengthscale-prior:
+     id: latest
+     use:
+      depends/lengthscale-prior.png: lengthscale-prior.png
+      depends/lengthscale-posterior.png: lengthscale-posterior.png
   - 1_check_aghq-nuts:
      id: latest
      use:

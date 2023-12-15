@@ -49,7 +49,7 @@ transformed parameters {
 
 model {
   matrix[n, n] K = cov_matern32(D, l);
-  l ~ normal(2.5, 1);
+  l ~ lognormal(0, 1);
   sigma_phi ~ normal(0, 2.5); // Weakly informative prior
   beta_0 ~ normal(-2, 1);
   phi ~ multi_normal(mu, K);
