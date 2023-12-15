@@ -12,13 +12,13 @@ D <- centroid_distance(sf)
 dat <- list(n = nrow(sf), y = sf$y, m = sf$n_obs, mu = rep(0, nrow(sf)), D = D)
 
 # No prior on l (uniform): this shouldn't be a good idea
-fit_non <- rstan::stan("stan/non-informative.stan", data = dat, warmup = 100, iter = 1000)
+fit_non <- rstan::stan("stan/non-informative.stan", data = dat, iter = 2000)
 
 # Nice visual checking tool: a lot of between chain posterior variability would be a bad sign
 bayesplot::mcmc_hist_by_chain(fit_non, pars = "l")
 
 # l ~ Gamma(1, 1)
-fit_gamma <- rstan::stan("stan/gamma_.stan", data = dat, warmup = 100, iter = 1000)
+fit_gamma <- rstan::stan("stan/gamma_.stan", data = dat, iter = 2000)
 
 bayesplot::mcmc_hist_by_chain(fit_gamma, pars = "l")
 
@@ -29,12 +29,12 @@ lb <- min(dist) # Could do dist[dist > 0] here but results in lb = 1
 lb <- 0.1
 ub <- max(dist)
 (ub - lb) / 3 # Approximately 2.3
-fit_normal_data <- rstan::stan("stan/normal-data.stan", data = dat, warmup = 100, iter = 1000)
+fit_normal_data <- rstan::stan("stan/normal-data.stan", data = dat, iter = 2000)
 
 bayesplot::mcmc_hist_by_chain(fit_normal_data, pars = "l")
 
 # l ~ N(2.5, 1): Informative prior at the true value
-fit_normal_inform <- rstan::stan("stan/informative.stan", data = dat, warmup = 100, iter = 1000)
+fit_normal_inform <- rstan::stan("stan/informative.stan", data = dat, iter = 2000)
 
 bayesplot::mcmc_hist_by_chain(fit_normal_inform, pars = "l")
 
@@ -62,11 +62,11 @@ opt_res <- nleqslv::nleqslv(
 
 exp(opt_res$x) # Approximately a = 1.7, b = 0.6
 
-fit_invgamma_data <- rstan::stan("stan/invgamma-data.stan", data = dat, warmup = 100, iter = 1000)
+fit_invgamma_data <- rstan::stan("stan/invgamma-data.stan", data = dat, iter = 2000)
 
 bayesplot::mcmc_hist_by_chain(fit_invgamma_data, pars = "l")
 
-fit_lognormal <- rstan::stan("stan/log-normal.stan", data = dat, warmup = 100, iter = 1000)
+fit_lognormal <- rstan::stan("stan/log-normal.stan", data = dat, iter = 2000)
 
 bayesplot::mcmc_hist_by_chain(fit_lognormal, pars = "l")
 
