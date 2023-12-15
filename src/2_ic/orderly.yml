@@ -2,9 +2,9 @@ script: script.R
 
 artefacts:
   - data:
-      description: Cross-validation results
+      description: Information criterion results
       filenames:
-        - cv.rds
+        - ic.rds
 
 parameters:
   f:

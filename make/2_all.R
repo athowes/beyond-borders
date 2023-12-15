@@ -31,6 +31,16 @@ run_commit_push("2_cv", param = list(f = "fik_aghq"))      #' [x]
 run_commit_push("2_cv", param = list(f = "ck_aghq"))       #' [x]
 run_commit_push("2_cv", param = list(f = "ik_aghq"))       #' [ ]
 
+#' 3. Fits without left out data
+run_commit_push("2_ic", param = list(f = "constant_aghq")) #' [ ]
+run_commit_push("2_ic", param = list(f = "iid_aghq"))      #' [ ]
+run_commit_push("2_ic", param = list(f = "besag_aghq"))    #' [ ]
+run_commit_push("2_ic", param = list(f = "bym2_aghq"))     #' [ ]
+run_commit_push("2_ic", param = list(f = "fck_aghq"))      #' [ ]
+run_commit_push("2_ic", param = list(f = "fik_aghq"))      #' [ ]
+run_commit_push("2_ic", param = list(f = "ck_aghq"))       #' [ ]
+run_commit_push("2_ic", param = list(f = "ik_aghq"))       #' [ ]
+
 #' 3. Post-process
 run_commit_push("2_plot_mean-se")    #' [x]
 run_commit_push("2_plot_maps")       #' [x]
