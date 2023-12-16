@@ -29,6 +29,12 @@ run_cv <- function(survey, type, inf_function) {
   n <- length(index)
   training_indices <- vector(mode = "list", length = n)
 
+  if(type == "loo"){
+    for(i in index){
+      training_indices[[i]] <- list(held_out = i, predict_on = i)
+    }
+  }
+
   if(type == "sloo"){
     nb <- sf_to_nb(sf)
     nb <- lapply(nb, FUN = function(region) {
@@ -43,12 +49,6 @@ run_cv <- function(survey, type, inf_function) {
       i_neighbours <- nb[[i]]
       held_out <- c(i, i_neighbours)
       training_indices[[i]] <- list(held_out = held_out, predict_on = i)
-    }
-  }
-
-  if(type == "loo"){
-    for(i in index){
-      training_indices[[i]] <- list(held_out = i, predict_on = i)
     }
   }
 

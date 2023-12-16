@@ -4,11 +4,11 @@
 
 ic <- list(
   "iid" = readRDS("depends/ic_iid.rds"),
-  "besag" = readRDS("depends/ic_besag.rds")
-  # "bym2" = readRDS("depends/ic_bym2.rds"),
-  # "fck" = readRDS("depends/ic_fck.rds"),
-  # "fik" = readRDS("depends/ic_fik.rds"),
-  # "ck" = readRDS("depends/ic_ck.rds")
+  "besag" = readRDS("depends/ic_besag.rds"),
+  # "bym2" = readRDS("depends/ic_bym2.rds")
+  "fck" = readRDS("depends/ic_fck.rds"),
+  "fik" = readRDS("depends/ic_fik.rds"),
+  "ck" = readRDS("depends/ic_ck.rds")
 )
 
 n_methods <- length(ic)
@@ -19,7 +19,6 @@ lapply(1:4, function(i) {
   df <- purrr::map_df(ic, i)$result %>%
     mutate(inf_model = recode_factor(
       inf_model,
-      "constant_aghq" = "Constant",
       "iid_aghq" = "IID",
       "besag_aghq" = "Besag",
       "bym2_aghq" = "BYM2",
@@ -28,6 +27,8 @@ lapply(1:4, function(i) {
       "fik_aghq" = "FIK",
       "ik_aghq" = "IK"
     ))
+
+  # sf <- read_sf(paste0("depends/", tolower(substr(df$survey[1], 1, 3)), "_areas.geojson"))
 
   df_direct <- df %>%
     filter(inf_model == "IID") %>%
@@ -40,13 +41,17 @@ lapply(1:4, function(i) {
     geom_point(aes(x = forcats::fct_reorder(area_name, direct), y = direct, col = inf_model), size = 3, shape = 15, alpha = 0.8) +
     geom_pointrange(data = df, aes(x = area_name, y = mean, ymin = lower, ymax = upper, col = inf_model), position = position_dodge(width = 0.6), alpha = 0.8) +
     coord_flip() +
+    facet_wrap(inf_model ~ ., ncol = 2) +
     scale_y_continuous(labels = scales::percent) +
     scale_colour_manual(values = cbpalette, breaks = c("Direct", "IID", "Besag", "BYM2", "FCK", "FIK", "CK")) +
-    labs(x = "Area name", y = "Prevalence estimate", col = "Inferential model") +
+    labs(x = "Area (ordered by direct prevalence)", y = "Prevalence estimate", col = "Inferential model") +
     guides(col = guide_legend(override.aes = list(shape = c(15, rep(16, n_methods)), linetype = rep(0, n_methods + 1)))) +
     theme_minimal() +
     theme(
-      legend.position = "bottom"
+      legend.position = "bottom",
+      axis.text.y = element_blank(),
+      axis.ticks.y = element_blank(),
+      panel.grid.major = element_blank()
     )
 
   ggsave(paste0("ladder-", tolower(df$survey_id[1]), ".png"), h = 8.5, w = 6.25, bg = "white")

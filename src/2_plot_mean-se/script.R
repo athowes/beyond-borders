@@ -6,6 +6,13 @@ discard_fails <- function(x) {
   lapply(x, function(y) y$result)
 }
 
+fct_case_when <- function(...) {
+  args <- as.list(match.call())
+  levels <- sapply(args[-1], function(f) f[[3]])
+  levels <- levels[!is.na(levels)]
+  factor(dplyr::case_when(...), levels=levels)
+}
+
 df <- bind_rows(
   discard_fails(readRDS("depends/cv_iid.rds")),
   discard_fails(readRDS("depends/cv_besag.rds")),
@@ -36,13 +43,6 @@ df <- bind_rows(
 
 cbpalette <- c("#56B4E9","#009E73", "#E69F00", "#F0E442", "#0072B2", "#D55E00", "#CC79A7")
 
-fct_case_when <- function(...) {
-  args <- as.list(match.call())
-  levels <- sapply(args[-1], function(f) f[[3]])
-  levels <- levels[!is.na(levels)]
-  factor(dplyr::case_when(...), levels=levels)
-}
-
 survey_names <- unique(df$survey)
 
 subtitle <- c(
@@ -58,8 +58,8 @@ lapply(seq_along(survey_names), function(i) {
   df %>%
     filter(survey == x) %>%
     ggplot(aes(x = forcats::fct_rev(inf_model), y = crps, col = inf_model_type)) +
-    geom_jitter(size = 1.5, width = 0.05, alpha = 0.8, shape = 1, col = "grey75") +
-    stat_summary(fun = "mean", geom = "point", position = position_dodge(width = 0.5), size = 3) +
+    geom_jitter(size = 1.5, width = 0.1, alpha = 0.4, shape = 1) +
+    stat_summary(fun = "mean", geom = "point", size = 3) +
     stat_summary(fun.data = mean_se, geom = "errorbar", fun.args = list(mult = 1.96), width = 0.3) +
     coord_flip() +
     facet_grid(type ~ .) +

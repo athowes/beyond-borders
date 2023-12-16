@@ -48,7 +48,10 @@ surveys <- lapply(iso3, function(x) {
   sf <- st_transform(sf, utm_crs)
 
   #' Remove the islands from Malawi
-  if(x == "mwi") sf <- filter(sf, !(area_name %in% c("Likoma", "Chizumulu")))
+  if(x == "mwi") sf <- filter(sf, !(area_name %in% c("Likoma")))
+
+  #' Remove the islands from Tanzania
+  if(x == "tza") sf <- filter(sf, !(area_name %in% c("Kaskazini Unguja", "Kusini Unguja", "Mjini Magharibi", "Kaskazini Pemba", "Kusini Pemba")))
 
   saveRDS(sf, paste0(tolower(survey_name[toupper(x)]), ".rds"))
 

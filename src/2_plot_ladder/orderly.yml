@@ -28,6 +28,22 @@ packages:
   - ggplotify
 
 depends:
+  - civ_data_areas:
+     id: latest
+     use:
+       depends/civ_areas.geojson: civ_areas.geojson
+  - mwi_data_areas:
+     id: latest
+     use:
+       depends/mwi_areas.geojson: mwi_areas.geojson
+  - tza_data_areas:
+     id: latest
+     use:
+       depends/tza_areas.geojson: tza_areas.geojson
+  - zwe_data_areas:
+     id: latest
+     use:
+       depends/zwe_areas.geojson: zwe_areas.geojson
   - 2_ic:
      id: latest(parameter:f == "iid_aghq")
      use:
@@ -40,15 +56,15 @@ depends:
      id: latest(parameter:f == "bym2_aghq")
      use:
        depends/ic_bym2.rds: ic.rds
-  # - 2_ic:
-  #    id: latest(parameter:f == "fck_aghq")
-  #    use:
-  #      depends/ic_fck.rds: ic.rds
-  # - 2_ic:
-  #    id: latest(parameter:f == "fik_aghq")
-  #    use:
-  #      depends/ic_fik.rds: ic.rds
-  # - 2_ic:
-  #    id: latest(parameter:f == "ck_aghq")
-  #    use:
-  #      depends/ic_ck.rds: ic.rds
+  - 2_ic:
+     id: latest(parameter:f == "fck_aghq")
+     use:
+       depends/ic_fck.rds: ic.rds
+  - 2_ic:
+     id: latest(parameter:f == "fik_aghq")
+     use:
+       depends/ic_fik.rds: ic.rds
+  - 2_ic:
+     id: latest(parameter:f == "ck_aghq")
+     use:
+       depends/ic_ck.rds: ic.rds
