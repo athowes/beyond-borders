@@ -42,6 +42,14 @@ depends:
        depends/histogram-ecdf-diff-grid.png: histogram-ecdf-diff-grid.png
        depends/histogram-ecdf-diff-civ.png: histogram-ecdf-diff-civ.png
        depends/histogram-ecdf-diff-tex.png: histogram-ecdf-diff-tex.png
+  - 1_plot_lengthscales:
+     id: latest
+     use:
+      depends/lengthscale-recovery.png: lengthscale-recovery.png
+  - 1_plot_proportions:
+     id: latest
+     use:
+      depends/proportion-recovery.png: proportion-recovery.png
   - 1_check_lengthscale-prior:
      id: latest
      use:

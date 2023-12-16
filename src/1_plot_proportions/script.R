@@ -11,11 +11,11 @@ df %>%
   ) %>%
   arealutils::update_naming() %>%
   ggplot(aes(x = as.factor(replicate), y = mean)) +
-    geom_point(alpha = 0.5) +
-    geom_errorbar(aes(ymin = lower, ymax = upper), alpha = 0.5) +
-    facet_grid(geometry ~ sim_model) +
-    coord_flip() +
-    labs(x = "Replicate", y = "Proportion log-odds") +
+    geom_point(col = "#D55E00") +
+    geom_errorbar(aes(ymin = lower, ymax = upper), width = 0, col = "#D55E00") +
+    facet_grid(sim_model ~ geometry, scales = "free") +
+    scale_y_continuous(name = "BYM2 proportion log-odds", sec.axis = sec_axis(trans = ~ plogis(.), breaks = c(0.1, 0.5, 0.9), name = "")) +
+    labs(x = "Replicate") +
     theme_minimal()
 
 ggsave("proportion-recovery.png", h = 7, w = 6.25, bg = "white")
