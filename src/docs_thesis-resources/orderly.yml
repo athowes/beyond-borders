@@ -80,6 +80,7 @@ depends:
      id: latest
      use:
        depends/gt_cv-crps.rds: gt_cv-crps.rds
+       depends/gt_cv-mse.rds: gt_cv-mse.rds
   - 2_plot_coverage:
      id: latest
      use:

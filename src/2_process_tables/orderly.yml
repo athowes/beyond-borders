@@ -5,6 +5,7 @@ artefacts:
       description: Metric tables
       filenames:
         - gt_cv-crps.rds
+        - gt_cv-mse.rds
 
 packages:
   - sf
