@@ -50,3 +50,7 @@ depends:
      id: latest(parameter:f == "ck_aghq")
      use:
        depends/results_ck.rds: results.rds
+  - 1_run:
+     id: latest(parameter:f == "ik_aghq")
+     use:
+       depends/results_ik.rds: results.rds

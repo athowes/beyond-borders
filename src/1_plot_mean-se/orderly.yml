@@ -28,6 +28,16 @@ packages:
   - purrr
 
 depends:
+  - 1_sim_geometries:
+      id: latest
+      use:
+        depends/1.rds: geometry-1.rds
+        depends/2.rds: geometry-2.rds
+        depends/3.rds: geometry-3.rds
+        depends/4.rds: geometry-4.rds
+        depends/grid.rds: grid.rds
+        depends/civ.rds: civ.rds
+        depends/tex.rds: tex.rds
   - 1_run:
      id: latest(parameter:f == "iid_aghq")
      use:
@@ -52,13 +62,7 @@ depends:
      id: latest(parameter:f == "ck_aghq")
      use:
        depends/results_ck.rds: results.rds
-  - 1_sim_geometries:
-      id: latest
-      use:
-        depends/1.rds: geometry-1.rds
-        depends/2.rds: geometry-2.rds
-        depends/3.rds: geometry-3.rds
-        depends/4.rds: geometry-4.rds
-        depends/grid.rds: grid.rds
-        depends/civ.rds: civ.rds
-        depends/tex.rds: tex.rds
+  - 1_run:
+     id: latest(parameter:f == "ik_aghq")
+     use:
+       depends/results_ik.rds: results.rds
