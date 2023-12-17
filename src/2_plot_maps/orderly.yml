@@ -52,6 +52,10 @@ depends:
      id: latest(parameter:f == "ck_aghq")
      use:
        depends/cv_ck.rds: cv.rds
+  - 2_cv:
+     id: latest(parameter:f == "ik_aghq")
+     use:
+       depends/cv_ik.rds: cv.rds
   - 2_process_surveys:
       id: latest
       use:

@@ -68,3 +68,7 @@ depends:
      id: latest(parameter:f == "ck_aghq")
      use:
        depends/ic_ck.rds: ic.rds
+  - 2_ic:
+     id: latest(parameter:f == "ik_aghq")
+     use:
+       depends/ic_ik.rds: ic.rds

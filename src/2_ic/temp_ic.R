@@ -1,4 +1,4 @@
-survey <- "civ2017phia"
+survey <- "zwe2016phia"
 inf_function <- arealutils::ik_aghq
 f <- "ik_aghq"
 
@@ -18,3 +18,4 @@ rho_summaries <- data.frame(t(apply(rho_samples, 1, function(x) c(mean(x), quant
 names(rho_summaries) <- c("mean", "mode", "lower", "upper")
 result <- bind_cols(select(sf, survey_id, area_name, y, n_obs), rho_summaries)
 result$inf_model <- f
+result

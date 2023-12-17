@@ -12,7 +12,8 @@ df <- bind_rows(
   discard_fails(readRDS("depends/cv_bym2.rds")),
   discard_fails(readRDS("depends/cv_fck.rds")),
   discard_fails(readRDS("depends/cv_fik.rds")),
-  discard_fails(readRDS("depends/cv_ck.rds"))
+  discard_fails(readRDS("depends/cv_ck.rds")),
+  discard_fails(readRDS("depends/cv_ik.rds"))
 )
 
 survey_names <- unique(df$survey)

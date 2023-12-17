@@ -19,7 +19,8 @@ df <- bind_rows(
   discard_fails(readRDS("depends/cv_bym2.rds")),
   discard_fails(readRDS("depends/cv_fck.rds")),
   discard_fails(readRDS("depends/cv_fik.rds")),
-  discard_fails(readRDS("depends/cv_ck.rds"))
+  discard_fails(readRDS("depends/cv_ck.rds")),
+  discard_fails(readRDS("depends/cv_ik.rds"))
 ) %>%
   mutate(
     type = toupper(type),
@@ -77,31 +78,32 @@ lapply(seq_along(survey_names), function(i) {
 })
 
 df %>%
-  filter(type == "LOO") %>%
   mutate(
     survey = recode_factor(survey,
-      "civ2017phia" = "Côte d’Ivoire\nPHIA 2017",
-      "mwi2016phia" = "Malawi\nPHIA 2016",
-      "tza2017phia" = "Tanzania\nPHIA 2017",
-      "zwe2016phia" = "Zimbabwe\nPHIA 2016"
+      "civ2017phia" = "Côte d’Ivoire, PHIA 2017",
+      "mwi2016phia" = "Malawi, PHIA 2016",
+      "tza2017phia" = "Tanzania, PHIA 2017",
+      "zwe2016phia" = "Zimbabwe, PHIA 2016"
     )
   ) %>%
-  group_by(inf_model, inf_model_type, survey) %>%
+  group_by(inf_model, inf_model_type, type, survey) %>%
   summarise(
     mean = mean(crps, na.rm = TRUE),
     se = sd(crps) / n()
   ) %>%
-  ggplot(aes(x = forcats::fct_rev(inf_model), y = mean, col = inf_model_type, group = survey)) +
-  geom_pointrange(aes(ymin = mean - 1.96 * se, ymax = mean + 1.96 * se), size = 0.3) +
-  facet_grid(survey ~ .) +
-  coord_flip() +
-  labs(x = "Inferential model", y = "Leave-one-out continuous ranked probability score", col = "") +
+  ggplot(aes(y = forcats::fct_rev(inf_model), x = mean, col = inf_model_type, group = survey, shape = type)) +
+  geom_pointrange(aes(xmin = mean - 1.96 * se, xmax = mean + 1.96 * se, group = type),  position = position_dodge(width = 0.5), size = 0.5) +
+  facet_wrap(survey ~ ., scales = "free", ncol = 2) +
+  labs(y = "Inferential model", x = "Continuous ranked probability score", col = "", shape = "") +
   scale_colour_manual(values = cbpalette) +
-  guides(col = guide_legend(override.aes = list(size = 0.6, alpha = 1, shape = 15, linetype = c(0, 0, 0)))) +
+  guides(
+    col = guide_legend(override.aes = list(size = 0.6, alpha = 1, shape = 15, linetype = c(0, 0, 0))),
+    shape = guide_legend(override.aes = list(col = "grey50"))
+  ) +
   theme_minimal() +
   theme(
     legend.position = "top",
-    legend.justification = "left"
+    legend.justification = "centre"
   )
 
-ggsave("crps-mean-se-surveys.png", h = 5, w = 6.25, bg = "white")
+ggsave("crps-mean-se-surveys.png", h = 6, w = 6.25, bg = "white")
