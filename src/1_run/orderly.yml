@@ -16,6 +16,8 @@ parameters:
     default: TRUE
   realistic:
     default: TRUE
+  nsim:
+    default: 10
 
 packages:
   - sf
@@ -34,7 +36,7 @@ packages:
 
 depends:
   1_sim_geometries:
-    id: latest
+    id: latest(parameter:nsim == nsim)
     use:
       depends/data_iid_1.rds: data_iid_1.rds
       depends/data_icar_1.rds: data_icar_1.rds

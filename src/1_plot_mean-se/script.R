@@ -72,7 +72,7 @@ lapply(seq_along(geometry_names), function(i) {
       legend.direction = "vertical"
     )
 
-  mean_se_plot + inset_element(geometry_plot, align_to = "full", left = 0.75, right = 0.95, bottom = 0.75, top = 0.95)
+  mean_se_plot + patchwork::inset_element(geometry_plot, align_to = "full", left = 0.75, right = 0.95, bottom = 0.75, top = 0.95)
 
   ggsave(paste0("crps-mean-se-", x, ".png"), h = 5, w = 6.25, bg = "white")
 })
