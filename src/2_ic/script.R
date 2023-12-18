@@ -1,5 +1,5 @@
 #' Uncomment and run the two line below to resume development of this script
-# orderly::orderly_develop_start("2_ic", parameters = list(f = "ik_aghq"))
+# orderly::orderly_develop_start("2_ic", parameters = list(f = "iid_aghq"))
 # setwd("src/2_ic")
 
 surveys <- list("civ2017phia", "mwi2016phia", "tza2017phia", "zwe2016phia")
@@ -23,7 +23,7 @@ run_ic <- function(survey, type, inf_function) {
   names(rho_summaries) <- c("mean", "mode", "lower", "upper")
   result <- bind_cols(select(sf, survey_id, area_name, y, n_obs), rho_summaries)
   result$inf_model <- f
-  return(result)
+  return(list(df = result, fit = fit))
 }
 
 ic_pars <- expand.grid("survey" = surveys, "inf_function" = fs)
