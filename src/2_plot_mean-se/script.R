@@ -58,15 +58,18 @@ lapply(seq_along(survey_names), function(i) {
 
   df %>%
     filter(survey == x) %>%
-    ggplot(aes(x = forcats::fct_rev(inf_model), y = crps, col = inf_model_type)) +
-    geom_jitter(size = 1.5, width = 0.1, alpha = 0.4, shape = 1) +
-    stat_summary(fun = "mean", geom = "point", size = 3) +
-    stat_summary(fun.data = mean_se, geom = "errorbar", fun.args = list(mult = 1.96), width = 0.3) +
+    ggplot(aes(x = forcats::fct_rev(inf_model), y = crps, col = inf_model_type, shape = type)) +
+    geom_jitter(size = 1.5, width = 0.05, alpha = 0.4) +
+    stat_summary(fun = "mean", geom = "point", size = 3, position = position_nudge(x = 0.2, y = 0)) +
+    stat_summary(fun.data = mean_se, geom = "errorbar", fun.args = list(mult = 1.96), width = 0.3, position = position_nudge(x = 0.2, y = 0)) +
     coord_flip() +
     facet_grid(type ~ .) +
-    labs(x = "Inferential model", y = "Continuous ranked probability score", col = "", subtitle = subtitle[i]) +
+    labs(x = "Inferential model", y = "Continuous ranked probability score", col = "", subtitle = subtitle[i], shape = "") +
     scale_colour_manual(values = cbpalette) +
-    guides(col = guide_legend(override.aes = list(size = 3, alpha = 1, shape = 15, linetype = c(0, 0, 0)))) +
+    guides(
+      col = guide_legend(override.aes = list(size = 3, alpha = 1, shape = 15, linetype = c(0, 0, 0))),
+      shape = guide_legend(override.aes = list(col = "grey50"))
+    ) +
     theme_minimal() +
     theme(
       legend.position = "top",
@@ -84,7 +87,8 @@ df %>%
       "mwi2016phia" = "Malawi, PHIA 2016",
       "tza2017phia" = "Tanzania, PHIA 2017",
       "zwe2016phia" = "Zimbabwe, PHIA 2016"
-    )
+    ),
+    type = as.factor(type)
   ) %>%
   group_by(inf_model, inf_model_type, type, survey) %>%
   summarise(
@@ -92,13 +96,13 @@ df %>%
     se = sd(crps) / n()
   ) %>%
   ggplot(aes(y = forcats::fct_rev(inf_model), x = mean, col = inf_model_type, group = survey, shape = type)) +
-  geom_pointrange(aes(xmin = mean - 1.96 * se, xmax = mean + 1.96 * se, group = type),  position = position_dodge(width = 0.5), size = 0.5) +
+  geom_pointrange(aes(xmin = mean - 1.96 * se, xmax = mean + 1.96 * se, group = type),  position = position_dodge2(width = 0.5, reverse = TRUE), size = 0.5) +
   facet_wrap(survey ~ ., scales = "free", ncol = 2) +
   labs(y = "Inferential model", x = "Continuous ranked probability score", col = "", shape = "") +
   scale_colour_manual(values = cbpalette) +
   guides(
     col = guide_legend(override.aes = list(size = 0.6, alpha = 1, shape = 15, linetype = c(0, 0, 0))),
-    shape = guide_legend(override.aes = list(col = "grey50"))
+    shape = guide_legend(override.aes = list(col = "grey50", linetype = c(0, 0)))
   ) +
   theme_minimal() +
   theme(
