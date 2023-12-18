@@ -31,7 +31,8 @@ ic_df <- ic_df$result  %>%
     inf_model_type = fct_case_when(
       inf_model == "IID" ~ "Unstructured",
       inf_model %in% c("Besag", "BYM2") ~ "Adjacency",
-      inf_model %in% c("FCK", "FIK", "CK", "IK") ~ "Kernel"
+      inf_model %in% c("FCK", "FIK") ~ "Kernel (fixed)",
+      inf_model %in% c("CK", "IK") ~ "Kernel (learnt)"
     )
   )
 
@@ -44,7 +45,7 @@ subtitle <- c(
   "Zimbabwe, PHIA 2016"
 )
 
-cbpalette <- c("#999999", "#56B4E9","#009E73", "#E69F00", "#F0E442", "#0072B2", "#D55E00", "#CC79A7")
+cbpalette <- c("#999999", "#56B4E9","#009E73", "#E69F00", "#CC79A7")
 
 lapply(seq_along(unique_surveys), function(i) {
   df <- ic_df %>%
@@ -65,11 +66,11 @@ lapply(seq_along(unique_surveys), function(i) {
   ggplot(df_direct) +
     geom_point(aes(x = forcats::fct_reorder(area_name, direct), y = direct, col = inf_model_type), size = 3, shape = 15) +
     geom_pointrange(data = df, aes(x = area_name, y = mean, ymin = lower, ymax = upper, col = inf_model_type), shape = 19) +
-    facet_wrap(factor(inf_model, levels = c("Direct", "IID", "Besag", "BYM2", "FCK", "FIK", "CK", "IK")) ~ ., ncol = 2) +
+    facet_wrap(factor(inf_model, levels = c("Direct", "IID", "Besag", "BYM2", "FCK", "CK", "FIK", "IK")) ~ ., ncol = 2) +
     coord_cartesian(clip = "off") +
     scale_y_continuous(labels = scales::percent, limits = c(0, NA)) +
-    scale_colour_manual(values = cbpalette, breaks = c("Direct", "Unstructured", "Adjacency", "Kernel")) +
-    labs(x = "Area (ordered by direct prevalence)", y = "Prevalence estimate", col = "Inferential model", subtitle = subtitle[i]) +
+    scale_colour_manual(values = cbpalette, breaks = c("Direct", "Unstructured", "Adjacency", "Kernel (fixed)", "Kernel (learnt)")) +
+    labs(x = "Area (ordered by direct prevalence)", y = "Prevalence estimate", col = "", subtitle = subtitle[i]) +
     guides(col = guide_legend(override.aes = list(shape = c(15, rep(16, n_method_types)), linetype = rep(0, n_method_types + 1)))) +
     theme_minimal() +
     theme(
@@ -78,5 +79,5 @@ lapply(seq_along(unique_surveys), function(i) {
       axis.ticks.x = element_blank()
     )
 
-  ggsave(paste0("ladder-", tolower(df$survey_id[1]), ".png"), h = 8.5, w = 6.25, bg = "white")
+  ggsave(paste0("ladder-", tolower(df$survey_id[1]), ".png"), h = 7.5, w = 6.25, bg = "white")
 })
