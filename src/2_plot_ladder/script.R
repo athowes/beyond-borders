@@ -17,17 +17,9 @@ ic_df <- ic %>%
   keep(~!is.null(.x$result)) %>%
   bind_rows()
 
-ic_df <- ic_df$result
-
-unique_surveys <- unique(ic_df$survey_id)
-
-cbpalette <- c("#999999", "#56B4E9","#009E73", "#E69F00", "#F0E442", "#0072B2", "#D55E00", "#CC79A7")
-
-lapply(unique_surveys, function(survey) {
-  df <- ic_df %>%
-    filter(survey_id == survey) %>%
-    mutate(inf_model = recode_factor(
-      inf_model,
+ic_df <- ic_df$result  %>%
+  mutate(
+    inf_model = recode_factor(inf_model,
       "iid_aghq" = "IID",
       "besag_aghq" = "Besag",
       "bym2_aghq" = "BYM2",
@@ -35,7 +27,28 @@ lapply(unique_surveys, function(survey) {
       "ck_aghq" = "CK",
       "fik_aghq" = "FIK",
       "ik_aghq" = "IK"
-    ))
+    ),
+    inf_model_type = fct_case_when(
+      inf_model == "IID" ~ "Unstructured",
+      inf_model %in% c("Besag", "BYM2") ~ "Adjacency",
+      inf_model %in% c("FCK", "FIK", "CK", "IK") ~ "Kernel"
+    )
+  )
+
+unique_surveys <- unique(ic_df$survey_id)
+
+subtitle <- c(
+  "Côte d’Ivoire, PHIA 2017",
+  "Malawi, PHIA 2016",
+  "Tanzania, PHIA 2017",
+  "Zimbabwe, PHIA 2016"
+)
+
+cbpalette <- c("#999999", "#56B4E9","#009E73", "#E69F00", "#F0E442", "#0072B2", "#D55E00", "#CC79A7")
+
+lapply(seq_along(unique_surveys), function(i) {
+  df <- ic_df %>%
+    filter(survey_id == unique_surveys[i])
 
   # sf <- read_sf(paste0("depends/", tolower(substr(df$survey[1], 1, 3)), "_areas.geojson"))
 
@@ -43,26 +56,26 @@ lapply(unique_surveys, function(survey) {
     filter(inf_model == "IID") %>%
     mutate(
       direct = y / n_obs,
-      inf_model = "Direct"
+      inf_model = "Direct",
+      inf_model_type = "Direct"
     )
 
-  n_methods <- length(unique(df$inf_model))
+  n_method_types <- length(unique(df$inf_model_type))
 
   ggplot(df_direct) +
-    geom_point(aes(x = forcats::fct_reorder(area_name, direct), y = direct, col = inf_model), size = 3, shape = 15, alpha = 0.8) +
-    geom_pointrange(data = df, aes(x = area_name, y = mean, ymin = lower, ymax = upper, col = inf_model), position = position_dodge(width = 0.6), alpha = 0.8) +
-    coord_flip() +
-    facet_wrap(inf_model ~ ., ncol = 2) +
-    scale_y_continuous(labels = scales::percent) +
-    scale_colour_manual(values = cbpalette, breaks = c("Direct", "IID", "Besag", "BYM2", "FCK", "FIK", "CK", "IK")) +
-    labs(x = "Area (ordered by direct prevalence)", y = "Prevalence estimate", col = "Inferential model") +
-    guides(col = guide_legend(override.aes = list(shape = c(15, rep(16, n_methods)), linetype = rep(0, n_methods + 1)))) +
+    geom_point(aes(x = forcats::fct_reorder(area_name, direct), y = direct, col = inf_model_type), size = 3, shape = 15) +
+    geom_pointrange(data = df, aes(x = area_name, y = mean, ymin = lower, ymax = upper, col = inf_model_type), shape = 19) +
+    facet_wrap(factor(inf_model, levels = c("Direct", "IID", "Besag", "BYM2", "FCK", "FIK", "CK", "IK")) ~ ., ncol = 2) +
+    coord_cartesian(clip = "off") +
+    scale_y_continuous(labels = scales::percent, limits = c(0, NA)) +
+    scale_colour_manual(values = cbpalette, breaks = c("Direct", "Unstructured", "Adjacency", "Kernel")) +
+    labs(x = "Area (ordered by direct prevalence)", y = "Prevalence estimate", col = "Inferential model", subtitle = subtitle[i]) +
+    guides(col = guide_legend(override.aes = list(shape = c(15, rep(16, n_method_types)), linetype = rep(0, n_method_types + 1)))) +
     theme_minimal() +
     theme(
       legend.position = "bottom",
-      axis.text.y = element_blank(),
-      axis.ticks.y = element_blank(),
-      panel.grid.major = element_blank()
+      axis.text.x = element_blank(),
+      axis.ticks.x = element_blank()
     )
 
   ggsave(paste0("ladder-", tolower(df$survey_id[1]), ".png"), h = 8.5, w = 6.25, bg = "white")
