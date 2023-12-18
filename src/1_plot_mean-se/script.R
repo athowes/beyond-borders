@@ -25,7 +25,7 @@ calc_boxplot_stat <- function(y) {
   return(stats)
 }
 
-cbpalette <- c("#56B4E9","#009E73", "#E69F00", "#F0E442", "#0072B2", "#D55E00", "#CC79A7")
+cbpalette <- c("#56B4E9","#009E73", "#E69F00", "#CC79A7")
 
 geometry_names <- unique(df$geometry)
 title <- c("1", "2", "3", "4", "Grid", "Cote d'Ivoire", "Texas")
@@ -54,16 +54,17 @@ lapply(seq_along(geometry_names), function(i) {
       inf_model_type = fct_case_when(
         inf_model == "IID" ~ "Unstructured",
         inf_model %in% c("Besag", "BYM2") ~ "Adjacency",
-        inf_model %in% c("FCK", "FIK", "CK", "IK") ~ "Kernel"
+        inf_model %in% c("FCK", "FIK") ~ "Kernel (fixed)",
+        inf_model %in% c("CK", "IK") ~ "Kernel (learnt)"
     )) %>%
     ggplot(aes(x = forcats::fct_rev(inf_model), y = crps, col = inf_model_type)) +
     # stat_summary(fun.data = calc_boxplot_stat, geom = "boxplot", width = 0.5, alpha = 0.9, show.legend = FALSE, fill = NA) +
     stat_summary(fun = "mean", geom = "point", position = position_dodge(width = 0.5), alpha = 0.7) +
-    stat_summary(fun.data = mean_se, geom = "errorbar", fun.args = list(mult = 1.96)) +
+    stat_summary(fun.data = mean_se, geom = "errorbar", fun.args = list(mult = 1.96), width = 0) +
     scale_color_manual(values = cbpalette) +
     facet_grid(sim_model ~ .) +
     labs(x = "Inferential model", y = "Continuous ranked probability score", col = "") +
-    guides(col = guide_legend(override.aes = list(size = 3, alpha = 1, shape = 15, linetype = c(0, 0, 0)))) +
+    guides(col = guide_legend(override.aes = list(size = 3, alpha = 1, shape = 15, linetype = c(0, 0, 0, 0)), nrow = 2, byrow = FALSE)) +
     coord_flip() +
     theme_minimal() +
     theme(

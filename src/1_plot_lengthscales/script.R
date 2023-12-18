@@ -7,6 +7,9 @@ df <- bind_rows(
   readRDS("depends/results_ck.rds")
 )
 
+df <- df %>%
+  filter(replicate <= 40)
+
 unique_geometries <- unique(df$geometry)
 
 best_lengthscales <- lapply(unique_geometries, function(geometry) {
@@ -42,15 +45,20 @@ df %>%
   ) %>%
   arealutils::update_naming() %>%
   ggplot(aes(x = as.factor(replicate), y = mean)) +
-    geom_point(col = "#56B4E9") +
-    geom_errorbar(aes(ymin = lower, ymax = upper), width = 0, col = "#56B4E9") +
-    geom_hline(aes(yintercept = truth), col = "grey30") +
-    geom_hline(data = best_lengthscales, aes(yintercept = l), col = "#009E73") +
+    geom_point(col = "#009E73") +
+    geom_errorbar(aes(ymin = lower, ymax = upper), width = 0, col = "#009E73") +
+    geom_hline(aes(yintercept = truth), col = "grey30", size = 0.6, linetype = "dashed") +
+    geom_hline(data = best_lengthscales, aes(yintercept = l), col = "#56B4E9", size = 0.6, linetype = "dashed") +
     facet_wrap(. ~ geometry, scales = "free") +
-    geom_col(data = data.frame(x = rep(0, 2), y = rep(0, 2), type = as.factor(c("Fixed (Best heuristic)", "Inferred"))), aes(x = x, y = y, fill = type)) +
-    scale_fill_manual(values = c("#56B4E9", "#009E73")) +
+    geom_col(data = data.frame(x = rep(0, 3), y = rep(0, 3), type = as.factor(c("Fixed (Best heuristic)", "Inferred", "Truth"))), aes(x = x, y = y, fill = type)) +
+    scale_fill_manual(values = c("#56B4E9", "#009E73", "grey30")) +
     labs(x = "Replicate", y = "Log-lengthscale", fill = "") +
     theme_minimal() +
-    theme(legend.position = "bottom")
+    theme(
+      legend.position = "bottom",
+      axis.ticks.x = element_blank(),
+      axis.text.x = element_blank(),
+      panel.grid.major = element_blank()
+    )
 
 ggsave("lengthscale-recovery.png", h = 4, w = 6.25, bg = "white")

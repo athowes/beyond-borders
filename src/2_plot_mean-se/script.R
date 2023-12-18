@@ -38,11 +38,12 @@ df <- bind_rows(
     inf_model_type = fct_case_when(
       inf_model == "IID" ~ "Unstructured",
       inf_model %in% c("Besag", "BYM2") ~ "Adjacency",
-      inf_model %in% c("FCK", "FIK", "CK", "IK") ~ "Kernel"
+      inf_model %in% c("FCK", "FIK") ~ "Kernel (fixed)",
+      inf_model %in% c("CK", "IK") ~ "Kernel (learnt)"
     )
   )
 
-cbpalette <- c("#56B4E9","#009E73", "#E69F00", "#F0E442", "#0072B2", "#D55E00", "#CC79A7")
+cbpalette <- c("#56B4E9","#009E73", "#E69F00", "#CC79A7")
 
 survey_names <- unique(df$survey)
 
@@ -67,13 +68,13 @@ lapply(seq_along(survey_names), function(i) {
     labs(x = "Inferential model", y = "Continuous ranked probability score", col = "", subtitle = subtitle[i], shape = "") +
     scale_colour_manual(values = cbpalette) +
     guides(
-      col = guide_legend(override.aes = list(size = 3, alpha = 1, shape = 15, linetype = c(0, 0, 0))),
-      shape = guide_legend(override.aes = list(col = "grey50"))
+      col = guide_legend(override.aes = list(size = 3, alpha = 1, shape = 15, linetype = c(0, 0, 0, 0)), ncol = 2),
+      shape = guide_legend(override.aes = list(col = "grey50"), ncol = 1)
     ) +
     theme_minimal() +
     theme(
       legend.position = "top",
-      legend.justification = "left",
+      legend.justification = "centre",
       plot.subtitle = element_text(size = 10, hjust = 1)
     )
 
@@ -101,8 +102,8 @@ df %>%
   labs(y = "Inferential model", x = "Continuous ranked probability score", col = "", shape = "") +
   scale_colour_manual(values = cbpalette) +
   guides(
-    col = guide_legend(override.aes = list(size = 0.6, alpha = 1, shape = 15, linetype = c(0, 0, 0))),
-    shape = guide_legend(override.aes = list(col = "grey50", linetype = c(0, 0)))
+    col = guide_legend(override.aes = list(size = 0.6, alpha = 1, shape = 15, linetype = c(0, 0, 0, 0)), ncol = 2),
+    shape = guide_legend(override.aes = list(col = "grey50", linetype = c(0, 0)), ncol = 1)
   ) +
   theme_minimal() +
   theme(
