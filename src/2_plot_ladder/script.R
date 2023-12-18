@@ -15,9 +15,11 @@ ic <- list(
 ic_df <- ic %>%
   flatten() %>%
   keep(~!is.null(.x$result)) %>%
+  map("result") %>%
+  map("df") %>%
   bind_rows()
 
-ic_df <- ic_df$result  %>%
+ic_df <- ic_df  %>%
   mutate(
     inf_model = recode_factor(inf_model,
       "iid_aghq" = "IID",
