@@ -2,9 +2,9 @@ script: script.R
 
 artefacts:
   - data:
-      description: Placeholder
+      description: Hyperparameter prior to posterior comparisons
       filenames:
-        - temp.png
+        - proportion-posteriors.png
 
 packages:
   - sf
