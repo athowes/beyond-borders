@@ -5,6 +5,7 @@ artefacts:
       description: Hyperparameter prior to posterior comparisons
       filenames:
         - proportion-posteriors.png
+        - lengthscale-posteriors.png
 
 packages:
   - sf
