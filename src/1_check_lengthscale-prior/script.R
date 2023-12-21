@@ -114,7 +114,7 @@ df <- do.call("rbind", lapply(
 
 fig_posterior <- ggplot(df, aes(x = l, fill = type)) +
   geom_histogram(aes(y = ..density..)) +
-  geom_vline(aes(xintercept = truth), col = "grey30") +
+  geom_vline(aes(xintercept = truth), col = "grey30", linetype = "dashed") +
   facet_wrap(~ type, ncol = 3, scales = "free") +
   scale_fill_manual(values = cbpalette) +
   labs(y = "Posterior density", x = "Lengthscale", fill = "") +
@@ -130,3 +130,5 @@ ggsave("lengthscale-prior.png", h = 3, w = 6.25, bg = "white")
 fig_posterior
 
 ggsave("lengthscale-posterior.png", h = 4, w = 6.25, bg = "white")
+
+dev.off()

@@ -22,7 +22,6 @@ df %>%
     geom_errorbar(aes(ymin = lower, ymax = upper), width = 0) +
     facet_grid(sim_model ~ geometry, scales = "free") +
     scale_y_continuous(name = "BYM2 proportion log-odds", sec.axis = sec_axis(trans = ~ plogis(.), breaks = c(0.1, 0.5, 0.9), name = "")) +
-    geom_hline(aes(yintercept = 0), col = "grey30", size = 0.6, linetype = "dashed") +
     scale_color_manual(values = c("#0072B2", "#D55E00")) +
     labs(x = "Replicate", colour = "") +
     guides(col = guide_legend(override.aes = list(size = 3, alpha = 1, shape = 15, linetype = c(0, 0)))) +
