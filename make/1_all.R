@@ -1,17 +1,17 @@
 source("make/utils.R")
 
 #' 1. Simulate data
-run_commit_push("1_sim_geometries", param = list(nsim = 100)) #' [x]
+run_commit_push("1_sim_geometries", param = list(nsim = 250)) #' [x]
 
 #' 2. Run models and assess
-run_commit_push("1_run", param = list(f = "constant_aghq", nsim = 100)) #' [ ]
-run_commit_push("1_run", param = list(f = "iid_aghq", nsim = 100))      #' [x]
-run_commit_push("1_run", param = list(f = "besag_aghq", nsim = 100))    #' [x]
-run_commit_push("1_run", param = list(f = "bym2_aghq", nsim = 100))     #' [x]
-run_commit_push("1_run", param = list(f = "fck_aghq", nsim = 100))      #' [x]
-run_commit_push("1_run", param = list(f = "fik_aghq", nsim = 100))      #' [x]
-run_commit_push("1_run", param = list(f = "ck_aghq", nsim = 100))       #' [x]
-run_commit_push("1_run", param = list(f = "ik_aghq", nsim = 100))       #' [x]
+run_commit_push("1_run", param = list(f = "constant_aghq", nsim = 250)) #' [ ]
+run_commit_push("1_run", param = list(f = "iid_aghq", nsim = 250))      #' [x]
+run_commit_push("1_run", param = list(f = "besag_aghq", nsim = 250))    #' [x]
+run_commit_push("1_run", param = list(f = "bym2_aghq", nsim = 250))     #' [ ]
+run_commit_push("1_run", param = list(f = "fck_aghq", nsim = 250))      #' [ ]
+run_commit_push("1_run", param = list(f = "fik_aghq", nsim = 250))      #' [ ]
+run_commit_push("1_run", param = list(f = "ck_aghq", nsim = 250))       #' [ ]
+run_commit_push("1_run", param = list(f = "ik_aghq", nsim = 250))       #' [ ]
 
 #' 3. Post-process
 run_commit_push("1_process_tables")    #' [x]
