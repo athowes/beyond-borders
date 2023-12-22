@@ -5,11 +5,11 @@ run_commit_push("1_sim_geometries", param = list(nsim = 250)) #' [x]
 
 #' 2. Run models and assess
 run_commit_push("1_run", param = list(f = "constant_aghq", nsim = 250)) #' [ ]
-run_commit_push("1_run", param = list(f = "iid_aghq", nsim = 250))      #' [x]
-run_commit_push("1_run", param = list(f = "besag_aghq", nsim = 250))    #' [x]
-run_commit_push("1_run", param = list(f = "bym2_aghq", nsim = 250))     #' [ ]
-run_commit_push("1_run", param = list(f = "fck_aghq", nsim = 250))      #' [ ]
-run_commit_push("1_run", param = list(f = "fik_aghq", nsim = 250))      #' [ ]
+run_commit_push("1_run", param = list(f = "iid_aghq", nsim = 250))      #' [x] 1 hour
+run_commit_push("1_run", param = list(f = "besag_aghq", nsim = 250))    #' [x] 2 hours
+run_commit_push("1_run", param = list(f = "bym2_aghq", nsim = 250))     #' [x] 2 hours
+run_commit_push("1_run", param = list(f = "fck_aghq", nsim = 250))      #' [x] 15 minutes
+run_commit_push("1_run", param = list(f = "fik_aghq", nsim = 250))      #' [x] 30 minutes
 run_commit_push("1_run", param = list(f = "ck_aghq", nsim = 250))       #' [ ]
 run_commit_push("1_run", param = list(f = "ik_aghq", nsim = 250))       #' [ ]
 
