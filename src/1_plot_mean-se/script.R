@@ -12,6 +12,18 @@ df <- bind_rows(
   readRDS("depends/results_ik.rds")
 )
 
+#' Should be 250 for everything!
+df %>%
+  group_by(inf_model, sim_model, geometry) %>%
+  summarise(count = length(unique(replicate))) %>%
+  print(n = Inf)
+
+#' It's just the logit_phi and log_l parameters that are missing CRPS values
+df %>%
+  filter(is.na(crps)) %>%
+  select(par) %>%
+  unique()
+
 calc_boxplot_stat <- function(y) {
   coef <- 1.5
   n <- sum(!is.na(y))

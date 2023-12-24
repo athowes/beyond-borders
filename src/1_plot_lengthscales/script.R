@@ -47,8 +47,8 @@ df %>%
   ggplot(aes(x = as.factor(replicate), y = mean)) +
     geom_point(col = "#009E73") +
     geom_errorbar(aes(ymin = lower, ymax = upper), width = 0, col = "#009E73") +
-    geom_hline(aes(yintercept = truth), col = "grey30", size = 0.6, linetype = "dashed") +
-    geom_hline(data = best_lengthscales, aes(yintercept = l), col = "#56B4E9", size = 0.6, linetype = "dashed") +
+    geom_hline(aes(yintercept = truth), col = "grey30", linewidth = 0.6, linetype = "dashed") +
+    geom_hline(data = best_lengthscales, aes(yintercept = l), col = "#56B4E9", linewidth = 0.6, linetype = "dashed") +
     facet_wrap(. ~ geometry, scales = "free") +
     geom_col(data = data.frame(x = rep(0, 3), y = rep(0, 3), type = as.factor(c("Fixed (Best heuristic)", "Inferred", "Truth"))), aes(x = x, y = y, fill = type)) +
     scale_fill_manual(values = c("#56B4E9", "#009E73", "grey30")) +
@@ -62,3 +62,5 @@ df %>%
     )
 
 ggsave("lengthscale-recovery.png", h = 4, w = 6.25, bg = "white")
+
+dev.off()

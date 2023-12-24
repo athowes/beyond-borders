@@ -34,3 +34,5 @@ df %>%
     )
 
 ggsave("proportion-recovery.png", h = 7, w = 6.25, bg = "white")
+
+dev.off()
