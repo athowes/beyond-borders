@@ -24,6 +24,7 @@ df_crps <- df %>%
   )
 
 gt_crps <- df_crps %>%
+  mutate(mean = 1000 * mean, se = 1000 * se) %>%
   # mutate(value = paste0(round(mean, digits = 3), " (", round(1.96 * se, digits = 3), ")")) %>%
   mutate(value = round(mean, digits = 3)) %>%
   select(geometry, sim_model, inf_model, value) %>%
@@ -50,6 +51,7 @@ df_mse <- df %>%
   )
 
 gt_mse <- df_mse %>%
+  mutate(mean = 1000 * mean, se = 1000 * se) %>%
   # mutate(value = paste0(round(mean, digits = 3), " (", round(1.96 * se, digits = 3), ")")) %>%
   mutate(value = round(mean, digits = 3)) %>%
   select(geometry, sim_model, inf_model, value) %>%
