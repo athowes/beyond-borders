@@ -1,5 +1,5 @@
 #' Uncomment and run the two line below to resume development of this script
-# orderly::orderly_develop_start("1_run", parameters = list(f = "ik_aghq"))
+# orderly::orderly_develop_start("1_run", parameters = list(f = "iid_aghq"))
 # setwd("src/1_run")
 
 geometries <- c()
@@ -12,9 +12,22 @@ fs <- list(get(f, envir = asNamespace("arealutils")))
 
 pars <- expand.grid("geometry" = geometries, "sim_model" = sim_models, "inf_function" = fs)
 
-#' Run models and assessment
-results <- purrr::pmap(pars, run, .progress = TRUE)
-results <- data.frame(dplyr::bind_rows(results))
+#' Run models (safely!) and assessment
+results <- purrr::pmap(pars, safely(run), .progress = TRUE)
+
+#' Save the errors
+errors <- results %>%
+  keep(~!is.null(.x$error))
+
+saveRDS(errors, "errors.rds")
+
+#' Save the results
+results <- results %>%
+  keep(~is.null(.x$error)) %>%
+  map("result") %>%
+  bind_rows() %>%
+  data.frame()
+
 results$inf_model <- f
 
 saveRDS(results, "results.rds")
