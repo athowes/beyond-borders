@@ -54,3 +54,10 @@ depends:
      id: latest(parameter:f == "ik_aghq")
      use:
        depends/ic_ik.rds: ic.rds
+  - 2_process_surveys:
+     id: latest
+     use:
+       depends/civ2017phia.rds: civ2017phia.rds
+       depends/mwi2016phia.rds: mwi2016phia.rds
+       depends/tza2017phia.rds: tza2017phia.rds
+       depends/zwe2016phia.rds: zwe2016phia.rds

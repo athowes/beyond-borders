@@ -81,27 +81,68 @@ l_samples <- lapply(lengthscale_index, function(i) {
   names(theta_samples) <- names(fit$optresults$mode)
   l <- exp(theta_samples$log_l)
   survey_id <- filter(key_df, id == i)$survey_id
-  data.frame(l = l, survey_id = survey_id)
+  inf_model <- filter(key_df, id == i)$inf_model
+  data.frame(l = l, survey_id = survey_id, inf_model = inf_model)
 })
+
+ck_prior_params <- lapply(tolower(unique(key_df$survey_id)), function(x) {
+  sf <- readRDS(paste0("depends/", x, ".rds"))
+  D <- centroid_distance(sf)
+  print(max(D))
+  param <- invgamma_prior(lb = 0.1, ub = max(as.vector(D)), plb = 0.01, pub = 0.01)
+  data.frame(a = param$a, b = param$b, survey_id = toupper(x), inf_model = "CK")
+})
+
+ik_prior_params <- lapply(tolower(unique(key_df$survey_id)), function(x) {
+  sf <- readRDS(paste0("depends/", x, ".rds"))
+  n <- nrow(sf)
+  samples <- sf::st_sample(sf, type = "hexagonal", exact = TRUE, size = rep(10, n))
+  S <- sf::st_distance(samples, samples)
+  print(max(as.vector(S)))
+  param <- invgamma_prior(lb = 0.1, ub = max(as.vector(S)), plb = 0.01, pub = 0.01)
+  data.frame(a = param$a, b = param$b, survey_id = toupper(x), inf_model = "IK")
+})
+
+prior_params <- bind_rows(ck_prior_params, ik_prior_params) %>%
+  mutate(
+    survey_id = forcats::fct_recode(survey_id,
+      "Côte d’Ivoire,\nPHIA 2017" = "CIV2017PHIA",
+      "Malawi,\nPHIA 2016" = "MWI2016PHIA",
+      "Tanzania,\nPHIA 2017" = "TZA2017PHIA",
+      "Zimbabwe,\nPHIA 2016" = "ZWE2016PHIA",
+    )
+  )
 
 bind_rows(l_samples) %>%
   mutate(
     survey_id = forcats::fct_recode(survey_id,
-      "Côte d’Ivoire, PHIA 2017" = "CIV2017PHIA",
-      "Malawi, PHIA 2016" = "MWI2016PHIA",
-      "Tanzania, PHIA 2017" = "TZA2017PHIA",
-      "Zimbabwe, PHIA 2016" = "ZWE2016PHIA",
+      "Côte d’Ivoire,\nPHIA 2017" = "CIV2017PHIA",
+      "Malawi,\nPHIA 2016" = "MWI2016PHIA",
+      "Tanzania,\nPHIA 2017" = "TZA2017PHIA",
+      "Zimbabwe,\nPHIA 2016" = "ZWE2016PHIA",
+    ),
+    inf_model = forcats::fct_recode(inf_model,
+      "CK" = "ck_aghq",
+      "IK" = "ik_aghq"
     )
   ) %>%
   ggplot() +
   geom_histogram(aes(x = l, y = after_stat(density)), fill = "#56B4E9") +
-  facet_wrap(~ survey_id, ncol = 2) +
+  geom_function(data = prior_params[1, ], fun = nimble::dinvgamma, args = list(shape = prior_params[1, ]$a, scale = prior_params[1, ]$b), col = "#009E73") +
+  geom_function(data = prior_params[2, ], fun = nimble::dinvgamma, args = list(shape = prior_params[2, ]$a, scale = prior_params[2, ]$b), col = "#009E73") +
+  geom_function(data = prior_params[3, ], fun = nimble::dinvgamma, args = list(shape = prior_params[3, ]$a, scale = prior_params[3, ]$b), col = "#009E73") +
+  geom_function(data = prior_params[4, ], fun = nimble::dinvgamma, args = list(shape = prior_params[4, ]$a, scale = prior_params[4, ]$b), col = "#009E73") +
+  geom_function(data = prior_params[5, ], fun = nimble::dinvgamma, args = list(shape = prior_params[5, ]$a, scale = prior_params[5, ]$b), col = "#009E73") +
+  geom_function(data = prior_params[6, ], fun = nimble::dinvgamma, args = list(shape = prior_params[6, ]$a, scale = prior_params[6, ]$b), col = "#009E73") +
+  geom_function(data = prior_params[7, ], fun = nimble::dinvgamma, args = list(shape = prior_params[7, ]$a, scale = prior_params[7, ]$b), col = "#009E73") +
+  geom_function(data = prior_params[8, ], fun = nimble::dinvgamma, args = list(shape = prior_params[8, ]$a, scale = prior_params[8, ]$b), col = "#009E73") +
+  facet_grid(inf_model ~ survey_id) +
   labs(x = "Lengthscale", y = "Density", fill = "") +
   geom_col(data = data.frame(x = c(0, 0), y = c(0, 0), type = c("Prior", "Posterior")), aes(x = x, y = y, fill = type)) +
   scale_fill_manual(values = c("#56B4E9", "#009E73")) +
   theme_minimal() +
   theme(
-    legend.position = "right"
+    legend.position = "bottom"
   )
 
-ggsave("lengthscale-posteriors.png", h = 3.5, w = 6.25, bg = "white")
+ggsave("lengthscale-posteriors.png", h = 4.5, w = 6.25, bg = "white")
