@@ -11,7 +11,7 @@ run_commit_push("1_run", param = list(f = "bym2_aghq", nsim = 250))     #' [x] 2
 run_commit_push("1_run", param = list(f = "fck_aghq", nsim = 250))      #' [x] 15 minutes
 run_commit_push("1_run", param = list(f = "fik_aghq", nsim = 250))      #' [x] 30 minutes
 run_commit_push("1_run", param = list(f = "ck_aghq", nsim = 250))       #' [x] 30 minutes (this seems puzzlingly low)
-run_commit_push("1_run", param = list(f = "ik_aghq", nsim = 250))       #' [ ] Failed after 4 hours. Probably need to do safely version to get it working
+run_commit_push("1_run", param = list(f = "ik_aghq", nsim = 250))       #' [x] 3.5 hours
 
 #' 3. Post-process
 run_commit_push("1_process_tables")    #' [x]
