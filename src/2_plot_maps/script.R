@@ -42,14 +42,14 @@ lapply(seq_along(survey_names), function(i) {
     left_join(
       sf %>%
         tibble::rowid_to_column("index") %>%
-        select(index, geometry),
+        select(index, area_name, geometry),
       by = "index"
     ) %>%
     st_as_sf() %>%
     ggplot(aes(fill = log(crps))) +
     geom_sf(size = 0.1, colour = scales::alpha("grey", 0.25)) +
     scale_fill_viridis_c(option = "E") +
-    facet_wrap(~ inf_model + type) +
+    facet_grid(type ~ inf_model) +
     theme_minimal() +
     labs(fill = "log(CRPS)") +
     theme(
@@ -63,5 +63,5 @@ lapply(seq_along(survey_names), function(i) {
       legend.key.width = unit(4, "lines")
     )
 
-  ggsave(paste0("map-", x, ".png"), h = 6.5, w = 6.25, bg = "white")
+  ggsave(paste0("map-", x, ".png"), h = 4, w = 6.25, bg = "white")
 })
