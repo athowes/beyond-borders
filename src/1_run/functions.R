@@ -21,9 +21,9 @@ run <- function(geometry, sim_model, inf_function) {
 
   message("Fitting ", length(data), " ", f, " models to ", sim_model, " simulated data on the ", geometry, " geometry...")
 
-  results <- lapply(data, function(x) {
+  .g <- function(x) {
     capture.output(fit <- inf_function(x$sf))
-    samples_aghq <- aghq::sample_marginal(fit, 100)
+    samples_aghq <- aghq::sample_marginal(fit, 200)
     x_samples <- samples_aghq$samps
 
     # Want to keep only beta_0 and u. Omit w in the case of BYM2
@@ -60,7 +60,10 @@ run <- function(geometry, sim_model, inf_function) {
     result <- purrr::map2_df(split(samples, seq(nrow(samples))), true_values, summaries)
     result$par <- c("beta_0", paste0("u", 1:length(x$u)), paste0("rho", 1:length(x$u)), names(fit$optresults$mode))
     return(result)
-  })
+  }
+
+  results <- purrr::map(data, safely(.g))
+  results <- keep(results, ~is.null(.x$error))
 
   df <- data.frame(dplyr::bind_rows(results, .id = "replicate"))
   df$replicate <- as.numeric(df$replicate)
