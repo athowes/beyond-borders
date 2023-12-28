@@ -11,8 +11,16 @@ ii <- NULL
 
 D <- centroid_distance(sf)
 
+if(units(D)$numerator == "m") {
+  D <- units::set_units(D, "km")
+}
+
+D_nonzero <- as.vector(D)[as.vector(D) > 0]
+lb <- quantile(D_nonzero, 0.05)
+ub <- quantile(D_nonzero, 0.95)
+
 # Parameters of the length-scale prior
-param <- arealutils::invgamma_prior(lb = 0.1, ub = max(as.vector(D)), plb = 0.01, pub = 0.01)
+param <- arealutils::invgamma_prior(lb = lb, ub = ub, plb = 0.05, pub = 0.05)
 
 dat <- list(n = nrow(sf),
             y = sf$y,
@@ -42,4 +50,4 @@ l_samples <- exp(log_l_samples)
 
 #' Observe the difference here
 plot(l_samples)
-D
+mean(D)
