@@ -12,6 +12,13 @@ ic <- list(
   "ik" = readRDS("depends/ic_ik.rds")
 )
 
+fct_case_when <- function(...) {
+  args <- as.list(match.call())
+  levels <- sapply(args[-1], function(f) f[[3]])
+  levels <- levels[!is.na(levels)]
+  factor(dplyr::case_when(...), levels=levels)
+}
+
 ic_df <- ic %>%
   flatten() %>%
   keep(~!is.null(.x$result)) %>%

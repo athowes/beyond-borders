@@ -88,8 +88,16 @@ l_samples <- lapply(lengthscale_index, function(i) {
 ck_prior_params <- lapply(tolower(unique(key_df$survey_id)), function(x) {
   sf <- readRDS(paste0("depends/", x, ".rds"))
   D <- centroid_distance(sf)
-  print(max(D))
-  param <- invgamma_prior(lb = 0.1, ub = max(as.vector(D)), plb = 0.01, pub = 0.01)
+  # Parameters of the length-scale prior
+  if(units(D)$numerator == "m") {
+    D <- units::set_units(D, "km")
+  }
+
+  D_nonzero <- as.vector(D)[as.vector(D) > 0]
+  lb <- quantile(D_nonzero, 0.05)
+  ub <- quantile(D_nonzero, 0.95)
+
+  param <- invgamma_prior(lb = lb, ub = ub, plb = 0.05, pub = 0.05)
   data.frame(a = param$a, b = param$b, survey_id = toupper(x), inf_model = "CK")
 })
 
@@ -98,8 +106,15 @@ ik_prior_params <- lapply(tolower(unique(key_df$survey_id)), function(x) {
   n <- nrow(sf)
   samples <- sf::st_sample(sf, type = "hexagonal", exact = TRUE, size = rep(10, n))
   S <- sf::st_distance(samples, samples)
-  print(max(as.vector(S)))
-  param <- invgamma_prior(lb = 0.1, ub = max(as.vector(S)), plb = 0.01, pub = 0.01)
+  if(units(S)$numerator == "m") {
+    S <- units::set_units(S, "km")
+  }
+
+  S_nonzero <- as.vector(S)[as.vector(S) > 0]
+  lb <- quantile(S_nonzero, 0.05)
+  ub <- quantile(S_nonzero, 0.95)
+
+  param <- invgamma_prior(lb = lb, ub = ub, plb = 0.05, pub = 0.05)
   data.frame(a = param$a, b = param$b, survey_id = toupper(x), inf_model = "IK")
 })
 
@@ -136,8 +151,8 @@ bind_rows(l_samples) %>%
   geom_function(data = prior_params[6, ], fun = nimble::dinvgamma, args = list(shape = prior_params[6, ]$a, scale = prior_params[6, ]$b), col = "#009E73") +
   geom_function(data = prior_params[7, ], fun = nimble::dinvgamma, args = list(shape = prior_params[7, ]$a, scale = prior_params[7, ]$b), col = "#009E73") +
   geom_function(data = prior_params[8, ], fun = nimble::dinvgamma, args = list(shape = prior_params[8, ]$a, scale = prior_params[8, ]$b), col = "#009E73") +
-  facet_grid(inf_model ~ survey_id) +
-  labs(x = "Lengthscale", y = "Density", fill = "") +
+  facet_grid(survey_id ~ inf_model, scales = "free") +
+  labs(x = "Lengthscale (km)", y = "Density", fill = "") +
   geom_col(data = data.frame(x = c(0, 0), y = c(0, 0), type = c("Prior", "Posterior")), aes(x = x, y = y, fill = type)) +
   scale_fill_manual(values = c("#56B4E9", "#009E73")) +
   theme_minimal() +
