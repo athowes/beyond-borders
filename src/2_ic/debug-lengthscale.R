@@ -51,3 +51,12 @@ l_samples <- exp(log_l_samples)
 #' Observe the difference here
 plot(l_samples)
 mean(D)
+
+fit <- arealutils::ck_aghq(sf, k = 3, ii = NULL)
+samples <- aghq::sample_marginal(fit, M = 1000)
+log_l_samples <- samples$thetasamples[[2]]
+l_samples <- exp(log_l_samples)
+
+#' Observe the difference here
+plot(l_samples)
+mean(D)
