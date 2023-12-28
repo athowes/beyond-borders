@@ -63,7 +63,9 @@ run <- function(geometry, sim_model, inf_function) {
   }
 
   results <- purrr::map(data, safely(.g))
-  results <- keep(results, ~is.null(.x$error))
+
+  results <- keep(results, ~is.null(.x$error)) %>%
+    map("result")
 
   df <- data.frame(dplyr::bind_rows(results, .id = "replicate"))
   df$replicate <- as.numeric(df$replicate)
