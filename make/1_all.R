@@ -5,11 +5,11 @@ run_commit_push("1_sim_geometries", param = list(nsim = 250)) #' [x]
 
 #' 2. Run models and assess
 run_commit_push("1_run", param = list(f = "iid_aghq", nsim = 250))      #' [x] 30 minutes
-run_commit_push("1_run", param = list(f = "besag_aghq", nsim = 250))    #' [ ] 2 hours
-run_commit_push("1_run", param = list(f = "bym2_aghq", nsim = 250))     #' [ ] 2.5 hours
+run_commit_push("1_run", param = list(f = "besag_aghq", nsim = 250))    #' [x] 2 hours
+run_commit_push("1_run", param = list(f = "bym2_aghq", nsim = 250))     #' [x] 2.5 hours
 run_commit_push("1_run", param = list(f = "fck_aghq", nsim = 250))      #' [x] 30 minutes
 run_commit_push("1_run", param = list(f = "fik_aghq", nsim = 250))      #' [x] 40 minutes
-run_commit_push("1_run", param = list(f = "ck_aghq", nsim = 250))       #' [x] 40 minutes
+run_commit_push("1_run", param = list(f = "ck_aghq", nsim = 10))        #' [ ] 40 minutes
 run_commit_push("1_run", param = list(f = "ik_aghq", nsim = 250))       #' [ ] 3.6 hours
 
 #' 3. Post-process

@@ -1,7 +1,7 @@
 geometry <- pars$geometry[1]
 sim_model <- pars$sim_model[1]
 inf_function <- pars$inf_function[1]
-inf_function <- arealutils::iid_aghq
+inf_function <- arealutils::ck_aghq
 
 if(f %in% c("fck_aghq", "ck_aghq") & geometry == "2") {
   message("The centroid kernel is not defined for geometry 2!")
@@ -54,8 +54,9 @@ message("Fitting ", length(data), " ", f, " models to ", sim_model, " simulated 
 }
 
 results <- purrr::map(data, safely(.g))
+
 results <- keep(results, ~is.null(.x$error)) %>%
-  map(results)
+  map("result")
 
 df <- data.frame(dplyr::bind_rows(results, .id = "replicate"))
 df$replicate <- as.numeric(df$replicate)
