@@ -112,3 +112,5 @@ df %>%
   )
 
 ggsave("crps-mean-se-surveys.png", h = 6, w = 6.25, bg = "white")
+
+dev.off()

@@ -9,8 +9,8 @@ run_commit_push("1_run", param = list(f = "besag_aghq", nsim = 250))    #' [x] 2
 run_commit_push("1_run", param = list(f = "bym2_aghq", nsim = 250))     #' [x] 2.5 hours
 run_commit_push("1_run", param = list(f = "fck_aghq", nsim = 250))      #' [x] 30 minutes
 run_commit_push("1_run", param = list(f = "fik_aghq", nsim = 250))      #' [x] 40 minutes
-run_commit_push("1_run", param = list(f = "ck_aghq", nsim = 250))       #' [ ] 40 minutes
-run_commit_push("1_run", param = list(f = "ik_aghq", nsim = 250))       #' [ ] 3.6 hours
+run_commit_push("1_run", param = list(f = "ck_aghq", nsim = 250))       #' [x] 40 minutes
+run_commit_push("1_run", param = list(f = "ik_aghq", nsim = 250))       #' [x] 3.6 hours
 
 #' 3. Post-process
 run_commit_push("1_process_tables")    #' [x]
