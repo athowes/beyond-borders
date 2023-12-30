@@ -26,16 +26,16 @@ df <- df %>%
       "besag_aghq" = "Besag",
       "bym2_aghq" = "BYM2",
       "fck_aghq" = "FCK",
-      "fik_aghq" = "FIK",
       "ck_aghq" = "CK",
+      "fik_aghq" = "FIK",
       "ik_aghq" = "IK"
     ),
     survey = recode_factor(
       survey,
-      "civ2017phia" = "Côte d’Ivoire, PHIA 2017",
-      "mwi2016phia" = "Malawi, PHIA 2016",
-      "tza2017phia" = "Tanzania, PHIA 2017",
-      "zwe2016phia" = "Zimbabwe, PHIA 2016"
+      "civ2017phia" = "Côte d’Ivoire, 2017",
+      "mwi2016phia" = "Malawi, 2016",
+      "tza2017phia" = "Tanzania, 2017",
+      "zwe2016phia" = "Zimbabwe, 2016"
     )
   )
 
@@ -49,16 +49,17 @@ df_crps <- df %>%
 
 gt_crps <- df_crps %>%
   mutate(mean = 1000 * mean, se = 1000 * se) %>%
-  mutate(value = paste0(sprintf("%0.1f", mean), " (", sprintf("%0.1f", se), ")")) %>%
-  select(Survey = survey, inf_model, value) %>%
+  # mutate(value = paste0(sprintf("%0.1f", mean), " (", sprintf("%0.1f", se), ")")) %>%
+  mutate(value = sprintf("%0.1f", mean)) %>%
+  select(`PHIA survey` = survey, inf_model, value) %>%
   spread(inf_model, value) %>%
   gt() %>%
-  cols_align(align = "left", columns = "Survey") %>%
-  tab_spanner(label = "Continuous ranked probability score (units: 1/1000)", columns = -Survey) %>%
+  cols_align(align = "left", columns = "PHIA survey") %>%
+  tab_spanner(label = "Continuous ranked probability score (units: 1/1000)", columns = -`PHIA survey`) %>%
   sub_missing(missing_text = "-") %>%
   tab_style(
     style = cell_text(align = "center"),
-    locations = cells_column_labels(columns = -Survey)
+    locations = cells_column_labels(columns = -`PHIA survey`)
   )
 
 saveRDS(gt_crps, "gt_cv-crps.rds")
@@ -73,16 +74,17 @@ df_mse <- df %>%
 
 gt_mse <- df_mse %>%
   mutate(mean = 1000 * mean, se = 1000 * se) %>%
-  mutate(value = paste0(sprintf("%0.02f", mean), " (", ifelse(round(se, 2) == 0, "<0.01", sprintf("%0.2f", se)), ")")) %>%
-  select(Survey = survey, inf_model, value) %>%
+  # mutate(value = paste0(sprintf("%0.02f", mean), " (", ifelse(round(se, 2) == 0, "<0.01", sprintf("%0.2f", se)), ")")) %>%
+  mutate(value = sprintf("%0.02f", mean)) %>%
+  select(`PHIA survey` = survey, inf_model, value) %>%
   spread(inf_model, value) %>%
   gt() %>%
-  cols_align(align = "left", columns = "Survey") %>%
-  tab_spanner(label = "Mean squared error (units: 1/1000)", columns = -Survey) %>%
+  cols_align(align = "left", columns = "PHIA survey") %>%
+  tab_spanner(label = "Mean squared error (units: 1/1000)", columns = -`PHIA survey`) %>%
   sub_missing(missing_text = "-") %>%
   tab_style(
     style = cell_text(align = "center"),
-    locations = cells_column_labels(columns = -Survey)
+    locations = cells_column_labels(columns = -`PHIA survey`)
   )
 
 saveRDS(gt_mse, "gt_cv-mse.rds")
