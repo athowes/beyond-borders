@@ -7,8 +7,8 @@ df <- bind_rows(
   readRDS("depends/results_besag.rds"),
   readRDS("depends/results_bym2.rds"),
   readRDS("depends/results_fck.rds"),
-  readRDS("depends/results_fik.rds"),
   readRDS("depends/results_ck.rds"),
+  readRDS("depends/results_fik.rds"),
   readRDS("depends/results_ik.rds")
 )
 
@@ -64,7 +64,7 @@ histogram_ecdf_diff_plot <- function(i) {
     separate(indicator, c("sim_model", "inf_model")) %>%
     mutate(
       sim_model = forcats::fct_relevel(sim_model, "IID", "Besag", "IK"),
-      inf_model = forcats::fct_relevel(inf_model, "IID", "Besag")
+      inf_model = forcats::fct_relevel(inf_model, "IID", "Besag", "BYM2", "FCK", "CK", "FIK", "IK")
     ) %>%
     ggplot(aes(x = nominal_coverage, y = ecdf_diff)) +
     facet_grid(sim_model ~ inf_model, drop = TRUE, scales = "free") +
